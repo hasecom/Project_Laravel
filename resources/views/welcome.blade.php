@@ -79,7 +79,7 @@
                 </div>
             @endif
 
-            <div class="content">
+            <div class="content">a
                 <div class="title m-b-md">
                     Laravelbbbbb
                 </div>
