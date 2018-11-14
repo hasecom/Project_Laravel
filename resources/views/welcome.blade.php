@@ -81,8 +81,9 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravelaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                    Laravelbbbbbb
                 </div>
+                aaaaa
 
                 <div class="links">
                     <a href="https://laravel.com/docs">Documentation</a>
