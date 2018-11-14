@@ -81,9 +81,9 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravelbbbbbb
+                    Laravelbbbbb
                 </div>
-                
+                ss
 bb
                 <div class="links">
                     <a href="https://laravel.com/docs">Documentation</a>
