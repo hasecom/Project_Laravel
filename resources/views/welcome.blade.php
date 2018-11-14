@@ -79,7 +79,11 @@
                 </div>
             @endif
 
+<<<<<<< HEAD
             <div class="content">abcdd
+=======
+            <div class="content">abcccc
+>>>>>>> origin/parts_sec
                 <div class="title m-b-md">
                     Laravelbbbbb
                 </div>
