@@ -1,6 +1,6 @@
 <template>
   <div class="side_bar">
-       
+      
     <router-link tag="li" to="/admin_manager" class="spa_link">
       <a>管理者操作</a>
     </router-link>

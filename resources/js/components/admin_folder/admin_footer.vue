@@ -1,3 +1,7 @@
+<!--
+管理者画面のフッター
+-->
+
 <template>
   <div>
 Admin footer です。
