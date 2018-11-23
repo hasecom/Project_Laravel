@@ -22,18 +22,13 @@
                 margin: 0;
             }
 
-
-            .clearfix::after {
-                content: '';
-                display: block;
-                clear: both;
-                
-            }
             #app{
                 height:100%;
             }
             .main_content{
                 height:100%;
+                display:flex;
+                flex-wrap: wrap;
             }
 
 

@@ -20,9 +20,10 @@
 
 <style>
 .header{
-    background:#eee;
+    background:rgba(238,238,238,0.2);
     margin:0;
     border-color:rgba(0,0,0,0.2);
+    padding:5px;
   
 }
 </style>
