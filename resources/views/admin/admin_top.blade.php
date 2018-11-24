@@ -29,6 +29,14 @@
                 height:100%;
                 display:flex;
                 flex-wrap: wrap;
+                flex-direction:column;
+            }
+            @media only screen and (max-width: 768px) {
+                .main_content{
+                height:100%;
+                flex-direction: row;
+                
+            }
             }
 
 
@@ -37,10 +45,9 @@
     <body>
 
 
-
 <div id="app">
     <admin-header></admin-header>
-        <div class="main_content clearfix">
+        <div class="main_content">
         <side-bar></side-bar>
             <admin-main></admin-main>
         </div>

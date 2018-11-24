@@ -1,6 +1,6 @@
 <template>
  <!-- jumbotron・・・画面幅いっぱい -->
-<div class="main　jumbotron right">
+<div class="right">
   <div class="main_root shadow-sm border-bottom ">
     <!-- ex: Home / Dashboard -->
     HOME / Dashboard
@@ -26,6 +26,7 @@
   height: 100%;
   display: flex;
  
+ 
 }
 .main_root{
   
@@ -37,5 +38,13 @@
   background:#eee;
   height:100%;
   padding:30px;
+}
+
+@media only screen and (max-width: 768px) {
+
+.right{
+  width:100%;
+  height:100%;
+}
 }
 </style>
