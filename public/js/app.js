@@ -14601,7 +14601,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.txt_box{\n \n  background:white;\n  padding:10px 15px 10px 15px;\n}\n", ""]);
 
 // exports
 
@@ -14610,6 +14610,8 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 /* 26 */
 /***/ (function(module, exports) {
 
+//
+//
 //
 //
 //
@@ -14635,7 +14637,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [_c("p", [_vm._v("\n    ここはuser_managerです。\n  ")])])
+    return _c("div", [
+      _c("div", { staticClass: "txt_box border rounded" }, [
+        _c("p", [_vm._v("\n    ここはuser_managerです。\n  ")])
+      ])
+    ])
   }
 ]
 render._withStripped = true
@@ -14733,7 +14739,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.side_bar {\n  float: left;\n  width: 30%;\n  height: 500vh;\n  background-color:rgb(50,54,58);\n  color:white;\n  position: -webkit-sticky;\n  position: sticky; top: 10px; \n  min-height: 100%;\nheight: auto !important;\nheight: 100%;\n}\n.spa_link a{\n  color:white;\n}\nli{\n  list-style: none;\n}\n\n", ""]);
+exports.push([module.i, "\n.side_bar {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;/*サイドバー内縦配置*/\n  width: 15%;\n  height: 100%;\n  background:rgb(41,48,52);\n  color:white;\n  position: -webkit-sticky;\n  position: sticky; top: 10px;\n}\n.dashboard{\n  background:rgb(50,58,63);\n  padding:0.5em 1em 0.5em 1em;/*上右下左*/\n  text-align: center;\n  font-weight: bold;\n}\n.sider_bar_menu{\n  padding:1rem;\n}\n.spa_link{\n  padding:0.5rem;\n}\n.spa_link a{\n  color:white;\n}\nli{\n  list-style: none;\n}\n\n\n", ""]);
 
 // exports
 
@@ -14742,6 +14748,18 @@ exports.push([module.i, "\n.side_bar {\n  float: left;\n  width: 30%;\n  height:
 /* 31 */
 /***/ (function(module, exports) {
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -14763,26 +14781,46 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "side_bar" },
-    [
-      _c(
-        "router-link",
-        { staticClass: "spa_link", attrs: { tag: "li", to: "/admin_manager" } },
-        [_c("a", [_vm._v("管理者操作")])]
-      ),
-      _vm._v(" "),
-      _c(
-        "router-link",
-        { staticClass: "spa_link", attrs: { tag: "li", to: "/user_manager" } },
-        [_c("a", [_vm._v("ユーザ管理")])]
-      )
-    ],
-    1
-  )
+  return _c("div", { staticClass: "side_bar shadow-lg" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "sider_bar_menu" },
+      [
+        _c(
+          "router-link",
+          {
+            staticClass: "spa_link",
+            attrs: { tag: "li", to: "/admin_manager" }
+          },
+          [_c("a", [_vm._v("管理者操作")])]
+        ),
+        _vm._v(" "),
+        _c(
+          "router-link",
+          {
+            staticClass: "spa_link",
+            attrs: { tag: "li", to: "/user_manager" }
+          },
+          [_c("a", [_vm._v("ユーザ管理")])]
+        )
+      ],
+      1
+    )
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "dashboard shadow-sm" }, [
+      _c("i", { staticClass: "fas fa-tachometer-alt" }),
+      _vm._v("　Dashboard\n  ")
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -14878,7 +14916,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.right {\n  float: right;\n  width: 70%;\n  height: 100%;\n}\n", ""]);
+exports.push([module.i, "\n.right {\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;/*メインコンテンツ内縦配置*/\n  width: 85%;\n  height: 100%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n.main_root{\n  \n  background-color:white;\n  padding:0.5em 1em 0.5em 1em;/*上右下左*/\n}\n.main_display{\n  background:#eee;\n  height:100%;\n  padding:30px;\n}\n", ""]);
 
 // exports
 
@@ -14887,6 +14925,16 @@ exports.push([module.i, "\n.right {\n  float: right;\n  width: 70%;\n  height: 1
 /* 36 */
 /***/ (function(module, exports) {
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -14907,8 +14955,12 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "main　jumbotron right" }, [
-    _c("div", { staticClass: "container" }, [_c("router-view")], 1)
+  return _c("div", { staticClass: "main right" }, [
+    _c("div", { staticClass: "main_root shadow-sm border-bottom " }, [
+      _vm._v("\n    HOME / Dashboard\n  ")
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "main_display container" }, [_c("router-view")], 1)
   ])
 }
 var staticRenderFns = []
@@ -15007,7 +15059,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.header{\n    background:#eee;\n    margin:0;\n    border-color:rgba(0,0,0,0.2);\n}\n", ""]);
+exports.push([module.i, "\n.header{\n    background:rgba(238,238,238,0.2);\n    margin:0;\n    border-color:rgba(0,0,0,0.2);\n    padding:5px;\n}\n", ""]);
 
 // exports
 
@@ -15016,6 +15068,9 @@ exports.push([module.i, "\n.header{\n    background:#eee;\n    margin:0;\n    bo
 /* 41 */
 /***/ (function(module, exports) {
 
+//
+//
+//
 //
 //
 //
@@ -15047,7 +15102,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "border-bottom header" }, [
       _c("div", { staticClass: "container" }, [
-        _c("h1", [_vm._v("○aa○.kkksakkkjjjjkkkkkllkflk")])
+        _c("h1", [_vm._v("Administrator")])
       ])
     ])
   }
@@ -15147,7 +15202,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -15156,6 +15211,10 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 /* 46 */
 /***/ (function(module, exports) {
 
+//
+//
+//
+//
 //
 //
 //
