@@ -14739,7 +14739,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.side_bar {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;/*サイドバー内縦配置*/\n  width: 15%;\n  height: 100%;\n  background:rgb(41,48,52);\n  color:white;\n  position: -webkit-sticky;\n  position: sticky; top: 10px;\n}\n.dashboard{\n  background:rgb(50,58,63);\n  padding:0.5em 1em 0.5em 1em;/*上右下左*/\n  text-align: center;\n  font-weight: bold;\n}\n.sider_bar_menu{\n  padding:1rem;\n}\n.spa_link{\n  padding:0.5rem;\n}\n.spa_link a{\n  color:white;\n}\nli{\n  list-style: none;\n}\n\n\n", ""]);
+exports.push([module.i, "\n.side_bar {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;/*サイドバー内縦配置*/\n  width: 15%;\n  height: 100%;\n  background:rgb(41,48,52);\n  color:white;\n  position: -webkit-sticky;\n  position: sticky; top: 10px;\n}\n.nav_custom{\n  height:100%;\n}\n.switch_nav{\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;/*サイドバー内縦配置*/\n}\n.dashboard{\n  background:rgb(50,58,63);\n  padding:0.5em 1em 0.5em 1em;/*上右下左*/\n  text-align: center;\n  font-weight: bold;\n  width:100%;\n}\n.sider_bar_menu{\n  padding:1rem;\n}\n.spa_link{\n  padding:0.5rem;\n}\n.spa_link a{\n  color:white;\n}\nli{\n  list-style: none;\n}\n@media only screen and (max-width: 768px) {\n.side_bar {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  width:100%;\n  height:auto;\n  background:rgb(41,48,52);\n  color:white;\n  position: -webkit-sticky;\n  position: sticky; top: 10px;\n}\n}\n", ""]);
 
 // exports
 
@@ -14748,6 +14748,19 @@ exports.push([module.i, "\n.side_bar {\n  display: -webkit-box;\n  display: -ms-
 /* 31 */
 /***/ (function(module, exports) {
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -14782,32 +14795,45 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "side_bar shadow-lg" }, [
-    _vm._m(0),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "sider_bar_menu" },
-      [
-        _c(
-          "router-link",
-          {
-            staticClass: "spa_link",
-            attrs: { tag: "li", to: "/admin_manager" }
-          },
-          [_c("a", [_vm._v("管理者操作")])]
-        ),
-        _vm._v(" "),
-        _c(
-          "router-link",
-          {
-            staticClass: "spa_link",
-            attrs: { tag: "li", to: "/user_manager" }
-          },
-          [_c("a", [_vm._v("ユーザ管理")])]
-        )
-      ],
-      1
-    )
+    _c("nav", { staticClass: "navbar-expand-md navbar-light" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "collapse navbar-collapse switch_nav",
+          attrs: { id: "Navber" }
+        },
+        [
+          _vm._m(1),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "sider_bar_menu" },
+            [
+              _c(
+                "router-link",
+                {
+                  staticClass: "spa_link",
+                  attrs: { tag: "li", to: "/admin_manager" }
+                },
+                [_c("a", [_vm._v("管理者操作")])]
+              ),
+              _vm._v(" "),
+              _c(
+                "router-link",
+                {
+                  staticClass: "spa_link",
+                  attrs: { tag: "li", to: "/user_manager" }
+                },
+                [_c("a", [_vm._v("ユーザ管理")])]
+              )
+            ],
+            1
+          )
+        ]
+      )
+    ])
   ])
 }
 var staticRenderFns = [
@@ -14815,10 +14841,34 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "dashboard shadow-sm" }, [
-      _c("i", { staticClass: "fas fa-tachometer-alt" }),
-      _vm._v("　Dashboard\n  ")
-    ])
+    return _c(
+      "button",
+      {
+        staticClass: "navbar-toggler",
+        attrs: {
+          type: "button",
+          "data-toggle": "collapse",
+          "data-target": "#Navber",
+          "aria-controls": "Navber",
+          "aria-expanded": "false",
+          "aria-label": "ナビゲーションの切替"
+        }
+      },
+      [_c("span", { staticClass: "navbar-toggler-icon" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "dashboard shadow-sm", attrs: { tag: "li" } },
+      [
+        _c("i", { staticClass: "fas fa-tachometer-alt" }),
+        _vm._v("　Dashboard\n    ")
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -14916,7 +14966,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.right {\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;/*メインコンテンツ内縦配置*/\n  width: 85%;\n  height: 100%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n.main_root{\n  \n  background-color:white;\n  padding:0.5em 1em 0.5em 1em;/*上右下左*/\n}\n.main_display{\n  background:#eee;\n  height:100%;\n  padding:30px;\n}\n", ""]);
+exports.push([module.i, "\n.right {\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;/*メインコンテンツ内縦配置*/\n  width: 85%;\n  height: 100%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n.main_root{\n  \n  background-color:white;\n  padding:0.5em 1em 0.5em 1em;/*上右下左*/\n}\n.main_display{\n  background:#eee;\n  height:100%;\n  padding:30px;\n}\n@media only screen and (max-width: 768px) {\n.right{\n  width:100%;\n  height:100%;\n}\n}\n", ""]);
 
 // exports
 
@@ -14925,10 +14975,6 @@ exports.push([module.i, "\n.right {\n  -webkit-box-orient: vertical;\n  -webkit-
 /* 36 */
 /***/ (function(module, exports) {
 
-//
-//
-//
-//
 //
 //
 //
@@ -14955,7 +15001,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "main right" }, [
+  return _c("div", { staticClass: "right" }, [
     _c("div", { staticClass: "main_root shadow-sm border-bottom " }, [
       _vm._v("\n    HOME / Dashboard\n  ")
     ]),

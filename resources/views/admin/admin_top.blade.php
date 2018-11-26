@@ -5,7 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{csrf_token()}}">
         <title>Laravel</title>
-        <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+        
+        <link rel="stylesheet"    href="{{ mix('css/app.css') }}">
         <!-- Fonts -->
     
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
@@ -52,6 +53,7 @@
             <admin-main></admin-main>
         </div>
 </div>
+
 <script src="{{ mix('js/app.js') }}"></script>
     </body>
 </html>
