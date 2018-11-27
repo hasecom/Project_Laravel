@@ -23,3 +23,6 @@ Route::get('/admin', function () {
     return view('admin/admin_login');
 });
 
+
+
+

@@ -24,6 +24,9 @@
       <router-link tag="li" to="/user_manager" class="spa_link">
       <a>ユーザ管理</a>
       </router-link>
+      <router-link tag="li" to="/news_manager" class="spa_link">
+      <a>通知・お知らせ機能</a>
+      </router-link>
       </div>
 
     

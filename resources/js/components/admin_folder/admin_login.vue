@@ -4,14 +4,13 @@
 
 <template>
   <div class="admin_login_main">
-
 <div class="authentication_box border rounded shadow-lg">
 <div class="my_state"></div>
     <div class="authentication_table">
     <form>
   <div class="form-group">
     <label >ユーザー名またはメールアドレス</label>
-    <input type="email" class="form-control shadow-sm">
+    <input type="text" class="form-control shadow-sm">
   </div>
   <div class="form-group">
     <label>パスワード</label>
@@ -37,6 +36,7 @@
     background:rgb(241,241,241);
     display: table;
     margin:auto;
+    
 
 }
 

@@ -6,8 +6,7 @@
     HOME / Dashboard
   </div>
   
-　<div class="main_display container">
-  
+　<div class="main_display">
   <router-view></router-view>
 　</div> 
 </div>
@@ -25,6 +24,7 @@
   width: 85%;
   height: 100%;
   display: flex;
+
  
  
 }
@@ -32,10 +32,13 @@
   
   background-color:white;
   padding:0.5em 1em 0.5em 1em;/*上右下左*/
+  
  
 }
 .main_display{
   background:#eee;
+  width:100%;
+  margin:0;
   height:100%;
   padding:30px;
 }
