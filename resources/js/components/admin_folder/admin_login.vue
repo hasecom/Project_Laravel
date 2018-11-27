@@ -35,20 +35,17 @@
 <style>
 .admin_login_main{
     background:rgb(241,241,241);
-    height:100%;
-    position:absolute;
-    width:100%;
+    display: table;
+    margin:auto;
+
 }
 
 .authentication_box{
-    position:absolute;
-    top:50%;
-    width:50%;
-    left:25%;
     background:white;
+    width:60%;
     padding:3rem 2rem;
+   display:table-cell;
     vertical-align: middle;
-    margin:0 auto;
     }
 
 
