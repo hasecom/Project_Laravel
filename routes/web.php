@@ -34,6 +34,11 @@ Route::get('/sign_up', function () {
     return view('user/sign_up');
 });
 
+//ユーザートップページ
+Route::get('/user', function () {
+    return view('user/top');
+});
+
 
 
 

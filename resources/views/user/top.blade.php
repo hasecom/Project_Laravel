@@ -13,14 +13,13 @@
 
         <!-- Styles -->
         <style>
-
-
-
         </style>
     </head>
     <body>
 
-
+<div id="app">
+<user_top></user_top>
+</div>
 
 
 <script src="{{ mix('js/app.js') }}"></script>

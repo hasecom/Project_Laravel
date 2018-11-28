@@ -1,9 +1,11 @@
 <!--
-ユーザ新規登録画面
+ユーザ新規登録画面(フレーム)
 -->
 
 <template>
+<div>
   <router-view></router-view>
+</div>
 </template>
 
 <script>

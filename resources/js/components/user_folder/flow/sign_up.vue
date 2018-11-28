@@ -33,10 +33,12 @@
     <label>パスワード(確認)</label>
     <input type="password" class="form-control shadow-sm">
   </div>
- <router-link tag="li" to="/sign_up2">
+
+
+ <router-link to="/sms_confirmation" class="btn btn-primary">
       <a>次へ</a>
       </router-link>
-  <button type="submit" class="btn btn-primary">次へ</button>
+
 </form>
 
 </div>

@@ -10,19 +10,13 @@
     <div class="authentication_table">
     <form>
   <div class="form-group">
-    <label >ニックネーム</label>
-    <input type="text" class="form-control shadow-sm">
-  </div>
-
-
-  <div class="form-group">
-    <label >メールアドレス</label>
-    <input type="email" class="form-control shadow-sm">
+    <label >携帯電話の番号</label>
+    <input type="tel" class="form-control shadow-sm">
   </div>
 
  
 
-  <button type="submit" class="btn btn-primary">次へ</button>
+  <button type="submit" class="btn btn-primary">SMSに送信する</button>
 </form>
 
 </div>
