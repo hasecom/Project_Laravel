@@ -9,6 +9,7 @@ import admin_login from './components/admin_folder/admin_login.vue';
 
 //USER
 import login from './components/user_folder/flow/user_login.vue';
+import sign_up from './components/user_folder/flow/sign_up.vue';
 
 
 //ADMIN
@@ -25,6 +26,7 @@ Vue.component('admin-login', admin_login);//#app内
 
 //USER
 Vue.component('login', login);//#app内
+Vue.component('sign_up', sign_up);//#app内
 
 
 

@@ -20,7 +20,9 @@
     </head>
     <body>
 
-
+<div id="app">
+    <sign_up></sign_up>
+</div>
 
 
 <script src="{{ mix('js/app.js') }}"></script>
