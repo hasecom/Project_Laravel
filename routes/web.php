@@ -10,9 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//フロントページ
 Route::get('/', function () {
-    return view('welcome');
+    return view('
+    user/front');
 });
 
 //管理者用トップページ
