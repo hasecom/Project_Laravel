@@ -4,6 +4,8 @@
 
 <template>
 <div>
+    新規登録の1ページ目はrouter-viewではなく
+    コンポーネントとして表示させる
   <router-view></router-view>
 </div>
 </template>
