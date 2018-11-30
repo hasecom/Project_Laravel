@@ -7,7 +7,8 @@
 <div class="authentication_box border rounded shadow-lg">
 <div class="my_state"></div>
     <div class="authentication_table">
-    <form action="admin_top">
+    <form action="admin_top" method="POST">
+      
   <div class="form-group" >
     <label >ユーザー名またはメールアドレス</label>
     <input type="text" class="form-control shadow-sm">
@@ -21,6 +22,7 @@
     <label class="form-check-label">ログイン状態を保存する</label>
   </div>
   <button type="submit" class="btn btn-primary">ログイン</button>
+  
 </form>
 </div>
 </div>

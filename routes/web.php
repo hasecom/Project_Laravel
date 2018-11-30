@@ -1,6 +1,13 @@
 <?php
+/*
+TODO: AdminとUser用のコントローラー作成
+TODO: return viewを各コントローラーで行うように変更
 
 
+Admin用のコントローラー作成完了
+(app/http/Controllers/AdminsController.php)
+
+*/
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,19 +18,21 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+//管理者用トップページ
+Route::get('/admin', 'AdminsController@admin_top');
+
+//管理者用ログインページ
+Route::get('/admin', 'AdminsController@admin_attempt');
+
+
+
+
 //フロントページ
 Route::get('/', function () {
     return view('
     user/front');
-});
-
-//管理者用トップページ
-Route::get('/admin_top', function () {
-    return view('admin/admin_top');
-});
-//管理者用ログインページ
-Route::get('/admin', function () {
-    return view('admin/admin_login');
 });
 
 //ユーザログインページ
