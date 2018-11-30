@@ -60,3 +60,7 @@ $data=DB::table('admins')->get();
 
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
