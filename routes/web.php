@@ -1,5 +1,6 @@
 <?php
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,6 +40,13 @@ Route::get('/sign_up', function () {
 Route::get('/user', function () {
     return view('user/top');
 });
+
+
+Route::get('hello',function(){
+$data=DB::table('admins')->get();
+ echo var_dump($data);
+ });
+
 
 
 
