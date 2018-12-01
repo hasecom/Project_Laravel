@@ -74,7 +74,10 @@ return [
     | Supported: "database", "eloquent"
     |
     */
-
+/*
+h-プロバイダーのusersを変更したら
+/loginの画面がエラーになった
+*/
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
