@@ -1,5 +1,5 @@
 <?php
-
+use App\admin;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,6 +39,9 @@ Route::get('/sign_up', function () {
 Route::get('/user', function () {
     return view('user/top');
 });
+
+Route::get('admindb', 'AdminController@index');
+Route::get('ajax/admindb', 'Ajax\AdminController@index');
 
 
 
