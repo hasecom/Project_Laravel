@@ -33,7 +33,7 @@ return [
     | サポート： "セッション"、 "トークン"
     |
     */
-
+//認証ガード
     'guards' => [
         'web' => [
             'driver' => 'session',
@@ -44,7 +44,13 @@ return [
             'driver' => 'token',
             'provider' => 'users',
         ],
+    //h-追加 for admin
+        'admin' =>[
+            'driver' => 'session',
+            'provider' => 'admins',
+        ]
     ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -70,10 +76,10 @@ return [
         ],
 
         //h-追加-test
-        //  'admins' => [
-        //     'driver' => 'eloquent',
-        //      'table' => 'admins',
-        //  ],
+        'admins' => [
+            'driver' => 'eloquent',
+            'table' => App\Admin::class,
+        ],
     ],
 
     /*
