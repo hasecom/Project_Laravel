@@ -9,7 +9,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\Admin as Authenticatable;
- 
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 class Admin extends Authenticatable
 {
@@ -23,7 +23,7 @@ class Admin extends Authenticatable
      */
     //$fillableは更新系の処理で予期せぬ値が登録されることを防ぐための仕組み
     protected $fillable = [
-        'admin_id', 'admin_pw',
+        'admin_id', 'admin_pw','admin_authority'
     ];
 
     /**
