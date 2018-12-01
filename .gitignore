@@ -14,3 +14,12 @@ yarn-error.log
 .env
 .phpunit.result.cache
 config/database.php
+config/database.php
+database/.DS_Store
+resources/.DS_Store
+resources/js/.DS_Store
+resources/js/components/.DS_Store
+resources/views/.DS_Store
+.DS_Store
+config/database.php
+config/database.php
