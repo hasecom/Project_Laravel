@@ -1,4 +1,8 @@
 <?php
+/*
+モデルを通すような処理を書く
+*/
+
 
 return [
 
@@ -16,6 +20,8 @@ return [
     'defaults' => [
         'guard' => 'web',
         'passwords' => 'users',
+        'admin_pw' => 'admins',
+        'admin_id' => 'admins',
     ],
 
     /*
@@ -76,6 +82,8 @@ return [
         ],
 
         //h-追加-test
+        //独自provider作成(Admin用)
+        //table =>App/Admin::classのAdmin部分はモデル名？（app/Admin.php）
         'admins' => [
             'driver' => 'eloquent',
             'table' => App\Admin::class,

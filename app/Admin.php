@@ -1,12 +1,14 @@
 <?php
 /*
 h-テストで作成中
+admin用のmodel
+主に認証用?
 
 */
 namespace App;
 
-
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\Admin as Authenticatable;
  
 
 class Admin extends Authenticatable
@@ -19,6 +21,7 @@ class Admin extends Authenticatable
      *
      * @var array
      */
+    //$fillableは更新系の処理で予期せぬ値が登録されることを防ぐための仕組み
     protected $fillable = [
         'admin_id', 'admin_pw',
     ];
