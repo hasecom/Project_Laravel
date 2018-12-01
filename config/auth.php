@@ -70,10 +70,11 @@ return [
             'model' => App\User::class,
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        //h-追加-test
+        //  'admins' => [
+        //     'driver' => 'eloquent',
+        //      'table' => 'admins',
+        //  ],
     ],
 
     /*
