@@ -7,9 +7,9 @@ return [
     | Authentication Defaults
     |--------------------------------------------------------------------------
     |
-    | This option controls the default authentication "guard" and password
-    | reset options for your application. You may change these defaults
-    | as required, but they're a perfect start for most applications.
+    | このオプションは、デフォルトの認証「ガード」とパスワードを制御します
+    | アプリケーションのリセットオプション。 これらのデフォルトを変更することができます
+    | 必要に応じて、それらはほとんどのアプリケーションにとって完璧なスタートです。
     |
     */
 
@@ -23,16 +23,15 @@ return [
     | Authentication Guards
     |--------------------------------------------------------------------------
     |
-    | Next, you may define every authentication guard for your application.
-    | Of course, a great default configuration has been defined for you
-    | here which uses session storage and the Eloquent user provider.
-    |
-    | All authentication drivers have a user provider. This defines how the
-    | users are actually retrieved out of your database or other storage
-    | mechanisms used by this application to persist your user's data.
-    |
-    | Supported: "session", "token"
-    |
+    | 次に、アプリケーションのすべての認証ガードを定義することができます。
+    | もちろん、素晴らしいデフォルト設定があなたのために定義されています
+    | ここでは、セッションストレージとEloquentユーザープロバイダを使用します。
+    | すべての認証ドライバには、ユーザープロバイダがあります。 これは、
+    | ユーザーは実際にデータベースや他のストレージから取り出されます
+    | このアプリケーションがユーザーのデータを保持するために使用するメカニズム。
+    |
+    | サポート： "セッション"、 "トークン"
+    |
     */
 
     'guards' => [
@@ -52,13 +51,13 @@ return [
     | User Providers
     |--------------------------------------------------------------------------
     |
-    | All authentication drivers have a user provider. This defines how the
-    | users are actually retrieved out of your database or other storage
-    | mechanisms used by this application to persist your user's data.
-    |
-    | If you have multiple user tables or models you may configure multiple
-    | sources which represent each model / table. These sources may then
-    | be assigned to any extra authentication guards you have defined.
+    | すべての認証ドライバには、ユーザープロバイダがあります。 これは、
+    | ユーザーは実際にデータベースや他のストレージから取り出されます
+    | このアプリケーションがユーザーのデータを保持するために使用するメカニズム。
+    |
+    | 複数のユーザーテーブルまたはモデルを使用している場合は、複数
+    | 各モデル/テーブルを表すソース。 これらの情報源は、
+    | あなたが定義した余分な認証ガードに割り当てられます。
     |
     | Supported: "database", "eloquent"
     |
@@ -81,15 +80,12 @@ return [
     |--------------------------------------------------------------------------
     | Resetting Passwords
     |--------------------------------------------------------------------------
-    |
-    | You may specify multiple password reset configurations if you have more
-    | than one user table or model in the application and you want to have
-    | separate password reset settings based on the specific user types.
-    |
-    | The expire time is the number of minutes that the reset token should be
-    | considered valid. This security feature keeps tokens short-lived so
-    | they have less time to be guessed. You may change this as needed.
-    |
+    | 複数のパスワードリセット設定を指定することができます
+    | アプリケーションの1つのユーザーテーブルまたはモデルよりも多くの
+    | 特定のユーザータイプに基づいて個別のパスワードリセット設定。
+    | 有効期限は、リセットトークンが必要な分数です
+    | 有効とみなされます。 このセキュリティ機能により、トークンは短命に保たれます。
+    | 彼らは推測する時間が少なくなります。 これは必要に応じて変更することができます。
     */
 
     'passwords' => [
