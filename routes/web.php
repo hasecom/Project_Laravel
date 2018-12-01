@@ -31,6 +31,8 @@ Route::get('/admin', 'AdminsController@admin_top');
 Route::get('/admin', 'AdminsController@admin_attempt');
 
 
+Route::get('admindb', 'AdminsController@index');
+Route::get('ajax/admindb', 'Ajax\AdminController@index');
 
 
 //フロントページ
@@ -54,19 +56,9 @@ Route::get('/user', function () {
     return view('user/top');
 });
 
-Route::get('admindb', 'AdminController@index');
-Route::get('ajax/admindb', 'Ajax\AdminController@index');
 
 
-Route::get('hello',function(){
-$data=DB::table('admins')->get();
- echo var_dump($data);
- });
-
-
-
-
-
+//php artisan model authにて自動で生成された部品
 
 Auth::routes();
 

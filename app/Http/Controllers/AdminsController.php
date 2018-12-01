@@ -4,6 +4,9 @@
 
 TODO: Web.phpからルートの移行
 TODO: DB設定
+
+h-ゆうたの作成したAdminControllerを
+AdminsControllerに統合
 */
 
 
@@ -22,6 +25,11 @@ class AdminsController extends Controller
     public function admin_top()
     {
         return view('admin/admin_top');
+    }
+    // 管理者一覧のビュー
+    public function index() 
+    {
+        return view('admindb'); 
     }
     
  
