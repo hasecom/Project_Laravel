@@ -8,7 +8,8 @@ admin用のmodel
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\Admin as Authenticatable;
+//↓User
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 class Admin extends Authenticatable
