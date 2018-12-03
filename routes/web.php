@@ -58,8 +58,4 @@ Route::get('/user', function () {
 
 
 
-//php artisan model authにて自動で生成された部品
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
