@@ -45,12 +45,14 @@
     </head>
     <body>
 
-
 <div id="app">
+<?php
+var_dump($sample2);
+?>
     <admin-header></admin-header>
         <div class="main_content">
         <side-bar></side-bar>
-            <admin-main></admin-main>
+            <admin-main  v-bind:sample3="aa"></admin-main>
         </div>
 </div>
 

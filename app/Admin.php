@@ -1,4 +1,8 @@
 <?php
+/*
+Admin用のモデル
+
+*/
 
 namespace App;
 

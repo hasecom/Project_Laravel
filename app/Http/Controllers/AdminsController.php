@@ -24,7 +24,9 @@ class AdminsController extends Controller
     //admin_top-Adminトップページ
     public function admin_top()
     {
-        return view('admin/admin_top');
+        //viewへの受け渡し
+        $sample2 ="sampleです";
+        return view('admin/admin_top', compact('sample2'));
     }
     // 管理者一覧のビュー
     public function index() 
