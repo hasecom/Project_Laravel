@@ -1,7 +1,7 @@
 <?php
-////<<<<<<< HEAD
+
 use App\admin;
-////=======
+
 /*
 TODO: AdminとUser用のコントローラー作成
 TODO: return viewを各コントローラーで行うように変更
@@ -11,7 +11,7 @@ Admin用のコントローラー作成完了
 (app/http/Controllers/AdminsController.php)
 
 */
-////>>>>>>> 88e86441e505b10194e03e663a6071fa5e39aba8
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,7 +25,7 @@ Admin用のコントローラー作成完了
 
 
 //管理者用トップページ
-Route::get('/admin', 'AdminsController@admin_top');
+Route::get('/admin_top', 'AdminsController@admin_top');
 
 //管理者用ログインページ
 Route::get('/admin', 'AdminsController@admin_attempt');
