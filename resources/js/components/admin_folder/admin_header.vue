@@ -20,9 +20,7 @@ export default{
 props:{
 test:String,
 },
-mounted(){
-console.log('ExampleComponent mounted.')
-},
+
 }
 </script>
 

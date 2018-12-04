@@ -2,21 +2,15 @@
   <div>
 Admin Manager です。<br>
 maa<br>
-<p>{{test}}</p>
+  <p>{{ message }}</p>
   </div>
   
 </template>
 
 <script>
-export default{
-props:{
-test:String,
-},
-mounted(){
-console.log('ExampleComponent mounted.')
-},
+export default {
+    props: ['message']
 }
-
 </script>
 
 <style>

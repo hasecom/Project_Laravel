@@ -7,14 +7,31 @@
   </div>
   
 　<div class="main_display">
-  <router-view></router-view>
+  <router-view  :message="message"></router-view>
 　</div> 
+<p>{{test}}</p>
 </div>
 
  
 </template>
 
 <script>
+import Child from './admin_manager.vue';
+
+export default{
+props:{
+test:String,
+},
+components: {
+        Child
+    },
+     data() {
+        return {
+            message:"aa"
+        }
+}
+
+}
 
 </script>
 

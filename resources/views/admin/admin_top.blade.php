@@ -62,7 +62,7 @@ $sampled = "aaa";
 <script>
 
 
-console.log("<?php echo $sample2 ?>");
+
 </script>
 <script src="{{ mix('js/app.js') }}"></script>
 
