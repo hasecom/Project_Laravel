@@ -46,12 +46,7 @@
     <body>
 
 <div id="app">
-<?php
-var_dump($sample2);
-$sampled = "aaa";
-?>
- 
-    <admin-header  test="{{ $sample2 }}"></admin-header>
+    <admin-header></admin-header>
         <div class="main_content" >
         <side-bar></side-bar>
             <admin-main  test="{{ $sample2 }}"></admin-main>

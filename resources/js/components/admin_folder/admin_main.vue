@@ -9,7 +9,6 @@
 　<div class="main_display">
   <router-view  :message="message"></router-view>
 　</div> 
-<p>{{test}}</p>
 </div>
 
  
@@ -27,7 +26,7 @@ components: {
     },
      data() {
         return {
-            message:"aa"
+            message:this.test
         }
 }
 

@@ -3,6 +3,7 @@
 Admin Manager です。<br>
 maa<br>
   <p>{{ message }}</p>
+  
   </div>
   
 </template>
