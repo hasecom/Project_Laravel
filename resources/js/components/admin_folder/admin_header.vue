@@ -8,6 +8,7 @@
 　<div class="container">
     <!-- タイトル -->
 　　<h1>Administrator</h1>
+<p>{{test}}</p>
 　</div> 
 </div>
 
@@ -15,7 +16,14 @@
 </template>
 
 <script>
-
+export default{
+props:{
+test:String,
+},
+mounted(){
+console.log('ExampleComponent mounted.')
+},
+}
 </script>
 
 <style>

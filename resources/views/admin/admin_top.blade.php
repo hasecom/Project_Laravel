@@ -8,7 +8,7 @@
         
         <link rel="stylesheet"    href="{{ mix('css/app.css') }}">
         <!-- Fonts -->
-    
+  
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
 
         <!-- Styles -->
@@ -48,14 +48,23 @@
 <div id="app">
 <?php
 var_dump($sample2);
+$sampled = "aaa";
 ?>
-    <admin-header></admin-header>
-        <div class="main_content">
+ 
+    <admin-header  test="{{ $sample2 }}"></admin-header>
+        <div class="main_content" >
         <side-bar></side-bar>
-            <admin-main  v-bind:sample3="aa"></admin-main>
+            <admin-main  test="{{ $sample2 }}"></admin-main>
         </div>
 </div>
 
+
+<script>
+
+
+console.log("<?php echo $sample2 ?>");
+</script>
 <script src="{{ mix('js/app.js') }}"></script>
+
     </body>
 </html>

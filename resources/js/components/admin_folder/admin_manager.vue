@@ -2,17 +2,21 @@
   <div>
 Admin Manager です。<br>
 maa<br>
-{{ sample3 }}
+<p>{{test}}</p>
   </div>
   
 </template>
 
 <script>
-
 export default{
-  props:['sample3'],
-  
+props:{
+test:String,
+},
+mounted(){
+console.log('ExampleComponent mounted.')
+},
 }
+
 </script>
 
 <style>
