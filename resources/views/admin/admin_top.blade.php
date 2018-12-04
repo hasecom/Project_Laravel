@@ -49,10 +49,9 @@
     <admin-header></admin-header>
         <div class="main_content" >
         <side-bar></side-bar>
-            <admin-main  test="{{ $sample2 }}"></admin-main>
+            <admin-main  sample="{{ $sample2 }}"></admin-main>
         </div>
 </div>
-
 
 <script>
 

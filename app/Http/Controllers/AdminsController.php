@@ -14,6 +14,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+//モデルAdminに問い合わせ
+use App\Admin;
+
 class AdminsController extends Controller
 {
     //admin_attempt-Adminログイン画面
@@ -26,7 +29,9 @@ class AdminsController extends Controller
     {
         //viewへの受け渡し
         $sample2 ="sampleですよおおおおおおおおお!!!!!!!!!!!!!!!!";
-        return view('admin/admin_top', compact('sample2'));
+        $sample3 ="HELLo";
+        $sample_arrary =  compact('sample2','sample3');
+        return view('admin/admin_top',$sample_arrary);
     }
     // 管理者一覧のビュー
     public function index() 

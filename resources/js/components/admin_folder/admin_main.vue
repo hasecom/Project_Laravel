@@ -7,6 +7,7 @@
   </div>
   
 　<div class="main_display">
+  <!-- :XXX="YYY"で子要素にデータを送る -->
   <router-view  :message="message"></router-view>
 　</div> 
 </div>
@@ -16,17 +17,21 @@
 
 <script>
 import Child from './admin_manager.vue';
-
+/*
+props->親要素からデータを受け取り
+componets->データを送りたい子要素ファイル(importしたもの)
+data() return ->子要素にデータを送る(自分自身のデータを送るのでthis.XXXとする)
+*/
 export default{
 props:{
-test:String,
+sample:String,
 },
 components: {
         Child
     },
      data() {
         return {
-            message:this.test
+            message:this.sample
         }
 }
 

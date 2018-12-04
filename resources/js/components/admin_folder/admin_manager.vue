@@ -9,6 +9,7 @@ maa<br>
 </template>
 
 <script>
+//親要素(main)からデータをpropsで取得
 export default {
     props: ['message']
 }

@@ -31,8 +31,8 @@ Route::get('/admin_top', 'AdminsController@admin_top');
 Route::get('/admin', 'AdminsController@admin_attempt');
 
 
-Route::get('admindb', 'AdminsController@index');
-Route::get('ajax/admindb', 'Ajax\AdminController@index');
+Route::get('/admindb', 'AdminsController@index');
+Route::get('/ajax/admindb', 'Ajax\AdminController@index');
 
 
 //フロントページ
