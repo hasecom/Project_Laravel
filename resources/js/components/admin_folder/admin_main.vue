@@ -5,7 +5,11 @@
     <!-- ex: Home / Dashboard -->
     HOME / Dashboard
   </div>
+
+
+   {{sample}}
   
+
 　<div class="main_display">
   <!-- :XXX="YYY"で子要素にデータを送る -->
   <router-view  :message="message"></router-view>
@@ -23,13 +27,15 @@ componets->データを送りたい子要素ファイル(importしたもの)
 data() return ->子要素にデータを送る(自分自身のデータを送るのでthis.XXXとする)
 */
 export default{
-props:{
-sample:String,
-},
+  props:{
+      sample: {
+        type: String,
+      }
+    },
 components: {
         Child
     },
-     data() {
+     data(){
         return {
             message:this.sample
         }

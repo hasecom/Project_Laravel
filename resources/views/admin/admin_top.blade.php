@@ -49,7 +49,7 @@
     <admin-header></admin-header>
         <div class="main_content" >
         <side-bar></side-bar>
-            <admin-main  sample="{{ $items }}"></admin-main>
+            <admin-main  sample="{{$sample2}}"></admin-main>
         </div>
 </div>
 
