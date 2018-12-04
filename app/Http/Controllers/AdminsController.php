@@ -28,9 +28,10 @@ class AdminsController extends Controller
     public function admin_top()
     {
         //viewへの受け渡し
+        $items = Admin::get(); 
         $sample2 ="sampleですよおおおおおおおおお!!!!!!!!!!!!!!!!";
         $sample3 ="HELLo";
-        $sample_arrary =  compact('sample2','sample3');
+        $sample_arrary =  compact('sample2','sample3','items');
         return view('admin/admin_top',$sample_arrary);
     }
     // 管理者一覧のビュー
