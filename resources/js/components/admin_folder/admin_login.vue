@@ -4,14 +4,15 @@
 
 <template>
   <div class="admin_login_main">
+    
 <div class="authentication_box border rounded shadow-lg">
 <div class="my_state"></div>
     <div class="authentication_table">
-    <form action="admin_top" method="POST">
+    <form action="admin_top" method="POST" @submit.prevent="exec">
       
-  <div class="form-group" >
+  <div id="form-group-id" class="form-group" >
     <label >ユーザー名</label>
-    <input type="text" class="form-control shadow-sm">
+    <input  type="text" class="form-control shadow-sm">
   </div>
   <div class="form-group">
     <label>パスワード</label>
@@ -21,20 +22,24 @@
     <input type="checkbox" class="form-check-input">
     <label class="form-check-label">ログイン状態を保存する</label>
   </div>
-  <button type="submit" class="btn btn-primary" @submit.prevent="exec">ログイン</button>
+   
+  <button type="submit" class="btn btn-primary">ログイン</button>
 </form>
 </div>
 </div>
+
   </div>
 </template>
-
 <script>
+const username = this.text;
+
 export default {
-  name: 'HelloWorld',
+  name: 'adminloginform',
   methods: {
     exec: function () {
-      // 本来はajax通信をする
-      console.log('exec')
+      
+     console.log("あああ");
+
     }
   }
 }
