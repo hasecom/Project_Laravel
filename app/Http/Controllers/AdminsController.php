@@ -1,12 +1,6 @@
 <?php
 /*
 管理者用のコントローラー
-
-TODO: Web.phpからルートの移行
-TODO: DB設定
-
-h-ゆうたの作成したAdminControllerを
-AdminsControllerに統合
 */
 
 
