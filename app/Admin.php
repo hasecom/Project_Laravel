@@ -22,7 +22,7 @@ class Admin extends Model
     
     protected  function sample(){
         $cold = Admin::get();
-    return $cold;
+    return $this->en($cold);
     }
 
   /*

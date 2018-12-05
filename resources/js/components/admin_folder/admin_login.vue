@@ -10,7 +10,7 @@
     <form action="admin_top" method="POST">
       
   <div class="form-group" >
-    <label >ユーザー名またはメールアドレス</label>
+    <label >ユーザー名</label>
     <input type="text" class="form-control shadow-sm">
   </div>
   <div class="form-group">
@@ -21,8 +21,7 @@
     <input type="checkbox" class="form-check-input">
     <label class="form-check-label">ログイン状態を保存する</label>
   </div>
-  <button type="submit" class="btn btn-primary">ログイン</button>
-  
+  <button type="submit" class="btn btn-primary" @submit.prevent="exec">ログイン</button>
 </form>
 </div>
 </div>
@@ -30,6 +29,17 @@
 </template>
 
 <script>
+export default {
+  name: 'HelloWorld',
+  methods: {
+    exec: function () {
+      // 本来はajax通信をする
+      console.log('exec')
+    }
+  }
+}
+ 
+   
 
 </script>
 

@@ -27,8 +27,9 @@ class AdminsController extends Controller
         $items2 = User::get(); 
         $sample2 = Admin::sample();
         $sample3 ="HELLo";
-        $sample_arrary =  compact('sample2','sample3','items','items2');
-        return view('admin/admin_top',$sample_arrary);
+        $sample_array = ['sample2'=>$sample2,'sample3'=>$sample3,'items'=>$items,'items2'=>$items2];
+        $sample_arrary2 =  compact('sample2','sample3','items','items2');
+        return view('admin/admin_top',$sample_array);
     }
     // 管理者一覧のビュー
     public function index() 
