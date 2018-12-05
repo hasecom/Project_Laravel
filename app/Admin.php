@@ -25,11 +25,18 @@ class Admin extends Model
     return $cold;
     }
 
-  
+  /*
+(array)XXX or エンコード後にデコード
+  (array)XXXの方がスピードは速いが
+  ネスト構造になっているものは結果が変わるかも。
+  */
+
+    //エンコード
     protected function en($array){
         $json = json_encode($array,JSON_PRETTY_PRINT);
         return $json;
     }
+    //デコード
     private function de($json){
         $array = json_decode($json,true);
         return $array;
