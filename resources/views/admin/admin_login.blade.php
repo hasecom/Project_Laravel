@@ -44,6 +44,16 @@
 
 
 <div id="app">
+<?php 
+if(isset($sample2)){
+var_dump($sample2);
+}
+if(isset($task)){
+    var_dump($task);
+    }
+
+
+    ?>
   <admin-login></admin-login>
 </div>
 

@@ -8,15 +8,15 @@
 <div class="authentication_box border rounded shadow-lg">
 <div class="my_state"></div>
     <div class="authentication_table">
-    <form action="admin_top" method="POST" @submit.prevent="exec">
+    <form action="" @submit.prevent="submitForm">
       
   <div id="form-group-id" class="form-group" >
     <label >ユーザー名</label>
-    <input  type="text" class="form-control shadow-sm">
+    <input v-model="username"  class="form-control shadow-sm" type="text">
   </div>
   <div class="form-group">
     <label>パスワード</label>
-    <input type="password" class="form-control shadow-sm">
+    <input v-model="userpassword" type="password" class="form-control shadow-sm">
   </div>
   <div class="form-group form-check">
     <input type="checkbox" class="form-check-input">
@@ -31,16 +31,42 @@
   </div>
 </template>
 <script>
-const username = this.text;
+/*
+v-model->data()
+
+v-on:exと指定->mehods内でex:function(){}とできる
+(post送信される前にjsで判定する)
+*/
+
+import Vue from 'vue'
+import axios from 'axios'
+Vue.$http = axios;
 
 export default {
-  name: 'adminloginform',
-  methods: {
-    exec: function () {
-      
-     console.log("あああ");
-
+  name: 'user-login',
+  data(){
+    return{
+      username:'',
+      userpassword:'',
     }
+  },
+  methods: {
+         submitForm: function () {
+        console.log('submitting message...');
+        let params = new URLSearchParams();
+        const sample = { username :this.username,userpassword :this.userpassword};
+
+  params.append('text', 'テストだよー');
+
+       
+axios.post('admin',params).then(response => {
+    console.log(response.config);  
+}).catch(function (error) {
+          console.log(error);
+          alert('失敗');
+        });
+      },
+
   }
 }
  

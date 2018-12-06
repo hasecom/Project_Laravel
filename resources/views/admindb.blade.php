@@ -25,7 +25,7 @@ new Vue({
     methods: {
          getMessages() {
 
-        const url = '/ajax/admindb';
+        const url = 'ajax/admindb';
         axios.get(url)
             .then((response) => {
 

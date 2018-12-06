@@ -29,6 +29,7 @@ Route::get('/admin_top', 'AdminsController@admin_top');
 
 //管理者用ログインページ
 Route::get('/admin', 'AdminsController@admin_attempt');
+Route::post('/admin', 'AdminsController@admin_login_data');
 
 
 Route::get('/admindb', 'AdminsController@index');
