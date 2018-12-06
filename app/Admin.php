@@ -19,6 +19,8 @@ class Admin extends Model
     protected $guarded = ['id'];
 
     protected $table = 'admins';
+
+    public $timestamps = false;
     
     protected  function sample(){
         $cold = Admin::get();

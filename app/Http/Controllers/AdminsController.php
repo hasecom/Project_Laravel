@@ -21,17 +21,24 @@ class AdminsController extends Controller
         $sample2 = "aa";
         $sample3 =10;
         $sample_array = ['sample2'=>$sample2,'sample3'=>$sample3];
+       
+
+        //サンプルです。ゆうたの権限を1にする
+        Admin::where('id', 1)
+        ->update(['admin_authority' => 1]);
         return view('admin/admin_login',$sample_array);
     }
 
     public function admin_login_data(){
        
         $data = json_decode(file_get_contents("php://input"), true); 
-        $task= $data['params']; 
-        $sample2 = "aa";
-        $sample3 =10;
-        $task_ = ['sample2'=>$sample2,'sample3'=>$sample3];
-        return $task;
+        $task_= $data['params']; 
+
+        //サンプルです。ゆうたの権限を3にする
+        Admin::where('id', 1)
+        ->update(['admin_authority' => 3]);
+        
+       
     }
 
 
