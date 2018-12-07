@@ -12,8 +12,12 @@ use Illuminate\Http\Request;
 use App\Admin;
 use App\User;
 
+
+
+
 class AdminsController extends Controller
 {
+  
     
     //admin_attempt-Adminログイン画面
     public function admin_attempt()
@@ -21,30 +25,31 @@ class AdminsController extends Controller
         $sample2 = "aa";
         $sample3 =10;
         $sample_array = ['sample2'=>$sample2,'sample3'=>$sample3];
-       
 
-        //サンプルです。ゆうたの権限を1にする
-        Admin::where('id', 1)
-        ->update(['admin_authority' => 1]);
         return view('admin/admin_login',$sample_array);
   
+    
+    
+    
     }
 
-    public function admin_login_data(){
-       
-     
+    public function admin_login_data()
+    {
+
+        if(isset($_POST['sample'])){
         $data = json_encode(['sample'=>$_POST['sample']]);
         $decoded_json = json_decode($data,true);
+       
         if(isset($decoded_json)){
-        //サンプルです。ゆうたの権限を3にする
-        var_dump($decoded_json);
-        echo "aa";
+        //サンプルです。
         Admin::where('id', 2)
         ->update(['admin_id' => $decoded_json['sample']]);
-         
+            
         }else{
             echo "not conect";
         }
+    }
+       
     }
 
 

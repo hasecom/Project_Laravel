@@ -8,7 +8,7 @@
 <div class="authentication_box border rounded shadow-lg">
 <div class="my_state"></div>
     <div class="authentication_table">
-    <form action="" @submit.prevent="submitForm">
+    <form action="admin_top" @submit.prevent="submitForm">
       
   <div id="form-group-id" class="form-group" >
     <label >ユーザー名</label>
@@ -55,19 +55,19 @@ export default {
         console.log('submitting message...');
         let params = new URLSearchParams();
         const sample = { username :this.username,userpassword :this.userpassword};
-
   params.append('sample', this.username);
-
-       
 axios.post('admin',params).then(response => {
-    console.dir(response.config);  
+    console.dir(response.config); 
+   
 }).catch(function (error) {
           console.log(error);
           alert('失敗');
         });
-      },
-
-  }
+         }
+        
+    },
+  
+  
 }
  
    

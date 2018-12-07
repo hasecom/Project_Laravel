@@ -13,5 +13,6 @@ class AdminController extends Controller
         return \App\Admin::orderBy('id', 'desc')->get();
 
     }
+ 
 
 }

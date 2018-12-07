@@ -32,8 +32,13 @@ Route::get('/admin', 'AdminsController@admin_attempt');
 Route::post('/admin', 'AdminsController@admin_login_data');
 
 
+
+
+
 Route::get('/admindb', 'AdminsController@index');
 Route::get('/ajax/admindb', 'Ajax\AdminController@index');
+
+
 
 
 //フロントページ
