@@ -45,13 +45,27 @@
     </head>
     <body>
 
+
+
 <div id="app">
+@if ($admin_status == 1)
+    <?php 
+echo $admin_id."<br>";
+echo $admin_pw."<br><br>";
+echo $admin_status."だよ<br><br>";
+
+?>
     <admin-header></admin-header>
         <div class="main_content" >
         <side-bar></side-bar>
             <admin-main ></admin-main>
         </div>
+@else
+
+@endif
 </div>
+
+  
 
 <script>
 

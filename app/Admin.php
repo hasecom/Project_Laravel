@@ -26,6 +26,9 @@ class Admin extends Model
         $cold = Admin::get();
     return $this->en($cold);
     }
+    protected function admin_id(){
+        
+    }
 
   /*
 (array)XXX or エンコード後にデコード

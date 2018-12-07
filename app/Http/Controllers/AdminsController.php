@@ -1,6 +1,9 @@
 <?php
 /*
 管理者用のコントローラー
+
+TODO:チャレンジレスポンス認証に変更させる
+TODO:パスワードのハッシュ化
 */
 
 
@@ -17,52 +20,74 @@ use App\User;
 
 class AdminsController extends Controller
 {
-  
-    
+        protected $status = false;//sessionでユーザ情報があるかないか:false=ない
+
+
     //admin_attempt-Adminログイン画面
     public function admin_attempt()
     {
-        $sample2 = "aa";
-        $sample3 =10;
-        $sample_array = ['sample2'=>$sample2,'sample3'=>$sample3];
-
-        return view('admin/admin_login',$sample_array);
-  
-    
-    
-    
+        return view('admin/admin_login');
     }
-
+    /* 
+    admin_login_dataはadminログインフォームからPOSTされたデータの処理
+    データベースと比較する。
+    POSTデータはadmin_login.vueより取得。
+    エンコードしてデコードする。
+    DBと比較して一致すればセッションに登録をする。
+    */
     public function admin_login_data()
-    {
-
-        if(isset($_POST['sample'])){
-        $data = json_encode(['sample'=>$_POST['sample']]);
-        $decoded_json = json_decode($data,true);
-       
-        if(isset($decoded_json)){
+    {  
+        if(isset($_POST['username'])){
+        $user_name_en = json_encode(['username'=>$_POST['username']]);
+        $user_pass_en = json_encode(['userpassword'=>$_POST['userpassword']]);
+        $user_name = json_decode($user_name_en,true);
+        $user_pass = json_decode($user_pass_en,true);
+     
+        if(isset($user_name_en)){
         //サンプルです。
-        Admin::where('id', 2)
-        ->update(['admin_id' => $decoded_json['sample']]);
-            
-        }else{
+        // Admin::where('id', 2)
+        // ->update(['admin_id' => $user_name['username']]);
+         session()->put(['admin_id' => $user_name['username']]);
+         session()->put(['admin_pw' => $user_pass['userpassword']]);
+       
+    }else{
             echo "not conect";
         }
-    }
-       
-    }
-
-
-    //admin_top-Adminトップページ
+    } 
+}
+    /*admin_top-Adminトップページ
+    session()->get()でセッションデータを取得。
+    admin_topに転送
+    */
     public function admin_top()
     {
         //viewへの受け渡し
         $items = Admin::get(); 
-        $items2 = User::get(); 
+
+        $admin_username =session()->get('admin_id');//入力idをsessionに登録
+        $admin_userpw = session()->get('admin_pw');//入力pwをsessionに登録
+       
+        $db_admin_id = Admin::pluck("admin_id"); 
+        foreach ($db_admin_id as $val) {//db内のadmin_idを回す
+            if($val === $admin_username){//idがdb内のidと一致するか
+                $admin_pass = Admin::where('admin_id',$admin_username)->value('admin_pw');
+               if($admin_userpw === $admin_pass){//dbのpwと入力されたpwが一致するか
+                    $this->status = true;//true=1(認証されたらtrue)
+      
         $sample2 = Admin::sample();
-        $sample3 =10;
-        $sample_array = ['sample2'=>$sample2,'sample3'=>$sample3,'items'=>$items,'items2'=>$items2];
+        $sample_array = ['sample2'=>$sample2,
+                        'items'=>$items,
+                        'admin_id'=>$admin_username,
+                        'admin_pw'=>$admin_pass,
+                        'admin_status'=>$this->status
+                    ];
+        //認証が成功したらトップページに移動
         return view('admin/admin_top',$sample_array);
+    }
+} 
+}
+//認証が失敗したらログインページにリダイレクト
+      return redirect()->route('admin_login');
     }
     // 管理者一覧のビュー
     public function index() 

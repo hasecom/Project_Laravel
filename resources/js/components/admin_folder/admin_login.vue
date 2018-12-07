@@ -1,5 +1,7 @@
 <!--
 管理者ログイン画面
+TODO:IDかパスワードの未入力時はPOSTさせないような仕組み
+TODO:不正時のエスケープ処理(記号などは全て置き換える。例: < > % #)
 -->
 
 <template>
@@ -54,11 +56,12 @@ export default {
          submitForm: function () {
         console.log('submitting message...');
         let params = new URLSearchParams();
-        const sample = { username :this.username,userpassword :this.userpassword};
-  params.append('sample', this.username);
+  params.append('username',this.username);
+  params.append('userpassword',this.userpassword);
 axios.post('admin',params).then(response => {
     console.dir(response.config); 
-   
+   window.location.href="admin_top";
+
 }).catch(function (error) {
           console.log(error);
           alert('失敗');
