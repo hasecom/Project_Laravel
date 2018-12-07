@@ -27,18 +27,23 @@ class AdminsController extends Controller
         Admin::where('id', 1)
         ->update(['admin_authority' => 1]);
         return view('admin/admin_login',$sample_array);
+  
     }
 
     public function admin_login_data(){
        
-        $data = json_decode(file_get_contents("php://input"), true); 
-        $task_= $data['params']; 
-
+      //  $data = json_decode(file_get_contents("php://input"), true); 
+       // $task_= $data['params']; 
+        $data = json_encode(['sample'=>$_POST['sample']]);
+        $decoded_json = json_decode($data,true);
+        if(isset($decoded_json)){
         //サンプルです。ゆうたの権限を3にする
-        Admin::where('id', 1)
-        ->update(['admin_authority' => 3]);
-        
-       
+        Admin::where('id', 2)
+        ->update(['admin_id' => $decoded_json['sample']]);
+         
+        }else{
+            echo "not conect";
+        }
     }
 
 

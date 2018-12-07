@@ -56,11 +56,11 @@ export default {
         let params = new URLSearchParams();
         const sample = { username :this.username,userpassword :this.userpassword};
 
-  params.append('text', 'テストだよー');
+  params.append('sample', this.username);
 
        
 axios.post('admin',params).then(response => {
-    console.log(response.config);  
+    console.dir(response.config);  
 }).catch(function (error) {
           console.log(error);
           alert('失敗');
