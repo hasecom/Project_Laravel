@@ -4,6 +4,7 @@
 
 TODO:チャレンジレスポンス認証に変更させる
 TODO:パスワードのハッシュ化
+TODO:admin_login_data()内のPOSTされる値をhidden要素に変更させるvalueはcsrf_token
 */
 
 
