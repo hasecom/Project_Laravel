@@ -32,12 +32,13 @@ class AdminsController extends Controller
 
     public function admin_login_data(){
        
-      //  $data = json_decode(file_get_contents("php://input"), true); 
-       // $task_= $data['params']; 
+     
         $data = json_encode(['sample'=>$_POST['sample']]);
         $decoded_json = json_decode($data,true);
         if(isset($decoded_json)){
         //サンプルです。ゆうたの権限を3にする
+        var_dump($decoded_json);
+        echo "aa";
         Admin::where('id', 2)
         ->update(['admin_id' => $decoded_json['sample']]);
          
