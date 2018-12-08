@@ -24,7 +24,7 @@ data() return ->子要素にデータを送る(自分自身のデータを送る
 */
 export default{
   props:{
-      sample: {
+      manager: {
         type: String,
       }
     },
@@ -33,7 +33,7 @@ components: {
     },
      data(){
         return {
-            admin_info_str:this.sample
+            admin_info_str:this.manager
         }
 },
 }
@@ -63,6 +63,11 @@ components: {
   margin:0;
   height:100%;
   padding:30px;
+}
+.txt_box{
+ 
+  background:white;
+  padding:10px 15px 10px 15px;
 }
 
 @media only screen and (max-width: 768px) {

@@ -58,7 +58,7 @@ echo $admin_status."だよ<br><br>";
     <admin-header></admin-header>
         <div class="main_content" >
         <side-bar></side-bar>
-            <admin-main sample={{$items}}></admin-main>
+            <admin-main manager={{$items}}></admin-main>
         </div>
 @else
 

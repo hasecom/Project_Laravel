@@ -13,9 +13,5 @@
 </script>
 
 <style>
-.txt_box{
- 
-  background:white;
-  padding:10px 15px 10px 15px;
-}
+
 </style>
