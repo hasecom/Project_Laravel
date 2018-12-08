@@ -7,8 +7,12 @@
 <div class="border-bottom header">
 　<div class="container">
     <!-- タイトル -->
+    <div >
 　　<h1>Administrator</h1>
-<p>{{test}}</p>
+</div>
+<div class="text-right">
+{{login_user}}さんようこそ
+</div>
 　</div> 
 </div>
 
@@ -17,10 +21,12 @@
 
 <script>
 export default{
-props:{
-test:String,
-},
+ props:{
+      login_user: {
+        type: String,
+      },
 
+    }
 }
 </script>
 

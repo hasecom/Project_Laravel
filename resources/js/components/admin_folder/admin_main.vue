@@ -8,15 +8,17 @@
 
 　<div class="main_display">
   <!-- :XXX="YYY"で子要素にデータを送る -->
-  <router-view  :admin_info_str="admin_info_str"></router-view>
+  <router-view  :admin_info_str="admin_info_str"  :user_info_str="user_info_str"></router-view>
 　</div> 
+
 </div>
 
- 
 </template>
 
 <script>
-import Child from './admin_manager.vue';
+import admin_manager from './admin_manager.vue';
+import user_manager from './user_manager.vue';
+
 /*
 props->親要素からデータを受け取り
 componets->データを送りたい子要素ファイル(importしたもの)
@@ -24,16 +26,21 @@ data() return ->子要素にデータを送る(自分自身のデータを送る
 */
 export default{
   props:{
-      manager: {
+      admin_manager: {
         type: String,
+      },
+      user_manager:{
+        type:String
       }
     },
 components: {
-        Child
+        admin_manager,
+        user_manager
     },
      data(){
         return {
-            admin_info_str:this.manager
+            admin_info_str:this.admin_manager,
+            user_info_str:this.user_manager
         }
 },
 }

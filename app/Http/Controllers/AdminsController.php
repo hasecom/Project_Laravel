@@ -61,7 +61,8 @@ class AdminsController extends Controller
     public function admin_top()
     {
         //viewへの受け渡し
-        $items = Admin::get(); 
+        $admin_info = Admin::get(); 
+        $user_info = User::get(); 
 
         $admin_username =session()->get('admin_id');//入力idをsessionに登録
         $admin_userpw = session()->get('admin_pw');//入力pwをsessionに登録
@@ -75,9 +76,9 @@ class AdminsController extends Controller
       
         $sample2 = Admin::sample();
         $sample_array = ['sample2'=>$sample2,
-                        'items'=>$items,
-                        'admin_id'=>$admin_username,
-                        'admin_pw'=>$admin_pass,
+                        'admin_info'=>$admin_info,
+                        'user_info'=>$user_info,
+                        'login_user_id'=>$admin_username,
                         'admin_status'=>$this->status//0は未ログイン
                     ];
         //認証が成功したらトップページに移動

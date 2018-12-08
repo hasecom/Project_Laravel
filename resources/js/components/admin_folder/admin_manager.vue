@@ -1,7 +1,6 @@
 <template>
   <div>
-Admin Manager です。<br>
-<br>
+
    <div class="txt_box border rounded">
     
   <div class="table-responsive">
