@@ -51,9 +51,7 @@ class AdminsController extends Controller
          session()->put(['admin_id' => $user_name['username']]);
          session()->put(['admin_pw' => $user_pass['userpassword']]);
        
-    }else{
-            echo "not conect";
-        }
+    }
     } 
 }
     /*admin_top-Adminトップページ
@@ -80,7 +78,7 @@ class AdminsController extends Controller
                         'items'=>$items,
                         'admin_id'=>$admin_username,
                         'admin_pw'=>$admin_pass,
-                        'admin_status'=>$this->status
+                        'admin_status'=>$this->status//0は未ログイン
                     ];
         //認証が成功したらトップページに移動
         return view('admin/admin_top',$sample_array);

@@ -6,13 +6,9 @@
     HOME / Dashboard
   </div>
 
-
-   {{sample}}
-  
-
 　<div class="main_display">
   <!-- :XXX="YYY"で子要素にデータを送る -->
-  <router-view  :message="message"></router-view>
+  <router-view  :admin_info_str="admin_info_str"></router-view>
 　</div> 
 </div>
 
@@ -37,10 +33,9 @@ components: {
     },
      data(){
         return {
-            message:this.sample
+            admin_info_str:this.sample
         }
-}
-
+},
 }
 
 </script>

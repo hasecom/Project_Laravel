@@ -30,7 +30,7 @@ new Vue({
             .then((response) => {
 
                 this.admins = response.data;
-
+                
             });
 
         }
