@@ -12,7 +12,7 @@
                 <th>管理者レベル</th>
             </tr>
             <tbody>
-            <tr v-for="item in admins" :key="item.id" v-on:click="select(item)">
+            <tr v-for="item in admins" :key="item.id" @click="select(item)">
                 <td v-text="item.id"></td>
                 <td v-text="item.admin_id"></td>
                   <td v-text="item.admin_pw"></td>
@@ -28,24 +28,31 @@
       
          <table class="table table-hover">
            
-           <caption>{{admin_fnc().admin_id}}</caption>
+           <caption>
+             {{admin_fnc().admin_id}}
+              <button @click="edit_btn" class="float-right  btn-{themecolor} badge-pill"><i class="fas fa-user-edit"></i></button>
+           </caption>
     
            <tbody>
             <tr>
                 <th>管理者内部ID</th>
                 <td>{{admin_fnc().id}}</td>
+                <td></td>
             </tr>
             <tr>
               <th>管理者ID</th>
               <td>{{admin_fnc().admin_id}}</td>
+              <td></td>
             </tr>
             <tr>
               <th>管理者パスワード</th>
               <td>{{admin_fnc().admin_pw}}</td>
+              <td></td>
             </tr>
             <tr> 
               <th>管理者レベル</th>
               <td>{{admin_fnc().admin_authority}}</td>
+              <td></td>
             </tr>
             </tbody>
         </table>
@@ -79,23 +86,24 @@ export default {
     }
   },   
   methods: {
-      get_admins_info() {
+      get_admins_info() {//adminの情報
            this.admins = JSON.parse(this.admin_info);
         },
-
        openModal() {
       this.admin_modal = true
     },
       closeModal() {
       this.admin_modal = false
     },
-      admin_fnc(){
+      admin_fnc(){//admin_dataの値を埋め込む
        return this.admin_data;
-      }
-    
+      },
+    edit_btn:function(){//編集機能
+      console.log("OK");
+    }
     },
     computed: {
-      select: function () {
+      select: function () {//テーブルの項目をクリックされた時の詳細情報
             self = this;
         return function (details_user) {
           this.openModal();
