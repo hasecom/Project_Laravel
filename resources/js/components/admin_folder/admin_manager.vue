@@ -1,8 +1,10 @@
 <template>
   <div>
+    <div class="col-12 clearfix">
+  <button type="button" class="float-right btn btn-primary" @click="select('新規登録')" >新規登録</button>
+</div>
 
    <div class="txt_box border rounded">
-    
   <div class="table-responsive">
          <table class="table table-hover">
             <tr>
@@ -27,7 +29,7 @@
      <div class="modal_display">
       
          <table class="table table-hover">
-           
+           <div v-if="display_judg == true">
            <caption>
              {{admin_fnc().admin_id}}
               <button @click="edit_btn" class="float-right  btn-{themecolor} badge-pill"><i class="fas fa-user-edit"></i></button>
@@ -55,6 +57,44 @@
               <td></td>
             </tr>
             </tbody>
+            </div>
+<!-- 新規登録 -->
+            <div v-if="display_judg == false">
+               <caption>新規登録</caption>
+ <tbody>
+            <tr>
+                <th>管理者内部ID</th>
+                <td>Can't decide</td>
+            </tr>
+            <tr>
+              <th>管理者ID</th>
+              <td><input  class="form-control" type="text"></td>
+            </tr>
+            <tr>
+              <th>管理者パスワード</th>
+              <td><input  class="form-control" type="text"></td>
+            </tr>
+            <tr> 
+              <th>管理者レベル</th>
+              <td>
+                <select>
+                <option disabled value="">Please select one</option>
+                <option>1</option>
+                 <option>2</option>
+                 <option>3</option>
+                </select>
+              </td>
+            </tr>
+            </tbody>
+            
+            <br>
+
+           
+              <div class="text-center">
+                <button type="button" class="btn-lg btn-primary">新規作成</button>
+                </div>
+           
+              </div>
         </table>
        
       </div>
@@ -76,13 +116,16 @@ export default {
       admin_info_str: {
         type:String,
       }
-      },components: { MyModal },
+      },components: { 
+        MyModal 
+        },
       data(){
     return{
      admin_info:this.admin_info_str,
      admins:[],
-      admin_modal: false,
-      admin_data:""
+      admin_modal: false, //modal表示・非表示
+      admin_data:"",
+      display_judg : true, //詳細 or 新規作成
     }
   },   
   methods: {
@@ -90,10 +133,10 @@ export default {
            this.admins = JSON.parse(this.admin_info);
         },
        openModal() {
-      this.admin_modal = true
+      this.admin_modal = true;
     },
       closeModal() {
-      this.admin_modal = false
+      this.admin_modal = false;
     },
       admin_fnc(){//admin_dataの値を埋め込む
        return this.admin_data;
@@ -106,9 +149,17 @@ export default {
       select: function () {//テーブルの項目をクリックされた時の詳細情報
             self = this;
         return function (details_user) {
+            console.table(details_user)
+        //details_userがstringかオブジェクトか判定
+        if(typeof(details_user)=="string"){
+          this.display_judg = false;//新規登録modal
+            this.openModal();
+            
+        }else{ 
+          this.display_judg = true;//ユーザ詳細modal
           this.openModal();
            this.admin_data = details_user;
-          
+        }
         };
             
          
@@ -118,11 +169,7 @@ export default {
     mounted() {
         this.get_admins_info();
     },
- //ライフサイクル   
-//   created: function () {
-// var admin_data = JSON.parse(this.admin_info);
-   
-//   }
+
     }
     
 

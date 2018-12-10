@@ -72,7 +72,7 @@ components: {
   padding:30px;
 }
 .txt_box{
- 
+ margin-top:1em;
   background:white;
   padding:10px 15px 10px 15px;
 }
