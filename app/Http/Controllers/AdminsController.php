@@ -50,7 +50,6 @@ class AdminsController extends Controller
         // ->update(['admin_id' => $user_name['username']]);
          session()->put(['admin_id' => $user_name['username']]);
          session()->put(['admin_pw' => $user_pass['userpassword']]);
-       
     }
     } 
 }
@@ -89,8 +88,26 @@ class AdminsController extends Controller
 //認証が失敗したらログインページにリダイレクト
       return redirect()->route('admin_login');
     }
-    // 管理者一覧のビュー
-    public function index() 
+        public function admin_top_post(Request $request){//admin_topからのpostデータ(新規登録&ユーザ変更処理)
+            if(isset($_POST['sign_up_id'])){//TODO:あとでhiddenに変更とーくん
+                $signup_id_en = json_encode(['admin_id'=>$_POST['sign_up_id']]);
+                $signup_pw_en = json_encode(['sign_up_pw'=>$_POST['sign_up_pw']]);
+                $signup_authority_en = json_encode(['sign_up_authority'=>$_POST['sign_up_authority']]);
+               
+                $signup_id = json_decode($signup_id_en,true);
+                $signup_pw = json_decode($signup_pw_en,true);
+                $signup_authority = json_decode($signup_authority_en,true);
+                 
+        $sign_up_admin = new Admin;
+        $sign_up_admin->admin_id = $signup_id['admin_id'];
+        $sign_up_admin->admin_pw = $signup_pw['sign_up_pw'];
+        $sign_up_admin->admin_authority = $signup_authority['sign_up_authority'];
+        $sign_up_admin->save();
+            }
+}
+
+// 管理者一覧のビュー
+public function index() 
     {
         return view('admindb'); 
     }

@@ -26,6 +26,7 @@ Admin用のコントローラー作成完了
 
 //管理者用トップページ
 Route::get('/admin_top', 'AdminsController@admin_top');
+Route::post('/admin_top', 'AdminsController@admin_top_post');
 
 //管理者用ログインページ
 Route::get('/admin', 'AdminsController@admin_attempt')->name('admin_login');

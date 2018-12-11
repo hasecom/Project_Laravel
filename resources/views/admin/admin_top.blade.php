@@ -55,16 +55,16 @@
         <side-bar></side-bar>
             <admin-main admin_manager={{$admin_info}} user_manager="{{$user_info}}"></admin-main>
         </div>
+       
 @else
 
 @endif
 </div>
 
   
-
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"></script>
+  
 <script>
-
-
 
 </script>
 <script src="{{ mix('js/app.js') }}"></script>
