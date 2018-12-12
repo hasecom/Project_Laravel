@@ -51,7 +51,11 @@ class AdminsController extends Controller
          session()->put(['admin_id' => $user_name['username']]);
          session()->put(['admin_pw' => $user_pass['userpassword']]);
     }
-    } 
+    }else if(isset($_POST['status'])){
+        session()->forget('admin_id');
+        session()->forget('admin_pw');
+
+    }
 }
     /*admin_top-Adminトップページ
     session()->get()でセッションデータを取得。
@@ -88,8 +92,10 @@ class AdminsController extends Controller
 //認証が失敗したらログインページにリダイレクト
       return redirect()->route('admin_login');
     }
+    //TODO:内部IDの削除枠がとぶ？正常？どっちがいい？
         public function admin_top_post(Request $request){//admin_topからのpostデータ(新規登録&ユーザ変更処理)
             if(isset($_POST['sign_up_id'])){//TODO:あとでhiddenに変更とーくん
+                echo "新規登録";
                 $signup_id_en = json_encode(['admin_id'=>$_POST['sign_up_id']]);
                 $signup_pw_en = json_encode(['sign_up_pw'=>$_POST['sign_up_pw']]);
                 $signup_authority_en = json_encode(['sign_up_authority'=>$_POST['sign_up_authority']]);
@@ -97,13 +103,32 @@ class AdminsController extends Controller
                 $signup_id = json_decode($signup_id_en,true);
                 $signup_pw = json_decode($signup_pw_en,true);
                 $signup_authority = json_decode($signup_authority_en,true);
-                 
+          //新規登録save       
         $sign_up_admin = new Admin;
         $sign_up_admin->admin_id = $signup_id['admin_id'];
         $sign_up_admin->admin_pw = $signup_pw['sign_up_pw'];
         $sign_up_admin->admin_authority = $signup_authority['sign_up_authority'];
         $sign_up_admin->save();
-            }
+    
+            }else if(isset($_POST['update_admin_id'])){
+            //編集機能edit
+            $inner_id = $_POST['admin_inner_id']; 
+                    $edit_id = $_POST['update_admin_id'];
+                    $edit_pw = $_POST['update_admin_pw'];
+                    $edit_authority = $_POST['update_admin_authority'];
+                  
+                     $edit_admin = Admin::findOrFail($inner_id);
+                     $edit_admin->admin_id =$edit_id;
+                     $edit_admin->admin_pw =$edit_pw;
+                     $edit_admin->admin_authority = $edit_authority;                     
+                    $edit_admin->save();
+    
+            }else{
+                //削除機能delete TODO:エラー時の分岐処理など
+                    $delete_id = $_POST['admin_inner_id'];
+                    $delete_admin = Admin::findOrFail($delete_id);
+                    $delete_admin->delete();
+                }
 }
 
 // 管理者一覧のビュー

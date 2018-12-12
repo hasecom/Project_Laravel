@@ -28,6 +28,7 @@ class Admin extends Model
 
     public $timestamps = false;
 
+//デフォルト値
     protected $attributes = [
         'admin_id' => "",
         'admin_pw' => "",
@@ -38,12 +39,7 @@ class Admin extends Model
         $cold = Admin::get();
     return $this->en($cold);
     }
-  
-
-   
-   
     
-
   /*
 (array)XXX or エンコード後にデコード
   (array)XXXの方がスピードは速いが

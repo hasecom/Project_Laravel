@@ -54,6 +54,7 @@ export default {
   },
   methods: {
          submitForm: function () {
+           
         console.log('submitting message...');
         let params = new URLSearchParams();
   params.append('username',this.username);

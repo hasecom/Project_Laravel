@@ -8,9 +8,7 @@
         <div class="rounded shadow border">
           <slot/>
         </div>
-      
-       
-    
+
       </div>
     </div>
   </transition>
