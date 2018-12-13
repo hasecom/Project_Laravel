@@ -7,7 +7,7 @@ use App\User;
 
 class UsersController extends Controller
 {
-    protected $status = false;//sessionでユーザ情報があるかないか:false=ない
+    protected $status = false;//sessionでユーザ情報があるかないか、false=ない
 
 /*====================================================================
 Userのフロント画面
