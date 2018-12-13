@@ -23,7 +23,7 @@ Userのログイン画面
     public function user_login() {
         return view('user/login');
     }
-     /*=UserログインPOST=*/
+    /*=UserログインPOST=*/
     public function user_login_post(Request $requsest){
     }
 /*====================================================================
