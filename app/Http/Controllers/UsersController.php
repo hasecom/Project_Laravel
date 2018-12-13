@@ -24,7 +24,20 @@ Userのログイン画面
         return view('user/login');
     }
     /*=UserログインPOST=*/
-    public function user_login_post(Request $requsest){
+    public function user_login_post(){
+   
+      if(isset($_POST['userid'])){
+        $user_id_en = json_encode(['userid'=>$_POST['userid']]);
+        $user_pass_en = json_encode(['userpassword'=>$_POST['userpassword']]);
+        $user_id = json_decode($user_id_en,true);
+        $user_pass = json_decode($user_pass_en,true);
+         var_dump($user_id);
+      }
+      if(isset($user_id_en)){//session記憶
+        session()->put(['user_id' => $user_id['userid']]);
+        session()->put(['user_pw' => $user_pass['userpassword']]);
+   }
+   //TODO:DBにアクセスして認証チェック
     }
 /*====================================================================
 Userの新規登録画面
@@ -38,6 +51,10 @@ Userのトップ画面
 ======================================================================*/
     /*=Userトップ画面=*/
     public function user_top() { 
+        $user_data = 
+        [
+            'user_status'=>$this->status//0は未ログイン
+        ];
         return view('user/top');
     }
     

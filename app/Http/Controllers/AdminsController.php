@@ -45,14 +45,11 @@ Adminログイン画面
         $user_name = json_decode($user_name_en,true);
         $user_pass = json_decode($user_pass_en,true);
      
-        if(isset($user_name_en)){
-        //サンプルです。
-        // Admin::where('id', 2)
-        // ->update(['admin_id' => $user_name['username']]);
+        if(isset($user_name_en)){//session記憶
          session()->put(['admin_id' => $user_name['username']]);
          session()->put(['admin_pw' => $user_pass['userpassword']]);
     }
-    }else if(isset($_POST['status'])){
+    }else if(isset($_POST['status'])){//session削除
         session()->forget('admin_id');
         session()->forget('admin_pw');
 
@@ -100,7 +97,7 @@ Adminトップページ
 
         public function admin_top_post(Request $request){//admin_topからのpostデータ(新規登録&ユーザ変更処理)
             if(isset($_POST['sign_up_id'])){//TODO:あとでhiddenに変更とーくん
-                echo "新規登録";
+                
                 $signup_id_en = json_encode(['admin_id'=>$_POST['sign_up_id']]);
                 $signup_pw_en = json_encode(['sign_up_pw'=>$_POST['sign_up_pw']]);
                 $signup_authority_en = json_encode(['sign_up_authority'=>$_POST['sign_up_authority']]);

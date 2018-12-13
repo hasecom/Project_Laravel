@@ -6,7 +6,7 @@
         <meta name="csrf-token" content="{{csrf_token()}}">
         <title>Laravel</title>
         
-        <link rel="stylesheet"    href="{{ mix('css/app.css') }}">
+        <link rel="stylesheet"  href="{{ mix('css/app.css') }}">
         <!-- Fonts -->
     
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
@@ -18,7 +18,9 @@
     <body>
 
 <div id="app">
+
 <user_top></user_top>
+
 </div>
 
 
