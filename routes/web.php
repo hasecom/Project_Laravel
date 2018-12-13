@@ -34,34 +34,23 @@ Route::post('/admin', 'AdminsController@admin_login_data');
 
 
 
-
-
 Route::get('/admindb', 'AdminsController@index');
 Route::get('/ajax/admindb', 'Ajax\AdminController@index');
 
 
-
-
 //フロントページ
-Route::get('/', function () {
-    return view('
-    user/front');
-});
+Route::get('/', 'UsersController@user_front');
 
 //ユーザログインページ
-Route::get('/login', function () {
-    return view('user/login');
-});
+Route::get('/login', 'UsersController@user_login');
+Route::post('/login', 'AdminsController@user_login_post');
 
 //ユーザー新規作成ページ
-Route::get('/sign_up', function () {
-    return view('user/sign_up');
-});
+Route::get('/sign_up', 'UsersController@sign_up');
 
 //ユーザートップページ
-Route::get('/user', function () {
-    return view('user/top');
-});
+Route::get('/user', 'UsersController@user_top');
+
 
 
 

@@ -23,8 +23,9 @@ class AdminsController extends Controller
 {
         protected $status = false;//sessionでユーザ情報があるかないか:false=ない
 
-
-    //admin_attempt-Adminログイン画面
+/*====================================================================
+Adminログイン画面
+======================================================================*/
     public function admin_attempt()
     {
         return view('admin/admin_login');
@@ -57,7 +58,10 @@ class AdminsController extends Controller
 
     }
 }
-    /*admin_top-Adminトップページ
+/*====================================================================
+Adminトップページ
+======================================================================*/
+    /*
     session()->get()でセッションデータを取得。
     admin_topに転送
     */
@@ -93,6 +97,7 @@ class AdminsController extends Controller
       return redirect()->route('admin_login');
     }
     //TODO:内部IDの削除枠がとぶ？正常？どっちがいい？
+
         public function admin_top_post(Request $request){//admin_topからのpostデータ(新規登録&ユーザ変更処理)
             if(isset($_POST['sign_up_id'])){//TODO:あとでhiddenに変更とーくん
                 echo "新規登録";
@@ -130,8 +135,9 @@ class AdminsController extends Controller
                     $delete_admin->delete();
                 }
 }
-
-// 管理者一覧のビュー
+/*====================================================================
+管理者一覧のビュー
+======================================================================*/
 public function index() 
     {
         return view('admindb'); 

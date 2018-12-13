@@ -9,7 +9,7 @@
     <div class="authentication_table">
     <form>
   <div class="form-group">
-    <label >ユーザー名またはメールアドレス</label>
+    <label >ユーザーID</label>
     <input type="text" class="form-control shadow-sm">
   </div>
   <div class="form-group">
