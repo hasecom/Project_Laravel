@@ -31,13 +31,12 @@ Userのログイン画面
         $user_pass_en = json_encode(['userpassword'=>$_POST['userpassword']]);
         $user_id = json_decode($user_id_en,true);
         $user_pass = json_decode($user_pass_en,true);
-         var_dump($user_id);
       }
       if(isset($user_id_en)){//session記憶
         session()->put(['user_id' => $user_id['userid']]);
         session()->put(['user_pw' => $user_pass['userpassword']]);
    }
-   //TODO:DBにアクセスして認証チェック
+
     }
 /*====================================================================
 Userの新規登録画面
@@ -46,17 +45,37 @@ Userの新規登録画面
     public function sign_up() {
         return view('user/sign_up');
     }
-/*====================================================================
+/* ====================================================================
 Userのトップ画面
 ======================================================================*/
     /*=Userトップ画面=*/
     public function user_top() { 
-        $user_data = 
-        [
+        $user_userid =session()->get('user_id');//入力idをsessionに登録
+        $user_userpw = session()->get('user_pw');//入力pwをsessionに登録
+/*
+TODO:DBにアクセスして認証チェック
+*/
+   $db_user_id = User::pluck("user_id");
+
+   foreach ($db_user_id as $val) {//db内のuser_idを回す
+        if($val === $user_userid){//idがdb内のidと一致するか
+         $user_pass = User::where('user_id',$user_userid)->value('user_pw');
+          if($user_userpw === $user_pass){//dbのpwと入力されたpwが一致するか
+            $user_inner = User::where('user_id',$user_userid)->value('id');//内部ID取得
+            $user_info = User::find($user_inner);//主キーからfindでデータ取得
+            echo $user_info;
+        
+            $this->status = true;//true=1(認証されたらtrue)
+            $user_data = 
+            [
+            'user_info'=>$user_info,//ユーザ情報
             'user_status'=>$this->status//0は未ログイン
-        ];
-        return view('user/top');
+            ];
+         return view('user/top',$user_data);
+         }
+     }
     }
-    
-    
+    //認証が失敗したらログインページにリダイレクト
+    return redirect()->route('login');
+    }
 }

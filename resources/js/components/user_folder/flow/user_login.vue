@@ -56,7 +56,6 @@ export default {
 axios.post('login',params).then(response => {
     console.dir(response.config); 
    window.location.href="user";
-
 }).catch(function (error) {
           console.log(error);
           alert('失敗');

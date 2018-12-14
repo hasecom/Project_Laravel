@@ -36,7 +36,7 @@ Route::get('/', 'UsersController@user_front');
 ユーザログインページ
 ======================================================================*/
 
-Route::get('/login', 'UsersController@user_login');
+Route::get('/login', 'UsersController@user_login')->name('login');
 Route::post('/login', 'UsersController@user_login_post');
 
 
