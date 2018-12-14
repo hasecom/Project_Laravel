@@ -62,8 +62,9 @@ TODO:DBにアクセスして認証チェック
          $user_pass = User::where('user_id',$user_userid)->value('user_pw');
           if($user_userpw === $user_pass){//dbのpwと入力されたpwが一致するか
             $user_inner = User::where('user_id',$user_userid)->value('id');//内部ID取得
-            $user_info = User::find($user_inner);//主キーからfindでデータ取得
-            echo $user_info;
+            //*主キーからfindでデータ取得->クラス内のメソッド参照(obj->arr)
+            $user_info = $this->utf_chg(User::find($user_inner));
+            var_dump($user_info);
         
             $this->status = true;//true=1(認証されたらtrue)
             $user_data = 
@@ -77,5 +78,12 @@ TODO:DBにアクセスして認証チェック
     }
     //認証が失敗したらログインページにリダイレクト
     return redirect()->route('login');
+    }
+
+    //*Userモデルでオブジェクトを配列に変換させる
+    public function utf_chg($uni_arr){
+        $utf8_arr = array();
+       $utf8_arr = User::de($uni_arr);
+        return $utf8_arr;
     }
 }
