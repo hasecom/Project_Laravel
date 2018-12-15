@@ -21,7 +21,22 @@
     <body>
 
 <div id="app">
+    
+    
+@if ($chk_userid == 0 && $chk_useremail ==0)
+    {{-- idとメアドがオリジナル --}}  
     <sign_up></sign_up>
+@else
+    {{-- idとメアドが重複している（DBと） --}}
+    <sign_up 
+    chk_userid="{{$chk_userid}}" 
+    chk_useremail="{{$chk_useremail}}"
+     v-bind:temp_user_data="['{{Session::get('temp_user_id')}}', 
+                     '{{Session::get('temp_user_email')}}', 
+                     '{{Session::get('temp_user_name')}}'
+                     ]"
+    ></sign_up>
+@endif
 </div>
 
 

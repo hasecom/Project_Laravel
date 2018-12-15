@@ -45,6 +45,7 @@ Route::post('/login', 'UsersController@user_login_post');
 ======================================================================*/
 
 Route::get('/sign_up', 'UsersController@sign_up');
+Route::post('/sign_up', 'UsersController@sign_up_post');
 
 
 /*====================================================================

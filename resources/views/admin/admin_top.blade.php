@@ -50,10 +50,10 @@
 <div id="app">
 @if ($admin_status == 1)
 
-    <admin-header login_user={{$login_user_id}}></admin-header>
+    <admin-header login_user="{{$login_user_id}}"></admin-header>
         <div class="main_content" >
         <side-bar></side-bar>
-            <admin-main admin_manager={{$admin_info}} user_manager="{{$user_info}}"></admin-main>
+            <admin-main admin_manager="{{$admin_info}}" user_manager="{{$user_info}}"></admin-main>
         </div>
        
 @else

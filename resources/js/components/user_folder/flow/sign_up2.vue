@@ -18,14 +18,40 @@
 
   <button type="submit" class="btn btn-primary">SMSに送信する</button>
 </form>
-
+{{chk_userid_send}}
+{{chk_useremail_send}}
 </div>
 </div>
   </div>
 </template>
 
 <script>
+export default {
 
+  name: 'user-sign_up2',
+  props:{
+    chk_userid_send: {
+        type: String,
+      },
+    chk_useremail_send: {
+        type: String,
+      },
+  },
+  //TODO:sign_up2で渡されたチェッカーたちをメソッドで返す？sign_up.vueでよいのか
+  
+  data(){
+    return{
+      chk_userid:this.chk_userid_send,
+      chk_useremail:this.chk_useremail_send,
+    }
+  },created : function(){
+    //*props扱えるのcreatedらしいぜよ
+    if(this.chk_userid_send == 1 || this.chk_useremail_send == 1){
+       window.location.href="sign_up#/registration";
+    }
+  
+  }
+}
 </script>
 
 <style>
