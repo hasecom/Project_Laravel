@@ -21,7 +21,23 @@
     <body>
 
 <div id="app">
+
+    
+@if ($chk_userid == 0 && $chk_useremail ==0)
+    {{-- idとメアドがオリジナル --}}  
     <sign_up></sign_up>
+@else
+    {{-- idとメアドが重複している（DBと） --}}
+    <sign_up 
+    chk_userid="{{$chk_userid}}" 
+    chk_useremail="{{$chk_useremail}}"
+    ></sign_up>
+ {{Session::forget('temp_user_id')}}  
+ {{Session::forget('temp_user_pw')}}  
+ {{Session::forget('temp_user_email')}}   
+ {{Session::forget('temp_user_name')}}  
+
+@endif
 </div>
 
 

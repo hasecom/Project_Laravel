@@ -93,9 +93,10 @@ Adminトップページ
 //認証が失敗したらログインページにリダイレクト
       return redirect()->route('admin_login');
     }
-    //TODO:内部IDの削除枠がとぶ？正常？どっちがいい？
+    //?内部IDの削除枠がとぶ？正常？どっちがいい？
 
-        public function admin_top_post(Request $request){//admin_topからのpostデータ(新規登録&ユーザ変更処理)
+        public function admin_top_post(Request $request){
+            //admin_topからのpostデータ(新規登録&ユーザ変更処理)
             if(isset($_POST['sign_up_id'])){//TODO:あとでhiddenに変更とーくん
                 
                 $signup_id_en = json_encode(['admin_id'=>$_POST['sign_up_id']]);

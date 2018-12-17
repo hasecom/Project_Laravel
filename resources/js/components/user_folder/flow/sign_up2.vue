@@ -7,25 +7,44 @@
 <div class="authentication_box border rounded shadow-lg">
 
 
-    <div class="authentication_table">
-    <form>
-  <div class="form-group">
-    <label >携帯電話の番号</label>
-    <input type="tel" class="form-control shadow-sm">
-  </div>
-
- 
-
-  <button type="submit" class="btn btn-primary">SMSに送信する</button>
-</form>
-
-</div>
 </div>
   </div>
 </template>
 
 <script>
+export default {
 
+  name: 'user-sign_up2',
+  props:{
+    chk_userid_send: {
+        type: String,
+      },
+    chk_useremail_send: {
+        type: String,
+      },
+  },
+  //TODO:sign_up2で渡されたチェッカーたちをメソッドで返す？sign_up.vueでよいのか
+  
+  data(){
+    return{
+      chk_userid:this.chk_userid_send,
+      chk_useremail:this.chk_useremail_send,
+    }
+  },created : function(){
+    //*props扱えるのcreatedらしいぜよ
+    //TODO:sign_up1へIDが被っているのかメールが不正or被っているかを返す
+    if(this.chk_userid_send == 1 || this.chk_useremail_send == 1){
+       window.location.href="sign_up#/registration";
+    }else{
+      axios.post('sign_up').then(response => {
+        console.log(response);
+}).catch(function (error) {
+          console.log(error);
+        });
+    
+    }
+  }
+}
 </script>
 
 <style>
@@ -33,8 +52,6 @@
     background:rgb(241,241,241);
     display: table;
     margin:auto;
-    
-
 }
 
 .authentication_box{

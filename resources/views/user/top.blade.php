@@ -18,9 +18,11 @@
     <body>
 
 <div id="app">
-
+@if ($user_status == 1)
 <user_top></user_top>
+@else
 
+@endif
 </div>
 
 
