@@ -76,6 +76,8 @@ Userの新規登録画面
             session()->put(['temp_user_pw' => $user_pass['userpassword']]);
             session()->put(['temp_user_email' => $user_email['useremail']]);
             session()->put(['temp_user_name' => $user_name['username']]);
+        }else{
+          $this->send_mail();
         }
       
     }
@@ -117,7 +119,29 @@ TODO:DBにアクセスして認証チェック
     //*Userモデルでオブジェクトを配列に変換させる
     public function utf_chg($uni_arr){
         $utf8_arr = array();
-       $utf8_arr = User::de($uni_arr);
+        $utf8_arr = User::de($uni_arr);
         return $utf8_arr;
+    }
+    public function send_mail(){
+        try{
+            echo "a";
+/*
+TODO:仮登録のメール設定
+メールへの接続
+
+*/
+//         mb_language("Ja");
+//         mb_internal_encoding("UTF-8");
+// $mailto = "hasetennis52@gmail.com";
+// $subject = "PHPでのメール送信について";
+// $content = "こんにちは。";
+// $mailfrom="From:" .mb_encode_mimeheader("サンプル") ."<hasetennisth@gmail.com>";
+// mb_send_mail($mailto, $subject, $content, $mailfrom);
+
+
+        }catch(Exception $e){
+
+        }
+
     }
 }

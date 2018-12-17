@@ -21,7 +21,7 @@
     <body>
 
 <div id="app">
-    
+
     
 @if ($chk_userid == 0 && $chk_useremail ==0)
     {{-- idとメアドがオリジナル --}}  
@@ -31,11 +31,12 @@
     <sign_up 
     chk_userid="{{$chk_userid}}" 
     chk_useremail="{{$chk_useremail}}"
-     v-bind:temp_user_data="['{{Session::get('temp_user_id')}}', 
-                     '{{Session::get('temp_user_email')}}', 
-                     '{{Session::get('temp_user_name')}}'
-                     ]"
     ></sign_up>
+ {{Session::forget('temp_user_id')}}  
+ {{Session::forget('temp_user_pw')}}  
+ {{Session::forget('temp_user_email')}}   
+ {{Session::forget('temp_user_name')}}  
+
 @endif
 </div>
 

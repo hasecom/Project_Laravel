@@ -4,8 +4,9 @@
 
 <template>
 <div>
-  <router-view :chk_userid_send="chk_userid_send" :chk_useremail_send="chk_useremail_send"></router-view>
-
+  <router-view :chk_userid_send="chk_userid_send" 
+                :chk_useremail_send="chk_useremail_send"
+               :temp_user_data_arr="temp_user_data_arr"></router-view>
 </div>
 </template>
 
@@ -33,6 +34,7 @@ export default{
         return {
             chk_userid_send:this.chk_userid,
             chk_useremail_send:this.chk_useremail,
+            temp_user_data_arr:this.temp_user_data
         }
 },
 }

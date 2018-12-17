@@ -19,7 +19,7 @@ export default [
 { path: '/user_manager', component:user_manager },
 { path: '/news_manager', component:news_manager },
 { path: '/registration', component:sign_up },
-{ path: '/sms_confirmation', component:sign_up2 },
+{ path: '/redirect', component:sign_up2 },
 { path: '/mypage', component:mypage },
 { path: '/post_image', component:post_image },
 { path: '/recruit_image', component:recruit_image },

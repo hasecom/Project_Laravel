@@ -36,14 +36,10 @@
 
 <button type="submit" class="btn btn-primary">次へ</button>
 
- <router-link to="/sms_confirmation" class="btn btn-primary">
-      <a>次へ</a>
-      </router-link>
 
 </form>
-{{chk_userid}}
-{{chk_useremail}}
 </div>
+
 </div>
   </div>
 </template>
@@ -84,7 +80,7 @@ export default {
            params.append('userpassword',this.user_pass);
             axios.post('sign_up',params).then(response => {
                console.dir(response.config); 
-               window.location.href="sign_up#/sms_confirmation";
+               window.location.href="sign_up#/redirect";
             }).catch(function (error) {
                console.log(error);
               alert('失敗');
