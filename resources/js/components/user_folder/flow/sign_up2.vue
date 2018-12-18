@@ -37,15 +37,14 @@ export default {
   
        }
   },created : function(){
-    console.log(this.chk_userid_send);
-    console.log(this.chk_useremail_send);
+
     //*props扱えるのcreatedらしいぜよ
     //TODO:sign_up1へIDが被っているのかメールが不正or被っているかを返す
     if(this.chk_userid_send == "1" || this.chk_useremail_send == "1"){
        window.location.href="sign_up#/registration";
     }else{
       axios.post('sign_up').then(response => {
-        console.log(response['data'])
+  
        if(response['data']['status'] == true){//コントローラーからのレスポンスデータ
           this.temporary_registration_display += '下記のメールアドレスに登録用URLを記載したメールを送信しました。\n';
           this.temporary_registration_display +=  response['data']['email'] + '\n\n';

@@ -8,6 +8,8 @@ use App\Temp_User;
 
 class UsersController extends Controller
 {
+
+    //TODO:【バグ】新規作成で仮登録完了後にもう一度入力すると登録できない
     protected $status = false;//sessionでユーザ情報があるかないか、false=ない
 
 /*====================================================================
@@ -46,7 +48,7 @@ Userの新規登録画面
     public function sign_up(){
         //*アカウント新規登録、許可の配列（重複させない）
         $allow=[
-        'chk_userid'=>true, //trueは許可されな
+        'chk_userid'=>true, //trueは許可されない
         'chk_useremail'=>true,
                 ];
         if(session()->has('challenge_signup')){
@@ -89,6 +91,7 @@ Userの新規登録画面
                 session()->forget('temp_user_email');
                 session()->forget('temp_user_name');
                 session()->forget('challenge_signup');
+             
             }
         }else{
         /*=新規登録入力後にメールが送られる処理=*/
@@ -113,6 +116,7 @@ Userの新規登録画面
           session()->forget('temp_user_pw');
           session()->forget('temp_user_email');
           session()->forget('temp_user_name');
+          session()->forget('challenge_signup');
           //sign_up2のvueにメールアドレスとステータスを返すのだお
           return $user_data;
         }
