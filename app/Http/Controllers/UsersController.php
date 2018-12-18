@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Temp_User;
 
 class UsersController extends Controller
 {
@@ -45,15 +46,16 @@ Userの新規登録画面
     public function sign_up(){
         //*アカウント新規登録、許可の配列（重複させない）
         $allow=[
-        'chk_userid'=>true, //trueは許可されない
+        'chk_userid'=>true, //trueは許可されな
         'chk_useremail'=>true,
                 ];
         if(session()->has('challenge_signup')){
+            echo "通過";
             //ID,emailにダブりかあるかチェックする(falseならダブりなし)
             $user_id_chk = User::where('user_id',session()->get('temp_user_id'))->exists();
             $user_email_chk = User::where('mail',session()->get('temp_user_email'))->exists();
             if($user_id_chk == false)$allow['chk_userid']=false;
-            if($user_email_chk == false)$allow['chk_useremail']=false;        
+            if($user_email_chk == false)$allow['chk_useremail']=false;   
         }
         return view('user/sign_up',$allow);
     }
@@ -62,6 +64,7 @@ Userの新規登録画面
         //TODO:hiddenで受け取り
         //?エンコード処理やnull値の処理はサーバでもやった方がいいかな？
         if(isset($_POST['userid'])){//*新規登録からアカウント情報を受け取れたか
+        
             $user_name_en = json_encode(['username'=>$_POST['username']]);
             $user_id_en = json_encode(['userid'=>$_POST['userid']]);
             $user_email_en = json_encode(['useremail'=>$_POST['useremail']]);
@@ -71,13 +74,47 @@ Userの新規登録画面
             $user_pass = json_decode($user_pass_en,true);
             $user_email = json_decode($user_email_en,true);
             $user_name = json_decode($user_name_en,true);
+            if($user_id['userid'] != "" || $user_pass['userpassword'] != "" || $user_email['useremail'] !="" || $user_name['username'] != "")
+            {
             session()->put(['challenge_signup'=>'challenge']);
             session()->put(['temp_user_id' => $user_id['userid']]);//sessionにput
             session()->put(['temp_user_pw' => $user_pass['userpassword']]);
             session()->put(['temp_user_email' => $user_email['useremail']]);
             session()->put(['temp_user_name' => $user_name['username']]);
+            
+            }else{
+               
+                session()->forget('temp_user_id');
+                session()->forget('temp_user_pw');
+                session()->forget('temp_user_email');
+                session()->forget('temp_user_name');
+                session()->forget('challenge_signup');
+            }
         }else{
+        /*=新規登録入力後にメールが送られる処理=*/
           $this->send_mail();
+
+          $user_data = 
+          [
+          'status'=>true,
+          'email'=>session()->get('temp_user_email'),
+          ];
+          /*=仮登録DBに保存しやす=*/
+          $temp_sign_up_user = new Temp_User;
+          $temp_sign_up_user->temp_id = session()->get('temp_user_id');
+          $temp_sign_up_user->temp_pw = session()->get('temp_user_pw');
+          $temp_sign_up_user->temp_name = session()->get('temp_user_name');
+          $temp_sign_up_user->temp_email = session()->get('temp_user_email');
+          $temp_sign_up_user->token = "a";
+          $temp_sign_up_user->save();
+
+          /*=仮登録用のsessionはここでサヨナラ=*/
+          session()->forget('temp_user_id');
+          session()->forget('temp_user_pw');
+          session()->forget('temp_user_email');
+          session()->forget('temp_user_name');
+          //sign_up2のvueにメールアドレスとステータスを返すのだお
+          return $user_data;
         }
       
     }
@@ -116,15 +153,18 @@ TODO:DBにアクセスして認証チェック
     return redirect()->route('login');
     }
 
+/* ====================================================================
+使い回しメソッド
+======================================================================*/
     //*Userモデルでオブジェクトを配列に変換させる
     public function utf_chg($uni_arr){
         $utf8_arr = array();
         $utf8_arr = User::de($uni_arr);
         return $utf8_arr;
     }
+    //*メール送信
     public function send_mail(){
-        try{
-            echo "a";
+        try{ 
 /*
 TODO:仮登録のメール設定
 メールへの接続

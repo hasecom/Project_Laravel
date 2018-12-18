@@ -21,13 +21,16 @@
     <body>
 
 <div id="app">
-
+{{$chk_userid}}
+{{$chk_useremail}}
     
 @if ($chk_userid == 0 && $chk_useremail ==0)
-    {{-- idとメアドがオリジナル --}}  
+    {{-- idとメアドがオリジナル --}} 
+    <?php echo "a";?> 
     <sign_up></sign_up>
 @else
     {{-- idとメアドが重複している（DBと） --}}
+    <?php echo "b";?>
     <sign_up 
     chk_userid="{{$chk_userid}}" 
     chk_useremail="{{$chk_useremail}}"

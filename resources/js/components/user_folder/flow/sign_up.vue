@@ -36,7 +36,6 @@
 
 <button type="submit" class="btn btn-primary">次へ</button>
 
-
 </form>
 </div>
 
@@ -59,6 +58,8 @@ export default {
     chk_useremail_send: {
         type: String,
       },
+
+ 
   },
   data(){//return内にテンプuser__情報ニュ力
     return{
@@ -73,7 +74,9 @@ export default {
   },
   methods: {
               submitForm: function () {
-         let params = new URLSearchParams();
+              if(this.user_name !="" && this.user_id != "" && this.user_email != "" && this.user_pass != "")
+              {
+        let params = new URLSearchParams();
            params.append('username',this.user_name);
            params.append('userid',this.user_id);
            params.append('useremail',this.user_email);
@@ -85,7 +88,7 @@ export default {
                console.log(error);
               alert('失敗');
             });
-            
+              }
          } 
     },
 }

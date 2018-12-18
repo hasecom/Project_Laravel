@@ -5,7 +5,9 @@
 <template>
   <div class="user_sign_up_main">
 <div class="authentication_box border rounded shadow-lg">
-
+  <p>
+    {{temporary_registration_display}}
+  </p>
 
 </div>
   </div>
@@ -22,6 +24,8 @@ export default {
     chk_useremail_send: {
         type: String,
       },
+
+  
   },
   //TODO:sign_up2で渡されたチェッカーたちをメソッドで返す？sign_up.vueでよいのか
   
@@ -29,15 +33,26 @@ export default {
     return{
       chk_userid:this.chk_userid_send,
       chk_useremail:this.chk_useremail_send,
-    }
+      temporary_registration_display:"",
+  
+       }
   },created : function(){
+    console.log(this.chk_userid_send);
+    console.log(this.chk_useremail_send);
     //*props扱えるのcreatedらしいぜよ
     //TODO:sign_up1へIDが被っているのかメールが不正or被っているかを返す
-    if(this.chk_userid_send == 1 || this.chk_useremail_send == 1){
+    if(this.chk_userid_send == "1" || this.chk_useremail_send == "1"){
        window.location.href="sign_up#/registration";
     }else{
       axios.post('sign_up').then(response => {
-        console.log(response);
+        console.log(response['data'])
+       if(response['data']['status'] == true){//コントローラーからのレスポンスデータ
+          this.temporary_registration_display += '下記のメールアドレスに登録用URLを記載したメールを送信しました。\n';
+          this.temporary_registration_display +=  response['data']['email'] + '\n\n';
+          this.temporary_registration_display += '登録用URLにアクセスさせて登録確認を完了してください。';
+          
+       }
+ 
 }).catch(function (error) {
           console.log(error);
         });
@@ -61,6 +76,11 @@ export default {
    display:table-cell;
     vertical-align: middle;
     }
+
+p{
+  white-space: pre;
+  text-align: center;
+}
 
 
 </style>
