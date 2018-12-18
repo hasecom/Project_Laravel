@@ -11,8 +11,8 @@
 
 
   <img v-show="uploadedImage" :src="uploadedImage" />
-  <input type="file" v-on:change="onFileChange" name="samp">
-  <img src="public/sampe.jpg">
+  <input type="file" v-on:change="onFileChange" name="file"  mulitple="multiple">
+<img src="storage/photo.jpg">
   </div>
 </template>
 
@@ -21,6 +21,7 @@ export default {
 data() {
     return {
       uploadedImage: '',
+      return_base64:''
     };
   },
   methods: {
@@ -36,17 +37,23 @@ data() {
      
 
       reader.onload = (e) => {
+
         this.uploadedImage = e.target.result;
-        console.log(this.uploadedImage);
+
+        
            let params = new URLSearchParams();
            params.append('files',this.uploadedImage);
+           console.log(file['name'])
         axios.post('',params).then(response => {
+          this.return_base64 = response['data'];
           }).catch(function (error) {
           console.log(error);
         });
+       
+
       };
       reader.readAsDataURL(file);
-   
+
     },
   },  
 

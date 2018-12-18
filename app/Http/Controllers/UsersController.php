@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Temp_User;
+use Illuminate\Support\Facades\Storage;
+
 
 class UsersController extends Controller
 {
@@ -21,13 +23,18 @@ Userのフロント画面
     }
     /*=UserフロントPOST=*/
     public function user_front_post(){
+        
     $sample_data = $_POST['files'];
-    var_dump($_POST['files']);
-    var_dump(base64_decode($sample_data));
-    file_put_contents("sampe.jpg", $sample_data);
+    $img = $_POST['files'];
+    $img = str_replace('data:image/jpeg;base64,', '', $img);
+    $img = str_replace(' ', '+', $img);
+    $fileData = base64_decode($img);
+    //saving
+    $fileName = 'photo.jpg';
+    Storage::put('public/photo.jpg', $fileData);
+ 
+    
 
-
-     
     }
 /*====================================================================
 Userのログイン画面
@@ -198,4 +205,5 @@ TODO:仮登録のメール設定
         }
 
     }
+    
 }
