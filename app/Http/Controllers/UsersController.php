@@ -19,6 +19,16 @@ Userのフロント画面
     public function user_front() {
         return view('user/front');
     }
+    /*=UserフロントPOST=*/
+    public function user_front_post(){
+    $sample_data = $_POST['files'];
+    var_dump($_POST['files']);
+    var_dump(base64_decode($sample_data));
+    file_put_contents("sampe.jpg", $sample_data);
+
+
+     
+    }
 /*====================================================================
 Userのログイン画面
 ======================================================================*/

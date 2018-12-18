@@ -66,6 +66,7 @@
     <body>
         <div id="app">
     <user_front></user_front>
+
 </div>
 <script src="{{ mix('js/app.js') }}"></script>
     </body>

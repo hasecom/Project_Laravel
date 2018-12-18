@@ -30,6 +30,7 @@ Route::get('/ajax/admindb', 'Ajax\AdminController@index');
 ======================================================================*/
 
 Route::get('/', 'UsersController@user_front');
+Route::post('/', 'UsersController@user_front_post');
 
 
 /*====================================================================
