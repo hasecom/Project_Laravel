@@ -31,9 +31,11 @@ Userのフロント画面
     $fileData = base64_decode($img);
     //saving
     $fileName = 'photo.jpg';
-    Storage::put('public/photo.jpg', $fileData);
- 
-    
+   // Storage::put('public/photo.jpg', $fileData);
+    $path = Storage::disk('s3')->put('public/chinchin.jpg', $fileData);
+    $contents = Storage::disk('s3')->get('face2.jpg'); 
+    return  base64_encode($contents);
+
 
     }
 /*====================================================================
@@ -69,7 +71,6 @@ Userの新規登録画面
         'chk_useremail'=>true,
                 ];
         if(session()->has('challenge_signup')){
-            echo "通過";
             //ID,emailにダブりかあるかチェックする(falseならダブりなし)
             $user_id_chk = User::where('user_id',session()->get('temp_user_id'))->exists();
             $user_email_chk = User::where('mail',session()->get('temp_user_email'))->exists();

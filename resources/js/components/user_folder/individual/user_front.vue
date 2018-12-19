@@ -13,6 +13,7 @@
   <img v-show="uploadedImage" :src="uploadedImage" />
   <input type="file" v-on:change="onFileChange" name="file"  mulitple="multiple">
 <img src="storage/photo.jpg">
+<img v-bind:src="sample_data">
   </div>
 </template>
 
@@ -21,7 +22,8 @@ export default {
 data() {
     return {
       uploadedImage: '',
-      return_base64:''
+      return_base64:'',
+      sample_data:""
     };
   },
   methods: {
@@ -33,19 +35,18 @@ data() {
     createImage(file) {
       console.log(file);
       let reader = new FileReader();
-
+console.table(file);
      
 
       reader.onload = (e) => {
-
         this.uploadedImage = e.target.result;
-
-        
            let params = new URLSearchParams();
            params.append('files',this.uploadedImage);
            console.log(file['name'])
         axios.post('',params).then(response => {
           this.return_base64 = response['data'];
+          console.log(response);
+  this.sample_data = "data:image/jpeg;base64," + response['data'];
           }).catch(function (error) {
           console.log(error);
         });
