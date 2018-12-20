@@ -8,7 +8,7 @@
   <p>
     {{temporary_registration_display}}
   </p>
-
+<p><a :href="temporary_url">http://{{temporary_url}}</a></p>
 </div>
   </div>
 </template>
@@ -34,6 +34,7 @@ export default {
       chk_userid:this.chk_userid_send,
       chk_useremail:this.chk_useremail_send,
       temporary_registration_display:"",
+      temporary_url:""
   
        }
   },created : function(){
@@ -48,7 +49,8 @@ export default {
        if(response['data']['status'] == true){//コントローラーからのレスポンスデータ
           this.temporary_registration_display += '下記のメールアドレスに登録用URLを記載したメールを送信しました。\n';
           this.temporary_registration_display +=  response['data']['email'] + '\n\n';
-          this.temporary_registration_display += '登録用URLにアクセスさせて登録確認を完了してください。';
+          this.temporary_registration_display += '登録用URLにアクセスさせて登録確認を完了してください。\n';
+          this.temporary_url = "login_first" + "?token=" +response['data']['token'];
           
        }
  

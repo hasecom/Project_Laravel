@@ -1,6 +1,8 @@
 <?php
 
 use App\admin;
+use App\User;
+use App\Temp_Uer;
 
 /*TODO:ユーザートップページが各ユーザのIDになるように設置*/
 
@@ -56,6 +58,11 @@ Route::post('/sign_up', 'UsersController@sign_up_post');
 Route::get('/user', 'UsersController@user_top');
 
 
+/*====================================================================
+ユーザー仮登録->本登録ページ
+======================================================================*/
+
+Route::get('/login_first', 'UsersController@main_registration');
 
 
 

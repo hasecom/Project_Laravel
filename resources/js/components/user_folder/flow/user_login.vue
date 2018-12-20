@@ -42,6 +42,9 @@ Vue.$http = axios;
 
 export default {
   name: 'user-login',
+   props:{
+   first_token:''
+  },
   data(){
     return{
       userid:'',
@@ -53,6 +56,7 @@ export default {
         let params = new URLSearchParams();
   params.append('userid',this.userid);
   params.append('userpassword',this.userpassword);
+  params.append('first_token',this.first_token);
 axios.post('login',params).then(response => {
     console.dir(response.config); 
    window.location.href="user";
@@ -61,7 +65,7 @@ axios.post('login',params).then(response => {
           alert('失敗');
         });
          }   
-    },
+    }
 }
 </script>
 

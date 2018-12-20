@@ -26,6 +26,7 @@ class Temp_User extends Model
     protected $temp_email = 'temp_email';
     protected $temp_name = 'temp_name';
     protected $token = 'token';
+    protected $token_flag = 'token_flag';
 
 //デフォルト値
     protected $attributes = [
@@ -33,7 +34,8 @@ class Temp_User extends Model
         'temp_pw' => "",
         'temp_email' => "",
         'temp_name' => "",
-        'token'=>""
+        'token'=>"",
+        'token_flag'=>1
     ];
 
     

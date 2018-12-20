@@ -21,7 +21,12 @@
     <body>
 
 <div id="app">
+    
+@if(isset($token))
+    <login first_token={{$token}}></login>
+@else
     <login></login>
+@endif
 </div>
 
 
