@@ -64,6 +64,12 @@ Route::get('/user', 'UsersController@user_top');
 
 Route::get('/login_first', 'UsersController@main_registration');
 
+/*====================================================================
+各ユーザのマイページ
+======================================================================*/
+
+Route::get('/{id}', 'PublicUserController@public_user');
+
 
 
 

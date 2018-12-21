@@ -233,10 +233,9 @@ TODO:DBにアクセスして認証チェック
         }
         //認証が失敗したらログインページにリダイレクト
         return redirect()->route('login');
-            
-
-       
+             
     }
+
 
 /* ====================================================================
 使い回しメソッド
@@ -261,7 +260,6 @@ TODO:仮登録のメール設定
 // $content = "こんにちは。";
 // $mailfrom="From:" .mb_encode_mimeheader("サンプル") ."<hasetennisth@gmail.com>";
 // mb_send_mail($mailto, $subject, $content, $mailfrom);
-
 
         }catch(Exception $e){
 
