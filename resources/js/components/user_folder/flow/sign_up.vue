@@ -83,7 +83,7 @@ export default {
            params.append('userpassword',this.user_pass);
             axios.post('sign_up',params).then(response => {
                console.dir(response.config); 
-               window.location.href="sign_up#/redirect";
+                window.location.href="sign_up#/redirect";
             }).catch(function (error) {
                console.log(error);
               alert('失敗');
