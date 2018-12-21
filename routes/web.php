@@ -32,7 +32,7 @@ Route::get('/ajax/admindb', 'Ajax\AdminController@index');
 ======================================================================*/
 
 Route::get('/', 'UsersController@user_front');
-Route::post('/', 'UsersController@user_front_post');
+// Route::post('/', 'UsersController@user_front_post');
 
 
 /*====================================================================
@@ -65,6 +65,11 @@ Route::get('/user', 'UsersController@user_top');
 Route::get('/login_first', 'UsersController@main_registration');
 
 
+/*====================================================================
+ユーザー画面->画像投稿
+======================================================================*/
+
+Route::post('/user', 'ImagesController@image_post');
 
 
 

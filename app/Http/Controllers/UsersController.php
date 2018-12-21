@@ -30,9 +30,11 @@ Userのフロント画面
     $img = str_replace(' ', '+', $img);
     $fileData = base64_decode($img);
     //saving
-    $fileName = 'photo.jpg';
+    // $fileName = 'photo.jpg';
    // Storage::put('public/photo.jpg', $fileData);
-    $path = Storage::disk('s3')->put('public/chinchin.jpg', $fileData);
+    $path = Storage::disk('s3')->put('public/aaa.jpg', $fileData);
+
+
     $contents = Storage::disk('s3')->get('face2.jpg'); 
     return  base64_encode($contents);
 
