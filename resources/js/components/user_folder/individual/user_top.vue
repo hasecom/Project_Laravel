@@ -14,9 +14,12 @@
       <router-link tag="li" to="/recruit_image" class="spa_link">
       <a>画像募集</a>
       </router-link>
-        <router-link tag="li" to="/search">
+      <router-link tag="li" to="/search">
       <a>検索</a>
       </router-link>
+      
+      
+ 
 <!-- サンプル -->
 <div class="border">
   <router-view></router-view>
@@ -25,7 +28,14 @@
 </template>
 
 <script>
+export default {
+data(){
+  return{
+    user_id:"1"
+  }
+}
 
+}
 </script>
 
 <style>
