@@ -4,24 +4,55 @@
 
 <template>
   <div>
-サンプルのユーザートップページ
-     <router-link tag="li" to="/mypage" >
-      <a>マイページ</a>
-      </router-link>
-      <router-link tag="li" to="/post_image">
-      <a>画像投稿</a>
-      </router-link>
-      <router-link tag="li" to="/recruit_image" class="spa_link">
-      <a>画像募集</a>
-      </router-link>
-      <router-link tag="li" to="/search">
-      <a>検索</a>
-      </router-link>
-      
+ <router-link to="/" >
+  <h2>TITLE</h2>
+   </router-link>
+<form class="form-inline">
+   <input class="form-control mr-sm-2" type="search" aria-label="Search">
+   <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search </button>
+ </form>
+ <nav class="navbar navbar-expand-md navbar-light bg-light">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav4" aria-controls="navbarNav4" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-around" id="navbarNav4">
+
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <router-link to="/mypage" >
+          <a>マイページ</a>
+        </router-link>
+      </li>
+    </ul>
+       <ul class="navbar-nav">
+      <li class="nav-item">
+        <router-link  to="/search">
+         <a>検索</a>
+        </router-link>
+      </li>
+    </ul>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <router-link  to="/post_image">
+          <a>画像投稿</a>
+        </router-link>
+      </li>
+    </ul>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+         <router-link  to="/recruit_image" class="spa_link">
+          <a>画像募集</a>
+         </router-link>
+      </li>
+    </ul>
+  </div>
+</nav>
+
       
  
 <!-- サンプル -->
 <div class="border">
+  
   <router-view></router-view>
 </div>
   </div>

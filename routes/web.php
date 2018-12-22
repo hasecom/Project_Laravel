@@ -73,7 +73,7 @@ TODO:個人情報は含まれないから大丈夫だけど
 TODO:/{id}としているからユーザが新規登録でidをloginにしたらマジでエラー吐く、対処しなきゃ↑上記で
 
 */
-Route::get('/{id}', 'PublicUserController@public_user');
+Route::get('/api/user/{id}', 'PublicUserController@public_user');
 
 
 /*====================================================================

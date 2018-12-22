@@ -13,6 +13,7 @@ import mypage from '../components/user_folder/individual/user_spa/my_page.vue';
 import post_image from '../components/user_folder/individual/user_spa/post_image_page.vue';
 import recruit_image from '../components/user_folder/individual/user_spa/recruit_image_page.vue';
 import search from '../components/user_folder/individual/user_spa/search_page.vue';
+import home from '../components/user_folder/individual/user_spa/user_home.vue';
 import each_user from '../components/user_folder/individual/user_spa/_each_user_page.vue';
 
 
@@ -26,6 +27,7 @@ export default [
 { path: '/post_image', component:post_image },
 { path: '/recruit_image', component:recruit_image },
 { path: '/search', component:search },
+{ path: '/', component:home },
 { path:'/:id?', name:'each_user_path', component:each_user},
 
 ];

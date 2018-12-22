@@ -19,11 +19,12 @@ class PublicUserController extends Controller
             $user_info = $this->utf_chg(User::find($user_inner,
             array(
                 'id',
+                'user_id',
                 'user_name',
                 'si_text',
                 'icon_path'
             )));
-            var_dump($user_info);
+            return $user_info;
           }
         }
     

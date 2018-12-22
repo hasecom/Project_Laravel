@@ -1,7 +1,17 @@
 <template>
     <div>
-       他のユーザのマイページだよ 
-       {{each_user_data}}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6 col-sm-offset-3 bg-success">
+
+       {{each_user_data.user_name}}のマイページだよ 
+   <p>id:{{each_user_data.user_id}}</p>
+   <p>name:{{each_user_data.user_name}}</p>
+    <p>profile:{{each_user_data.si_text}}</p>
+       </div>
+  </div>
+</div>
+
     </div>
 </template>
 <style>
@@ -18,26 +28,20 @@ export default {
         return{
             each_user_id:"",
             page:"",
-            each_user_data:""
+            each_user_data:[],
+            
         }
     },
-  validate({params}){
-    // 数値でなければならない
-    return /^\d+$/.test(params.id)
-  
-},mounted : function() { 
-            console.log("mouted:" + this.$route.params['id'])
+mounted : function() { 
             this.submit_user(this.$route.params['id']);
 },watch:{
             '$route' (to, from) {
-               console.log("watch:" + this.$route.params['id'])
                this.submit_user(this.$route.params['id']);
             }
 },methods:{
     submit_user: function (id) {
         let params = new URLSearchParams();
-            axios.get(id,params).then(response => {
-           console.log(response);
+            axios.get("api/user/"+id,params).then(response => {
            this.each_user_data = response['data'];
             }).catch(function (error) {
                console.log(error);
