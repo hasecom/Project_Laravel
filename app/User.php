@@ -31,7 +31,7 @@ class User extends Model
         'user_name' => "",
         'tel_num' => "",
         'si_text'=>"",
-        'icon_path'=>"",
+        'icon_path'=>"none",
         'flg'=>1,
         'point'=>0,
     ];
