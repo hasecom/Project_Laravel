@@ -13,7 +13,7 @@ class UsersController extends Controller
 
     //TODO:【バグ】新規作成で仮登録完了後にもう一度入力すると登録できない
     protected $status = false;//sessionでユーザ情報があるかないか、false=ない
-
+  
 /*====================================================================
 Userのフロント画面
 ======================================================================*/
@@ -23,20 +23,20 @@ Userのフロント画面
     }
     /*=UserフロントPOST=*/
     public function user_front_post(){
-        
-    $sample_data = $_POST['files'];
-    $img = $_POST['files'];
-    $img = str_replace('data:image/jpeg;base64,', '', $img);
-    $img = str_replace(' ', '+', $img);
-    $fileData = base64_decode($img);
+     //TODO:削除する   
+   // $sample_data = $_POST['files'];
+   // $img = $_POST['files'];
+   // $img = str_replace('data:image/jpeg;base64,', '', $img);
+    //$img = str_replace(' ', '+', $img);
+   // $fileData = base64_decode($img);
     //saving
     // $fileName = 'photo.jpg';
    // Storage::put('public/photo.jpg', $fileData);
-    $path = Storage::disk('s3')->put('public/aaa.jpg', $fileData);
+    //$path = Storage::disk('s3')->put('public/aaa.jpg', $fileData);
 
 
-    $contents = Storage::disk('s3')->get('face2.jpg'); 
-    return  base64_encode($contents);
+   // $contents = Storage::disk('s3')->get('face2.jpg'); 
+   // return  base64_encode($contents);
 
 
     }
@@ -205,13 +205,20 @@ TODO:DBにアクセスして認証チェック
           if($user_userpw === $user_pass){//dbのpwと入力されたpwが一致するか
             $user_inner = User::where('user_id',$user_userid)->value('id');//内部ID取得
             //*主キーからfindでデータ取得->クラス内のメソッド参照(obj->arr)
-            $user_info = $this->utf_chg(User::find($user_inner));
-            var_dump($user_info);
+            $account_info = $this->utf_chg(User::find($user_inner,
+            array(
+                'id',
+                'user_id',
+                'user_name',
+                'si_text',
+                'icon_path',
+                'point'
+            )));
         
             $this->status = true;//true=1(認証されたらtrue)
             $user_data = 
             [
-            'user_info'=>$user_info,//ユーザ情報
+            'account_info'=>$account_info,//ユーザ情報
             'user_status'=>$this->status//0は未ログイン
             ];
          return view('user/top',$user_data);
@@ -237,6 +244,32 @@ TODO:DBにアクセスして認証チェック
         return redirect()->route('login');
              
     }
+/* ====================================================================
+アカウント情報を送るデータ
+======================================================================*/
+   
+    public function account_data(){
+    
+        if(isset($this->user_top()->account_info)){
+            $account_data =  $this->user_top()->account_info;
+            return $account_data;
+         }else{
+ //?account_dataがない場合（ログインしてないとき)の表示？リダイレクトどうするか
+         }
+        
+    }
+/* ====================================================================
+誰がログインしてるか
+======================================================================*/
+    public function account_chk_data(){
+        if(isset($this->user_top()->account_info)){
+           $account_chk =  $this->user_top()->account_info;
+               
+        return $account_chk["user_id"];
+        }
+      
+    }
+ 
 
 
 /* ====================================================================

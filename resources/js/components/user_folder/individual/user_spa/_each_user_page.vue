@@ -10,13 +10,15 @@
                                  <h4 class="card-title ml-5">{{each_user_data.user_name}}</h4>
                                 <p class="pl-2 text-muted">{{each_user_data.user_id}}</p>
                             </div>
+                            <div class="float-right">
+                            <button type="button" class="btn-sm border">{{follow_staus}}</button>
+                            </div>
                             <p class="card-text mt-3">{{each_user_data.si_text}}</p>
                      </div>                  
                 </div>   
                 <div class="col-md-3"></div> 
             </div>
         </div>
-
     </div>
 </template>
 <style>
@@ -69,6 +71,7 @@ export default {
             each_user_id:"",
             page:"",
             each_user_data:[],
+            follow_staus:""
             
         }
     },
@@ -83,9 +86,10 @@ mounted : function() {
         let params = new URLSearchParams();
             axios.get("api/user/"+id,params).then(response => {
                if(typeof(response['data']) == "string"){
-           
+           //Not data
                }else{
-           this.each_user_data = response['data'];
+                   console.log(response['data']['follows']);
+           this.each_user_data = response['data']['user_info'];
                }
             }).catch(function (error) {
                console.log(error);

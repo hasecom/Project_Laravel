@@ -82,5 +82,10 @@ Route::get('/api/user/{id}', 'PublicUserController@public_user');
 
 Route::post('/user', 'ImagesController@image_post');
 
+/*====================================================================
+ユーザログインしてるか
+======================================================================*/
+
+Route::get('/api/users/chk', 'UsersController@account_chk_data');
 
 
