@@ -45,7 +45,6 @@ export default {
   },   
   methods: {
          get_users_info() {
-           
            this.users = JSON.parse(this.user_info);
         }
     },

@@ -259,13 +259,16 @@ TODO:DBにアクセスして認証チェック
         
     }
 /* ====================================================================
-誰がログインしてるか
+誰がログインしてるか->ログインしているユーザの情報を返す
 ======================================================================*/
     public function account_chk_data(){
         if(isset($this->user_top()->account_info)){
            $account_chk =  $this->user_top()->account_info;
-               
-        return $account_chk["user_id"];
+            $account_chk_arr = [
+                "user_id" => $account_chk['user_id'],
+                "id"=>$account_chk['id'],
+                                ];
+        return $account_chk_arr;
         }
       
     }

@@ -6,7 +6,7 @@
                  <div class="col-md-6">
                      <div class="mt-3">
                              <div class="card-body row align-items-center">
-                                <span class="cover ml-5" v-bind:style="{ backgroundImage: 'url(storage/' + each_user_data.icon_path + '.jpg)' }"></span>
+                                <span class="profile_icon cover ml-5" v-bind:style="{ backgroundImage: 'url(storage/' + each_user_data.icon_path + '.jpg)' }"></span>
                                  <h4 class="card-title ml-5">{{each_user_data.user_name}}</h4>
                                 <p class="pl-2 text-muted">{{each_user_data.user_id}}</p>
                             </div>
@@ -22,14 +22,16 @@
     </div>
 </template>
 <style>
-
+.profile_icon{
+      width: 150px;
+    height: 150px;
+}
 .cover{
     display: inline-block;
     background-color: #ccc;
     background-position: center center;
     background-repeat: no-repeat;
-    width: 150px;
-    height: 150px;
+  
     background-size: cover;
     border-radius: 50%;
 }
@@ -49,13 +51,7 @@
     max-width:none !important;
   }
 }
-.rounded-circle{
-    width: 150px;
-    height: 150px;
-    max-width:100%;
-    max-height:100%;
 
-}
 
 </style>
 
@@ -88,7 +84,6 @@ mounted : function() {
                if(typeof(response['data']) == "string"){
            //Not data
                }else{
-                   console.log(response['data']['follows']);
            this.each_user_data = response['data']['user_info'];
                }
             }).catch(function (error) {

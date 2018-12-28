@@ -74,6 +74,7 @@ TODO:/{id}としているからユーザが新規登録でidをloginにしたら
 
 */
 Route::get('/api/user/{id}', 'PublicUserController@public_user');
+Route::post('/api/user/{id}', 'PublicUserController@public_user_post');
 
 
 /*====================================================================

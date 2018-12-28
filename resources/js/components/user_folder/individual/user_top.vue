@@ -34,14 +34,14 @@
     <ul class="navbar-nav">
       <li class="nav-item">
         <router-link  to="/post_image">
-          <a>画像投稿</a>
+          <a>投稿</a>
         </router-link>
       </li>
     </ul>
     <ul class="navbar-nav">
       <li class="nav-item">
          <router-link  to="/recruit_image" class="spa_link">
-          <a>画像募集</a>
+          <a>募集</a>
          </router-link>
       </li>
     </ul>

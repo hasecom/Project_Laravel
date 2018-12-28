@@ -18,10 +18,14 @@ class Follows extends Model
     //laravelはidというカラム名が主キーと判定。規約をオーバーライドする場合はprimaryKeyプロパティ
 
     protected $table = 'follows';
+    protected $user_id = 'user_id';
+    protected $followed_id = 'followed_id';
+    
+    public $timestamps = false;
 
 //デフォルト値
     protected $attributes = [
-    
+     
     ];
 
 

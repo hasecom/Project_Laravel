@@ -32,25 +32,62 @@ class PublicUserController extends Controller
             $user_data['my_data'] = $mylogin_data->account_data();
 
             $user_data["user_info"] = $user_info;//user_data配列に加える
+            //フォロー中
             $user_follow = $this->utf_chg(Follows::where('user_id',$user_inner)->select('followed_id')->get());
-            for($i = 0; $i < count($user_follow); $i++){//フォロワーのデータ取得、送信
+           //フォロワー中
+            $user_followed = $this->utf_chg(Follows::where('followed_id',$user_inner)->select('user_id')->get());
+            for($i = 0; $i < count($user_follow); $i++){//フォローのデータ取得、送信
                 foreach($user_follow[$i] as $key =>$val){
                     $add_user_id = $this->utf_chg(User::find($val,
                     array(
+                        'id',
+                        'user_id',
+                        'user_name',
+                        'si_text',
+                        'icon_path', 
+                    )));
+                    $user_data["follows"][$i] = $add_user_id;
+                }
+            }
+            for($i = 0; $i < count($user_followed); $i++){//フォロワーのデータ取得、送信
+                foreach($user_followed[$i] as $key =>$val){
+                    $add_user_id = $this->utf_chg(User::find($val,
+                    array(
+                        'id',
                         'user_id',
                         'user_name',
                         'si_text',
                         'icon_path'
                     )));
-                    $user_data["follows"][$i] = $add_user_id;
+                    $user_data["followed"][$i] = $add_user_id;
                 }
-            }  
+            }    
           
           
             return $user_data;
           }
         }
     
+    }
+/* ====================================================================
+user_pageからのPOSTデータ(1)FF管理
+======================================================================*/
+    public function public_user_post(){
+        if(isset($_POST['id']) && isset($_POST['stauts']) && isset($_POST['my_id'])){
+            $get_id = $_POST['id'];
+            $get_stauts = $_POST['stauts'];
+            $get_my_id = $_POST['my_id'];
+             if($get_stauts == 0){
+                $follow_add = new Follows;
+                $follow_add->user_id =$get_my_id;
+                $follow_add->followed_id =$get_id;
+                $follow_add->save();
+             }else if($get_stauts == 1){
+                $delete_id = Follows::where('user_id',$get_my_id)->where('followed_id',$get_id)->value('id');
+                Follows::destroy($delete_id);
+                return  $delete_id;  
+             }
+        }
     }
 /* ====================================================================
 使い回しメソッド
