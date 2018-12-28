@@ -34,7 +34,7 @@
                             <span class="cover list_image text-left" @click="follows_link(val.user_id)" v-bind:style="{ backgroundImage: 'url(storage/' + val.icon_path + '.jpg)' }"></span>
                         </div>
                          <div class="col-md-4">
-                            <span class="h5"  @click="follows_link(val.user_id)">{{val.user_name}}</span>
+                            <span class="h5"  @click="follows_link(val.user_id)">{{val.user_name}}</span><br>
                             <span class="text-muted" style="line-height:0px;">{{val.user_id}}</span>
                         </div>
                         <div class="col-md-6">
@@ -86,9 +86,6 @@
   padding:50px 20px;
 }
 
-
-
-
 @media (max-width: 992px) {
   .container {
     min-width: 890px;
@@ -115,8 +112,8 @@ export default {
     data(){
         return{
          each_user_data:[],
-         follows_list:[],
-         followed_list:[],
+         follows_list:[],//フォロー
+         followed_list:[],//フォロワー
          account_id:"",
          account_inner_id:"",
          user_modal: false, //modal表示・非表示
@@ -142,9 +139,7 @@ export default {
                }else{
            this.each_user_data = response['data']['my_data'];
            this.follows_list =  response['data']['follows'];
-           this.followed_list =  response['data']['followed'];
-           console.log(this.follows_list[0]['id']);
-          
+           this.followed_list =  response['data']['followed'];        
             this.FF_chk();
                }
             }).catch(function (error) {
@@ -205,14 +200,16 @@ export default {
   
     }
     ,follow_or_Non(val,stauts){
-           console.log(val);
-            console.log(stauts);
         let params = new URLSearchParams();
-  params.append('id',val);
+  params.append('id',val);//myid6
+   params.append('user_id',this.account_id);
   params.append('stauts',stauts);
   params.append('my_id',this.account_inner_id);
 axios.post('api/user/'+this.account_id,params).then(response => {
-  console.log(response);
+             this.each_user_data = response['data']['my_data'];
+           this.follows_list =  response['data']['follows'];
+           this.followed_list =  response['data']['followed'];  
+             this.FF_chk(); 
 }).catch(function (error) {
           console.log(error);
         });
