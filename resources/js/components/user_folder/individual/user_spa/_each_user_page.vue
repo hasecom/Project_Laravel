@@ -13,9 +13,11 @@
                             <div class="float-right">
                             <button type="button" class="btn-sm border" @click="User_FF_send()">{{user_follow_string}}</button>
                             </div>
-                                <div>
-    <button type="button" class="btn-sm border"  @click="openModal(0)">フォロー中　{{user_follower.length}}人</button>
-                               <button type="button" class="btn-sm border"  @click="openModal(1)">フォロワー　{{user_followers.length}}人</button>
+                            <div>
+                                <button  v-if="user_follower.length != 0" type="button" class="btn-sm border"  @click="openModal(0)">フォロー中　{{user_follower.length}}人</button>
+                               <button  v-if="user_follower.length == 0" type="button" class="btn-sm border">フォロー中　{{user_follower.length}}人</button>
+                               <button v-if="user_followers.length != 0" type="button" class="btn-sm border"  @click="openModal(1)">フォロワー　{{user_followers.length}}人</button>
+                               <button v-if="user_followers.length == 0" type="button" class="btn-sm border">フォロワー　{{user_followers.length}}人</button>
                                 </div>
                             <p class="card-text mt-3">{{each_user_data.si_text}}</p>
                      </div>                  
@@ -40,9 +42,10 @@
                             <span class="h5"  @click="follows_link(val.user_id)">{{val.user_name}}</span><br>
                             <span class="text-muted" style="line-height:0px;">{{val.user_id}}</span>
                         </div>
-                        <div class="col-md-6">
-                            <button type="button" class="btn-sm border" @click="follow_or_Non(val.id,val.follows_stauts)">{{val.follows_string}}</button>
+                        <div class="col-md-6" v-if="val.id != my_data['id']">
+                            <button  type="button" class="btn-sm border" @click="follow_or_Non(val.id,val.follows_stauts)">{{val.follows_string}}</button>
                         </div>
+                         <div class="col-md-6 px-5"  v-if="val.id == my_data['id']"></div>
                     </div>
                 </div>
                </div>
@@ -58,9 +61,10 @@
                             <span class="h5"  @click="follows_link(val.user_id)">{{val.user_name}}</span><br>
                             <span class="text-muted" style="line-height:0px;">{{val.user_id}}</span>
                         </div>
-                        <div class="col-md-6">
-                            <button type="button" class="btn-sm border" @click="follow_or_Non(val.id,val.follows_stauts)">{{val.follows_string}}</button>
+                        <div class="col-md-6"  v-if="val.id != my_data['id']">
+                            <button  type="button" class="btn-sm border" @click="follow_or_Non(val.id,val.follows_stauts)">{{val.follows_string}}</button>
                         </div>
+                         <div class="col-md-6 px-5" v-if="val.id == my_data['id']"></div>
                     </div>
                 </div>
                </div>
@@ -122,8 +126,10 @@ export default {
             each_user_data:[],
             user_follow_stauts:"",
             user_follow_string:"",
-            user_followers:[],
-            user_follower:[],
+            user_followers:[],//フォロワー
+            user_follower:[],//フォロー
+            my_followers:[],//ログインユーザフォロワー
+            my_follower:[],//ログインユーザフォワー
             my_data:[],
             user_modal: false, //modal表示・非表示
             display_judg :0, 
@@ -137,20 +143,28 @@ mounted : function() {
 },watch:{
             '$route' (to, from) {
                this.submit_user(this.$route.params['id']);
-            }
+            },
 },methods:{
     submit_user: function (id) {
         let params = new URLSearchParams();
             axios.get("api/user/"+id,params).then(response => {
-               if(typeof(response['data']) == "string"){
+               if(typeof(response['data']) == "string"){       
            //Not data
                }else{
            this.each_user_data = response['data']['user_info'];
-           this.user_followers = response['data']['followed'];//フォロワー
-           this.user_follower = response['data']['follows'];//フォロー
+           this.user_followers = typeof(response['data']['followed'])=="undefined"? []:response['data']['followed'];//フォロワー
+           this.user_follower = typeof(response['data']['follows'])=="undefined" ? []:response['data']['follows'];//フォロー
            this.my_data = response['data']['my_data'];
-           this.FF_chk();
-           this.FF_chk_list();
+      
+            axios.get("api/user/"+response['data']['my_data']['user_id']).then(response=>{
+            this.my_followers = response['data']['followed'];
+            this.my_follower = response['data']['follows'];
+            this.FF_chk();
+            this.FF_chk_list();
+            }).catch(function(error){
+
+            });
+       
                }
             }).catch(function (error) {
                console.log(error);
@@ -167,14 +181,17 @@ mounted : function() {
       this.user_modal = false;
     },
     follows_link(val){
+        this.closeModal();
         this.$router.push('/'+val);
     },
     FF_chk(){//他人のマイページのFFボタン操作
-                if(this.user_followers == null){
+                if(this.user_followers == null || this.user_followers.length == 0){
                     this.user_follow_string = "フォローする";
                     this.user_follow_stauts = 0;
+                    return;
                 }
                 for(let i = 0; i < this.user_followers.length; i++){
+                 
                     if(this.user_followers[i]['id'] == this.my_data['id']){
                             this.user_follow_string = "フォロー中";
                             this.user_follow_stauts = 1;
@@ -187,38 +204,44 @@ mounted : function() {
             
          },
          FF_chk_list(){
+           
         var follows_arr = [];//本人フォロー中
         var followed_arr = [];//本人をフォローしてる人
-        
+        var my_follows_arr = [];//ログインユーザフォロー中
+        var my_followed_arr = [];//ログインユーザをフォローしてる人
+       
             for (let k = 0; k < this.user_follower.length; k++) {
-              follows_arr[k] = this.user_follower[k]['user_name'];
+              follows_arr[k] = this.user_follower[k]['id'];
             }
             for (let l = 0; l < this.user_followers.length; l++) {
-              followed_arr[l] = this.user_followers[l]['user_name'];
+              followed_arr[l] = this.user_followers[l]['id'];
+            }
+             for (let i = 0; i < this.my_follower.length; i++) {
+              my_follows_arr[i] = this.my_follower[i]['id'];
+            }
+            for (let j = 0; j < this.my_followers.length; j++) {
+              my_followed_arr[j] = this.my_followers[j]['id'];
             }
 
             for(let m = 0; m < followed_arr.length; m++){
-                //フォロワー配列にフォロー配列と同一人物がいるか。
-                if(0 <= follows_arr.indexOf(followed_arr[m])){
-                        //console.log("FF内"+followed_arr[m]);
-                        //stautsはあくまで”自分が”フォローしているかどうか
+                if(0 <= my_follows_arr.indexOf(followed_arr[m])){
                     this.user_followers[m]['follows_string'] ="フォロー中";
                     this.user_followers[m]['follows_stauts'] =1;
                 }else{
-                    //console.log("フォローのみされている"+followed_arr[m]);
                     this.user_followers[m]['follows_string'] ="フォローする";
-                    this.user_followers[m]['follows_stauts'] =0;
+                    this.user_followers[m]['follows_stauts'] =0;   
+                    
                 }
+                
             }
                 for(let n = 0; n < follows_arr.length; n++){
-                //フォロワー配列にフォロー配列と同一人物がいるか。
-                if(0 <= followed_arr.indexOf(follows_arr[n])){
+                if(0 <= my_follows_arr.indexOf(follows_arr[n])){
                     this.user_follower[n]['follows_string'] ="フォロー中";
                     this.user_follower[n]['follows_stauts'] =1;
                 }else{
-                    //console.log("フォローしているだけ"+follows_arr[n]);
-                    this.user_follower[n]['follows_string'] ="フォロー中";
-                    this.user_follower[n]['follows_stauts'] =1;
+                    this.user_follower[n]['follows_string'] ="フォローする";
+                    this.user_follower[n]['follows_stauts'] =0;
+                    
                 }
             }
          },
@@ -229,9 +252,17 @@ mounted : function() {
         params.append('stauts',this.user_follow_stauts);
         params.append('my_id',this.my_data['id']);
         axios.post('api/user/'+this.my_data['id'],params).then(response => {
-             this.each_user_data = response['data']['user_info'];
-           this.user_followers = response['data']['followed'];
-           this.my_data = response['data']['my_data'];
+            axios.get("api/user/"+this.each_user_data['user_id']).then(get_user_data=>{
+            this.each_user_data = get_user_data['data']['user_info'];
+           this.user_followers = typeof(get_user_data['data']['followed'])=="undefined"? []:get_user_data['data']['followed'];//フォロワー
+           this.user_follower = typeof(get_user_data['data']['follows'])=="undefined" ? []:get_user_data['data']['follows'];//フォロー
+           this.my_data = get_user_data['data']['my_data'];
+           this.FF_chk(); 
+            this.FF_chk_list(); 
+            }).catch(function (error) {
+          console.log(error);
+        });
+     
            this.FF_chk();
 }).catch(function (error) {
           console.log(error);
@@ -247,13 +278,20 @@ axios.post('api/user/'+this.my_data['id'],params).then(response => {
              this.my_data = response['data']['my_data'];
            this.user_follower =  response['data']['follows'];
            this.user_followers =  response['data']['followed'];  
-             this.FF_chk_list(); 
+            this.FF_chk_list(); 
 }).catch(function (error) {
           console.log(error);
         });
     }
 }
 }
+/*
+TODO:バグだらけだから修正が必要（まず、ユーザのFF情報を手に入れる他、
+TODO:自分のFF情報を手に入れる必要がある。
+TODO:JSONデータを他でPOSTした方が良いのか。
+TODO:大幅な修正が必要に？？とりあえず検討。
+TODO:各ユーザのFFリストを見たときに自分に対してのフォロー中か否かを確認する必要がある。
+*/
 
 
 </script>

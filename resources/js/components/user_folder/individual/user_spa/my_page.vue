@@ -167,10 +167,10 @@ export default {
         var followed_arr = [];//本人をフォローしてる人
         
             for (let k = 0; k < this.follows_list.length; k++) {
-              follows_arr[k] = this.follows_list[k]['user_name'];
+              follows_arr[k] = this.follows_list[k]['id'];
             }
             for (let l = 0; l < this.followed_list.length; l++) {
-              followed_arr[l] = this.followed_list[l]['user_name'];
+              followed_arr[l] = this.followed_list[l]['id'];
             }
 
             for(let m = 0; m < followed_arr.length; m++){
