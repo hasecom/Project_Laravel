@@ -10,9 +10,12 @@
                                  <h4 class="card-title ml-5">{{each_user_data.user_name}}</h4>
                                 <p class="pl-2 text-muted">{{each_user_data.user_id}}</p>
                             </div>
-                            <div>
-                               <button type="button" class="btn-sm border"  @click="openModal(0)">フォロー中　{{follows_list.length}}人</button>
-                               <button type="button" class="btn-sm border"  @click="openModal(1)">フォロワー　{{followed_list.length}}人</button>
+                            <div>   
+                                <button  v-if="follows_list.length != 0" type="button" class="btn-sm border"  @click="openModal(0)">フォロー中　{{follows_list.length}}人</button>
+                               <button  v-if="follows_list.length == 0" type="button" class="btn-sm border">フォロー中　{{follows_list.length}}人</button>
+                               <button v-if="followed_list.length != 0" type="button" class="btn-sm border"  @click="openModal(1)">フォロワー　{{followed_list.length}}人</button>
+                               <button v-if="followed_list.length == 0" type="button" class="btn-sm border">フォロワー　{{followed_list.length}}人</button>
+                               
                             </div>
                             <p class="card-text mt-3">{{each_user_data.si_text}}</p>
                      </div>         
@@ -138,8 +141,8 @@ export default {
                if(typeof(response['data']) == "string"){
                }else{
            this.each_user_data = response['data']['my_data'];
-           this.follows_list =  response['data']['follows'];
-           this.followed_list =  response['data']['followed'];        
+           this.follows_list = typeof(response['data']['follows'])=="undefined"? []:response['data']['follows'];
+           this.followed_list =  typeof(response['data']['followed'])=="undefined"? []:response['data']['followed'];      
             this.FF_chk();
                }
             }).catch(function (error) {
@@ -160,6 +163,7 @@ export default {
       this.user_modal = false;
     },
     follows_link(val){
+        this.closeModal();
         this.$router.push('/'+val);
     },
     FF_chk(){
@@ -207,8 +211,8 @@ export default {
   params.append('my_id',this.account_inner_id);
 axios.post('api/user/'+this.account_id,params).then(response => {
              this.each_user_data = response['data']['my_data'];
-           this.follows_list =  response['data']['follows'];
-           this.followed_list =  response['data']['followed'];  
+           this.follows_list =  typeof(response['data']['follows'])=="undefined"? []:response['data']['follows'];
+           this.followed_list = typeof(response['data']['followed'])=="undefined"? []:response['data']['followed'];
              this.FF_chk(); 
 }).catch(function (error) {
           console.log(error);

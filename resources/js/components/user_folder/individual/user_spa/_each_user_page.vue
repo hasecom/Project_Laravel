@@ -11,7 +11,7 @@
                                 <p class="pl-2 text-muted">{{each_user_data.user_id}}</p>
                             </div>
                             <div class="float-right">
-                            <button type="button" class="btn-sm border" @click="User_FF_send()">{{user_follow_string}}</button>
+                            <button v-if="user_page_follow_btn == 1" type="button" class="btn-sm border" @click="User_FF_send()">{{user_follow_string}}</button>
                             </div>
                             <div>
                                 <button  v-if="user_follower.length != 0" type="button" class="btn-sm border"  @click="openModal(0)">フォロー中　{{user_follower.length}}人</button>
@@ -134,6 +134,7 @@ export default {
             user_modal: false, //modal表示・非表示
             display_judg :0, 
             modai_title:"",
+            user_page_follow_btn:1,//ユーザページのフォローボタンを表示
         }
     },components:{
         MyModal
@@ -155,7 +156,6 @@ mounted : function() {
            this.user_followers = typeof(response['data']['followed'])=="undefined"? []:response['data']['followed'];//フォロワー
            this.user_follower = typeof(response['data']['follows'])=="undefined" ? []:response['data']['follows'];//フォロー
            this.my_data = response['data']['my_data'];
-      
             axios.get("api/user/"+response['data']['my_data']['user_id']).then(response=>{
             this.my_followers = response['data']['followed'];
             this.my_follower = response['data']['follows'];
@@ -185,6 +185,11 @@ mounted : function() {
         this.$router.push('/'+val);
     },
     FF_chk(){//他人のマイページのFFボタン操作
+               
+    this.user_page_follow_btn = 1;
+                if(this.my_data['user_id'] == this.$route.params['id']){
+                        this.user_page_follow_btn = 0;
+                }
                 if(this.user_followers == null || this.user_followers.length == 0){
                     this.user_follow_string = "フォローする";
                     this.user_follow_stauts = 0;
@@ -204,7 +209,7 @@ mounted : function() {
             
          },
          FF_chk_list(){
-           
+     
         var follows_arr = [];//本人フォロー中
         var followed_arr = [];//本人をフォローしてる人
         var my_follows_arr = [];//ログインユーザフォロー中
@@ -230,7 +235,6 @@ mounted : function() {
                 }else{
                     this.user_followers[m]['follows_string'] ="フォローする";
                     this.user_followers[m]['follows_stauts'] =0;   
-                    
                 }
                 
             }
@@ -263,7 +267,7 @@ mounted : function() {
           console.log(error);
         });
      
-           this.FF_chk();
+          
 }).catch(function (error) {
           console.log(error);
         });
@@ -274,14 +278,25 @@ mounted : function() {
    params.append('user_id',this.each_user_data['user_id']);
   params.append('stauts',stauts);
   params.append('my_id',this.my_data['id']);
-axios.post('api/user/'+this.my_data['id'],params).then(response => {
-             this.my_data = response['data']['my_data'];
-           this.user_follower =  response['data']['follows'];
-           this.user_followers =  response['data']['followed'];  
-            this.FF_chk_list(); 
+axios.post('api/user/'+this.my_data['id'],params).then(list_get_data => {
+    
+             this.my_data = list_get_data['data']['my_data']; 
+             var temp_user_follower = typeof(list_get_data['data']['follows'])=="undefined"? []:list_get_data['data']['follows'];
+             var temp_user_followers = typeof(list_get_data['data']['followed'])=="undefined"? []:list_get_data['data']['followed'];
+        axios.get("api/user/"+this.my_data['user_id']).then(my_data_update=>{
+            this.my_followers = typeof(my_data_update['data']['followed'])=="undefined"? []:my_data_update['data']['followed'];
+            this.my_follower = typeof(my_data_update['data']['follows'])=="undefined"? []:my_data_update['data']['follows'];
+           this.user_follower = temp_user_follower;
+          this.user_followers = temp_user_followers;
+            this.FF_chk_list();
+            }).catch(function(error){
+            });
+          
 }).catch(function (error) {
           console.log(error);
         });
+       
+    
     }
 }
 }
