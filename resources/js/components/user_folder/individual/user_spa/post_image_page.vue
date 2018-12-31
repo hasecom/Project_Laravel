@@ -12,6 +12,12 @@
           <img v-show="uploadedImage" :src="uploadedImage" />
           <input type="file" v-on:change="onFileChange" name="file">
           <button type="submit" class = "btn btn-primary">送信</button></form>
+          <div>
+            <form @submit.prevent="send_messsage">
+              <input type="text" v-model="send_description">
+              <button type="submit" class="btn-primary">送信</button>
+            </form>
+          </div>
     </div>
 </template>
 <style>
@@ -23,10 +29,22 @@ data() {
     return {
       uploadedImage: '',
       return_base64:'',
-      sample_data:''
+      sample_data:'',
+      send_description:'',
+      my_data:[]
     };
   },
+  mounted : function(){
+      this.on_post_Load();
+  },
   methods: {
+    on_post_Load(){
+             axios.get("api/users/chk").then(response=>{
+                this.my_data = typeof(response['data'])=="undefined"? []: response['data'];
+  }).catch(function (error) {
+               console.log(error);
+            });
+    },
     onFileChange(e) {
       let files = e.target.files || e.dataTransfer.files;
       this.createImage(files[0]);
@@ -37,20 +55,26 @@ data() {
       reader.onload = (e) => {
         this.uploadedImage = e.target.result;
 
-       
-
       };
       reader.readAsDataURL(file);
 
     },
     onPost(){
-        console.log("aaaaaa");
         let params = new URLSearchParams();
         params.append('files',this.uploadedImage);
         axios.post('',params).then(response => {
           this.return_base64 = response['data'];
             this.sample_data = "data:image/jpeg;base64," + response['data'];
           }).catch(function (error) {
+          console.log(error);
+        });
+    },
+    send_messsage(){
+        let params = new URLSearchParams();
+        params.append('description',this.send_description);
+        axios.post("api/user/post_data/"+ this.my_data['user_id'],params).then(response => {
+        console.log(response['data']);
+        }).catch(function (error) {
           console.log(error);
         });
     }

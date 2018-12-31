@@ -20,7 +20,8 @@
                                <button v-if="user_followers.length == 0" type="button" class="btn-sm border">フォロワー　{{user_followers.length}}人</button>
                                 </div>
                             <p class="card-text mt-3">{{each_user_data.si_text}}</p>
-                     </div>                  
+                     </div>
+                     <each-user-img-gallery :each_user_img=each_user_id></each-user-img-gallery>              
                 </div>   
                 <div class="col-md-3"></div> 
             </div>
@@ -149,6 +150,7 @@ mounted : function() {
     submit_user: function (id) {
         let params = new URLSearchParams();
             axios.get("api/user/"+id,params).then(response => {
+                this.each_user_id = id;
                if(typeof(response['data']) == "string"){       
            //Not data
                }else{

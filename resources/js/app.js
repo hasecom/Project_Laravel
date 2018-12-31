@@ -12,6 +12,8 @@ import login from './components/user_folder/flow/user_login.vue';
 import sign_up from './components/user_folder/flow/sign_up_frame.vue';
 import user_top from './components/user_folder/individual/user_top.vue';
 import user_front from './components/user_folder/individual/user_front.vue';
+import mypage_img_gallery from './components/user_folder/individual/mypage_img_gallery.vue';
+import each_user_img_gallery from './components/user_folder/individual/each_user_img_gallery.vue';
 
 
 //ADMIN
@@ -31,6 +33,8 @@ Vue.component('login', login);//#app内
 Vue.component('sign_up', sign_up);//#app内
 Vue.component('user_top', user_top);//#app内
 Vue.component('user_front', user_front);//#app内
+Vue.component('img-gallery',mypage_img_gallery);
+Vue.component('each-user-img-gallery',each_user_img_gallery);
 
 
 

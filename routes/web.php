@@ -70,8 +70,6 @@ Route::get('/login_first', 'UsersController@main_registration');
 /*
 TODO:{id}のマイページは_each_user_pageからaxiosで取得する為だけの箱のためいずれかはもっと複雑にするべき
 TODO:個人情報は含まれないから大丈夫だけど
-TODO:/{id}としているからユーザが新規登録でidをloginにしたらマジでエラー吐く、対処しなきゃ↑上記で
-
 */
 Route::get('/api/user/{id}', 'PublicUserController@public_user');
 Route::post('/api/user/{id}', 'PublicUserController@public_user_post');
@@ -88,5 +86,15 @@ Route::post('/user', 'ImagesController@image_post');
 ======================================================================*/
 
 Route::get('/api/users/chk', 'UsersController@account_chk_data');
+
+
+/*====================================================================
+投稿用のデータ送信用
+======================================================================*/
+/*
+
+*/
+Route::get('/api/user/post_data/{id}', 'ImagesController@post_data_get');
+Route::post('/api/user/post_data/{id}', 'ImagesController@post_data_post');
 
 

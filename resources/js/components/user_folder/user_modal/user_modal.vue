@@ -5,8 +5,6 @@
              <slot name="header">
           </slot>
         <div class="rounded shadow border bg-white ">
-         
-       
           <slot/>
          </div>
         </div>
@@ -28,10 +26,7 @@
     height: 100%;
     background: rgba(0, 0, 0, 0.2);
 }
-.row{
-  margin-left: 0;
-  margin-right: 0;
-}
+
 
 
 .modal-enter-active, .modal-leave-active {

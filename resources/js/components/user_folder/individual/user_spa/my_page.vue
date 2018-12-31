@@ -3,23 +3,25 @@
         <div class="container">
             <div class="row">
               <div class="col-md-3"></div>
-                 <div class="col-md-6">
+                 <div class="col-6">
                      <div class="mt-3">
                              <div class="card-body row align-items-center">
                                 <span class="cover ml-5 profile_icon" v-bind:style="{ backgroundImage: 'url(storage/' + each_user_data.icon_path + '.jpg)' }"></span>
                                  <h4 class="card-title ml-5">{{each_user_data.user_name}}</h4>
                                 <p class="pl-2 text-muted">{{each_user_data.user_id}}</p>
                             </div>
-                            <div>   
+                            <div>  
                                 <button  v-if="follows_list.length != 0" type="button" class="btn-sm border"  @click="openModal(0)">フォロー中　{{follows_list.length}}人</button>
                                <button  v-if="follows_list.length == 0" type="button" class="btn-sm border">フォロー中　{{follows_list.length}}人</button>
                                <button v-if="followed_list.length != 0" type="button" class="btn-sm border"  @click="openModal(1)">フォロワー　{{followed_list.length}}人</button>
                                <button v-if="followed_list.length == 0" type="button" class="btn-sm border">フォロワー　{{followed_list.length}}人</button>
                                
                             </div>
-                            <p class="card-text mt-3">{{each_user_data.si_text}}</p>
-                     </div>         
-                </div>   
+                            <p class="card-text mt-3">{{each_user_data.si_text}}</p>     
+                     </div> 
+                      <img-gallery></img-gallery>
+                     
+                </div>  
                 <div class="col-md-3"></div> 
             </div>
         </div>
@@ -169,7 +171,7 @@ export default {
     FF_chk(){
         var follows_arr = [];//本人フォロー中
         var followed_arr = [];//本人をフォローしてる人
-        
+
             for (let k = 0; k < this.follows_list.length; k++) {
               follows_arr[k] = this.follows_list[k]['id'];
             }
@@ -205,19 +207,19 @@ export default {
     }
     ,follow_or_Non(val,stauts){
         let params = new URLSearchParams();
-  params.append('id',val);//myid6
-   params.append('user_id',this.account_id);
-  params.append('stauts',stauts);
-  params.append('my_id',this.account_inner_id);
-axios.post('api/user/'+this.account_id,params).then(response => {
+            params.append('id',val);//myid6
+            params.append('user_id',this.account_id);
+            params.append('stauts',stauts);
+            params.append('my_id',this.account_inner_id);
+            axios.post('api/user/'+this.account_id,params).then(response => {
              this.each_user_data = response['data']['my_data'];
-           this.follows_list =  typeof(response['data']['follows'])=="undefined"? []:response['data']['follows'];
-           this.followed_list = typeof(response['data']['followed'])=="undefined"? []:response['data']['followed'];
+            this.follows_list =  typeof(response['data']['follows'])=="undefined"? []:response['data']['follows'];
+            this.followed_list = typeof(response['data']['followed'])=="undefined"? []:response['data']['followed'];
              this.FF_chk(); 
-}).catch(function (error) {
-          console.log(error);
-        });
+            }).catch(function (error) {
+                console.log(error);
+            });
     }
-         } 
+} 
 }
 </script>
