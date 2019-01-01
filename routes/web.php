@@ -97,4 +97,13 @@ Route::get('/api/users/chk', 'UsersController@account_chk_data');
 Route::get('/api/user/post_data/{id}', 'ImagesController@post_data_get');
 Route::post('/api/user/post_data/{id}', 'ImagesController@post_data_post');
 
+/*====================================================================
+タイムライン用データ送信用
+======================================================================*/
+/*
+
+*/
+Route::get('/api/user/post_data/timeline/data', 'TimeLineController@timeline_post_data_get');
+Route::post('/api/user/post_data/timeline/data', 'TimeLineController@timeline_post_data_post');
+
 

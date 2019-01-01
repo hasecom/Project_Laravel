@@ -52,7 +52,6 @@
  
 <!-- サンプル -->
 <div class="border">
-  
   <router-view></router-view>
 </div>
   </div>
