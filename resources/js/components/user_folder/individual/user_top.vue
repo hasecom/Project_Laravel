@@ -16,9 +16,15 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse justify-content-around" id="navbarNav4">
-
     <ul class="navbar-nav">
       <li class="nav-item active">
+        <router-link to="/" >
+          <a>ホーム</a>
+        </router-link>
+      </li>
+    </ul>
+    <ul class="navbar-nav">
+      <li class="nav-item">
         <router-link to="/mypage" >
           <a>マイページ</a>
         </router-link>
