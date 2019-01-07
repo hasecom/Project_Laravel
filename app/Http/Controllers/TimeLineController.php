@@ -10,9 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Posted_photos;
 use App\Follows;
 use App\User;
-
-
-
+use App\Http\Controllers\LikesController;
 
 class TimeLineController extends Controller{
     public function timeline_post_data_get(){
@@ -31,10 +29,14 @@ class TimeLineController extends Controller{
             $follows_id[] =$id;//タイムラインに自分のツイートも表示させたいのでここでフォロー配列に自分を加える
             foreach ($follows_id as $key => $val){
                 $post_data = Posted_photos::where('user_id',$val)->get();
-              
+                
                 foreach($post_data as $id_key => $data){
                   //$timeline_data[$data['user_id']][$id_key] = [$id_key => $data];//個別の配列  
                   $timeline_data[$post_count] = $data;
+                  $likes = LikesController::likes_allocation($timeline_data[$post_count]['photo_id']);//いいね情報GET
+                  $timeline_data[$post_count]['likes_cnt'] = $likes['likes_cnt'];
+                  $timeline_data[$post_count]['like_id'] = $likes['like_id'];
+                  $timeline_data[$post_count]['like_stauts'] = $likes['like_stauts'];
                   $user_inner_id = $timeline_data[$post_count]['user_id'];
                   $timeline_data[$post_count]['id'] = $user_inner_id;
                   $timeline_data[$post_count]['user_id'] = User::where('id',$user_inner_id)->value('user_id');
@@ -49,9 +51,22 @@ class TimeLineController extends Controller{
                 array_multisort($updated, SORT_DESC, $timeline_data);
             }
  
-     return $timeline_data;
+   return $timeline_data;
+  // return $likes;
     }
-    public function timeline_post_data_post(){
-
+public function timeline_post_data_post(){
+    
+  $likes_add_arr =  LikesController::likes_registration($_POST['photo_id'],$_POST['like_stauts']);//いいね情報GET
+    return  $this->utf_chg(User::en($likes_add_arr));
+}
+   /* ====================================================================
+使い回しメソッド
+======================================================================*/
+    //*Userモデルでオブジェクトを配列に変換させる
+    public function utf_chg($uni_arr){
+        $utf8_arr = array();
+        $utf8_arr = User::de($uni_arr);
+        return $utf8_arr;
     }
+  
 }

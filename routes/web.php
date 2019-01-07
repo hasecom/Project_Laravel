@@ -106,4 +106,11 @@ Route::post('/api/user/post_data/{id}', 'ImagesController@post_data_post');
 Route::get('/api/user/post_data/timeline/data', 'TimeLineController@timeline_post_data_get');
 Route::post('/api/user/post_data/timeline/data', 'TimeLineController@timeline_post_data_post');
 
+/*====================================================================
+いいねユーザ用データ送信用
+======================================================================*/
+/*
 
+*/
+Route::get('/api/user/post_data/timeline/likes_data/{id}', 'LikesController@likes_get');
+Route::post('/api/user/post_data/timeline/likes_data/{id}', 'LikesController@likes_post');
