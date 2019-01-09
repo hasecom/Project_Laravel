@@ -31,7 +31,8 @@ data() {
       return_base64:'',
       sample_data:'',
       send_description:'',
-      my_data:[]
+      my_data:[],
+      flg :0
     };
   },
   mounted : function(){
@@ -60,11 +61,20 @@ data() {
 
     },
     onPost(){
+       
+        if(this.flg==1){
+          return false;
+        }
+        let  token_ = Math.random();
+        console.log(token_);
         let params = new URLSearchParams();
         params.append('files',this.uploadedImage);
+        params.append('img_post',token_);
         axios.post('',params).then(response => {
+          this.flg=1;
           this.return_base64 = response['data'];
             this.sample_data = "data:image/jpeg;base64," + response['data'];
+          // console.log(response['data']);
           }).catch(function (error) {
           console.log(error);
         });

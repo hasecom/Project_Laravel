@@ -17,23 +17,67 @@ class ImagesController extends Controller
 {
     /*=UserフロントPOST=*/
     public function image_post(){
-        
-    $sample_data = $_POST['files'];
-    $img = $_POST['files'];
-    $img = str_replace('data:image/jpeg;base64,', '', $img);
-    $img = str_replace(' ', '+', $img);
-    $fileData = base64_decode($img);
-    //saving
-    // $fileName = 'photo.jpg';
-   // Storage::put('public/photo.jpg', $fileData);
-    $path = Storage::disk('s3')->put('public/ddd.jpg', $fileData);
-
-
-    $contents = Storage::disk('s3')->get('face2.jpg'); 
-    return  base64_encode($contents);
-
-
+/*
+*ゆたたが作るよー!
+*↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+*/
+    $img_post = $_POST['img_post'];
+    if(session()->has('img_token')){
+        $session_img = session()->get('img_token');
+        if($img_post!=$session_img){
+            $this->img_upload();
+            session()->put(['img_token'=>$img_post]);
+            }
+        }else{
+        $this->img_upload();
+        session()->put(['img_token'=>$img_post]);
+        }
     }
+
+    //画像取り出し
+    // $contents = Storage::disk('s3')->get('face2.jpg');  
+
+
+// session()->forget('img_token');
+// }
+
+    // return  base64_encode($contents);
+    // return $dir;
+/*
+*↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+*ゆたたが作ったよー!
+*/
+    private function img_upload(){
+        $sample_data = $_POST['files'];
+        $img = $_POST['files'];
+        $img = str_replace('data:image/jpeg;base64,', '', $img);
+        $img = str_replace(' ', '+', $img);
+        $fileData = base64_decode($img);
+
+        $date = date('Y-m-d H:i:s');
+        $folder_name=$date;
+        $file_name=$date.'_'.str_random(16);
+        $result=Storage::disk('s3')->directories();
+
+        $dir_flg=0;
+        foreach($result as $val){
+            $cnt_img = count(Storage::disk('s3')->allFiles($val));
+            if($cnt_img<5){
+                $dir=$val;
+                $dir_flg=1;
+            }
+        }
+        if($dir_flg==1){
+                Storage::disk('s3')->put($dir.'/'.$file_name.'.png', $fileData);
+            }else{
+                Storage::disk('s3')->makeDirectory($folder_name);
+                Storage::disk('s3')->put($folder_name.'/'.$file_name.'.png', $fileData);
+            }
+    }
+
+
+    
+
     public function post_data_get($id){//投稿のデータ
         $img_post_data = [];
         $input_exists = User::where('user_id', $id)->exists();
