@@ -54,7 +54,8 @@
                             <span class="text-muted" style="line-height:0px;">{{val.user_id}}</span>
                         </div>
                         <div class="col-md-6">
-                            <button type="button" class="btn-sm border">{{val.follows_string}}</button>
+                            <button type="button" class="btn-sm border"  v-if="val.ff_stauts != -1">{{val.follows_string}}</button>
+                            <div v-if="val.ff_stauts == -1">&emsp;&emsp;&emsp;&emsp;</div>
                         </div>
                     </div>
                 </div>
@@ -92,7 +93,7 @@
 import MyModal from '../../user_modal/user_modal.vue';
 window.Vue = require('vue');
 
- var value = 0;
+ 
 export default{
   data(){
     return{
@@ -104,7 +105,8 @@ export default{
       display_judg :0, 
       modai_title:"",
       likes_user:[],
-      follows_string:""
+      follows_string:"",
+      follows_stauts:0,
     }
   },components:{
         MyModal
@@ -155,29 +157,43 @@ export default{
              axios.get("api/user/post_data/timeline/likes_data/"+photo_id).then(photo_id_likes_user => {
                    if(typeof(photo_id_likes_user['data']) == "object"){
                      this.likes_user = photo_id_likes_user['data'];
-                      for(let i =0; i<this.likes_user.length; i++){
-                   //this.likes_user[i]['follow_stauts'] = this.addfollows_user(this.likes_user[i]['id']);
-                    this.addfollows_user(this.likes_user[i]['id']);
-                   
-                     }
-                    // console.log(this.likes_user);
-                     this.openModal(judg);
+                        axios.get("api/user/"+this.my_data['user_id']).then(response=>{
+                          let follows_arr =[];
+                          follows_arr = this.arr_chk(response['data']['follows']);
+                          for(let i =0; i<this.likes_user.length; i++){
+                          for(let j =0; j < follows_arr.length; j++){
+                            if(this.likes_user[i]['id'] == follows_arr[j]['id']){
+                             this.likes_user[i]['ff_stauts'] = 1;
+                             this.likes_user[i]['follows_string'] = "フォロー中";
+                             break;
+                           console.log(this.likes_user[i]);
+                            }else if(this.likes_user[i]['id'] ==this.my_data['id']){
+                              this.likes_user[i]['ff_stauts'] = -1;
+                              this.likes_user[i]['follows_string'] = "kkkk";
+                              break;
+                            }else{
+                              this.likes_user[i]['ff_stauts'] = 0;
+                              this.likes_user[i]['follows_string'] = "フォローする";
+                            }
+                          
+                          }
+                          if(i == this.likes_user.length -1){
+                              this.openModal(judg);
+                          }
+                        // 
+                         }  
+                   }).catch(function(error){
+                    console.log("error");
+                  });  
+                 
+                console.log(this.likes_user)
+                    
                     }
+                    
                     }).catch(function (error) {
                         console.log(error)
                     });
-    },addfollows_user(id){//FFチェック
-    axios.get("api/user/"+this.my_data['user_id']).then(response=>{
-         let follows_arr =[];
-         follows_arr = this.arr_chk(response['data']['follows']);
-       for(let j =0; j < follows_arr.length; j++){
-            if(id == follows_arr[j]['id']){
-              value = 1; 
-            }
-          }
-            }).catch(function(error){
-              value = 0;
-             });
+                     
     },
     openModal(judg) {
        this.display_judg = judg;

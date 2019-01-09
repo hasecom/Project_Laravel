@@ -89,7 +89,6 @@ class LikesController extends Controller
         $like_stauts = 1;
        }else{
            //*like_stauts = 1(いいねがされていたら)必然的にDBにデータが存在する
-           //!LikesDBnoカラム「likes_id」->「id」に変更。
             $likes_id = Likes::where('photo_id',$photo_id)->where('user_id',$user_inner_id)->value('id');
             $change_likes_flg = Likes::where('id',$likes_id)->first();
             $change_likes_flg->flg =0;
