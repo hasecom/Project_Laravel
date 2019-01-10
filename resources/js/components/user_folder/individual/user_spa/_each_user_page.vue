@@ -277,7 +277,7 @@ mounted : function() {
     follow_or_Non(val,stauts){
         let params = new URLSearchParams();
   params.append('id',val);//myid6
-   params.append('user_id',this.each_user_data['user_id']);
+  params.append('user_id',this.each_user_data['user_id']);
   params.append('stauts',stauts);
   params.append('my_id',this.my_data['id']);
 axios.post('api/user/'+this.my_data['id'],params).then(list_get_data => {

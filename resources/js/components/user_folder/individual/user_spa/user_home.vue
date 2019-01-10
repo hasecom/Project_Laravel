@@ -21,6 +21,7 @@
                                     <img v-if="item.like_stauts == 0" src="storage/like_emp.svg" width="16" height="16">
                                      </span>   
                                     <span @click="get_likes_user_data(0,item.photo_id)">{{item.likes_cnt}}件</span>
+                                  <chats></chats>
                                 </p>
                                 <p class="card-text text-muted text-center">{{item.photo_description}}</p>
 			                      </div>
@@ -44,17 +45,17 @@
           </div>
             <div v-if="display_judg == 0">
               <div class="modal_display mx-sm-5">
-                    <div v-for="val in likes_user" v-bind:key="val.id">
+                    <div v-for="(val , index) in likes_user" v-bind:key="index">
                     <div class="row mb-2">
                         <div class="col-md-2">
-                            <span class="cover list_image text-left"  v-bind:style="{ backgroundImage: 'url(storage/' + val.icon_path + '.jpg)' }"></span>
+                            <span class="cover list_image text-left" @click="follows_link(val.user_id)" v-bind:style="{ backgroundImage: 'url(storage/' + val.icon_path + '.jpg)' }"></span>
                         </div>
                          <div class="col-md-4">
-                            <span class="h5"  >{{val.user_name}}</span><br>
-                            <span class="text-muted" style="line-height:0px;">{{val.user_id}}</span>
+                            <span class="h5" @click="follows_link(val.user_id)">{{val.user_name}}</span><br>
+                            <span class="text-muted" style="line-height:0px;" @click="follows_link(val.user_id)">{{val.user_id}}</span>
                         </div>
                         <div class="col-md-6">
-                            <button type="button" class="btn-sm border"  v-if="val.ff_stauts != -1">{{val.follows_string}}</button>
+                            <button type="button" class="btn-sm border"  v-if="val.ff_stauts != -1" @click="ff_click(val.id,val.user_id,val.ff_stauts,val,index)">{{val.follows_string}}</button>
                             <div v-if="val.ff_stauts == -1">&emsp;&emsp;&emsp;&emsp;</div>
                         </div>
                     </div>
@@ -107,6 +108,7 @@ export default{
       likes_user:[],
       follows_string:"",
       follows_stauts:0,
+      now_photo_id:'',
     }
   },components:{
         MyModal
@@ -157,6 +159,7 @@ export default{
              axios.get("api/user/post_data/timeline/likes_data/"+photo_id).then(photo_id_likes_user => {
                    if(typeof(photo_id_likes_user['data']) == "object"){
                      this.likes_user = photo_id_likes_user['data'];
+                     console.log(this.likes_user)
                         axios.get("api/user/"+this.my_data['user_id']).then(response=>{
                           let follows_arr =[];
                           follows_arr = this.arr_chk(response['data']['follows']);
@@ -166,10 +169,10 @@ export default{
                              this.likes_user[i]['ff_stauts'] = 1;
                              this.likes_user[i]['follows_string'] = "フォロー中";
                              break;
-                           console.log(this.likes_user[i]);
+                    
                             }else if(this.likes_user[i]['id'] ==this.my_data['id']){
                               this.likes_user[i]['ff_stauts'] = -1;
-                              this.likes_user[i]['follows_string'] = "kkkk";
+                              this.likes_user[i]['follows_string'] = "";
                               break;
                             }else{
                               this.likes_user[i]['ff_stauts'] = 0;
@@ -179,6 +182,7 @@ export default{
                           }
                           if(i == this.likes_user.length -1){
                               this.openModal(judg);
+                              this.now_photo_id = photo_id;
                           }
                         // 
                          }  
@@ -186,7 +190,6 @@ export default{
                     console.log("error");
                   });  
                  
-                console.log(this.likes_user)
                     
                     }
                     
@@ -194,6 +197,31 @@ export default{
                         console.log(error)
                     });
                      
+    },
+
+    ff_click(id,user_id,stauts,photo_id,index){
+               let params = new URLSearchParams();
+              params.append('id',id);
+              params.append('user_id',user_id);
+              params.append('stauts',stauts);
+              params.append('likes',1);
+              params.append('my_id',this.my_data['id']);
+      axios.post('api/user/'+this.my_data['id'],params).then(list_get_data => {
+          this.arr_chk(list_get_data['data']['user_info']);
+           if(stauts == 0){
+             list_get_data['data']['user_info']['ff_stauts'] = 1;
+             list_get_data['data']['user_info'] ['follows_string'] = "フォロー中";
+            this.$set(this.likes_user,index,list_get_data['data']['user_info']);
+           this.$set(this.likes_user,index,list_get_data['data']['user_info']);
+           }else{
+        list_get_data['data']['user_info']['ff_stauts'] = 0;
+          list_get_data['data']['user_info'] ['follows_string'] = "フォローする";
+          this.$set(this.likes_user,index, list_get_data['data']['user_info']);
+           this.$set(this.likes_user,index,list_get_data['data']['user_info']);
+           }
+      }).catch(function (error) {
+          console.log(error);
+        });
     },
     openModal(judg) {
        this.display_judg = judg;
@@ -205,7 +233,11 @@ export default{
       this.user_modal = false;
     },arr_chk(data){
      return typeof(data)=="undefined"? []:data;
-    }
+    },  
+    follows_link(val){
+        this.closeModal();
+        this.$router.push('/'+val);
+    },
   }
 }
 </script>

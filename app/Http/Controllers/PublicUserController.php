@@ -90,7 +90,22 @@ user_pageからのPOSTデータ(1)FF管理
                 Follows::destroy($delete_id);
                 return  $this->public_user($get_my_user_id);  
              }
-        }
+        }else if(isset($_POST['id']) && isset($_POST['stauts']) && isset($_POST['my_id']) && isset($_POST['likes'])){
+            $get_id = $_POST['id'];
+            $get_stauts = $_POST['stauts'];
+            $get_my_id = $_POST['my_id'];
+            
+            if($get_stauts == 0){
+                $follow_add = new Follows;
+                $follow_add->user_id =$get_my_id;
+                $follow_add->followed_id =$get_id;
+                $follow_add->save();
+             }else if($get_stauts == 1){
+                $delete_id = Follows::where('user_id',$get_my_id)->where('followed_id',$get_id)->value('id');
+                Follows::destroy($delete_id);
+             }
+             
+        } 
     }
 /* ====================================================================
 使い回しメソッド
