@@ -16,38 +16,26 @@ use App\User;
 class ImagesController extends Controller
 {
     /*=UserフロントPOST=*/
-    public function image_post(){
-/*
-*ゆたたが作るよー!
-*↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-*/
+    
+    public function post_img_judge($get_input_id){
+
     $img_post = $_POST['img_post'];
     if(session()->has('img_token')){
         $session_img = session()->get('img_token');
         if($img_post!=$session_img){
-            $this->img_upload();
+            $this->img_upload($get_input_id);
             session()->put(['img_token'=>$img_post]);
             }
         }else{
-        $this->img_upload();
+        $this->img_upload($get_input_id);
         session()->put(['img_token'=>$img_post]);
         }
     }
 
-    //画像取り出し
+    //画像の取り出し方
     // $contents = Storage::disk('s3')->get('face2.jpg');  
 
-
-// session()->forget('img_token');
-// }
-
-    // return  base64_encode($contents);
-    // return $dir;
-/*
-*↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
-*ゆたたが作ったよー!
-*/
-    private function img_upload(){
+    private function img_upload($get_input_id){
         $sample_data = $_POST['files'];
         $img = $_POST['files'];
         $img = str_replace('data:image/jpeg;base64,', '', $img);
@@ -73,6 +61,19 @@ class ImagesController extends Controller
                 Storage::disk('s3')->makeDirectory($folder_name);
                 Storage::disk('s3')->put($folder_name.'/'.$file_name.'.png', $fileData);
             }
+        //*新規投稿画像をDBに保存
+        $new_posted_photos = new Posted_photos;
+        $new_posted_photos->user_id = $get_input_id;
+        $new_posted_photos->photo_description = $_POST['description'];
+        $new_posted_photos->photo_name = $_POST['post_name'];
+        $new_posted_photos->file_name = $file_name;
+        if($dir_flg==1){
+            $new_posted_photos->photo_path = $dir;
+        }else{
+            $new_posted_photos->photo_path = $folder_name;
+        };
+        $new_posted_photos->save();
+        return $get_input_id;
     }
 
 
@@ -98,15 +99,9 @@ class ImagesController extends Controller
         if($input_exists != true) exit;//idがなければ処理停止
         $get_input_id = User::where('user_id',$id)->value('id');//内部ID
 
+        $photo_result=$this->post_img_judge($get_input_id);
+        return $photo_result;
 
-        //*新規投稿画像をDBに保存
-        $new_posted_photos = new Posted_photos;
-        $new_posted_photos->user_id = $get_input_id;
-        $new_posted_photos->photo_description = $_POST['description'];
-        $new_posted_photos->file_name = str_random(16);
-        $new_posted_photos->photo_path =str_random(16);
-        $new_posted_photos->save();
-        return $get_input_id;
     }
     //画像データ送受信のjsonの整形
     private function mediation_post_data($get_input_id){
