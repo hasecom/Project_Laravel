@@ -18,6 +18,9 @@
 
 </style>
 <script>
+
+
+
 export default{
     props:{
     photo_data: {
@@ -41,8 +44,6 @@ export default{
       this.canMessageSubmit = true
     },   
     onBlur: function() {
-        
-     
     },
     text_send:function(e){
     if (!this.canMessageSubmit) {

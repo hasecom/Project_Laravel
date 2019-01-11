@@ -23,6 +23,7 @@
                                     <span @click="get_likes_user_data(0,item.photo_id)">{{item.likes_cnt}}件</span>
                                   <chats :photo_data="item" :my_data="my_data"></chats>
                                 </p>
+                                 <user-post-details :photo_data="item" :my_data="my_data"></user-post-details>
                                 <p class="card-text text-muted text-center">{{item.photo_description}}</p>
 			                      </div>
                             <div class="row">
@@ -63,6 +64,7 @@
                </div>
             </div>
         </MyModal>
+       
      </div>
 </template>
 <style>
