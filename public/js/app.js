@@ -25527,7 +25527,7 @@ return jQuery;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(22);
-module.exports = __webpack_require__(163);
+module.exports = __webpack_require__(168);
 
 
 /***/ }),
@@ -25559,7 +25559,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_user_folder_individual_mypage_img_gallery_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__components_user_folder_individual_mypage_img_gallery_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_user_folder_individual_each_user_img_gallery_vue__ = __webpack_require__(153);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_user_folder_individual_each_user_img_gallery_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__components_user_folder_individual_each_user_img_gallery_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_vue_router__ = __webpack_require__(162);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_user_folder_individual_component_chats_vue__ = __webpack_require__(158);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_user_folder_individual_component_chats_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__components_user_folder_individual_component_chats_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_vue_router__ = __webpack_require__(167);
 //ADMIN
 
 
@@ -25576,11 +25578,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+
 //ADMIN
-__webpack_require__(158);
+__webpack_require__(163);
 window.Vue = __webpack_require__(4);
 
-Vue.use(__WEBPACK_IMPORTED_MODULE_12_vue_router__["a" /* default */]);
+Vue.use(__WEBPACK_IMPORTED_MODULE_13_vue_router__["a" /* default */]);
 
 Vue.component('side-bar', __WEBPACK_IMPORTED_MODULE_1__components_admin_folder_admin_side_bar_vue___default.a); //#app内
 Vue.component('admin-main', __WEBPACK_IMPORTED_MODULE_2__components_admin_folder_admin_main_vue___default.a); //#app内
@@ -25595,8 +25598,9 @@ Vue.component('user_top', __WEBPACK_IMPORTED_MODULE_8__components_user_folder_in
 Vue.component('user_front', __WEBPACK_IMPORTED_MODULE_9__components_user_folder_individual_user_front_vue___default.a); //#app内
 Vue.component('img-gallery', __WEBPACK_IMPORTED_MODULE_10__components_user_folder_individual_mypage_img_gallery_vue___default.a);
 Vue.component('each-user-img-gallery', __WEBPACK_IMPORTED_MODULE_11__components_user_folder_individual_each_user_img_gallery_vue___default.a);
+Vue.component('chats', __WEBPACK_IMPORTED_MODULE_12__components_user_folder_individual_component_chats_vue___default.a);
 
-var router = new __WEBPACK_IMPORTED_MODULE_12_vue_router__["a" /* default */]({
+var router = new __WEBPACK_IMPORTED_MODULE_13_vue_router__["a" /* default */]({
     routes: __WEBPACK_IMPORTED_MODULE_0__router_routes_js__["a" /* default */]
 });
 
@@ -29447,7 +29451,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.img_up{\r\n  width:300px;\r\n  height:200px;\r\n  margin: 30px;\r\n  background-color:gray;\n}\n.sub{\r\n  text-align: center;\n}\r\n", ""]);
 
 // exports
 
@@ -29458,6 +29462,8 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""])
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__user_modal_user_modal_vue__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__user_modal_user_modal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__user_modal_user_modal_vue__);
 //
 //
 //
@@ -29483,6 +29489,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+window.Vue = __webpack_require__(4);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -29491,11 +29512,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       return_base64: '',
       sample_data: '',
       send_description: '',
+      send_post_name: '',
       my_data: [],
-      flg: 0
+      flg: 0,
+      img_modal: false
     };
   },
 
+  components: {
+    MyModal: __WEBPACK_IMPORTED_MODULE_0__user_modal_user_modal_vue___default.a
+  },
   mounted: function mounted() {
     this.on_post_Load();
   },
@@ -29524,6 +29550,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       };
       reader.readAsDataURL(file);
     },
+    openModal: function openModal() {
+      this.img_modal = true;
+    },
+    closeModal: function closeModal() {
+      this.img_modal = false;
+    },
     onPost: function onPost() {
       var _this3 = this;
 
@@ -29535,20 +29567,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var params = new URLSearchParams();
       params.append('files', this.uploadedImage);
       params.append('img_post', token_);
-      axios.post('', params).then(function (response) {
+      params.append('description', this.send_description);
+      params.append('post_name', this.send_post_name);
+      axios.post("api/user/post_data/" + this.my_data['user_id'], params).then(function (response) {
         _this3.flg = 1;
         _this3.return_base64 = response['data'];
         _this3.sample_data = "data:image/jpeg;base64," + response['data'];
         // console.log(response['data']);
-      }).catch(function (error) {
-        console.log(error);
-      });
-    },
-    send_messsage: function send_messsage() {
-      var params = new URLSearchParams();
-      params.append('description', this.send_description);
-      axios.post("api/user/post_data/" + this.my_data['user_id'], params).then(function (response) {
-        console.log(response['data']);
       }).catch(function (error) {
         console.log(error);
       });
@@ -29565,88 +29590,116 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm._m(0),
-    _vm._v(" "),
-    _c(
-      "form",
-      {
-        attrs: { enctype: "multipart/form-data" },
-        on: {
-          submit: function($event) {
-            $event.preventDefault()
-            return _vm.onPost($event)
-          }
-        }
-      },
-      [
-        _c("img", {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: _vm.uploadedImage,
-              expression: "uploadedImage"
-            }
-          ],
-          attrs: { src: _vm.uploadedImage }
-        }),
-        _vm._v(" "),
-        _c("input", {
-          attrs: { type: "file", name: "file" },
-          on: { change: _vm.onFileChange }
-        }),
-        _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-          [_vm._v("送信")]
-        )
-      ]
-    ),
-    _vm._v(" "),
-    _c("div", [
-      _c(
-        "form",
-        {
-          on: {
-            submit: function($event) {
-              $event.preventDefault()
-              return _vm.send_messsage($event)
-            }
-          }
-        },
-        [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.send_description,
-                expression: "send_description"
-              }
-            ],
-            attrs: { type: "text" },
-            domProps: { value: _vm.send_description },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.send_description = $event.target.value
-              }
-            }
-          }),
-          _vm._v(" "),
-          _c(
-            "button",
-            { staticClass: "btn-primary", attrs: { type: "submit" } },
-            [_vm._v("送信")]
+  return _c(
+    "div",
+    [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("i", {
+        staticClass: "far fa-arrow-alt-circle-up fa-5x",
+        on: { click: _vm.openModal }
+      }),
+      _vm._v(" "),
+      _vm.img_modal
+        ? _c(
+            "MyModal",
+            { staticClass: "border-0", on: { close: _vm.closeModal } },
+            [
+              _c(
+                "form",
+                {
+                  attrs: { enctype: "multipart/form-data" },
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.onPost($event)
+                    }
+                  }
+                },
+                [
+                  _c("div", { staticClass: "img_up" }, [
+                    _c("img", {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.uploadedImage,
+                          expression: "uploadedImage"
+                        }
+                      ],
+                      staticStyle: {},
+                      attrs: { src: _vm.uploadedImage }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    attrs: { type: "file", name: "file" },
+                    on: { change: _vm.onFileChange }
+                  }),
+                  _c("br"),
+                  _vm._v("\n          タイトル："),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.send_post_name,
+                        expression: "send_post_name"
+                      }
+                    ],
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.send_post_name },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.send_post_name = $event.target.value
+                      }
+                    }
+                  }),
+                  _c("br"),
+                  _vm._v("\n          説明欄　："),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.send_description,
+                        expression: "send_description"
+                      }
+                    ],
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.send_description },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.send_description = $event.target.value
+                      }
+                    }
+                  }),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "sub" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "submit" }
+                      },
+                      [_vm._v("送信")]
+                    )
+                  ])
+                ]
+              )
+            ]
           )
-        ]
-      )
-    ])
-  ])
+        : _vm._e()
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -29656,7 +29709,7 @@ var staticRenderFns = [
     return _c("nav", { staticClass: "navbar navbar-default" }, [
       _c("div", { staticClass: "container-fluid" }, [
         _c("div", { staticClass: "navbar-header" }, [
-          _vm._v("\n    画像の投稿\n    ")
+          _vm._v("\n        画像の投稿\n        ")
         ])
       ])
     ])
@@ -30112,11 +30165,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 //
 //
 //
+//
+//
 
 
 window.Vue = __webpack_require__(4);
 
-var value = 0;
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -30128,7 +30182,9 @@ var value = 0;
       display_judg: 0,
       modai_title: "",
       likes_user: [],
-      follows_string: ""
+      follows_string: "",
+      follows_stauts: 0,
+      now_photo_id: ''
     };
   },
   components: {
@@ -30185,31 +30241,63 @@ var value = 0;
       axios.get("api/user/post_data/timeline/likes_data/" + photo_id).then(function (photo_id_likes_user) {
         if (_typeof(photo_id_likes_user['data']) == "object") {
           _this3.likes_user = photo_id_likes_user['data'];
-          for (var i = 0; i < _this3.likes_user.length; i++) {
-            //this.likes_user[i]['follow_stauts'] = this.addfollows_user(this.likes_user[i]['id']);
-            _this3.addfollows_user(_this3.likes_user[i]['id']);
-          }
-          // console.log(this.likes_user);
-          _this3.openModal(judg);
+          console.log(_this3.likes_user);
+          axios.get("api/user/" + _this3.my_data['user_id']).then(function (response) {
+            var follows_arr = [];
+            follows_arr = _this3.arr_chk(response['data']['follows']);
+            for (var i = 0; i < _this3.likes_user.length; i++) {
+              for (var j = 0; j < follows_arr.length; j++) {
+                if (_this3.likes_user[i]['id'] == follows_arr[j]['id']) {
+                  _this3.likes_user[i]['ff_stauts'] = 1;
+                  _this3.likes_user[i]['follows_string'] = "フォロー中";
+                  break;
+                } else if (_this3.likes_user[i]['id'] == _this3.my_data['id']) {
+                  _this3.likes_user[i]['ff_stauts'] = -1;
+                  _this3.likes_user[i]['follows_string'] = "";
+                  break;
+                } else {
+                  _this3.likes_user[i]['ff_stauts'] = 0;
+                  _this3.likes_user[i]['follows_string'] = "フォローする";
+                }
+              }
+              if (i == _this3.likes_user.length - 1) {
+                _this3.openModal(judg);
+                _this3.now_photo_id = photo_id;
+              }
+              // 
+            }
+          }).catch(function (error) {
+            console.log("error");
+          });
         }
       }).catch(function (error) {
         console.log(error);
       });
     },
-    addfollows_user: function addfollows_user(id) {
+    ff_click: function ff_click(id, user_id, stauts, photo_id, index) {
       var _this4 = this;
 
-      //FFチェック
-      axios.get("api/user/" + this.my_data['user_id']).then(function (response) {
-        var follows_arr = [];
-        follows_arr = _this4.arr_chk(response['data']['follows']);
-        for (var j = 0; j < follows_arr.length; j++) {
-          if (id == follows_arr[j]['id']) {
-            value = 1;
-          }
+      var params = new URLSearchParams();
+      params.append('id', id);
+      params.append('user_id', user_id);
+      params.append('stauts', stauts);
+      params.append('likes', 1);
+      params.append('my_id', this.my_data['id']);
+      axios.post('api/user/' + this.my_data['id'], params).then(function (list_get_data) {
+        _this4.arr_chk(list_get_data['data']['user_info']);
+        if (stauts == 0) {
+          list_get_data['data']['user_info']['ff_stauts'] = 1;
+          list_get_data['data']['user_info']['follows_string'] = "フォロー中";
+          _this4.$set(_this4.likes_user, index, list_get_data['data']['user_info']);
+          _this4.$set(_this4.likes_user, index, list_get_data['data']['user_info']);
+        } else {
+          list_get_data['data']['user_info']['ff_stauts'] = 0;
+          list_get_data['data']['user_info']['follows_string'] = "フォローする";
+          _this4.$set(_this4.likes_user, index, list_get_data['data']['user_info']);
+          _this4.$set(_this4.likes_user, index, list_get_data['data']['user_info']);
         }
       }).catch(function (error) {
-        value = 0;
+        console.log(error);
       });
     },
     openModal: function openModal(judg) {
@@ -30223,6 +30311,10 @@ var value = 0;
     },
     arr_chk: function arr_chk(data) {
       return typeof data == "undefined" ? [] : data;
+    },
+    follows_link: function follows_link(val) {
+      this.closeModal();
+      this.$router.push('/' + val);
     }
   }
 });
@@ -30307,51 +30399,62 @@ var render = function() {
                             _vm._v(_vm._s(item.photo_name))
                           ]),
                           _vm._v(" "),
-                          _c("p", [
-                            _c(
-                              "span",
-                              {
-                                on: {
-                                  click: function($event) {
-                                    _vm.likes(item.photo_id, item.like_stauts)
+                          _c(
+                            "p",
+                            [
+                              _c(
+                                "span",
+                                {
+                                  on: {
+                                    click: function($event) {
+                                      _vm.likes(item.photo_id, item.like_stauts)
+                                    }
                                   }
-                                }
-                              },
-                              [
-                                item.like_stauts == 1
-                                  ? _c("img", {
-                                      attrs: {
-                                        src: "storage/like.svg",
-                                        width: "16",
-                                        height: "16"
-                                      }
-                                    })
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                item.like_stauts == 0
-                                  ? _c("img", {
-                                      attrs: {
-                                        src: "storage/like_emp.svg",
-                                        width: "16",
-                                        height: "16"
-                                      }
-                                    })
-                                  : _vm._e()
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "span",
-                              {
-                                on: {
-                                  click: function($event) {
-                                    _vm.get_likes_user_data(0, item.photo_id)
+                                },
+                                [
+                                  item.like_stauts == 1
+                                    ? _c("img", {
+                                        attrs: {
+                                          src: "storage/like.svg",
+                                          width: "16",
+                                          height: "16"
+                                        }
+                                      })
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  item.like_stauts == 0
+                                    ? _c("img", {
+                                        attrs: {
+                                          src: "storage/like_emp.svg",
+                                          width: "16",
+                                          height: "16"
+                                        }
+                                      })
+                                    : _vm._e()
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "span",
+                                {
+                                  on: {
+                                    click: function($event) {
+                                      _vm.get_likes_user_data(0, item.photo_id)
+                                    }
                                   }
+                                },
+                                [_vm._v(_vm._s(item.likes_cnt) + "件")]
+                              ),
+                              _vm._v(" "),
+                              _c("chats", {
+                                attrs: {
+                                  photo_data: item,
+                                  my_data: _vm.my_data
                                 }
-                              },
-                              [_vm._v(_vm._s(item.likes_cnt) + "件")]
-                            )
-                          ]),
+                              })
+                            ],
+                            1
+                          ),
                           _vm._v(" "),
                           _c(
                             "p",
@@ -30430,8 +30533,8 @@ var render = function() {
                     _c(
                       "div",
                       { staticClass: "modal_display mx-sm-5" },
-                      _vm._l(_vm.likes_user, function(val) {
-                        return _c("div", { key: val.id }, [
+                      _vm._l(_vm.likes_user, function(val, index) {
+                        return _c("div", { key: index }, [
                           _c("div", { staticClass: "row mb-2" }, [
                             _c("div", { staticClass: "col-md-2" }, [
                               _c("span", {
@@ -30439,35 +30542,71 @@ var render = function() {
                                 style: {
                                   backgroundImage:
                                     "url(storage/" + val.icon_path + ".jpg)"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    _vm.follows_link(val.user_id)
+                                  }
                                 }
                               })
                             ]),
                             _vm._v(" "),
                             _c("div", { staticClass: "col-md-4" }, [
-                              _c("span", { staticClass: "h5" }, [
-                                _vm._v(_vm._s(val.user_name))
-                              ]),
+                              _c(
+                                "span",
+                                {
+                                  staticClass: "h5",
+                                  on: {
+                                    click: function($event) {
+                                      _vm.follows_link(val.user_id)
+                                    }
+                                  }
+                                },
+                                [_vm._v(_vm._s(val.user_name))]
+                              ),
                               _c("br"),
                               _vm._v(" "),
                               _c(
                                 "span",
                                 {
                                   staticClass: "text-muted",
-                                  staticStyle: { "line-height": "0px" }
+                                  staticStyle: { "line-height": "0px" },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.follows_link(val.user_id)
+                                    }
+                                  }
                                 },
                                 [_vm._v(_vm._s(val.user_id))]
                               )
                             ]),
                             _vm._v(" "),
                             _c("div", { staticClass: "col-md-6" }, [
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn-sm border",
-                                  attrs: { type: "button" }
-                                },
-                                [_vm._v(_vm._s(val.follows_string))]
-                              )
+                              val.ff_stauts != -1
+                                ? _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn-sm border",
+                                      attrs: { type: "button" },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.ff_click(
+                                            val.id,
+                                            val.user_id,
+                                            val.ff_stauts,
+                                            val,
+                                            index
+                                          )
+                                        }
+                                      }
+                                    },
+                                    [_vm._v(_vm._s(val.follows_string))]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              val.ff_stauts == -1
+                                ? _c("div", [_vm._v("    ")])
+                                : _vm._e()
                             ])
                           ])
                         ])
@@ -33747,8 +33886,272 @@ if (false) {
 /* 158 */
 /***/ (function(module, exports, __webpack_require__) {
 
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(159)
+}
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(161)
+/* template */
+var __vue_template__ = __webpack_require__(162)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/user_folder/individual/component/chats.vue"
 
-window._ = __webpack_require__(159);
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-42bf642a", Component.options)
+  } else {
+    hotAPI.reload("data-v-42bf642a", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 159 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(160);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(1)("ed8b28c6", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-42bf642a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./chats.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-42bf642a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./chats.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 160 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(0)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 161 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: {
+        photo_data: {
+            type: Object
+        },
+        my_data: {
+            type: Object
+        }
+    },
+    data: function data() {
+        return {
+            text_add: "",
+            canMessageSubmit: false
+
+        };
+    },
+    methods: {
+        onFocus: function onFocus() {},
+        setCanMessageSubmit: function setCanMessageSubmit() {
+            this.canMessageSubmit = true;
+        },
+
+        onBlur: function onBlur() {},
+        text_send: function text_send(e) {
+            var _this = this;
+
+            if (!this.canMessageSubmit) {
+                return;
+            }
+
+            this.canMessageSubmit = false;
+            document.activeElement.blur();
+
+            //TODO:テキスト内容の処理を
+            //TODO:最後photo_id的なのをどうするか?バックエンドでもハッシュ化して照合？or暗号化?
+
+            var params = new URLSearchParams();
+            params.append('chat_text', this.text_add);
+            params.append('photo_data', this.photo_data['photo_id']);
+            params.append('my_data', this.my_data['id']);
+            axios.post("api/user/post_data/photo/chat/" + this.photo_data['photo_id'], params).then(function (chat_data) {
+                _this.text_add = "";
+                if (_typeof(chat_data['data']) == "object") {}
+                console.log(chat_data['data']);
+            }).catch(function (error) {
+                console.log(error);
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 162 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "row" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-7" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.text_add,
+              expression: "text_add"
+            }
+          ],
+          staticClass: "form-control form-control-sm",
+          attrs: {
+            id: "comment_text",
+            type: "text",
+            placeholder: "コメントを追加"
+          },
+          domProps: { value: _vm.text_add },
+          on: {
+            focus: _vm.onFocus,
+            keyup: function($event) {
+              if (
+                !("button" in $event) &&
+                _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+              ) {
+                return null
+              }
+              return _vm.text_send($event)
+            },
+            keypress: _vm.setCanMessageSubmit,
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.text_add = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.onFocus,
+              expression: "onFocus"
+            }
+          ],
+          staticClass: "col-md-2"
+        },
+        [
+          _c("span", { on: { click: _vm.text_send } }, [
+            _c("i", { staticClass: "far fa-paper-plane" })
+          ])
+        ]
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-1" }, [
+      _c("label", { attrs: { for: "comment_text" } }, [
+        _c("i", { staticClass: "far fa-comment" })
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-42bf642a", module.exports)
+  }
+}
+
+/***/ }),
+/* 163 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+window._ = __webpack_require__(164);
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -33760,7 +34163,7 @@ try {
   window.Popper = __webpack_require__(19).default;
   window.$ = window.jQuery = __webpack_require__(20);
 
-  __webpack_require__(161);
+  __webpack_require__(166);
 } catch (e) {}
 
 /**
@@ -33805,7 +34208,7 @@ if (token) {
 // });
 
 /***/ }),
-/* 159 */
+/* 164 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -50917,10 +51320,10 @@ if (token) {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(160)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(165)(module)))
 
 /***/ }),
-/* 160 */
+/* 165 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -50948,7 +51351,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 161 */
+/* 166 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -54898,7 +55301,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 162 */
+/* 167 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -57528,7 +57931,7 @@ if (inBrowser && window.Vue) {
 
 
 /***/ }),
-/* 163 */
+/* 168 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
