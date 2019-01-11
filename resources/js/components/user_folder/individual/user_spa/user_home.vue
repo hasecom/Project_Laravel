@@ -21,7 +21,7 @@
                                     <img v-if="item.like_stauts == 0" src="storage/like_emp.svg" width="16" height="16">
                                      </span>   
                                     <span @click="get_likes_user_data(0,item.photo_id)">{{item.likes_cnt}}件</span>
-                                  <chats></chats>
+                                  <chats :photo_data="item" :my_data="my_data"></chats>
                                 </p>
                                 <p class="card-text text-muted text-center">{{item.photo_description}}</p>
 			                      </div>

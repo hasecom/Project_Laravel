@@ -114,3 +114,12 @@ Route::post('/api/user/post_data/timeline/data', 'TimeLineController@timeline_po
 */
 Route::get('/api/user/post_data/timeline/likes_data/{id}', 'LikesController@likes_get');
 Route::post('/api/user/post_data/timeline/likes_data/{id}', 'LikesController@likes_post');
+
+/*====================================================================
+Photo用データ送信用
+======================================================================*/
+/*
+
+*/
+Route::get('/api/user/post_data/photo/chat/{id}', 'ChatsController@chat_get');
+Route::post('/api/user/post_data/photo/chat/{id}', 'ChatsController@chat_post');
