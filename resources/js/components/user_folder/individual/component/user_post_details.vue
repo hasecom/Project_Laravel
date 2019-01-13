@@ -25,7 +25,7 @@
                                
                            
 		                      </div>
-                        <div class="col-md-5">
+                        <div class="col-md-7">
                             <!-- DDDDDDDDDDDDDDDDDDDDDDDDDDDDD -->
                             <ul id="myTab" class="nav nav-tabs" role="tablist">
                                 <li class="nav-item">
@@ -60,6 +60,11 @@
 /* body{
   overflow: hidden;
 } */
+.tab-content{
+    overflow-y:scroll;
+    overflow-x: hidden;
+    height:400px;
+}
 :root{
     --width-size:auto;
     --height-size:auto;
@@ -111,8 +116,7 @@ export default{
     },
     data(){
         return{ 
-            user_modal :false, 
-           
+            user_modal :false,   
         }
         },components:{
         MyModal

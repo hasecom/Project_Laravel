@@ -9,8 +9,13 @@
                          <div v-for="(item ,index) in time_line" v-bind:key="index">
                            <div class="card img-thumbnail mt-3 shadow-sm">
                              <div class="row">
-                              <div class="col-md-4">{{item.user_name}}</div>
-                              <div class="col-md-4 text-muted">@{{item.user_id}}</div>
+                               <div class="col-md-1">
+                                 <span class="cover list_image" v-bind:style="{ backgroundImage: 'url(storage/' + item.icon_path + '.jpg)' }"></span>
+                               </div>
+                              <div class="col-md-10">
+                                <span>{{item.user_name}}</span>
+                                <span class="text-muted">@{{item.user_id}}</span>
+                                </div>
                               </div>
 			                        <svg @click="modal_set('details' + index)" class="bd-placeholder-img card-img-top" width="100%" height="300" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: カードの画像"><title>プレースホルダ</title><rect fill="#868e96" width="100%" height="100%"></rect><text fill="#dee2e6" dy=".3em" x="30%" y="50%">no image</text></svg>
 			                        <div class="card-body px-2 py-3">
