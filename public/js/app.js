@@ -29451,7 +29451,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.img_up{\r\n  width:300px;\r\n  height:200px;\r\n  margin: 30px;\r\n  background-color:gray;\n}\n.sub{\r\n  text-align: center;\n}\r\n", ""]);
+exports.push([module.i, "\n.img_up{\r\n  width:480px;\r\n  height:320px;\r\n  margin: 30px;\r\n  background-color:#555555;\n}\n.img_view{\r\n  text-align: center;\r\n  -o-object-fit: contain;\r\n     object-fit: contain;\n}\n.sub{\r\n  text-align: center;\n}\n.my-green{color:green;\n}\r\n", ""]);
 
 // exports
 
@@ -29464,6 +29464,15 @@ exports.push([module.i, "\n.img_up{\r\n  width:300px;\r\n  height:200px;\r\n  ma
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__user_modal_user_modal_vue__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__user_modal_user_modal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__user_modal_user_modal_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -29535,9 +29544,16 @@ window.Vue = __webpack_require__(4);
         console.log(error);
       });
     },
+    openModal: function openModal() {
+      this.img_modal = true;
+    },
+    closeModal: function closeModal() {
+      this.img_modal = false;
+    },
     onFileChange: function onFileChange(e) {
       var files = e.target.files || e.dataTransfer.files;
       this.createImage(files[0]);
+      // console.log(files);
     },
 
     // アップロードした画像を表示
@@ -29549,12 +29565,10 @@ window.Vue = __webpack_require__(4);
         _this2.uploadedImage = e.target.result;
       };
       reader.readAsDataURL(file);
-    },
-    openModal: function openModal() {
-      this.img_modal = true;
-    },
-    closeModal: function closeModal() {
-      this.img_modal = false;
+      var size = "ファイルサイズ：[" + file.size + " Bytes]";
+      // var dimension = "大きさ：[" + file.width + "x"+ file.height + "]"; //!ファイルの幅と高さ取得どうやるの。。。
+      document.getElementById("size").innerHTML = size;
+      // document.getElementById("px").innerHTML = dimension;
     },
     onPost: function onPost() {
       var _this3 = this;
@@ -29567,6 +29581,8 @@ window.Vue = __webpack_require__(4);
       var params = new URLSearchParams();
       params.append('files', this.uploadedImage);
       params.append('img_post', token_);
+      params.append('photo_size', size);
+      // params.append('photo_px',dimension); //!ファイルの幅と高さ取得どうやるの。。。
       params.append('description', this.send_description);
       params.append('post_name', this.send_post_name);
       axios.post("api/user/post_data/" + this.my_data['user_id'], params).then(function (response) {
@@ -29596,7 +29612,7 @@ var render = function() {
       _vm._m(0),
       _vm._v(" "),
       _c("i", {
-        staticClass: "far fa-arrow-alt-circle-up fa-5x",
+        staticClass: "fas fa-plus fa-5x faa-float animated my-green",
         on: { click: _vm.openModal }
       }),
       _vm._v(" "),
@@ -29627,16 +29643,20 @@ var render = function() {
                           expression: "uploadedImage"
                         }
                       ],
-                      staticStyle: {},
-                      attrs: { src: _vm.uploadedImage }
-                    })
+                      staticClass: "img_view",
+                      attrs: {
+                        src: _vm.uploadedImage,
+                        width: "480",
+                        height: "320"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("input", {
+                      attrs: { type: "file", name: "file" },
+                      on: { change: _vm.onFileChange }
+                    }),
+                    _c("br")
                   ]),
-                  _vm._v(" "),
-                  _c("input", {
-                    attrs: { type: "file", name: "file" },
-                    on: { change: _vm.onFileChange }
-                  }),
-                  _c("br"),
                   _vm._v("\n          タイトル："),
                   _c("input", {
                     directives: [
@@ -29647,7 +29667,7 @@ var render = function() {
                         expression: "send_post_name"
                       }
                     ],
-                    attrs: { type: "text" },
+                    attrs: { id: "title", type: "text" },
                     domProps: { value: _vm.send_post_name },
                     on: {
                       input: function($event) {
@@ -29669,7 +29689,7 @@ var render = function() {
                         expression: "send_description"
                       }
                     ],
-                    attrs: { type: "text" },
+                    attrs: { type: "textarea" },
                     domProps: { value: _vm.send_description },
                     on: {
                       input: function($event) {
@@ -29680,7 +29700,12 @@ var render = function() {
                       }
                     }
                   }),
-                  _c("br"),
+                  _vm._v(" "),
+                  _c("p", { attrs: { id: "size" } }, [
+                    _vm._v("ファイルサイズ：[0 Bytes]")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { attrs: { id: "px" } }, [_vm._v("大きさ：[0x0]")]),
                   _vm._v(" "),
                   _c("div", { staticClass: "sub" }, [
                     _c(
