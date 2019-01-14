@@ -15,6 +15,8 @@ import user_front from './components/user_folder/individual/user_front.vue';
 import mypage_img_gallery from './components/user_folder/individual/mypage_img_gallery.vue';
 import each_user_img_gallery from './components/user_folder/individual/each_user_img_gallery.vue';
 import chats from './components/user_folder/individual/component/chats.vue';
+import user_post_details from './components/user_folder/individual/component/user_post_details.vue';
+import chats_indicate from './components/user_folder/individual/component/chats_indicate.vue';
 
 
 //ADMIN
@@ -37,6 +39,8 @@ Vue.component('user_front', user_front);//#app内
 Vue.component('img-gallery',mypage_img_gallery);
 Vue.component('each-user-img-gallery',each_user_img_gallery);
 Vue.component('chats',chats);
+Vue.component('user-post-details',user_post_details);
+Vue.component('chats-indicate',chats_indicate);
 
 
 

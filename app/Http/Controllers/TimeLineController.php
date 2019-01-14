@@ -13,8 +13,8 @@ use App\User;
 use App\Http\Controllers\LikesController;
 
 class TimeLineController extends Controller{
+    //*タイムライン表示の処理
     public function timeline_post_data_get(){
-       
         $timeline_data = [];
         $post_count = 0;
          $user_id = session()->get('user_id');
@@ -41,6 +41,7 @@ class TimeLineController extends Controller{
                   $timeline_data[$post_count]['id'] = $user_inner_id;
                   $timeline_data[$post_count]['user_id'] = User::where('id',$user_inner_id)->value('user_id');
                   $timeline_data[$post_count]['user_name'] = User::where('id',$user_inner_id)->value('user_name');
+                  $timeline_data[$post_count]['icon_path'] = User::where('id',$user_inner_id)->value('icon_path');
                   $post_count++;
                
                 }

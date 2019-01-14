@@ -1,11 +1,8 @@
 <template>
     <div>
         <div class="row">
-            <div class="col-md-1">
-                <label for="comment_text"><i class="far fa-comment"></i></label>
-            </div>
             <div class="col-md-7">
-                <input class="form-control form-control-sm" id="comment_text" type="text" placeholder="コメントを追加" v-model="text_add"  @focus="onFocus"
+                <input class="form-control form-control-sm" type="text" placeholder="コメントを追加" v-model="text_add"  @focus="onFocus"
                 @keyup.enter="text_send"  @keypress="setCanMessageSubmit">
             </div>
             <div class="col-md-2" v-show="onFocus">
@@ -18,6 +15,9 @@
 
 </style>
 <script>
+
+
+
 export default{
     props:{
     photo_data: {
@@ -41,8 +41,6 @@ export default{
       this.canMessageSubmit = true
     },   
     onBlur: function() {
-        
-     
     },
     text_send:function(e){
     if (!this.canMessageSubmit) {

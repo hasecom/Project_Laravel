@@ -1,7 +1,7 @@
 <template>
   <transition name="modal" appear>
     <div class="modal modal-overlay" @click.self="$emit('close')">
-      <div class="modal-window">
+      <div class="modal-window" >
              <slot name="header">
           </slot>
         <div class="rounded shadow border bg-white ">
@@ -11,7 +11,13 @@
       </div>
   </transition>
 </template>
-
+<script>
+export default{
+  methods:{
+ 
+  }
+}
+</script>
 <style>
 .modal {
     

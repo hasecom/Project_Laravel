@@ -9,10 +9,15 @@
                          <div v-for="(item ,index) in time_line" v-bind:key="index">
                            <div class="card img-thumbnail mt-3 shadow-sm">
                              <div class="row">
-                              <div class="col-md-4">{{item.user_name}}</div>
-                              <div class="col-md-4 text-muted">@{{item.user_id}}</div>
+                               <div class="col-md-1">
+                                 <span class="cover list_image" v-bind:style="{ backgroundImage: 'url(storage/' + item.icon_path + '.jpg)' }"></span>
+                               </div>
+                              <div class="col-md-10">
+                                <span>{{item.user_name}}</span>
+                                <span class="text-muted">@{{item.user_id}}</span>
+                                </div>
                               </div>
-			                        <svg class="bd-placeholder-img card-img-top" width="100%" height="300" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: カードの画像"><title>プレースホルダ</title><rect fill="#868e96" width="100%" height="100%"></rect><text fill="#dee2e6" dy=".3em" x="30%" y="50%">no image</text></svg>
+			                        <svg @click="modal_set('details' + index)" class="bd-placeholder-img card-img-top" width="100%" height="300" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: カードの画像"><title>プレースホルダ</title><rect fill="#868e96" width="100%" height="100%"></rect><text fill="#dee2e6" dy=".3em" x="30%" y="50%">no image</text></svg>
 			                        <div class="card-body px-2 py-3">
                                 <h5 class="card-title">{{item.photo_name}}</h5>  
                                 <p>
@@ -23,6 +28,7 @@
                                     <span @click="get_likes_user_data(0,item.photo_id)">{{item.likes_cnt}}件</span>
                                   <chats :photo_data="item" :my_data="my_data"></chats>
                                 </p>
+                                 <user-post-details :photo_data="item" :my_data="my_data" :ref="'details' + index "></user-post-details>
                                 <p class="card-text text-muted text-center">{{item.photo_description}}</p>
 			                      </div>
                             <div class="row">
@@ -37,7 +43,7 @@
             </div>  
             <div class="col-md-3"></div> 
         </div>
-           <MyModal @close="closeModal" v-if="user_modal" class="border-0">
+           <MyModal @close="closeModal" v-if="user_modal" class="border-0" ref="modal_style">
                <div class="row justify-content-center mt-3 border-bottom ">
               <div class="col-md-3"></div>
             <div class="col-md-6 h4">{{modai_title}}</div>
@@ -63,8 +69,11 @@
                </div>
             </div>
         </MyModal>
+       
      </div>
 </template>
+
+
 <style>
 .profile_icon{
       width: 150px;
@@ -92,6 +101,7 @@
 </style>
 <script>
 import MyModal from '../../user_modal/user_modal.vue';
+import Details from "../component/user_post_details.vue"
 window.Vue = require('vue');
 
  
@@ -109,9 +119,10 @@ export default{
       follows_string:"",
       follows_stauts:0,
       now_photo_id:'',
+      user_post_details_:false
     }
   },components:{
-        MyModal
+        MyModal,Details
     },mounted:function(){
       this.get_timeline_data();
   },methods:{
@@ -159,7 +170,6 @@ export default{
              axios.get("api/user/post_data/timeline/likes_data/"+photo_id).then(photo_id_likes_user => {
                    if(typeof(photo_id_likes_user['data']) == "object"){
                      this.likes_user = photo_id_likes_user['data'];
-                     console.log(this.likes_user)
                         axios.get("api/user/"+this.my_data['user_id']).then(response=>{
                           let follows_arr =[];
                           follows_arr = this.arr_chk(response['data']['follows']);
@@ -238,6 +248,9 @@ export default{
         this.closeModal();
         this.$router.push('/'+val);
     },
+    modal_set(ref){
+        this.$refs[ref][0].openModal();
+    }
   }
 }
 </script>
