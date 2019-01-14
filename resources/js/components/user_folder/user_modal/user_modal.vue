@@ -22,7 +22,7 @@ export default{
 .modal {
     
     display: flex;
-    align-items: center;
+    /*align-items: center;*/
     justify-content: center;
     position: fixed;
     z-index: 30;

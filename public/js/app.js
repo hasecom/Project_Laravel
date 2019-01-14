@@ -11906,7 +11906,7 @@ function injectStyle (ssrContext) {
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = null
+var __vue_script__ = __webpack_require__(189)
 /* template */
 var __vue_template__ = __webpack_require__(76)
 /* template functional */
@@ -25561,7 +25561,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_user_folder_individual_each_user_img_gallery_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__components_user_folder_individual_each_user_img_gallery_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_user_folder_individual_component_chats_vue__ = __webpack_require__(158);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_user_folder_individual_component_chats_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__components_user_folder_individual_component_chats_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_vue_router__ = __webpack_require__(167);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_user_folder_individual_component_user_post_details_vue__ = __webpack_require__(188);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_user_folder_individual_component_user_post_details_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13__components_user_folder_individual_component_user_post_details_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_user_folder_individual_component_chats_indicate_vue__ = __webpack_require__(194);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_user_folder_individual_component_chats_indicate_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14__components_user_folder_individual_component_chats_indicate_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_vue_router__ = __webpack_require__(167);
 //ADMIN
 
 
@@ -25579,11 +25583,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+
+
 //ADMIN
 __webpack_require__(163);
 window.Vue = __webpack_require__(4);
 
-Vue.use(__WEBPACK_IMPORTED_MODULE_13_vue_router__["a" /* default */]);
+Vue.use(__WEBPACK_IMPORTED_MODULE_15_vue_router__["a" /* default */]);
 
 Vue.component('side-bar', __WEBPACK_IMPORTED_MODULE_1__components_admin_folder_admin_side_bar_vue___default.a); //#app内
 Vue.component('admin-main', __WEBPACK_IMPORTED_MODULE_2__components_admin_folder_admin_main_vue___default.a); //#app内
@@ -25599,8 +25605,10 @@ Vue.component('user_front', __WEBPACK_IMPORTED_MODULE_9__components_user_folder_
 Vue.component('img-gallery', __WEBPACK_IMPORTED_MODULE_10__components_user_folder_individual_mypage_img_gallery_vue___default.a);
 Vue.component('each-user-img-gallery', __WEBPACK_IMPORTED_MODULE_11__components_user_folder_individual_each_user_img_gallery_vue___default.a);
 Vue.component('chats', __WEBPACK_IMPORTED_MODULE_12__components_user_folder_individual_component_chats_vue___default.a);
+Vue.component('user-post-details', __WEBPACK_IMPORTED_MODULE_13__components_user_folder_individual_component_user_post_details_vue___default.a);
+Vue.component('chats-indicate', __WEBPACK_IMPORTED_MODULE_14__components_user_folder_individual_component_chats_indicate_vue___default.a);
 
-var router = new __WEBPACK_IMPORTED_MODULE_13_vue_router__["a" /* default */]({
+var router = new __WEBPACK_IMPORTED_MODULE_15_vue_router__["a" /* default */]({
     routes: __WEBPACK_IMPORTED_MODULE_0__router_routes_js__["a" /* default */]
 });
 
@@ -28982,7 +28990,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.modal {\r\n    \r\n    display: -webkit-box;\r\n    \r\n    display: -ms-flexbox;\r\n    \r\n    display: flex;\r\n    -webkit-box-align: center;\r\n        -ms-flex-align: center;\r\n            align-items: center;\r\n    -webkit-box-pack: center;\r\n        -ms-flex-pack: center;\r\n            justify-content: center;\r\n    position: fixed;\r\n    z-index: 30;\r\n    top: 0;\r\n    left: 0;\r\n    width: 100%;\r\n    height: 100%;\r\n    background: rgba(0, 0, 0, 0.2);\n}\n.modal-enter-active, .modal-leave-active {\r\n  -webkit-transition: opacity 0.2s;\r\n  transition: opacity 0.2s;\n}\n.modal-leave-active {\r\n  -webkit-transition: opacity 0.2s ease 0.1s;\r\n  transition: opacity 0.2s ease 0.1s;\n}\n.modal-enter, .modal-leave-to {\r\n  opacity: 0;\n}\r\n", ""]);
+exports.push([module.i, "\n.modal {\r\n    \r\n    display: -webkit-box;\r\n    \r\n    display: -ms-flexbox;\r\n    \r\n    display: flex;\r\n    /*align-items: center;*/\r\n    -webkit-box-pack: center;\r\n        -ms-flex-pack: center;\r\n            justify-content: center;\r\n    position: fixed;\r\n    z-index: 30;\r\n    top: 0;\r\n    left: 0;\r\n    width: 100%;\r\n    height: 100%;\r\n    background: rgba(0, 0, 0, 0.2);\n}\n.modal-enter-active, .modal-leave-active {\r\n  -webkit-transition: opacity 0.2s;\r\n  transition: opacity 0.2s;\n}\n.modal-leave-active {\r\n  -webkit-transition: opacity 0.2s ease 0.1s;\r\n  transition: opacity 0.2s ease 0.1s;\n}\n.modal-enter, .modal-leave-to {\r\n  opacity: 0;\n}\r\n", ""]);
 
 // exports
 
@@ -29451,7 +29459,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.img_up{\r\n  width:480px;\r\n  height:320px;\r\n  margin: 30px;\r\n  background-color:#555555;\n}\n.img_view{\r\n  text-align: center;\r\n  -o-object-fit: contain;\r\n     object-fit: contain;\n}\n.sub{\r\n  text-align: center;\n}\n.my-green{color:green;\n}\r\n", ""]);
+exports.push([module.i, "\n#main_modal{\r\n    margin:0 auto;\r\n    width: 100%;\r\n    height: auto;\r\n    border: 1px solid #CCC;\r\n    border-radius: 10px;\r\n    -webkit-box-shadow: 1px 1px #ccc inset;\r\n            box-shadow: 1px 1px #ccc inset;\r\n    -webkit-box-shadow: 1px 1px #ccc;\r\n            box-shadow: 1px 1px #ccc;\r\n    overflow:auto;\n}\n.img_up{\r\n  width:480px;\r\n  height:320px;\r\n  margin: 30px;\r\n  background-color:#555555;\n}\n.img_view{\r\n  text-align: center;\r\n  -o-object-fit: contain;\r\n     object-fit: contain;\n}\n.sub{\r\n  text-align: center;\n}\n.my-green{color:green;\n}\ntextarea {\r\n  resize: none;\r\n  width:300px;\r\n  height:200px;\n}\r\n", ""]);
 
 // exports
 
@@ -29464,6 +29472,23 @@ exports.push([module.i, "\n.img_up{\r\n  width:480px;\r\n  height:320px;\r\n  ma
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__user_modal_user_modal_vue__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__user_modal_user_modal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__user_modal_user_modal_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -29619,8 +29644,14 @@ var render = function() {
       _vm.img_modal
         ? _c(
             "MyModal",
-            { staticClass: "border-0", on: { close: _vm.closeModal } },
+            {
+              staticClass: "border-0",
+              attrs: { id: "main_modal" },
+              on: { close: _vm.closeModal }
+            },
             [
+              _c("h1", [_vm._v("画像投稿")]),
+              _vm._v(" "),
               _c(
                 "form",
                 {
@@ -29680,7 +29711,7 @@ var render = function() {
                   }),
                   _c("br"),
                   _vm._v("\n          説明欄　："),
-                  _c("input", {
+                  _c("textarea", {
                     directives: [
                       {
                         name: "model",
@@ -29689,7 +29720,6 @@ var render = function() {
                         expression: "send_description"
                       }
                     ],
-                    attrs: { type: "textarea" },
                     domProps: { value: _vm.send_description },
                     on: {
                       input: function($event) {
@@ -30098,6 +30128,8 @@ exports.push([module.i, "\n.profile_icon{\r\n      width: 150px;\r\n    height: 
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__user_modal_user_modal_vue__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__user_modal_user_modal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__user_modal_user_modal_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__component_user_post_details_vue__ = __webpack_require__(188);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__component_user_post_details_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__component_user_post_details_vue__);
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 //
@@ -30192,6 +30224,16 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 window.Vue = __webpack_require__(4);
@@ -30209,11 +30251,12 @@ window.Vue = __webpack_require__(4);
       likes_user: [],
       follows_string: "",
       follows_stauts: 0,
-      now_photo_id: ''
+      now_photo_id: '',
+      user_post_details_: false
     };
   },
   components: {
-    MyModal: __WEBPACK_IMPORTED_MODULE_0__user_modal_user_modal_vue___default.a
+    MyModal: __WEBPACK_IMPORTED_MODULE_0__user_modal_user_modal_vue___default.a, Details: __WEBPACK_IMPORTED_MODULE_1__component_user_post_details_vue___default.a
   }, mounted: function mounted() {
     this.get_timeline_data();
   }, methods: {
@@ -30266,7 +30309,6 @@ window.Vue = __webpack_require__(4);
       axios.get("api/user/post_data/timeline/likes_data/" + photo_id).then(function (photo_id_likes_user) {
         if (_typeof(photo_id_likes_user['data']) == "object") {
           _this3.likes_user = photo_id_likes_user['data'];
-          console.log(_this3.likes_user);
           axios.get("api/user/" + _this3.my_data['user_id']).then(function (response) {
             var follows_arr = [];
             follows_arr = _this3.arr_chk(response['data']['follows']);
@@ -30340,6 +30382,9 @@ window.Vue = __webpack_require__(4);
     follows_link: function follows_link(val) {
       this.closeModal();
       this.$router.push('/' + val);
+    },
+    modal_set: function modal_set(ref) {
+      this.$refs[ref][0].openModal();
     }
   }
 });
@@ -30372,12 +30417,22 @@ var render = function() {
                       { staticClass: "card img-thumbnail mt-3 shadow-sm" },
                       [
                         _c("div", { staticClass: "row" }, [
-                          _c("div", { staticClass: "col-md-4" }, [
-                            _vm._v(_vm._s(item.user_name))
+                          _c("div", { staticClass: "col-md-1" }, [
+                            _c("span", {
+                              staticClass: "cover list_image",
+                              style: {
+                                backgroundImage:
+                                  "url(storage/" + item.icon_path + ".jpg)"
+                              }
+                            })
                           ]),
                           _vm._v(" "),
-                          _c("div", { staticClass: "col-md-4 text-muted" }, [
-                            _vm._v("@" + _vm._s(item.user_id))
+                          _c("div", { staticClass: "col-md-10" }, [
+                            _c("span", [_vm._v(_vm._s(item.user_name))]),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "text-muted" }, [
+                              _vm._v("@" + _vm._s(item.user_id))
+                            ])
                           ])
                         ]),
                         _vm._v(" "),
@@ -30393,6 +30448,11 @@ var render = function() {
                               focusable: "false",
                               role: "img",
                               "aria-label": "Placeholder: カードの画像"
+                            },
+                            on: {
+                              click: function($event) {
+                                _vm.modal_set("details" + index)
+                              }
                             }
                           },
                           [
@@ -30419,74 +30479,93 @@ var render = function() {
                           ]
                         ),
                         _vm._v(" "),
-                        _c("div", { staticClass: "card-body px-2 py-3" }, [
-                          _c("h5", { staticClass: "card-title" }, [
-                            _vm._v(_vm._s(item.photo_name))
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "p",
-                            [
-                              _c(
-                                "span",
-                                {
-                                  on: {
-                                    click: function($event) {
-                                      _vm.likes(item.photo_id, item.like_stauts)
+                        _c(
+                          "div",
+                          { staticClass: "card-body px-2 py-3" },
+                          [
+                            _c("h5", { staticClass: "card-title" }, [
+                              _vm._v(_vm._s(item.photo_name))
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "p",
+                              [
+                                _c(
+                                  "span",
+                                  {
+                                    on: {
+                                      click: function($event) {
+                                        _vm.likes(
+                                          item.photo_id,
+                                          item.like_stauts
+                                        )
+                                      }
                                     }
-                                  }
-                                },
-                                [
-                                  item.like_stauts == 1
-                                    ? _c("img", {
-                                        attrs: {
-                                          src: "storage/like.svg",
-                                          width: "16",
-                                          height: "16"
-                                        }
-                                      })
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  item.like_stauts == 0
-                                    ? _c("img", {
-                                        attrs: {
-                                          src: "storage/like_emp.svg",
-                                          width: "16",
-                                          height: "16"
-                                        }
-                                      })
-                                    : _vm._e()
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "span",
-                                {
-                                  on: {
-                                    click: function($event) {
-                                      _vm.get_likes_user_data(0, item.photo_id)
+                                  },
+                                  [
+                                    item.like_stauts == 1
+                                      ? _c("img", {
+                                          attrs: {
+                                            src: "storage/like.svg",
+                                            width: "16",
+                                            height: "16"
+                                          }
+                                        })
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    item.like_stauts == 0
+                                      ? _c("img", {
+                                          attrs: {
+                                            src: "storage/like_emp.svg",
+                                            width: "16",
+                                            height: "16"
+                                          }
+                                        })
+                                      : _vm._e()
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "span",
+                                  {
+                                    on: {
+                                      click: function($event) {
+                                        _vm.get_likes_user_data(
+                                          0,
+                                          item.photo_id
+                                        )
+                                      }
                                     }
+                                  },
+                                  [_vm._v(_vm._s(item.likes_cnt) + "件")]
+                                ),
+                                _vm._v(" "),
+                                _c("chats", {
+                                  attrs: {
+                                    photo_data: item,
+                                    my_data: _vm.my_data
                                   }
-                                },
-                                [_vm._v(_vm._s(item.likes_cnt) + "件")]
-                              ),
-                              _vm._v(" "),
-                              _c("chats", {
-                                attrs: {
-                                  photo_data: item,
-                                  my_data: _vm.my_data
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "p",
-                            { staticClass: "card-text text-muted text-center" },
-                            [_vm._v(_vm._s(item.photo_description))]
-                          )
-                        ]),
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c("user-post-details", {
+                              ref: "details" + index,
+                              refInFor: true,
+                              attrs: { photo_data: item, my_data: _vm.my_data }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "p",
+                              {
+                                staticClass: "card-text text-muted text-center"
+                              },
+                              [_vm._v(_vm._s(item.photo_description))]
+                            )
+                          ],
+                          1
+                        ),
                         _vm._v(" "),
                         _c("div", { staticClass: "row" }, [
                           _c("p", { staticClass: "col-md-8" }, [
@@ -30524,7 +30603,11 @@ var render = function() {
       _vm.user_modal
         ? _c(
             "MyModal",
-            { staticClass: "border-0", on: { close: _vm.closeModal } },
+            {
+              ref: "modal_style",
+              staticClass: "border-0",
+              on: { close: _vm.closeModal }
+            },
             [
               _c(
                 "div",
@@ -33993,7 +34076,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -34022,9 +34105,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 //
 //
 //
-//
-//
-//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
@@ -34087,8 +34168,6 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "row" }, [
-      _vm._m(0),
-      _vm._v(" "),
       _c("div", { staticClass: "col-md-7" }, [
         _c("input", {
           directives: [
@@ -34100,11 +34179,7 @@ var render = function() {
             }
           ],
           staticClass: "form-control form-control-sm",
-          attrs: {
-            id: "comment_text",
-            type: "text",
-            placeholder: "コメントを追加"
-          },
+          attrs: { type: "text", placeholder: "コメントを追加" },
           domProps: { value: _vm.text_add },
           on: {
             focus: _vm.onFocus,
@@ -34150,18 +34225,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-1" }, [
-      _c("label", { attrs: { for: "comment_text" } }, [
-        _c("i", { staticClass: "far fa-comment" })
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -57960,6 +58024,836 @@ if (inBrowser && window.Vue) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 169 */,
+/* 170 */,
+/* 171 */,
+/* 172 */,
+/* 173 */,
+/* 174 */,
+/* 175 */,
+/* 176 */,
+/* 177 */,
+/* 178 */,
+/* 179 */,
+/* 180 */,
+/* 181 */,
+/* 182 */,
+/* 183 */,
+/* 184 */,
+/* 185 */,
+/* 186 */,
+/* 187 */,
+/* 188 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(190)
+}
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(192)
+/* template */
+var __vue_template__ = __webpack_require__(193)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/user_folder/individual/component/user_post_details.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-69d85532", Component.options)
+  } else {
+    hotAPI.reload("data-v-69d85532", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 189 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  methods: {}
+});
+
+/***/ }),
+/* 190 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(191);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(1)("42714cf8", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-69d85532\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./user_post_details.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-69d85532\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./user_post_details.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 191 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(0)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* body{\r\n  overflow: hidden;\r\n} */\n.tab-content{\r\n    overflow-y:scroll;\r\n    overflow-x: hidden;\r\n    height:400px;\n}\n:root{\r\n    --width-size:auto;\r\n    --height-size:auto;\n}\n.modal-window{\r\n    background: var(--base-color);\r\n    width:var(--width-size);\r\n    overflow:scroll;\n}\n.profile_icon{\r\n    width: 150px;\r\n    height: 150px;\n}\n.cover{\r\n    display: inline-block;\r\n    background-color: #ccc;\r\n    background-position: center center;\r\n    background-repeat: no-repeat;\r\n    background-size: cover;\r\n    border-radius: 50%;\n}\n.card-title{\r\n    display:block;\n}\n.modal_display{\r\n  background:white;\r\n  padding:50px 20px;\n}\n.list_image{\r\n    width:30px;\r\n    height:30px;\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 192 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__user_modal_user_modal_vue__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__user_modal_user_modal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__user_modal_user_modal_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+window.Vue = __webpack_require__(4);
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: {
+        photo_data: {
+            type: Object
+        },
+        my_data: {
+            type: Object
+        }
+    },
+    data: function data() {
+        return {
+            user_modal: false
+        };
+    },
+    components: {
+        MyModal: __WEBPACK_IMPORTED_MODULE_0__user_modal_user_modal_vue___default.a
+    }, watch: {},
+    methods: {
+        openModal: function openModal() {
+            var body = document.getElementsByTagName('body')[0];
+            body.style.overflow = "hidden";
+            this.user_modal = true;
+            document.documentElement.style.setProperty('--width-size', '80%');
+            document.documentElement.style.setProperty('--height-size', '80%');
+        },
+        closeModal: function closeModal() {
+            var body = document.getElementsByTagName('body')[0];
+            body.style.overflow = "scroll";
+            this.user_modal = false;
+            var modal_return = setTimeout(function () {
+                document.documentElement.style.setProperty('--width-size', 'auto');
+                document.documentElement.style.setProperty('--height-size', 'auto');
+            }, 300);
+        }
+    }
+});
+
+/***/ }),
+/* 193 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _vm.user_modal
+        ? _c(
+            "MyModal",
+            { staticClass: "border-0", on: { close: _vm.closeModal } },
+            [
+              _c("div", { staticClass: "modal_display" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-5" }, [
+                    _c("div", [
+                      _vm._v(_vm._s(_vm.photo_data.user_name) + "  "),
+                      _c("span", { staticClass: "text-muted" }, [
+                        _vm._v("@" + _vm._s(_vm.photo_data.user_id))
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "svg",
+                      {
+                        staticClass: "bd-placeholder-img card-img-top",
+                        attrs: {
+                          width: "100%",
+                          height: "300",
+                          xmlns: "http://www.w3.org/2000/svg",
+                          preserveAspectRatio: "xMidYMid slice",
+                          focusable: "false",
+                          role: "img",
+                          "aria-label": "Placeholder: カードの画像"
+                        }
+                      },
+                      [
+                        _c("title", [_vm._v("プレースホルダ")]),
+                        _c("rect", {
+                          attrs: {
+                            fill: "#868e96",
+                            width: "100%",
+                            height: "100%"
+                          }
+                        }),
+                        _c(
+                          "text",
+                          {
+                            attrs: {
+                              fill: "#dee2e6",
+                              dy: ".3em",
+                              x: "30%",
+                              y: "50%"
+                            }
+                          },
+                          [_vm._v("no image")]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "card-body px-2 py-3" },
+                      [
+                        _c("h5", { staticClass: "card-title d-inline" }, [
+                          _vm._v(_vm._s(_vm.photo_data.photo_name))
+                        ]),
+                        _vm._v(
+                          "   \n                                            "
+                        ),
+                        _c(
+                          "h5",
+                          {
+                            staticClass:
+                              "text-white bg-primary rounded px-md-3 d-inline"
+                          },
+                          [_vm._v("¥" + _vm._s(_vm.photo_data.photo_price))]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "p",
+                          [
+                            _c(
+                              "span",
+                              {
+                                on: {
+                                  click: function($event) {
+                                    _vm.likes(
+                                      _vm.photo_data.photo_id,
+                                      _vm.photo_data.like_stauts
+                                    )
+                                  }
+                                }
+                              },
+                              [
+                                _vm.photo_data.like_stauts == 1
+                                  ? _c("img", {
+                                      attrs: {
+                                        src: "storage/like.svg",
+                                        width: "16",
+                                        height: "16"
+                                      }
+                                    })
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.photo_data.like_stauts == 0
+                                  ? _c("img", {
+                                      attrs: {
+                                        src: "storage/like_emp.svg",
+                                        width: "16",
+                                        height: "16"
+                                      }
+                                    })
+                                  : _vm._e()
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "span",
+                              {
+                                on: {
+                                  click: function($event) {
+                                    _vm.get_likes_user_data(
+                                      0,
+                                      _vm.photo_data.photo_id
+                                    )
+                                  }
+                                }
+                              },
+                              [_vm._v(_vm._s(_vm.photo_data.likes_cnt) + "件")]
+                            ),
+                            _vm._v(" "),
+                            _c("chats", {
+                              attrs: {
+                                photo_data: _vm.photo_data,
+                                my_data: _vm.my_data
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c("user-post-details", {
+                          attrs: {
+                            photo_data: _vm.photo_data,
+                            my_data: _vm.my_data
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "p",
+                          { staticClass: "card-text text-muted text-center" },
+                          [_vm._v(_vm._s(_vm.photo_data.photo_description))]
+                        )
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-7" }, [
+                    _c(
+                      "ul",
+                      {
+                        staticClass: "nav nav-tabs",
+                        attrs: { id: "myTab", role: "tablist" }
+                      },
+                      [
+                        _c("li", { staticClass: "nav-item" }, [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "nav-link active",
+                              attrs: {
+                                href: "#home",
+                                id: "home-tab",
+                                role: "tab",
+                                "data-toggle": "pill",
+                                "aria-controls": "home",
+                                "aria-selected": "true"
+                              }
+                            },
+                            [_vm._v("詳細")]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "nav-item" }, [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "nav-link",
+                              attrs: {
+                                href: "#comment",
+                                id: "comment-tab",
+                                role: "tab",
+                                "data-toggle": "pill",
+                                "aria-controls": "comment",
+                                "aria-selected": "false"
+                              }
+                            },
+                            [_vm._v("コメント")]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "nav-item" }, [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "nav-link",
+                              attrs: {
+                                href: "#likes",
+                                id: "likes-tab",
+                                role: "tab",
+                                "data-toggle": "pill",
+                                "aria-controls": "likes",
+                                "aria-selected": "false"
+                              }
+                            },
+                            [_vm._v("いいね")]
+                          )
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "tab-content mt-3",
+                        attrs: { id: "myTabContent" }
+                      },
+                      [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "tab-pane active",
+                            attrs: {
+                              id: "home",
+                              role: "tabpanel",
+                              "aria-labelledby": "home-tab"
+                            }
+                          },
+                          [_vm._v("ホームの文章です。...")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "tab-pane",
+                            attrs: {
+                              id: "comment",
+                              role: "tabpanel",
+                              "aria-labelledby": "comment-tab"
+                            }
+                          },
+                          [
+                            _c("chats-indicate", {
+                              attrs: { chats: _vm.photo_data["photo_id"] }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "tab-pane",
+                            attrs: {
+                              id: "likes",
+                              role: "tabpanel",
+                              "aria-labelledby": "likes-tab"
+                            }
+                          },
+                          [_vm._v("コンタクトの文章です。...")]
+                        )
+                      ]
+                    )
+                  ])
+                ])
+              ])
+            ]
+          )
+        : _vm._e()
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-69d85532", module.exports)
+  }
+}
+
+/***/ }),
+/* 194 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(195)
+}
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(197)
+/* template */
+var __vue_template__ = __webpack_require__(198)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/user_folder/individual/component/chats_indicate.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-095fb686", Component.options)
+  } else {
+    hotAPI.reload("data-v-095fb686", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 195 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(196);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(1)("424b1f9c", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-095fb686\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./chats_indicate.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-095fb686\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./chats_indicate.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 196 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(0)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.profile_icon{\r\n     width: 150px;\r\n    height: 150px;\n}\n.cover{\r\n    display: inline-block;\r\n    background-color: #ccc;\r\n    background-position: center center;\r\n    background-repeat: no-repeat;\r\n    background-size: cover;\r\n    border-radius: 50%;\n}\n.card-title{\r\n    display:block;\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 197 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: {
+        chats: {
+            type: Number
+        }
+    },
+    data: function data() {
+        return {
+            each_chats_data: [],
+            date_disassembly_out: []
+        };
+    },
+
+    methods: {
+        chat_get: function chat_get() {
+            var _this = this;
+
+            axios.get("api/user/post_data/photo/chat/" + this.chats).then(function (chat_data) {
+                if (_typeof(chat_data['data']) == "object") {
+                    _this.each_chats_data = chat_data['data'];
+
+                    _this.date_set();
+                }
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        date_set: function date_set() {
+            var date_disassembly = [];
+            console.log(this.each_chats_data);
+            var date_synthesis = [];
+            var date_bef = [];
+            for (var j = 0; j < this.each_chats_data.length; j++) {
+                date_bef[j] = this.each_chats_data[j][0]['comment_date'];
+                date_disassembly[j] = date_bef[j].match(/\d{1,4}/g);
+                //--01の0を消す処理だよ、できへんやん
+                // for(let k = 0; k < date_disassembly[j].length; k++){
+                //   date_synthesis[j][k]=date_disassembly[j][k].match(/0*([0-9]+)/)[1];  
+                // }  
+            }
+            this.date_disassembly_out = date_disassembly;
+        }
+    },
+    mounted: function mounted() {
+        this.chat_get();
+    }
+
+});
+
+/***/ }),
+/* 198 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    _vm._l(_vm.each_chats_data, function(item, index) {
+      return _c("div", { key: index }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-1" }, [
+            _c("span", {
+              staticClass: "cover list_image text-left",
+              style: {
+                backgroundImage:
+                  "url(storage/" +
+                  item[0]["user_data"][0]["icon_path"] +
+                  ".jpg)"
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-10" }, [
+            _c("span", [_vm._v(_vm._s(item[0]["user_data"][0]["user_name"]))]),
+            _vm._v(" "),
+            _c("span", { staticClass: "text-muted" }, [
+              _vm._v(_vm._s(item[0]["user_data"][0]["user_id"]))
+            ]),
+            _vm._v("  \n                "),
+            _c("span", { staticClass: "text-muted small" }, [
+              _vm._v(
+                _vm._s(_vm.date_disassembly_out[index][0]) +
+                  "年" +
+                  _vm._s(_vm.date_disassembly_out[index][1]) +
+                  "月" +
+                  _vm._s(_vm.date_disassembly_out[index][2]) +
+                  "日"
+              )
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "small" }, [
+              _vm._v(_vm._s(item[0]["comment_text"]))
+            ])
+          ])
+        ])
+      ])
+    })
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-095fb686", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
