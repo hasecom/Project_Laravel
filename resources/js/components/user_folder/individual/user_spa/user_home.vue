@@ -1,3 +1,4 @@
+//!コメントアウトを消す(1/18~)
 <template>
     <div class="container">
         <div class="row">
@@ -25,10 +26,10 @@
                                     <img v-if="item.like_stauts == 1" src="storage/like.svg" width="16" height="16">
                                     <img v-if="item.like_stauts == 0" src="storage/like_emp.svg" width="16" height="16">
                                      </span>   
-                                    <span @click="get_likes_user_data(0,item.photo_id)">{{item.likes_cnt}}件</span>
+                                    <span @click="modal_set('details' + index,2)">{{item.likes_cnt}}件</span>
                                     <span @click="modal_set('details' + index,1)"><i class="far fa-comment"></i></span>
                                 </p>
-                                 <user-post-details :photo_data="item" :my_data="my_data" :ref="'details' + index "></user-post-details>
+                                 <user-post-details :photo_data="item" :my_data="my_data" :ref="'details' + index" v-on:likes-event="get_timeline_data"></user-post-details>
                                 <p class="card-text text-muted text-center">{{item.photo_description}}</p>
 			                      </div>
                             <div class="row">
@@ -43,7 +44,7 @@
             </div>  
             <div class="col-md-3"></div> 
         </div>
-           <MyModal @close="closeModal" v-if="user_modal" class="border-0" ref="modal_style">
+           <!-- <MyModal @close="closeModal" v-if="user_modal" class="border-0" ref="modal_style">
                <div class="row justify-content-center mt-3 border-bottom ">
               <div class="col-md-3"></div>
             <div class="col-md-6 h4">{{modai_title}}</div>
@@ -68,7 +69,7 @@
                 </div>
                </div>
             </div>
-        </MyModal>
+        </MyModal> -->
        
      </div>
 </template>
@@ -162,91 +163,92 @@ export default{
           console.log(error);
         });
       
-    },get_likes_user_data(judg,photo_id){
-             axios.get("api/user/post_data/timeline/likes_data/"+photo_id).then(photo_id_likes_user => {
-                   if(typeof(photo_id_likes_user['data']) == "object"){
-                     this.likes_user = photo_id_likes_user['data'];
-                        axios.get("api/user/"+this.my_data['user_id']).then(response=>{
-                          let follows_arr =[];
-                          follows_arr = this.arr_chk(response['data']['follows']);
-                          for(let i =0; i<this.likes_user.length; i++){
-                          for(let j =0; j < follows_arr.length; j++){
-                            if(this.likes_user[i]['id'] == follows_arr[j]['id']){
-                             this.likes_user[i]['ff_stauts'] = 1;
-                             this.likes_user[i]['follows_string'] = "フォロー中";
-                             break;
+    },
+    // get_likes_user_data(judg,photo_id){
+    //          axios.get("api/user/post_data/timeline/likes_data/"+photo_id).then(photo_id_likes_user => {
+    //                if(typeof(photo_id_likes_user['data']) == "object"){
+    //                  this.likes_user = photo_id_likes_user['data'];
+    //                     axios.get("api/user/"+this.my_data['user_id']).then(response=>{
+    //                       let follows_arr =[];
+    //                       follows_arr = this.arr_chk(response['data']['follows']);
+    //                       for(let i =0; i<this.likes_user.length; i++){
+    //                       for(let j =0; j < follows_arr.length; j++){
+    //                         if(this.likes_user[i]['id'] == follows_arr[j]['id']){
+    //                          this.likes_user[i]['ff_stauts'] = 1;
+    //                          this.likes_user[i]['follows_string'] = "フォロー中";
+    //                          break;
                     
-                            }else if(this.likes_user[i]['id'] ==this.my_data['id']){
-                              this.likes_user[i]['ff_stauts'] = -1;
-                              this.likes_user[i]['follows_string'] = "";
-                              break;
-                            }else{
-                              this.likes_user[i]['ff_stauts'] = 0;
-                              this.likes_user[i]['follows_string'] = "フォローする";
-                            }
+    //                         }else if(this.likes_user[i]['id'] ==this.my_data['id']){
+    //                           this.likes_user[i]['ff_stauts'] = -1;
+    //                           this.likes_user[i]['follows_string'] = "";
+    //                           break;
+    //                         }else{
+    //                           this.likes_user[i]['ff_stauts'] = 0;
+    //                           this.likes_user[i]['follows_string'] = "フォローする";
+    //                         }
                           
-                          }
-                          if(i == this.likes_user.length -1){
-                              this.openModal(judg);
-                              this.now_photo_id = photo_id;
-                          }
-                        // 
-                         }  
-                   }).catch(function(error){
-                    console.log("error");
-                  });  
+    //                       }
+                  
+    //                     // 
+    //                      }  
+    //                }).catch(function(error){
+    //                 console.log("error");
+    //               });  
                  
                     
-                    }
+    //                 }
                     
-                    }).catch(function (error) {
-                        console.log(error)
-                    });
+    //                 }).catch(function (error) {
+    //                     console.log(error)
+    //                 });
                      
-    },
+    // },
 
-    ff_click(id,user_id,stauts,photo_id,index){
-               let params = new URLSearchParams();
-              params.append('id',id);
-              params.append('user_id',user_id);
-              params.append('stauts',stauts);
-              params.append('likes',1);
-              params.append('my_id',this.my_data['id']);
-      axios.post('api/user/'+this.my_data['id'],params).then(list_get_data => {
-          this.arr_chk(list_get_data['data']['user_info']);
-           if(stauts == 0){
-             list_get_data['data']['user_info']['ff_stauts'] = 1;
-             list_get_data['data']['user_info'] ['follows_string'] = "フォロー中";
-            this.$set(this.likes_user,index,list_get_data['data']['user_info']);
-           this.$set(this.likes_user,index,list_get_data['data']['user_info']);
-           }else{
-        list_get_data['data']['user_info']['ff_stauts'] = 0;
-          list_get_data['data']['user_info'] ['follows_string'] = "フォローする";
-          this.$set(this.likes_user,index, list_get_data['data']['user_info']);
-           this.$set(this.likes_user,index,list_get_data['data']['user_info']);
-           }
-      }).catch(function (error) {
-          console.log(error);
-        });
-    },
-    openModal(judg) {
-       this.display_judg = judg;
-       if (judg==0) this.modai_title = "いいね";
-       if (judg==1) this.modai_title = "フォロワー";
-      this.user_modal = true;
-    },
-    closeModal() {
-      this.user_modal = false;
-    },arr_chk(data){
+    // ff_click(id,user_id,stauts,photo_id,index){
+    //            let params = new URLSearchParams();
+    //           params.append('id',id);
+    //           params.append('user_id',user_id);
+    //           params.append('stauts',stauts);
+    //           params.append('likes',1);
+    //           params.append('my_id',this.my_data['id']);
+    //   axios.post('api/user/'+this.my_data['id'],params).then(list_get_data => {
+    //       this.arr_chk(list_get_data['data']['user_info']);
+    //        if(stauts == 0){
+    //          list_get_data['data']['user_info']['ff_stauts'] = 1;
+    //          list_get_data['data']['user_info'] ['follows_string'] = "フォロー中";
+    //         this.$set(this.likes_user,index,list_get_data['data']['user_info']);
+    //        this.$set(this.likes_user,index,list_get_data['data']['user_info']);
+    //        }else{
+    //     list_get_data['data']['user_info']['ff_stauts'] = 0;
+    //       list_get_data['data']['user_info'] ['follows_string'] = "フォローする";
+    //       this.$set(this.likes_user,index, list_get_data['data']['user_info']);
+    //        this.$set(this.likes_user,index,list_get_data['data']['user_info']);
+    //        }
+    //   }).catch(function (error) {
+    //       console.log(error);
+    //     });
+    // },
+    // openModal(judg) {
+    //    this.display_judg = judg;
+    //    if (judg==0) this.modai_title = "いいね";
+    //    if (judg==1) this.modai_title = "フォロワー";
+    //   this.user_modal = true;
+    // },
+    // closeModal() {
+    //   this.user_modal = false;
+    // },
+    arr_chk(data){
      return typeof(data)=="undefined"? []:data;
     },  
-    follows_link(val){
-        this.closeModal();
-        this.$router.push('/'+val);
-    },
+    // follows_link(val){
+    //     this.closeModal();
+    //     this.$router.push('/'+val);
+    // },
     modal_set(ref,chat_or_img){
      //chatクリック=1
         this.$refs[ref][0].openModal(chat_or_img); 
+    },samm(){
+      console.log("jfewi")
     }
   }
 }

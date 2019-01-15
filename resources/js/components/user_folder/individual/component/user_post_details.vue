@@ -14,7 +14,7 @@
                                             <img v-if="photo_data.like_stauts == 1" src="storage/like.svg" width="16" height="16">
                                          <img v-if="photo_data.like_stauts == 0" src="storage/like_emp.svg" width="16" height="16">
                                            </span>   
-                                          <span @click="get_likes_user_data(0,photo_data.photo_id)">{{photo_data.likes_cnt}}件</span>
+                                          <span @click="tab_select(2)">{{photo_data.likes_cnt}}件</span>
                                          </p>
                                  <user-post-details :photo_data="photo_data" :my_data="my_data"></user-post-details>
                                 <p class="card-text text-muted text-center">{{photo_data.photo_description}}</p>
@@ -42,7 +42,7 @@
 <div id="myTabContent" class="tab-content mt-3">
   <div id="home" class="tab-pane" :class="[isActive == 0 ?'active':'']"  role="tabpanel" aria-labelledby="home-tab">ホームの文章です。...</div>
   <div id="comment" class="tab-pane" :class="[isActive == 1 ?'active':'']" role="tabpanel" aria-labelledby="comment-tab"><chats-indicate :chats="photo_data['photo_id']" ref="chatsget"></chats-indicate></div>
-  <div id="likes" class="tab-pane"  :class="[isActive == 2 ?'active':'']" role="tabpanel" aria-labelledby="likes-tab"><likes-list :photo_data_box="photo_data"></likes-list></div>
+  <div id="likes" class="tab-pane"  :class="[isActive == 2 ?'active':'']" role="tabpanel" aria-labelledby="likes-tab"><likes-list :photo_data_box="photo_data" :my_data="my_data" v-on:chats-event="likesMethod" ref="likes_child"></likes-list></div>
 </div>
 <chats :photo_data="photo_data" :my_data="my_data" :foucs_flg="chat_flg_send" v-on:chats-event="parentsMethod" ></chats>
  
@@ -132,19 +132,20 @@ export default{
         var body = document.getElementsByTagName('body')[0];
         body.style.overflow="hidden";
         this.user_modal = true;
-        console.log("fakwo")
         document.documentElement.style.setProperty('--width-size', '80%');
         document.documentElement.style.setProperty('--height-size', '80%');
-        if(select_num == 0){
+    this.tab_select(select_num);
+    },tab_select(select_num){
+   if(select_num == 0){
             this.chat_flg_send = 0;
             this.isActive = 0;
         }else if(select_num == 1){//chat
             this.chat_flg_send = 1;
-            this.isActive = 1
-        }else{
-
+            this.isActive = 1;
+        }else{//いいね
+            this.chat_flg_send = 2;
+            this.isActive = 2;
         }
-  
     },
     closeModal() {
         var body = document.getElementsByTagName('body')[0];
@@ -156,9 +157,23 @@ export default{
         document.documentElement.style.setProperty('--width-size', 'auto');
         document.documentElement.style.setProperty('--height-size', 'auto');
         },300);
+    },likes:function(photo_id,like_stauts){
+        let params = new URLSearchParams();
+        params.append('photo_id',photo_id);
+        params.append('like_stauts',like_stauts);
+        axios.post("api/user/post_data/timeline/data",params).then(response => {
+         this.$emit('likes-event');
+         this.$refs.likes_child.get_likes_user_data(0,photo_id);
+        }).catch(function (error) {
+          console.log(error);
+        });
+      
     },
     parentsMethod(){
          this.$refs.chatsget.chat_update();
+    },
+    likesMethod(){
+        this.closeModal();
     }
       }
 }
