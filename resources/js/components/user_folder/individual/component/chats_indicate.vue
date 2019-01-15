@@ -13,6 +13,7 @@
                 </div>
             </div>
         </div>
+        
     </div>
 </template>
 <style>
@@ -34,6 +35,7 @@
 }
 </style>
 <script>
+
 export default{
     props:{
           chats: {
@@ -51,7 +53,6 @@ export default{
               axios.get("api/user/post_data/photo/chat/" + this.chats).then(chat_data => {
                 if(typeof(chat_data['data']) == "object"){
                      this.each_chats_data = chat_data['data'];
-                   
                      this.date_set();
                     }
                     }).catch(function (error) {
@@ -60,7 +61,6 @@ export default{
             },
             date_set(){
           var date_disassembly =[];
-          console.log(this.each_chats_data);
           var date_synthesis = [];
           var date_bef = [];
           for(let j = 0; j < this.each_chats_data.length; j++){
@@ -72,7 +72,11 @@ export default{
             // }  
           }
           this.date_disassembly_out = date_disassembly;       
-    }
+    },
+    chat_update(){
+       this.chat_get();
+    },
+    
     },
     mounted:function(){
         this.chat_get();

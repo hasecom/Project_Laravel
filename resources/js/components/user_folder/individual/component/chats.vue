@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-7">
                 <input class="form-control form-control-sm" type="text" placeholder="コメントを追加" v-model="text_add"  @focus="onFocus"
-                @keyup.enter="text_send"  @keypress="setCanMessageSubmit">
+                @keyup.enter="text_send"  @keypress="setCanMessageSubmit" id="chat_input">
             </div>
             <div class="col-md-2" v-show="onFocus">
                  <span @click="text_send"><i class="far fa-paper-plane"></i></span>
@@ -17,7 +17,6 @@
 <script>
 
 
-
 export default{
     props:{
     photo_data: {
@@ -25,6 +24,9 @@ export default{
       },
     my_data:{
         type:Object
+    },
+    foucs_flg:{
+        type:Number
     }
     },
     data(){
@@ -33,8 +35,23 @@ export default{
             canMessageSubmit: false
             
         }
-    },methods:{
-         onFocus: function() {
+    },created: function(){
+       
+    },watch:{
+   
+    },mounted:function(){
+        //foucs_flg 初期値0
+            if(this.foucs_flg == 1){
+                    this.onFocus();
+            }else{
+
+            }
+    },
+    methods:{
+         onFocus(){
+            var chat_input = document.getElementById('chat_input');
+            
+            chat_input.focus();
 
     },
     setCanMessageSubmit() {
@@ -59,14 +76,12 @@ export default{
               params.append('my_data',this.my_data['id']);
       axios.post("api/user/post_data/photo/chat/" + this.photo_data['photo_id'],params).then(chat_data => {
         this.text_add="";
-       if(typeof(chat_data['data']) == "object"){
-           
-                    }
                     console.log(chat_data['data']);
+                    this.$emit('chats-event');
                     }).catch(function (error) {
                         console.log(error)
                     });
-    }
+    },
         }
 }
 </script>

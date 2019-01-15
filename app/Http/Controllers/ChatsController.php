@@ -9,7 +9,7 @@ use App\Posted_photos;
 class ChatsController extends Controller
 {
     //
-    public function chat_get($id){
+    public function chat_get($id){//$id = photo_id
        $photo_id_exist =Posted_photos::where('photo_id',$id)->exists();
         if($photo_id_exist != true)exit();
         $chat_data = [];
@@ -45,6 +45,6 @@ class ChatsController extends Controller
         $new_chats->comment_text = $chat_text;
         $new_chats->save();
 
-
+        return $this->chat_get($photo_id);
     }
 }

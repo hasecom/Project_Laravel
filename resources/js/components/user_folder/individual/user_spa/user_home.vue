@@ -17,7 +17,7 @@
                                 <span class="text-muted">@{{item.user_id}}</span>
                                 </div>
                               </div>
-			                        <svg @click="modal_set('details' + index)" class="bd-placeholder-img card-img-top" width="100%" height="300" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: カードの画像"><title>プレースホルダ</title><rect fill="#868e96" width="100%" height="100%"></rect><text fill="#dee2e6" dy=".3em" x="30%" y="50%">no image</text></svg>
+			                        <svg @click="modal_set('details' + index,0)" class="bd-placeholder-img card-img-top" width="100%" height="300" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: カードの画像"><title>プレースホルダ</title><rect fill="#868e96" width="100%" height="100%"></rect><text fill="#dee2e6" dy=".3em" x="30%" y="50%">no image</text></svg>
 			                        <div class="card-body px-2 py-3">
                                 <h5 class="card-title">{{item.photo_name}}</h5>  
                                 <p>
@@ -26,7 +26,7 @@
                                     <img v-if="item.like_stauts == 0" src="storage/like_emp.svg" width="16" height="16">
                                      </span>   
                                     <span @click="get_likes_user_data(0,item.photo_id)">{{item.likes_cnt}}件</span>
-                                  <chats :photo_data="item" :my_data="my_data"></chats>
+                                    <span @click="modal_set('details' + index,1)"><i class="far fa-comment"></i></span>
                                 </p>
                                  <user-post-details :photo_data="item" :my_data="my_data" :ref="'details' + index "></user-post-details>
                                 <p class="card-text text-muted text-center">{{item.photo_description}}</p>
@@ -150,10 +150,6 @@ export default{
           for(let j = 0; j < this.time_line.length; j++){
               date_bef[j] = this.time_line[j]['upload_date']
               date_disassembly[j] = date_bef[j].match(/\d{1,4}/g);
-            //--01の0を消す処理だよ、できへんやん
-            // for(let k = 0; k < date_disassembly[j].length; k++){
-            //   date_synthesis[j][k]=date_disassembly[j][k].match(/0*([0-9]+)/)[1];  
-            // }  
           }
           this.date_disassembly_out = date_disassembly;       
     },likes:function(photo_id,like_stauts){
@@ -248,8 +244,9 @@ export default{
         this.closeModal();
         this.$router.push('/'+val);
     },
-    modal_set(ref){
-        this.$refs[ref][0].openModal();
+    modal_set(ref,chat_or_img){
+     //chatクリック=1
+        this.$refs[ref][0].openModal(chat_or_img); 
     }
   }
 }

@@ -15,7 +15,6 @@
                                          <img v-if="photo_data.like_stauts == 0" src="storage/like_emp.svg" width="16" height="16">
                                            </span>   
                                           <span @click="get_likes_user_data(0,photo_data.photo_id)">{{photo_data.likes_cnt}}件</span>
-                                         <chats :photo_data="photo_data" :my_data="my_data"></chats>
                                          </p>
                                  <user-post-details :photo_data="photo_data" :my_data="my_data"></user-post-details>
                                 <p class="card-text text-muted text-center">{{photo_data.photo_description}}</p>
@@ -29,23 +28,23 @@
                             <!-- DDDDDDDDDDDDDDDDDDDDDDDDDDDDD -->
                             <ul id="myTab" class="nav nav-tabs" role="tablist">
                                 <li class="nav-item">
-                                    <a href="#home" id="home-tab" class="nav-link active" role="tab" data-toggle="pill" aria-controls="home" aria-selected="true">詳細</a>
+                                    <a href="#home" id="home-tab" class="nav-link" role="tab" :class="[isActive == 0 ?'active':'']" data-toggle="pill" aria-controls="home" aria-selected="true">詳細</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#comment" id="comment-tab" class="nav-link" role="tab" data-toggle="pill" aria-controls="comment" aria-selected="false">コメント</a>
+                                    <a href="#comment" id="comment-tab" class="nav-link" :class="[isActive == 1 ?'active':'']" role="tab" data-toggle="pill" aria-controls="comment" aria-selected="false">コメント</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#likes" id="likes-tab" class="nav-link" role="tab" data-toggle="pill" aria-controls="likes" aria-selected="false">いいね</a>
+                                    <a href="#likes" id="likes-tab" class="nav-link"  :class="[isActive == 2 ?'active':'']" role="tab" data-toggle="pill" aria-controls="likes" aria-selected="false">いいね</a>
                                 </li>
                             </ul>
 
 <!-- パネル部分 -->
 <div id="myTabContent" class="tab-content mt-3">
-  <div id="home" class="tab-pane active" role="tabpanel" aria-labelledby="home-tab">ホームの文章です。...</div>
-  <div id="comment" class="tab-pane" role="tabpanel" aria-labelledby="comment-tab"><chats-indicate :chats="photo_data['photo_id']"></chats-indicate></div>
-  <div id="likes" class="tab-pane" role="tabpanel" aria-labelledby="likes-tab">コンタクトの文章です。...</div>
+  <div id="home" class="tab-pane" :class="[isActive == 0 ?'active':'']"  role="tabpanel" aria-labelledby="home-tab">ホームの文章です。...</div>
+  <div id="comment" class="tab-pane" :class="[isActive == 1 ?'active':'']" role="tabpanel" aria-labelledby="comment-tab"><chats-indicate :chats="photo_data['photo_id']" ref="chatsget"></chats-indicate></div>
+  <div id="likes" class="tab-pane"  :class="[isActive == 2 ?'active':'']" role="tabpanel" aria-labelledby="likes-tab"><likes-list :photo_data_box="photo_data"></likes-list></div>
 </div>
-
+<chats :photo_data="photo_data" :my_data="my_data" :foucs_flg="chat_flg_send" v-on:chats-event="parentsMethod" ></chats>
  
    
                             <!-- DDDDDDDDDDDDDDDDDDDDDDDDDDDDD -->
@@ -102,6 +101,9 @@
 <script>
 
 import MyModal from '../../user_modal/user_modal.vue';
+import Chat_Set from '../component/chats.vue';
+
+
 window.Vue = require('vue');
 
 
@@ -116,7 +118,9 @@ export default{
     },
     data(){
         return{ 
-            user_modal :false,   
+            user_modal :false,
+            chat_flg_send:0, 
+            isActive:0
         }
         },components:{
         MyModal
@@ -124,23 +128,38 @@ export default{
 
 }, 
       methods:{  
-        openModal() {
+        openModal(select_num) {
         var body = document.getElementsByTagName('body')[0];
         body.style.overflow="hidden";
         this.user_modal = true;
+        console.log("fakwo")
         document.documentElement.style.setProperty('--width-size', '80%');
         document.documentElement.style.setProperty('--height-size', '80%');
+        if(select_num == 0){
+            this.chat_flg_send = 0;
+            this.isActive = 0;
+        }else if(select_num == 1){//chat
+            this.chat_flg_send = 1;
+            this.isActive = 1
+        }else{
+
+        }
   
     },
     closeModal() {
         var body = document.getElementsByTagName('body')[0];
         body.style.overflow="scroll";
         this.user_modal = false;
+        this.chat_flg_send = 0;
+        this.isActive = 0;
         var modal_return= setTimeout(function(){
         document.documentElement.style.setProperty('--width-size', 'auto');
         document.documentElement.style.setProperty('--height-size', 'auto');
         },300);
     },
+    parentsMethod(){
+         this.$refs.chatsget.chat_update();
+    }
       }
 }
 </script>
