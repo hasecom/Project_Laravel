@@ -8,6 +8,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Posted_photos;
+use App\Tags;
 use App\User;
 
 
@@ -50,7 +51,7 @@ class ImagesController extends Controller
         $dir_flg=0;
         foreach($result as $val){
             $cnt_img = count(Storage::disk('s3')->allFiles($val));
-            if($cnt_img<5){
+            if($cnt_img<30){
                 $dir=$val;
                 $dir_flg=1;
             }
@@ -65,7 +66,10 @@ class ImagesController extends Controller
         $new_posted_photos = new Posted_photos;
         $new_posted_photos->user_id = $get_input_id;
         $new_posted_photos->photo_description = $_POST['description'];
+        $new_posted_photos->tag = $_POST['post_tag'];
         $new_posted_photos->photo_name = $_POST['post_name'];
+        $new_posted_photos->photo_size = $_POST['photo_size'];
+        
         $new_posted_photos->file_name = $file_name;
         if($dir_flg==1){
             $new_posted_photos->photo_path = $dir;
@@ -73,6 +77,19 @@ class ImagesController extends Controller
             $new_posted_photos->photo_path = $folder_name;
         };
         $new_posted_photos->save();
+
+
+        $vtag=$_POST['post_tag'];
+        $tag_array = explode('#',$vtag);
+        foreach($tag_array as $tag_val){
+            if (0 == strcmp($tag_val, ''))    {
+                continue;
+            }
+            $new_tags = new Tags;
+            $new_tags->tag_name=$tag_val;
+            $new_tags->save();
+        }
+
         return $get_input_id;
     }
 

@@ -16,25 +16,37 @@
           <img class="img_view" v-show="uploadedImage" :src="uploadedImage" width="480" height="320"/>
           <input type="file" v-on:change="onFileChange" name="file"><br>
           </div>
-          タイトル：<input id="title" type="text" v-model="send_post_name"/><br>
-          説明欄　：<textarea v-model="send_description"/>
+          <div class="photo_info">
+          <p>タイトル：<input id="title" type="text" v-model="send_post_name"/></p>
+          <p>タ　グ　：<input type="text" v-model="send_post_tag"/></p>
+          <p>説明欄　：<textarea v-model="send_description"></textarea></p>
           <p id="size">ファイルサイズ：[0 Bytes]</p>
           <p id="px">大きさ：[0x0]</p>
+          </div>
           <div class="sub" ><button  type="submit" class = "btn btn-primary">送信</button></div>
           </form>
 </MyModal>
     </div>
 </template>
 <style>
+
+
 #main_modal{
+    /*position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 92%;
+    height: 90%;
+    margin: auto;
+    z-index: 3;*/
+
     margin:0 auto;
     width: 100%;
-    height: auto;
-    border: 1px solid #CCC;
-    border-radius: 10px;
-    box-shadow: 1px 1px #ccc inset;
-    box-shadow: 1px 1px #ccc;
+    height: 100%;
     overflow:auto;
+
 }
 
 .img_up{
@@ -49,6 +61,14 @@
   object-fit: contain; 
 }
 
+.photo_info{
+  line-height: 120%;
+  font-size: 1.12em;
+  width: 480px;
+  margin-left:30px;
+  /*background-color: red;*/
+}
+
 .sub{
   text-align: center;
 }
@@ -56,9 +76,13 @@
 .my-green{color:green;}
 
 textarea {
-  resize: none;
-  width:300px;
+  vertical-align:top;
+  resize: left;
+  width:380px;
   height:200px;
+}
+input{
+  width: 380px;
 }
 </style>
 <script>
@@ -74,8 +98,10 @@ data() {
       sample_data:'',
       send_description:'',
       send_post_name:'',
+      send_post_tag:'',
       my_data:[],
       flg :0,
+      photo_size :0,
       img_modal:false,
     };
   },
@@ -112,9 +138,10 @@ data() {
 
       };
       reader.readAsDataURL(file);
-      var size = "ファイルサイズ：[" + file.size + " Bytes]";
+      this.photo_size = file.size;
+      var size_txt = "ファイルサイズ：[" + this.photo_size + " Bytes]";
       // var dimension = "大きさ：[" + file.width + "x"+ file.height + "]"; //!ファイルの幅と高さ取得どうやるの。。。
-      document.getElementById("size").innerHTML = size;
+      document.getElementById("size").innerHTML = size_txt;
       // document.getElementById("px").innerHTML = dimension;
     },
     onPost(){
@@ -127,15 +154,16 @@ data() {
         let params = new URLSearchParams();
         params.append('files',this.uploadedImage);
         params.append('img_post',token_);
-        params.append('photo_size',size);
+        params.append('photo_size',this.photo_size);
         // params.append('photo_px',dimension); //!ファイルの幅と高さ取得どうやるの。。。
         params.append('description',this.send_description);
+        params.append('post_tag',this.send_post_tag);
         params.append('post_name',this.send_post_name);
         axios.post("api/user/post_data/"+ this.my_data['user_id'],params).then(response => {
           this.flg=1;
           this.return_base64 = response['data'];
             this.sample_data = "data:image/jpeg;base64," + response['data'];
-          // console.log(response['data']);
+          console.log(response['data']);
           }).catch(function (error) {
           console.log(error);
         });
