@@ -247,9 +247,7 @@ export default{
     modal_set(ref,chat_or_img){
      //chatクリック=1
         this.$refs[ref][0].openModal(chat_or_img); 
-    },samm(){
-      console.log("jfewi")
-    }
+    },
   }
 }
 </script>

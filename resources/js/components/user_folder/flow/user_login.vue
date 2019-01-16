@@ -58,7 +58,6 @@ export default {
   params.append('userpassword',this.userpassword);
   params.append('first_token',this.first_token);
 axios.post('login',params).then(response => {
-    console.dir(response.config); 
    window.location.href="user";
 }).catch(function (error) {
           console.log(error);
