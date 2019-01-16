@@ -27,6 +27,7 @@ class Posted_photos extends Model
     protected $photo_px = 'photo_px';
     protected $photo_size = 'photo_size';
     protected $upload_date = 'update_date';
+    protected $tag = 'tag';
 
     
     public $timestamps = false;
@@ -40,6 +41,7 @@ class Posted_photos extends Model
        'photo_path'=>'',
        'photo_px'=>0,
        'photo_size'=>0,
+       'tag'=>'',
     ];
  
 }
