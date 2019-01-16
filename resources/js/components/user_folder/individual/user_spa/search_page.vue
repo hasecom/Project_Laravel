@@ -1,12 +1,11 @@
 <template>
     <div>
-       ああ
   
+
+<div v-for="n in 100" :key=n>k</div>
     </div>
 </template>
-<style>
 
-</style>
 <script>
 
 export default{
@@ -30,3 +29,6 @@ export default{
 }
 
 </script>
+<style>
+
+</style>

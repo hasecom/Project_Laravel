@@ -1,7 +1,5 @@
 <?php
-/*
-Follows
-*/
+
 
 namespace App;
 
@@ -15,8 +13,7 @@ protected-そのクラス自身と継承クラスからアクセス可能
 class Tags extends Model
 {
     protected $fillable = ['id'];
-    
-    protected $table = 'Tags';
+    protected $table = 'tags';
     protected $id = 'id';
     protected $tag_name = 'tag_name';
     
