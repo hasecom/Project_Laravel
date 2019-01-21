@@ -19,6 +19,10 @@ import user_post_details from './components/user_folder/individual/component/use
 import chats_indicate from './components/user_folder/individual/component/chats_indicate.vue';
 import likes_list from './components/user_folder/individual/component/likes_list.vue';
 import search_input from './components/user_folder/individual/component/search_input.vue';
+import account_manager from './components/user_folder/individual/component/account_manager.vue';
+import set_profile from './components/user_folder/individual/component/set_profile.vue';
+import set_pass from './components/user_folder/individual/component/set_pass.vue';
+import set_privacy from './components/user_folder/individual/component/set_privacy.vue';
 
 
 //ADMIN
@@ -45,6 +49,10 @@ Vue.component('user-post-details',user_post_details);
 Vue.component('chats-indicate',chats_indicate);
 Vue.component('likes-list',likes_list);
 Vue.component('search-input',search_input);
+Vue.component('account-manager',account_manager);
+Vue.component('set-profile',set_profile);
+Vue.component('set-pass',set_pass);
+Vue.component('set-privacy',set_privacy);
 
 
 

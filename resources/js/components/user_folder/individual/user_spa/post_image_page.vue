@@ -17,7 +17,17 @@
           <input type="file" v-on:change="onFileChange" name="file"><br>
           </div>
           <div class="photo_info">
-          <p>タイトル：<input id="title" type="text" v-model="send_post_name"/></p>
+            <div class="row">
+              <div class="col-md-3">
+                  タイトル：
+              </div>
+               <div class="col-md-8">
+                  <p><input id="title" type="text" v-model="send_post_name"/></p>
+              </div>
+
+            </div>
+        
+
           <p>タ　グ　：<input type="text" v-model="send_post_tag"/></p>
           <p>説明欄　：<textarea v-model="send_description"></textarea></p>
           <p id="size">ファイルサイズ：[0 Bytes]</p>
@@ -78,11 +88,11 @@
 textarea {
   vertical-align:top;
   resize: left;
-  width:380px;
-  height:200px;
+  /* width:380px;
+  height:200px; */
 }
 input{
-  width: 380px;
+  /* width: 380px; */
 }
 </style>
 <script>
