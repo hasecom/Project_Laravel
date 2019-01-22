@@ -4,7 +4,7 @@
 
 <template>
   <div>
-    <div class="fixed-top bg-light">
+    <div class="sticky-top  bg-light">
       <div class="row">
         <div class="col-md-4">
           <router-link to="/" ><h2>TITLE</h2></router-link>
@@ -61,8 +61,6 @@
 </nav>
 </div>
       
- <div class="margin-bottom"></div>
- 
 <div class="border">
   <router-view></router-view>
 </div>
@@ -96,9 +94,6 @@ data(){
    display:table-cell;
     vertical-align: middle;
     }
-.margin-bottom{
-  height:100px;
-}
 
 
 </style>

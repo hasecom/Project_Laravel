@@ -147,3 +147,6 @@ Route::post('/api/user/post_data/photo/tags/{word}', 'TagsController@tags_list_p
 */
 Route::get('/api/user/post_data/photo/search/{word}', 'SearchController@search_list_get');
 Route::post('/api/user/post_data/photo/search/{word}','SearchController@search_list_post');
+
+
+

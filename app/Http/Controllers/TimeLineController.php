@@ -29,7 +29,6 @@ class TimeLineController extends Controller{
             $follows_id[] =$id;//タイムラインに自分のツイートも表示させたいのでここでフォロー配列に自分を加える
             foreach ($follows_id as $key => $val){
                 $post_data = Posted_photos::where('user_id',$val)->get();
-                
                 foreach($post_data as $id_key => $data){
                   //$timeline_data[$data['user_id']][$id_key] = [$id_key => $data];//個別の配列  
                   $timeline_data[$post_count] = $data;
@@ -43,7 +42,7 @@ class TimeLineController extends Controller{
                   $timeline_data[$post_count]['user_name'] = User::where('id',$user_inner_id)->value('user_name');
                   $timeline_data[$post_count]['icon_path'] = User::where('id',$user_inner_id)->value('icon_path');
                   $post_count++;
-               
+            
                 }
             }
             foreach($timeline_data as $key => $val){//upload_dateでソート
@@ -53,10 +52,9 @@ class TimeLineController extends Controller{
             }
  
    return $timeline_data;
-  // return $likes;
+  
     }
 public function timeline_post_data_post(){
-    
   $likes_add_arr =  LikesController::likes_registration($_POST['photo_id'],$_POST['like_stauts']);//いいね情報GET
     return  $this->utf_chg(User::en($likes_add_arr));
 }
