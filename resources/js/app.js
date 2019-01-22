@@ -46,6 +46,14 @@ Vue.component('chats-indicate',chats_indicate);
 Vue.component('likes-list',likes_list);
 Vue.component('search-input',search_input);
 
+//*aws amplify
+import Amplify, * as AmplifyModules from 'aws-amplify';
+import { AmplifyPlugin } from 'aws-amplify-vue';
+import aws_exports from '../../src/aws-exports';
+Amplify.configure(aws_exports)
+
+Vue.use(AmplifyPlugin, AmplifyModules);
+
 
 
 const router = new VueRouter({ 

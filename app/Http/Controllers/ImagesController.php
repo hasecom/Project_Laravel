@@ -46,7 +46,10 @@ class ImagesController extends Controller
         $date = date('Y-m-d H:i:s');
         $folder_name=$date;
         $file_name=$date.'_'.str_random(16);
-        $result=Storage::disk('s3')->directories();
+        $result=Storage::disk('s3')->directories('public/');
+        // if(count(Storage::disk('s3')->directories('public/'))==0){
+        //     Storage::disk('s3')->makeDirectory($folder_name);
+        // }
 
         $dir_flg=0;
         foreach($result as $val){
@@ -59,7 +62,7 @@ class ImagesController extends Controller
         if($dir_flg==1){
                 Storage::disk('s3')->put($dir.'/'.$file_name.'.png', $fileData);
             }else{
-                Storage::disk('s3')->makeDirectory($folder_name);
+                Storage::disk('s3')->makeDirectory('public/'.$folder_name);
                 Storage::disk('s3')->put($folder_name.'/'.$file_name.'.png', $fileData);
             }
         //*新規投稿画像をDBに保存
@@ -72,7 +75,7 @@ class ImagesController extends Controller
         
         $new_posted_photos->file_name = $file_name;
         if($dir_flg==1){
-            $new_posted_photos->photo_path = $dir;
+            $new_posted_photos->photo_path = str_replace('public/', '', $dir);
         }else{
             $new_posted_photos->photo_path = $folder_name;
         };
@@ -84,6 +87,10 @@ class ImagesController extends Controller
         foreach($tag_array as $tag_val){
             if (0 == strcmp($tag_val, ''))    {
                 continue;
+            }
+         
+            if(Tags::where('tag_name',$tag_val)==true){
+            continue;
             }
             $new_tags = new Tags;
             $new_tags->tag_name=$tag_val;

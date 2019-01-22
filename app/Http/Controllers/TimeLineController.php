@@ -42,8 +42,13 @@ class TimeLineController extends Controller{
                   $timeline_data[$post_count]['user_id'] = User::where('id',$user_inner_id)->value('user_id');
                   $timeline_data[$post_count]['user_name'] = User::where('id',$user_inner_id)->value('user_name');
                   $timeline_data[$post_count]['icon_path'] = User::where('id',$user_inner_id)->value('icon_path');
+
+                //   $img_path = Posted_photos::where('photo_id',$data)->value('photo_path');
+                //   $img_name = Posted_photos::where('photo_id',$data)->value('file_name');
+                //   $timeline_data[$post_count]['photo_path'] =$img_path.'/'.$img_name.'.png'; 
+                  
                   $post_count++;
-               
+            //    return $img_name;
                 }
             }
             foreach($timeline_data as $key => $val){//upload_dateでソート

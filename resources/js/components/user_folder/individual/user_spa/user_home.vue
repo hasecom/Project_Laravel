@@ -18,10 +18,14 @@
                                 <span class="text-muted">@{{item.user_id}}</span>
                                 </div>
                               </div>
-			                        <svg @click="modal_set('details' + index,0)" class="bd-placeholder-img card-img-top" width="100%" height="300" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: カードの画像"><title>プレースホルダ</title><rect fill="#868e96" width="100%" height="100%"></rect><text fill="#dee2e6" dy=".3em" x="30%" y="50%">no image</text></svg>
+			                        <!--<svg @click="modal_set('details' + index,0)" class="bd-placeholder-img card-img-top" width="100%" height="300" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: カードの画像"><title>プレースホルダ</title><rect fill="#868e96" width="100%" height="100%"></rect><text fill="#dee2e6" dy=".3em" x="30%" y="50%">no image</text></svg>-->
+			                        <div @click="modal_set('details' + index,0)" class="bd-placeholder-img card-img-top" width="100%" height="300">
+                              <amplify-s3-image style="pointer-events: none;" :imagePath= "item.photo_path+'/'+item.file_name+'.png'"></amplify-s3-image>
+                              </div>
+                              <!--<p>{{item}}</p>-->
+                                <!--<p>{{item.photo_path}}</p>-->
 			                        <div class="card-body px-2 py-3">
                                 <h5 class="card-title">{{item.photo_name}}</h5>  
-                                <p>
                                   <span @click="likes(item.photo_id,item.like_stauts)">
                                     <img v-if="item.like_stauts == 1" src="storage/like.svg" width="16" height="16">
                                     <img v-if="item.like_stauts == 0" src="storage/like_emp.svg" width="16" height="16">
@@ -102,7 +106,9 @@
 </style>
 <script>
 import MyModal from '../../user_modal/user_modal.vue';
-import Details from "../component/user_post_details.vue"
+import Details from "../component/user_post_details.vue";
+import { AmplifyEventBus } from 'aws-amplify-vue';
+import { S3Image} from 'aws-amplify-vue';
 window.Vue = require('vue');
 
  
