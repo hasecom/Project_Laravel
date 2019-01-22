@@ -16,12 +16,14 @@ class Tags extends Model
     protected $table = 'tags';
     protected $id = 'id';
     protected $tag_name = 'tag_name';
+    protected $tag_cnt = 'tag_cnt';
     
     public $timestamps = false;
 
 //デフォルト値
     protected $attributes = [
        'tag_name'=>'',
+       'tag_cnt'=>0
     ];
  
 }

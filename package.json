@@ -25,6 +25,7 @@
         "aws-amplify": "^1.1.20-unstable.3",
         "aws-amplify-vue": "^0.2.6-unstable.0",
         "aws-sdk": "^2.391.0",
+        "scrollmagic": "^2.0.6",
         "vue-router": "^3.0.1"
     }
 }

@@ -4,11 +4,19 @@
 
 <template>
   <div>
-    <div class="fixed-top bg-light">
-      <router-link to="/" >
-        <h2>TITLE</h2>
-      </router-link>
-      <search-input></search-input>
+    <div class="sticky-top  bg-light">
+      <div class="row">
+        <div class="col-md-4">
+          <router-link to="/" ><h2>TITLE</h2></router-link>
+        </div>
+        <div class="col-md-6">
+         <search-input></search-input>
+        </div>
+        <div class="col-md-2">
+         <account-manager></account-manager>
+        </div>
+      </div>
+      
       <nav class="navbar navbar-expand-md navbar-light bg-light">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav4" aria-controls="navbarNav4" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -53,8 +61,6 @@
 </nav>
 </div>
       
- <div class="margin-bottom"></div>
-<!-- サンプル -->
 <div class="border">
   <router-view></router-view>
 </div>
@@ -88,9 +94,6 @@ data(){
    display:table-cell;
     vertical-align: middle;
     }
-.margin-bottom{
-  height:100px;
-}
 
 
 </style>

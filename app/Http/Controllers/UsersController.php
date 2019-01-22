@@ -267,12 +267,52 @@ TODO:DBにアクセスして認証チェック
             $account_chk_arr = [
                 "user_id" => $account_chk['user_id'],
                 "id"=>$account_chk['id'],
+                "icon_path"=>$account_chk['icon_path'],
+                "user_name"=>$account_chk['user_name'],
+                "si_text"=>$account_chk['si_text'],
                                 ];
         return $account_chk_arr;
         }
       
     }
- 
+    public function user_info_change(){
+        if(!isset($_POST['is_judge_which']))exit;
+        if($_POST['is_judge_which'] == 0){//プロフィール変更
+            $user_name = $_POST['user_name'];
+            $si_text = $_POST['si_text'];
+            $id = $_POST['id'];
+            $user_id= session()->get('user_id');
+            $truth_id = User::where('user_id',$user_id)->value('id');
+            if($truth_id != $id)exit;//本人じゃなかったら断つ
+            $change_profile = User::where('id', $id)->first();
+            $change_profile->user_name = $user_name;
+            $change_profile->si_text =$si_text;
+            $change_profile->save();
+          return $this->account_chk_data();
+        }else if($_POST['is_judge_which'] == 1){
+            $old_pass = $_POST['old_pass'];
+            $new_pass = $_POST['new_pass'];
+            $id = $_POST['id'];
+            $user_id= session()->get('user_id');
+            $truth_id = User::where('user_id',$user_id)->value('id');
+            if($truth_id != $id)exit;
+            $get_pass = User::where('id',$truth_id)->value('user_pw');
+            $truth_pass = session()->get('user_pw');
+            if($truth_pass != $get_pass)exit;
+
+            if($old_pass == $truth_pass){
+                $change_pass = User::where('id', $truth_id)->first();
+                $change_pass->user_pw = $new_pass;
+                $change_pass->save();
+                return 'success';
+            }else{
+                return 'wrong_pass';
+            }
+          
+        }
+        
+  
+    }
 
 
 /* ====================================================================

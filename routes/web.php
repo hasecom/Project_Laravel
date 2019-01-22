@@ -87,6 +87,12 @@ Route::post('/user', 'ImagesController@image_post');
 
 Route::get('/api/users/chk', 'UsersController@account_chk_data');
 
+/*====================================================================
+ユーザ情報変更
+======================================================================*/
+
+Route::post('/api/users/change/userinfo', 'UsersController@user_info_change');
+
 
 /*====================================================================
 投稿用のデータ送信用
@@ -123,3 +129,24 @@ Photo用データ送信用
 */
 Route::get('/api/user/post_data/photo/chat/{id}', 'ChatsController@chat_get');
 Route::post('/api/user/post_data/photo/chat/{id}', 'ChatsController@chat_post');
+
+/*====================================================================
+Tags用データ送信用
+======================================================================*/
+/*
+
+*/
+Route::get('/api/user/post_data/photo/tags/{word}', 'TagsController@tags_list_get');
+Route::post('/api/user/post_data/photo/tags/{word}', 'TagsController@tags_list_post');
+
+/*====================================================================
+検索用データ送信用
+======================================================================*/
+/*
+
+*/
+Route::get('/api/user/post_data/photo/search/{word}', 'SearchController@search_list_get');
+Route::post('/api/user/post_data/photo/search/{word}','SearchController@search_list_post');
+
+
+
