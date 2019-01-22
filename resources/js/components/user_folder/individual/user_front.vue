@@ -19,11 +19,10 @@
         <div class="cover_img wrap">
           <img src="storage/top.JPG" width='100%' height='auto' class="blur">
           <div class="cover-text text-center">
-            <div class="over_view p-3 mb-md-4 js-scroll-fade" ref="over_view_ref">
+            <div class="over_view p-3 mb-md-4 js-scroll-fade" ref="over_view_ref" >
               <p>気軽に売れて、手軽に買える</p>
-              <p>低価格の写真売買サイト</p>
-
-              
+              <p>低価格の写真売買サイト</p>   
+             <i class="fas fa-heart" style="border:1px solid;"></i>
             </div>
             <button type="button" class="btn-lg  img_btn shadow px-md-5 py-md-3">会員登録</button>
 				  </div>
@@ -45,8 +44,6 @@ data() {
     return {
      scrollY: 0,
      scroll_judg:true,
-    number: 0,
-    tweenedNumber: 0
     }
   }, 
   mounted() {
@@ -143,7 +140,6 @@ a{
   color:#ff9900;
 }
 .section{
-  
   width:100%;
 }
 .cover_img{
@@ -182,20 +178,17 @@ transform: translate(-50%,-50%);
   color:rgb(235,235,235);
 }
 .over_view{
-
   font-size: 20px;
   cursor:default;
 }
 @keyframes anim {
   from {
     width:0%;
-    height:0px;
-    
+    height:0px; 
     }
   to {
     width:100%;
     height:50px;
-    
     }
 }
 
@@ -219,6 +212,7 @@ transform: translate(-50%,-50%);
     content: '';
     animation: anim ease 1s normal;
 }
+
 
 
 

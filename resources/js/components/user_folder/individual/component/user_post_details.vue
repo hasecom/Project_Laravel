@@ -12,8 +12,8 @@
                                             <h5 class="text-white bg-primary rounded px-md-3 d-inline">¥{{photo_data.photo_price}}</h5>    
                                         <p>
                                             <span @click="likes(photo_data.photo_id,photo_data.like_stauts)">
-                                            <img v-if="photo_data.like_stauts == 1" src="storage/like.svg" width="16" height="16">
-                                         <img v-if="photo_data.like_stauts == 0" src="storage/like_emp.svg" width="16" height="16">
+                                        <span v-if="photo_data.like_stauts == 1"  width="16" height="16"><i class="fas fa-heart" style="color:red;"></i></span>
+                                    <span v-if="photo_data.like_stauts == 0" width="16" height="16"><i class="far fa-heart"></i></span>
                                            </span>   
                                           <span @click="tab_select(2)">{{photo_data.likes_cnt}}件</span>
                                          </p>
