@@ -26,12 +26,12 @@
 			                        <div class="card-body px-2 py-3">
                                 <h5 class="card-title">{{item.photo_name}}</h5>  
                                   <span @click="likes(item.photo_id,item.like_stauts)">
-                                    <img v-if="item.like_stauts == 1" src="storage/like.svg" width="16" height="16">
-                                    <img v-if="item.like_stauts == 0" src="storage/like_emp.svg" width="16" height="16">
+                                    <span v-if="item.like_stauts == 1"  width="16" height="16"><i class="fas fa-heart" style="color:red;"></i></span>
+                                    <span v-if="item.like_stauts == 0" width="16" height="16"><i class="far fa-heart"></i></span>
                                      </span>   
                                     <span @click="modal_set('details' + index,2)">{{item.likes_cnt}}件</span>
                                     <span @click="modal_set('details' + index,1)"><i class="far fa-comment"></i></span>
-                                </p>
+                               
                                  <user-post-details :photo_data="item" :my_data="my_data" :ref="'details' + index" v-on:likes-event="get_timeline_data"></user-post-details>
                                 <p class="card-text text-muted text-center">{{item.photo_description}}</p>
 			                      </div>
