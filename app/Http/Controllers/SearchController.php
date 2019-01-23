@@ -12,11 +12,10 @@ class SearchController extends Controller
     $input_word =Tags::where('tag_name',$word)->exists();
     if($input_word != 1)exit();
     $word_cnt = Tags::where('tag_name',$word)->value('tag_cnt');
-
     $search_photo_ob = Posted_photos::where('tag', 'like', '%'.$word.'%')->get();
             return $search_photo_ob;
     }
     public function search_list_post($word){
-
     }
+   
 }

@@ -16,6 +16,7 @@ use App\User;
 
 class ImagesController extends Controller
 {
+
     /*=UserフロントPOST=*/
     
     public function post_img_judge($get_input_id){
@@ -74,6 +75,7 @@ class ImagesController extends Controller
         $new_posted_photos->photo_size = $_POST['photo_size'];
         
         $new_posted_photos->file_name = $file_name;
+
         if($dir_flg==1){
             $new_posted_photos->photo_path = str_replace('public/', '', $dir);
         }else{
@@ -81,22 +83,27 @@ class ImagesController extends Controller
         };
         $new_posted_photos->save();
 
-
         $vtag=$_POST['post_tag'];
+        $tag_array = [];
         $tag_array = explode('#',$vtag);
         foreach($tag_array as $tag_val){
-            if (0 == strcmp($tag_val, ''))    {
+            if (0 == strcmp($tag_val, '')){
                 continue;
             }
-         
-            if(Tags::where('tag_name',$tag_val)==true){
+            if(Tags::where('tag_name',$tag_val)->exists()==true){
+                $tag_id = Tags::where('tag_name',$tag_val)->value('id');
+                $tag_cnt = Tags::where('tag_name',$tag_val)->value('tag_cnt');
+                $change_cnt = Tags::where('id',$tag_id)->first();
+                $change_cnt->tag_cnt= $tag_cnt + 1;
+                $change_cnt->save();
             continue;
             }
             $new_tags = new Tags;
             $new_tags->tag_name=$tag_val;
+            $new_tags->tag_cnt=1;
             $new_tags->save();
         }
-
+        
         return $get_input_id;
     }
 
@@ -125,6 +132,7 @@ class ImagesController extends Controller
 
         $photo_result=$this->post_img_judge($get_input_id);
         return $photo_result;
+      
 
     }
     //画像データ送受信のjsonの整形

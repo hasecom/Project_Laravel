@@ -5,7 +5,7 @@
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search </button>
         </form>
         <div class="balloon2-top border" v-if="isWord">
-            <div  v-if="0 < search_result.length">
+            <div  v-if="0 < search_result.length || 0 < user_search.length">
                <div v-for="(item,index) in search_result" :key='index' @mousedown="tag_click(item)">
                    <div class="row pl-2 pt-3 pb-3 search_item"> 
                        <div class="col-md-9">
@@ -13,6 +13,19 @@
                        </div>
                        <div class="col-md-3">
                         {{item.tag_cnt}}件
+                        </div>
+                    </div>
+                </div>
+                    <div v-for="user_item in user_search" :key="user_item.id"  @mousedown="user_click(user_item.user_id)">
+                   <div class="row pl-2 pt-3 pb-3 search_item"> 
+                       <div class="col-md-2">
+                           <span class="cover list_image"  v-bind:style="{ backgroundImage: 'url(storage/' + user_item.icon_path + '.jpg)' }"></span>
+                       </div>
+                       <div class="col-md-3">
+                        {{user_item.user_name}}
+                       </div>
+                       <div class="col-md-3">
+                        <span class="small text-muted">@{{user_item.user_id}}</span>
                         </div>
                     </div>
                 </div>
@@ -36,9 +49,10 @@ export default{
             search_word:"",
             isWord:false,
             search_result:[],
+            user_search:[],
         }
     },watch:{
-        search_word: function(oldval ,newval){
+        search_word:function(oldval ,newval){
             if(0 < newval.length && oldval.length == 0){
                this.isWord = false;
             }
@@ -82,7 +96,9 @@ export default{
                 return false;
             }
                 axios.get('api/user/post_data/photo/tags/' + val).then(assist_word_response => {  
-                    this.search_result = assist_word_response['data'];  
+                    this.user_search = assist_word_response['data'][1];
+                    this.search_result = assist_word_response['data'][0];  
+                  
                     }).catch(function (error) {
                 console.log(error);
                     });
@@ -95,11 +111,18 @@ export default{
               let word = val.split('#').join('');         
               let emp_word = word.replace(/\s+/g, ""); 
              return  emp_word;
+            }else if(val.indexOf('@') != -1){
+            let word = val.split('@').join('');   
+               let emp_word = word.replace(/\s+/g, ""); 
+               return  emp_word;
             }else{
             let emp_word = val.replace(/\s+/g, ""); 
             return emp_word;
             }
-        }
+        },
+        user_click(val){
+        this.$router.push('/'+val);
+    },
                     }
 
 }

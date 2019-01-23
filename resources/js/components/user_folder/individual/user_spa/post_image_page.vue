@@ -160,7 +160,7 @@ data() {
           return false;
         }
         let  token_ = Math.random();
-        console.log(token_);
+      
         let params = new URLSearchParams();
         params.append('files',this.uploadedImage);
         params.append('img_post',token_);

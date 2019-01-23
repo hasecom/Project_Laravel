@@ -22,17 +22,17 @@
             <div class="over_view p-3 mb-md-4 js-scroll-fade" ref="over_view_ref" >
               <p>気軽に売れて、手軽に買える</p>
               <p>低価格の写真売買サイト</p>   
-             <i class="fas fa-heart" style="border:1px solid;"></i>
+            
             </div>
-            <button type="button" class="btn-lg  img_btn shadow px-md-5 py-md-3">会員登録</button>
+            <button type="button" class="btn-lg  img_btn shadow py-md-3">会員登録</button>
 				  </div>
         </div>
       </div> 
-      <div v-for="n in 100" :key="n">
-      <p>n</p>
-      </div>
+      
+      <front-main></front-main>
+      <vue-footer></vue-footer>
     </div>
-
+  
 
 
   </div>
@@ -66,7 +66,7 @@ data() {
      }
     },
      handleScroll() {
-       if(window.scrollY < 50){this.scroll_judg = true}
+       if(window.scrollY < 60){this.scroll_judg = true}
        if(this.scroll_judg != true){return false;}
       this.scrollY = window.scrollY;
        var header_front_cone = this.$refs.front_header;
@@ -80,10 +80,6 @@ data() {
     },borderAnimation(){
         var over_view_border = this.$refs.over_view_ref;
        // over_view_border.style.setProperty("--over_view_border",0 +"px");
-         
-      
-    
-       
     }
  
     },
@@ -104,8 +100,7 @@ data() {
 body{
   width:100%;
   height:auto;
-   background:rgb(63,63,61);
- 
+  background:rgb(63,63,61);
 }
 a{
   color:none !important;  
@@ -123,7 +118,7 @@ a{
    width:100%;
    height:var(--header_height);
    margin:0 !important;
-   transition: all 400ms 0s ease;
+   transition: all 400ms 0.1s ease;
 }
 .front_btn{
     width:150px;
@@ -159,7 +154,7 @@ transition: .1s;
   position: absolute;
   color: white;/*文字は白に*/
   font-weight: bold; /*太字に*/
-top: 50%;
+top: 40%;
 left: 50%;
 -webkit-transform: translate(-50%,-50%);
 -moz-transform: translate(-50%,-50%);
@@ -167,30 +162,53 @@ left: 50%;
 -o-transform: translate(-50%,-50%);
 transform: translate(-50%,-50%);
 }
-.img_btn{
+.img_btn{  /*会員登録button*/
   background: #ff9900;
   color:white;
   border:#ff9900;
   cursor: pointer;
+  background-size: 400% 400%;
+  padding-left:3rem;
+  padding-right:3rem;
+  font-size:18px;
+  padding-left: 3rem;
+  padding-right:3rem;
+  font-size:18px;
+  transition: all 0.5s linear; /* 追加 */
+  animation: fade-in ease 2s normal;
 }
 .img_btn:hover{
-  background: rgb(233,147,47);
-  color:rgb(235,235,235);
+  color:rgb(245,245,245);
+    padding-left: 4rem;
+    padding-right:4rem;
+    font-size:20px;
+   transition:all 0.5s linear; /* 追加 */
 }
 .over_view{
   font-size: 20px;
   cursor:default;
+  animation: fade-in ease 2s normal;
 }
 @keyframes anim {
-  from {
+  0%{
     width:0%;
     height:0px; 
+    
     }
-  to {
+  100%{
     width:100%;
     height:50px;
     }
 }
+@keyframes fade-in{
+  from {
+    opacity:0.1;
+    }
+  to {
+    opacity:1;
+    }
+}
+
 
 .over_view:before{
     display: block;

@@ -23,6 +23,8 @@ import account_manager from './components/user_folder/individual/component/accou
 import set_profile from './components/user_folder/individual/component/set_profile.vue';
 import set_pass from './components/user_folder/individual/component/set_pass.vue';
 import set_privacy from './components/user_folder/individual/component/set_privacy.vue';
+import footer from './components/user_folder/individual/component/footer.vue';
+import front_main from './components/user_folder/individual/component/front_main.vue';
 
 
 //ADMIN
@@ -53,6 +55,8 @@ Vue.component('account-manager',account_manager);
 Vue.component('set-profile',set_profile);
 Vue.component('set-pass',set_pass);
 Vue.component('set-privacy',set_privacy);
+Vue.component('vue-footer',footer);
+Vue.component('front-main',front_main);
 
 //*aws amplify
 import Amplify, * as AmplifyModules from 'aws-amplify';
