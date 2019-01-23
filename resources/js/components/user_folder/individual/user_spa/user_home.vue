@@ -18,11 +18,12 @@
                                 </div>
                               </div>
 			                        <!--<svg @click="modal_set('details' + index,0)" class="bd-placeholder-img card-img-top" width="100%" height="300" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: カードの画像"><title>プレースホルダ</title><rect fill="#868e96" width="100%" height="100%"></rect><text fill="#dee2e6" dy=".3em" x="30%" y="50%">no image</text></svg>-->
-			                        <div @click="modal_set('details' + index,0)" class="bd-placeholder-img card-img-top" width="100%" height="300">
-                              <amplify-s3-image style="pointer-events: none;" :imagePath= "item.photo_path+'/'+item.file_name+'.png'"></amplify-s3-image>
+			                        <div @click="modal_set('details' + index,0)" class="img_up" width="100%" height="300">
+                              <amplify-s3-image :imagePath= "item.photo_path+'/'+item.file_name+'.png'">
+                              </amplify-s3-image>
                               </div>
                               <!--<p>{{item}}</p>-->
-                                <!--<p>{{item.photo_path}}</p>-->
+                                <p>{{item.photo_path}}</p>
 			                        <div class="card-body px-2 py-3">
                                 <h5 class="card-title">{{item.photo_name}}</h5>  
                                   <span @click="likes(item.photo_id,item.like_stauts)">
@@ -77,6 +78,15 @@
     width:30px;
     height:30px;
 }
+.img_up{
+  width:95%;
+  text-align: center;
+  background-color:rgb(63,63,61);
+  border-radius:6px;
+  
+}
+
+
 </style>
 <script>
 import MyModal from '../../user_modal/user_modal.vue';
