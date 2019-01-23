@@ -88,12 +88,8 @@
 textarea {
   vertical-align:top;
   resize: left;
-  /* width:380px;
-  height:200px; */
 }
-input{
-  /* width: 380px; */
-}
+
 </style>
 <script>
 import MyModal from '../../user_modal/user_modal.vue';

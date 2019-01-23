@@ -8,34 +8,43 @@
                   <div class="col-md-12">
                          <div v-for="(item ,index) in time_line" v-bind:key="index">
                            <div class="card img-thumbnail mt-3 shadow-sm">
-                             <div class="row">
+			                      <div @click="modal_set('details' + index,0)" class="img_up" width="100%" height="300">
+                              <amplify-s3-image :imagePath= "item.photo_path+'/'+item.file_name+'.png'">
+                              </amplify-s3-image>
+                            </div>
+                                <div class="row">
                                <div class="col-md-1">
                                  <span class="cover list_image" v-bind:style="{ backgroundImage: 'url(storage/' + item.icon_path + '.jpg)' }"></span>
                                </div>
                               <div class="col-md-10">
                                 <span>{{item.user_name}}</span>
                                 <span class="text-muted">@{{item.user_id}}</span>
-                                </div>
                               </div>
-			                        <!--<svg @click="modal_set('details' + index,0)" class="bd-placeholder-img card-img-top" width="100%" height="300" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: カードの画像"><title>プレースホルダ</title><rect fill="#868e96" width="100%" height="100%"></rect><text fill="#dee2e6" dy=".3em" x="30%" y="50%">no image</text></svg>-->
-			                        <div @click="modal_set('details' + index,0)" class="bd-placeholder-img card-img-top" width="100%" height="300">
-                              <amplify-s3-image style="pointer-events: none;" :imagePath= "item.photo_path+'/'+item.file_name+'.png'"></amplify-s3-image>
-                              </div>
-                              <!--<p>{{item}}</p>-->
-                                <!--<p>{{item.photo_path}}</p>-->
-			                        <div class="card-body px-2 py-3">
+                            </div>
+			                        <div class="card-body">
                                 <h5 class="card-title">{{item.photo_name}}</h5>  
-                                  <span @click="likes(item.photo_id,item.like_stauts)">
-                                    <span v-if="item.like_stauts == 1"  width="16" height="16"><i class="fas fa-heart" style="color:red;"></i></span>
-                                    <span v-if="item.like_stauts == 0" width="16" height="16"><i class="far fa-heart"></i></span>
-                                     </span>   
-                                    <span @click="modal_set('details' + index,2)">{{item.likes_cnt}}件</span>
-                                    <span @click="modal_set('details' + index,1)"><i class="far fa-comment"></i></span>
+			                      </div>
+                                <div class="bg-light">
+                                      <div class="d-flex align-items-center"> 
+                                        <div class="row w-100 row_margin_del_">
+                                          <div class="col-md-6 border py-3 text-center">
+                                             <span @click="likes(item.photo_id,item.like_stauts)">
+                                            <span v-if="item.like_stauts == 1"  width="16" height="16"><i class="fas fa-heart" style="color:red;"></i></span>
+                                            <span v-if="item.like_stauts == 0" width="16" height="16"><i class="far fa-heart"></i></span>
+                                            </span>  
+                                            <span @click="modal_set('details' + index,2)">{{item.likes_cnt}}件</span>
+                                           </div>
+                                           <div class="col-md-6 border py-3 text-center">
+                                            <span @click="modal_set('details' + index,1)"><i class="far fa-comment"></i></span>
+                                          </div>
+                                       </div>
+                                      </div>
+                  
+
                                
                                  <user-post-details :photo_data="item" :my_data="my_data" :ref="'details' + index" v-on:likes-event="get_timeline_data"></user-post-details>
-                                <p class="card-text text-muted text-center">{{item.photo_description}}</p>
-			                      </div>
-                            <div class="row">
+                                </div>
+                            <div class="row bg-info card_footer_  py-3">
                                 <p class="col-md-8">{{date_disassembly_out[index][0]}}年{{date_disassembly_out[index][1]}}月{{date_disassembly_out[index][2]}}日</p>
                                 <p class="col-md-3 text-white bg-primary rounded">¥{{item.photo_price}}</p>   
                             </div>
@@ -54,6 +63,20 @@
 
 
 <style>
+.card_footer_{
+  margin:0;
+}
+.row_margin_del_{
+  margin:0;
+}
+.img-thumbnail{
+  padding:0 !important;
+}
+.amplify-image{
+    width:100% !important;
+    height:auto;
+    margin:0 !important;
+}
 .profile_icon{
       width: 150px;
     height: 150px;
@@ -77,6 +100,15 @@
     width:30px;
     height:30px;
 }
+.img_up{
+  /* width:95%;
+  text-align: center;
+  background-color:rgb(63,63,61);
+  border-radius:6px; */
+  
+}
+
+
 </style>
 <script>
 import MyModal from '../../user_modal/user_modal.vue';
