@@ -8,7 +8,7 @@
                   <div class="col-md-12">
                          <div v-for="(item ,index) in time_line" v-bind:key="index">
                            <div class="card img-thumbnail mt-3 shadow-sm">
-			                      <div @click="modal_set('details' + index,0)" class="img_up" width="100%" height="300">
+			                      <div @click="modal_set('details' + index,0)"  width="100%" height="300">
                               <amplify-s3-image :imagePath= "item.photo_path+'/'+item.file_name+'.png'">
                               </amplify-s3-image>
                             </div>
@@ -76,6 +76,7 @@
     width:100% !important;
     height:auto;
     margin:0 !important;
+    pointer-events: none !important;
 }
 .profile_icon{
       width: 150px;
@@ -99,13 +100,6 @@
 .list_image{
     width:30px;
     height:30px;
-}
-.img_up{
-  /* width:95%;
-  text-align: center;
-  background-color:rgb(63,63,61);
-  border-radius:6px; */
-  
 }
 
 

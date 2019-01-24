@@ -6,7 +6,7 @@
   <div>
     <div class="shadow sticky-top row header_ p-4" ref="front_header">
         <div class="col-md-4">
-          <h1 class="title_ rounded-pill">タイトル</h1>
+          <h1 class="title_ rounded-pill">Byezer</h1>
         </div>
         <div class="text-md-right col-md-8">
           <div @click="link_click(2)" class="front_btn rounded-pill">ログイン</div>
@@ -108,6 +108,7 @@ a{
 .title_{
   color:white;
   font-weight: bold;
+  
 }
 .title_:hover{
   color:#ff9900;
