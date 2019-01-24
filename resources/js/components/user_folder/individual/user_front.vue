@@ -105,15 +105,7 @@ body{
 a{
   color:none !important;  
 }
-.title_{
-  color:white;
-  font-weight: bold;
-  
-}
-.title_:hover{
-  color:#ff9900;
-   cursor: pointer;
-}
+
 .header_{
    background:rgb(63,63,61);
    width:100%;

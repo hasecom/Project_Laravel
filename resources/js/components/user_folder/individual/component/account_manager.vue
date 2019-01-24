@@ -1,8 +1,8 @@
 <template>
     <div>
         <div @click="openModal">
-         <span class="cover list_image"  v-bind:style="{ backgroundImage: 'url(storage/' + my_data.icon_path + '.jpg)' }"></span>
-         <span class="small">{{my_data.user_name}}</span>
+         <span class="cover list_image set_click"  v-bind:style="{ backgroundImage: 'url(storage/' + my_data.icon_path + '.jpg)' }" ></span>
+         <span class="small set_click">{{my_data.user_name}}</span>
          </div>
 
 
@@ -34,7 +34,10 @@
     
     </div>
 </template>
-<style>
+<style scoped>
+.set_click{
+    cursor: pointer;
+}
 .cover{
     display: inline-block;
     background-color: #ccc;

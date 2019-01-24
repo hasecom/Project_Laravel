@@ -7,7 +7,7 @@
     <div class="sticky-top py-3 shadow">
       <div class="row">
         <div class="col-md-4">
-          <router-link to="/"><h2 class="no_link">Byezer</h2></router-link>
+          <router-link to="/"><h2 class="no_link title_">Byezer</h2></router-link>
         </div>
         <div class="col-md-6">
          <search-input></search-input>
@@ -35,13 +35,13 @@
         </router-link>
       </li>
     </ul>
-       <ul class="navbar-nav">
+       <!-- <ul class="navbar-nav">
       <li class="nav-item">
         <router-link  to="/search">
          <a  class="no_link">検索</a>
         </router-link>
       </li>
-    </ul>
+    </ul> -->
     <ul class="navbar-nav">
       <li class="nav-item">
         <router-link  to="/post_image">
@@ -77,8 +77,6 @@ data(){
 },
 watch:{
   scrollY:function(oldval,newval){
-     console.log(oldval - newval);
-  
       if(oldval - newval  < -5 ||  5 <oldval -newval ){
           if(0 < oldval -  newval ){
         this.isScroll_Down = true;
@@ -103,7 +101,6 @@ methods:{
        my_menu.style.getPropertyValue("--border_opacity");
      //  my_menu.style.getPropertyValue("--my_menu_height");
       if(this.isScroll_Down == true){//上へスクロール
-     console.log(this.isScroll_Down);
          my_menu.style.setProperty("--my_menu_height",0 +"px");
         my_menu.style.setProperty("--border_opacity",0 );
         my_menu.style.setProperty("--my_menu_display","hidden" );
@@ -120,6 +117,7 @@ methods:{
 
 }
 </script>
+ 
 
 <style scoped>
 :root {
@@ -142,9 +140,11 @@ methods:{
     height:var(--my_menu_height);
     visibility:var(--my_menu_display);
    transition: all 400ms 0.1s ease;
-   
-   
 }
+.my_menu_ a{
+  color:white;
+}
+
 
 .authentication_box{
     background:white;
@@ -163,6 +163,9 @@ methods:{
   .sticky-top{
 background:rgb(63,63,61);
 color:white;
+  }
+  .nav-item a:hover{
+    color:#ff9900;
   }
 
 </style>
