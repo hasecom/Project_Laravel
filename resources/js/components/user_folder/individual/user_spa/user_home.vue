@@ -8,8 +8,8 @@
                   <div class="col-md-12">
                          <div v-for="(item ,index) in time_line" v-bind:key="index">
                            <div class="card img-thumbnail mt-3 shadow-sm">
-			                      <div @click="modal_set('details' + index,0)" class="img_up" width="100%" height="300">
-                              <amplify-s3-image :imagePath= "item.photo_path+'/'+item.file_name+'.png'">
+			                      <div @click="modal_set('details' + index,0)" class="img_layer">
+                              <amplify-s3-image :imagePath= "'Photos/'+item.photo_path+'/'+item.file_name+'.png'">
                               </amplify-s3-image>
                             </div>
                                 <div class="row">
@@ -57,7 +57,10 @@
             <div class="col-md-3"></div> 
         </div>
  
-       
+    <div class="up_btn"><i class="fas fa-file-upload fa-3x faa-float animated my-green" @click="openModal">投稿</i></div>
+      <MyModal id="main_modal" @close="closeModal" v-if="img_modal" class="border-0">
+        <uploadmodal></uploadmodal>
+      </MyModal>
      </div>
 </template>
 
@@ -73,12 +76,26 @@
   padding:0 !important;
 }
 .amplify-image{
-    width:100% !important;
-    height:auto;
+    height:auto !important;
+    width:auto !important;
+    max-width:100% !important;
+    max-height:100% !important;
     margin:0 !important;
+    pointer-events:none !important;
+    object-fit: contain !important;
+    border:none !important;
+    border-radius:0px !important;
+
+/*  default setting
+    width:30%;
+    margin:.2em;
+    border-radius:6px;
+    border:2px solid var(--color-white);
+    cursor:pointer;*/
+
 }
 .profile_icon{
-      width: 150px;
+    width: 150px;
     height: 150px;
 }
 .cover{
@@ -100,14 +117,37 @@
     width:30px;
     height:30px;
 }
-.img_up{
-  /* width:95%;
-  text-align: center;
-  background-color:rgb(63,63,61);
-  border-radius:6px; */
+
+.img_layer{
+  width:auto !important;
+  height:auto !important;
+  background-color:#f8f9fa;
   
+  display: table-cell !important; /*上下中央*/
+  text-align: center !important; /*左右中央*/
+  vertical-align: middle !important; /*上下中央*/
+
 }
 
+
+
+.my-green{
+  width:140%;
+  height:80%;
+  color:#f90;
+  line-height: 2.3em;
+  letter-spacing: 3px;
+  text-align: center;
+  border-radius: 35px;
+  user-select:none;
+  background-color: rgb(63,63,61);
+}
+
+.up_btn{
+  position: fixed;
+  bottom: 7%;
+  right: 10%;
+}
 
 </style>
 <script>
@@ -115,6 +155,7 @@ import MyModal from '../../user_modal/user_modal.vue';
 import Details from "../component/user_post_details.vue";
 import { AmplifyEventBus } from 'aws-amplify-vue';
 import { S3Image} from 'aws-amplify-vue';
+import uploadmodal from '../../user_modal/upload_modal.vue';
 window.Vue = require('vue');
 
  
@@ -132,10 +173,11 @@ export default{
       follows_string:"",
       follows_stauts:0,
       now_photo_id:'',
-      user_post_details_:false
+      user_post_details_:false,
+      img_modal:false,
     }
   },components:{
-        MyModal,Details
+        MyModal,Details,uploadmodal
     },mounted:function(){
       this.get_timeline_data();
   },methods:{
@@ -184,6 +226,12 @@ export default{
     modal_set(ref,chat_or_img){
      //chatクリック=1
         this.$refs[ref][0].openModal(chat_or_img); 
+    },
+    openModal() {
+      this.img_modal = true;
+    },
+    closeModal() {
+      this.img_modal = false;
     },
   }
 }
