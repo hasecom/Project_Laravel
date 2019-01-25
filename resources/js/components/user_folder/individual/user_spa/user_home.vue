@@ -10,6 +10,7 @@
                            <div class="card img-thumbnail mt-3 shadow-sm">
 			                      <div @click="modal_set('details' + index,0)" class="img_layer">
                               <amplify-s3-image :imagePath= "'Photos/'+item.photo_path+'/'+item.file_name+'.png'">
+
                               </amplify-s3-image>
                             </div>
                                 <div class="row">
@@ -92,7 +93,6 @@
     border-radius:6px;
     border:2px solid var(--color-white);
     cursor:pointer;*/
-
 }
 .profile_icon{
     width: 150px;

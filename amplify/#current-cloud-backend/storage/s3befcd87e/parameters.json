@@ -1,0 +1,9 @@
+{
+    "bucketName": "projectlaraveldc8fdda6d29842acad5a6dd32a7d42a3",
+    "authPolicyName": "s3_amplify_befcd87e",
+    "unauthPolicyName": "s3_amplify_befcd87e",
+    "authRoleName": "rojectaravel-20190118113203-authRole",
+    "unauthRoleName": "rojectaravel-20190118113203-unauthRole",
+    "authPermissions": "rw",
+    "unauthPermissions": "rw"
+}

@@ -15820,7 +15820,13 @@ readers do not read off random characters that represent icons */
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
-body {
-  font-family: 'Open Sans',serif;
+.title_ {
+  color: white;
+  font-weight: bold;
+}
+
+.title_:hover {
+  color: #ff9900;
+  cursor: pointer;
 }
 

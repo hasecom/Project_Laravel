@@ -1,0 +1,69 @@
+{
+	"providers": {
+		"awscloudformation": {
+			"AuthRoleName": "rojectaravel-20190118113203-authRole",
+			"UnauthRoleArn": "arn:aws:iam::831637856683:role/rojectaravel-20190118113203-unauthRole",
+			"AuthRoleArn": "arn:aws:iam::831637856683:role/rojectaravel-20190118113203-authRole",
+			"Region": "ap-northeast-1",
+			"DeploymentBucketName": "rojectaravel-20190118113203-deployment",
+			"UnauthRoleName": "rojectaravel-20190118113203-unauthRole",
+			"StackName": "rojectaravel-20190118113203",
+			"StackId": "arn:aws:cloudformation:ap-northeast-1:831637856683:stack/rojectaravel-20190118113203/2016bae0-1ac9-11e9-9a2b-0e24bd0e4c44"
+		}
+	},
+	"auth": {
+		"cognito1197df8f": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/rojectaravel-20190118113203-deployment/amplify-cfn-templates/auth/cognito1197df8f-cloudformation-template.yml",
+				"logicalId": "authcognito1197df8f"
+			},
+			"lastPushTimeStamp": "2019-01-18T02:55:34.275Z",
+			"output": {
+				"AppClientSecret": "16kc3qbi3fc4s50vlh8jg0948u7r2oriff09sg2dhbi348ftlv6m",
+				"UserPoolId": "ap-northeast-1_13mneOqxZ",
+				"AppClientIDWeb": "15erdj132frinaj6rdl845nqc",
+				"AppClientID": "4deibqfp67ejpafftbaofatisl",
+				"IdentityPoolId": "ap-northeast-1:1eceab64-b4e5-4a9e-827d-4616232f48c3",
+				"IdentityPoolName": "cognito1197df8f_identitypool_1197df8f",
+				"UserPoolName": "cognito1197df8f_userpool_1197df8f"
+			},
+			"lastPushDirHash": "d8MqW6DZxZRPnFHZFFDnid9S3WI="
+		}
+	},
+	"api": {
+		"awsamplifyvue": {
+			"service": "AppSync",
+			"providerPlugin": "awscloudformation",
+			"output": {
+				"securityType": "API_KEY",
+				"GraphQLAPIIdOutput": "a5ik4epxajhtxeay4exenjnfxe",
+				"GraphQLAPIEndpointOutput": "https://gti64m5emraovipthw6gjmhuae.appsync-api.ap-northeast-1.amazonaws.com/graphql",
+				"GraphQLAPIKeyOutput": "da2-m76axxwtobbopbnrvczbezg3tm"
+			},
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/rojectaravel-20190118113203-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+				"logicalId": "apiawsamplifyvue"
+			},
+			"lastPushTimeStamp": "2019-01-18T02:55:34.275Z",
+			"lastPushDirHash": "Wd9roapfmQ8jgNTSvsOPAwQOiSE="
+		}
+	},
+	"storage": {
+		"s3befcd87e": {
+			"service": "S3",
+			"providerPlugin": "awscloudformation",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/rojectaravel-20190118113203-deployment/amplify-cfn-templates/storage/s3-cloudformation-template.json",
+				"logicalId": "storages3befcd87e"
+			},
+			"lastPushTimeStamp": "2019-01-18T02:55:34.275Z",
+			"output": {
+				"BucketName": "projectlaraveldc8fdda6d29842acad5a6dd32a7d42a3",
+				"Region": "ap-northeast-1"
+			},
+			"lastPushDirHash": "MIJygz+BnICK1eu9FMu8ooH3pRw="
+		}
+	}
+}

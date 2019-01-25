@@ -1,0 +1,7 @@
+{
+    "AppSyncApiName": "awsamplifyvue",
+    "schemaGraphql": "s3://rojectaravel-20190118113203-deployment/amplify-appsync-files/schema.graphql.1547779945934",
+    "ResolverBucket": "rojectaravel-20190118113203-deployment",
+    "ResolverRootKey": "amplify-appsync-files",
+    "DeploymentTimestamp": "1547779945934"
+}
