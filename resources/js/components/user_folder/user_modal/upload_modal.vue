@@ -50,7 +50,7 @@
 
                 <div class="photo_info2">
                 <p id="size">ファイルサイズ[0 Bytes]</p>
-                <p id="px">大きさ[0x0]</p>
+                <p id="px">大きさ[{{upload_width}}x{{upload_height}}]</p>
                 </div>
         <!--</div>-->
     </div>
@@ -191,6 +191,8 @@ export default {
       photoUrl: '',
       error: '',
       amplifyUI: AmplifyUI,
+      upload_width:0,
+      upload_height:0
     }
   },
   mounted : function(){
@@ -257,6 +259,7 @@ export default {
       // const name = this.options.defaultName ? this.options.defaultName : this.file.name;
       // this.s3ImagePath = `${this.options.path}${name}`;
       // const that = this;
+      var up_image = new Image();
       const reader = new FileReader();
       reader.onload = (e) => {
       //   const target = e.target;
@@ -264,6 +267,12 @@ export default {
       //   that.photoUrl = url;
       this.file_type = this.file.type;
       this.uploadedImage = e.target.result;
+           up_image.src = reader.result;
+           up_image.onload = function(){
+        _this.upload_width = up_image.naturalWidth;
+        _this.upload_height = up_image.naturalHeight;
+      }; 
+      const _this = this;
       }
       reader.readAsDataURL(this.file);
     },
