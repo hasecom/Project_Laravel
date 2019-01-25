@@ -1,130 +1,65 @@
 <template>
-    <div>
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <div class="navbar-header">
-        画像の投稿
-        </div>
-      </div>
-    </nav>
-<i class="fas fa-plus fa-5x faa-float animated my-green" @click="openModal"></i>
-    
-<MyModal id="main_modal" @close="closeModal" v-if="img_modal" class="border-0">
-          <h1>画像投稿</h1>
-          <form @submit.prevent="onPost" enctype= "multipart/form-data">
-          <div class="img_up">    
-          <img class="img_view" v-show="uploadedImage" :src="uploadedImage" width="480" height="320"/>
-          <input type="file" v-on:change="onFileChange" name="file"><br>
-          </div>
-          <div class="photo_info">
-            <div class="row">
-              <div class="col-md-3">
-                  タイトル：
-              </div>
-               <div class="col-md-8">
-                  <p><input id="title" type="text" v-model="send_post_name"/></p>
-              </div>
-
-            </div>
-        
-
-          <p>タ　グ　：<input type="text" v-model="send_post_tag"/></p>
-          <p>説明欄　：<textarea v-model="send_description"></textarea></p>
-          <p id="size">ファイルサイズ：[0 Bytes]</p>
-          <p id="px">大きさ：[0x0]</p>
-          </div>
-          <div class="sub" ><button  type="submit" class = "btn btn-primary">送信</button></div>
-          </form>
-</MyModal>
-    </div>
+  <div>
+    <div class="up_btn"><i class="fas fa-file-upload fa-3x faa-float animated my-green" @click="openModal">投稿</i></div>
+      <MyModal id="main_modal" @close="closeModal" v-if="img_modal" class="border-0">
+        <uploadmodal></uploadmodal>
+      </MyModal>
+  </div>
 </template>
 <style>
 
-
 #main_modal{
-    /*position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 92%;
-    height: 90%;
-    margin: auto;
-    z-index: 3;*/
-
     margin:0 auto;
     width: 100%;
     height: 100%;
     overflow:auto;
-
 }
 
-.img_up{
-  width:480px;
-  height:320px;
-  margin: 30px;
-  background-color:#555555;
-}
-
-.img_view{
+.my-green{
+  width:140%;
+  height:80%;
+  color:#f90;
+  line-height: 2.3em;
+  letter-spacing: 3px;
   text-align: center;
-  object-fit: contain; 
+  border-radius: 35px;
+  user-select:none;
+  background-color: rgb(63,63,61);
 }
 
-.photo_info{
-  line-height: 120%;
-  font-size: 1.12em;
-  width: 480px;
-  margin-left:30px;
-  /*background-color: red;*/
+.up_btn{
+  position: fixed;
+  bottom: 7%;
+  right: 10%;
 }
-
-.sub{
-  text-align: center;
-}
-
-.my-green{color:green;}
-
-textarea {
-  vertical-align:top;
-  resize: left;
-}
-
 </style>
 <script>
 import MyModal from '../../user_modal/user_modal.vue';
+import uploadmodal from '../../user_modal/upload_modal.vue';
 window.Vue = require('vue');
 
 
 export default {
 data() {
     return {
-      uploadedImage: '',
-      return_base64:'',
-      sample_data:'',
-      send_description:'',
-      send_post_name:'',
-      send_post_tag:'',
-      my_data:[],
-      flg :0,
-      photo_size :0,
       img_modal:false,
+      upload_width:0,
+      upload_height:0,
+    
     };
   },
   components:{
-        MyModal
+        MyModal,
+        uploadmodal
     },
+
   mounted : function(){
       this.on_post_Load();
+     
+     
   },
+
   methods: {
-    on_post_Load(){
-             axios.get("api/users/chk").then(response=>{
-                this.my_data = typeof(response['data'])=="undefined"? []: response['data'];
-  }).catch(function (error) {
-               console.log(error);
-            });
-    },
     openModal() {
       this.img_modal = true;
     },
@@ -133,22 +68,41 @@ data() {
     },
     onFileChange(e) {
       let files = e.target.files || e.dataTransfer.files;
+      
       this.createImage(files[0]);
-          // console.log(files);
+       
     },
     // アップロードした画像を表示
     createImage(file) {
+      var up_image = new Image();
       let reader = new FileReader();
-      reader.onload = (e) => {
-        this.uploadedImage = e.target.result;
 
-      };
+      reader.onload = function(e){
+        this.uploadedImage = e.target.result;
+           up_image.src = reader.result;
+            };
+           up_image.onload = function(){
+        _this.upload_width = up_image.naturalWidth;
+        _this.upload_height = up_image.naturalHeight;
+      }; 
+      const _this = this;
+
+       
+    
+      
+      
+
+
+        
+     
       reader.readAsDataURL(file);
       this.photo_size = file.size;
+   
       var size_txt = "ファイルサイズ：[" + this.photo_size + " Bytes]";
-      // var dimension = "大きさ：[" + file.width + "x"+ file.height + "]"; //!ファイルの幅と高さ取得どうやるの。。。
+    //   var dimension = "大きさ：[" + this.upload_width + "x"+ this.upload_height + "]"; //!ファイルの幅と高さ取得どうやるの。。。
       document.getElementById("size").innerHTML = size_txt;
       // document.getElementById("px").innerHTML = dimension;
+  
     },
     onPost(){
        
