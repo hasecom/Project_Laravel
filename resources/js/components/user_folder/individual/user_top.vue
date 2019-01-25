@@ -42,13 +42,13 @@
         </router-link>
       </li>
     </ul> -->
-    <ul class="navbar-nav">
+    <!-- <ul class="navbar-nav">
       <li class="nav-item">
         <router-link  to="/post_image">
           <a  class="no_link">投稿</a>
         </router-link>
       </li>
-    </ul>
+    </ul> -->
     <ul class="navbar-nav">
       <li class="nav-item">
          <router-link  to="/recruit_image" class="spa_link">

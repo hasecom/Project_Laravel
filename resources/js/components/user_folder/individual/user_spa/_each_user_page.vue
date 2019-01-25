@@ -6,17 +6,22 @@
                  <div class="col-md-6">
                      <div class="mt-3">
                              <div class="card-body row align-items-center">
-                                <span class="profile_icon cover ml-5" v-bind:style="{ backgroundImage: 'url(storage/' + each_user_data.icon_path + '.jpg)' }"></span>
-                                 <h4 class="card-title ml-5">{{each_user_data.user_name}}</h4>
-                                <p class="pl-2 text-muted">{{each_user_data.user_id}}</p>
+                                <span class="profile_icon cover ml-5 pointer" v-bind:style="{ backgroundImage: 'url(storage/' + each_user_data.icon_path + '.jpg)' }"></span>
+                                 <h4 class="card-title ml-5 pointer">{{each_user_data.user_name}}</h4>
+                                <p class="pl-2 text-muted pointer">{{each_user_data.user_id}}</p>
                             </div>
                             <div class="float-right">
-                            <button v-if="user_page_follow_btn == 1" type="button" class="btn-sm border" @click="User_FF_send()">{{user_follow_string}}</button>
+                                <div v-if="user_follow_string == 'フォロー中'">
+                                    <button v-if="user_page_follow_btn == 1" type="button" class="btn-sm border follows_r" @click="User_FF_send()">{{user_follow_string}}</button>
+                                </div>
+                                 <div v-else>
+                                    <button v-if="user_page_follow_btn == 1" type="button" class="btn-sm border" @click="User_FF_send()">{{user_follow_string}}</button>
+                                </div>
                             </div>
                             <div>
-                                <button  v-if="user_follower.length != 0" type="button" class="btn-sm border"  @click="openModal(0)">フォロー中　{{user_follower.length}}人</button>
+                                <button  v-if="user_follower.length != 0" type="button" class="btn-sm border pointer"  @click="openModal(0)">フォロー中　{{user_follower.length}}人</button>
                                <button  v-if="user_follower.length == 0" type="button" class="btn-sm border">フォロー中　{{user_follower.length}}人</button>
-                               <button v-if="user_followers.length != 0" type="button" class="btn-sm border"  @click="openModal(1)">フォロワー　{{user_followers.length}}人</button>
+                               <button v-if="user_followers.length != 0" type="button" class="btn-sm border pointer"  @click="openModal(1)">フォロワー　{{user_followers.length}}人</button>
                                <button v-if="user_followers.length == 0" type="button" class="btn-sm border">フォロワー　{{user_followers.length}}人</button>
                                 </div>
                             <p class="card-text mt-3">{{each_user_data.si_text}}</p>
@@ -30,21 +35,26 @@
        <div class="row justify-content-center mt-3 border-bottom ">
               <div class="col-md-3"></div>
             <div class="col-md-6 h4">{{modai_title}}</div>
-           <div @click="closeModal()" class="col-md-3 h4"><i class="fas fa-times"></i></div>
+           <div @click="closeModal()" class="col-md-3 h4 pointer"><i class="fas fa-times"></i></div>
           </div>
             <div v-if="display_judg == 0">
               <div class="modal_display mx-sm-5">
                 <div v-for="val in user_follower" v-bind:key="val.id">
                     <div class="row mb-2">
                         <div class="col-md-2">
-                            <span class="cover list_image text-left" @click="follows_link(val.user_id)" v-bind:style="{ backgroundImage: 'url(storage/' + val.icon_path + '.jpg)' }"></span>
+                            <span class="cover list_image text-left pointer" @click="follows_link(val.user_id)" v-bind:style="{ backgroundImage: 'url(storage/' + val.icon_path + '.jpg)' }"></span>
                         </div>
                          <div class="col-md-4">
-                            <span class="h5"  @click="follows_link(val.user_id)">{{val.user_name}}</span><br>
-                            <span class="text-muted" style="line-height:0px;">{{val.user_id}}</span>
+                            <span class="h5 pointer"  @click="follows_link(val.user_id)">{{val.user_name}}</span><br>
+                            <span class="text-muted pointer" style="line-height:0px;">{{val.user_id}}</span>
                         </div>
                         <div class="col-md-6" v-if="val.id != my_data['id']">
-                            <button  type="button" class="btn-sm border" @click="follow_or_Non(val.id,val.follows_stauts)">{{val.follows_string}}</button>
+                                <div v-if="val.follows_stauts == 0">
+                                <button type="button" class="btn-sm border pointer" @click="follow_or_Non(val.id,val.follows_stauts)" >{{val.follows_string}}</button>
+                            </div>
+                            <div v-if="val.follows_stauts == 1">
+                                <button type="button" class="btn-sm border follows_r pointer" @click="follow_or_Non(val.id,val.follows_stauts)" >{{val.follows_string}}</button>
+                            </div>
                         </div>
                          <div class="col-md-6 px-5"  v-if="val.id == my_data['id']"></div>
                     </div>
@@ -56,14 +66,19 @@
                 <div v-for="val in user_followers" v-bind:key="val.id">
                     <div class="row mb-2">
                         <div class="col-md-2">
-                            <span class="cover list_image text-left" @click="follows_link(val.user_id)" v-bind:style="{ backgroundImage: 'url(storage/' + val.icon_path + '.jpg)' }"></span>
+                            <span class="cover list_image text-left pointer" @click="follows_link(val.user_id)" v-bind:style="{ backgroundImage: 'url(storage/' + val.icon_path + '.jpg)' }"></span>
                         </div>
                          <div class="col-md-4">
-                            <span class="h5"  @click="follows_link(val.user_id)">{{val.user_name}}</span><br>
-                            <span class="text-muted" style="line-height:0px;">{{val.user_id}}</span>
+                            <span class="h5 pointer"  @click="follows_link(val.user_id)">{{val.user_name}}</span><br>
+                            <span class="text-muted pointer" style="line-height:0px;">{{val.user_id}}</span>
                         </div>
                         <div class="col-md-6"  v-if="val.id != my_data['id']">
-                            <button  type="button" class="btn-sm border" @click="follow_or_Non(val.id,val.follows_stauts)">{{val.follows_string}}</button>
+                                      <div v-if="val.follows_stauts == 0">
+                                <button type="button" class="btn-sm border pointer" @click="follow_or_Non(val.id,val.follows_stauts)" >{{val.follows_string}}</button>
+                            </div>
+                            <div v-if="val.follows_stauts == 1">
+                                <button type="button" class="btn-sm border follows_r pointer" @click="follow_or_Non(val.id,val.follows_stauts)" >{{val.follows_string}}</button>
+                            </div>
                         </div>
                          <div class="col-md-6 px-5" v-if="val.id == my_data['id']"></div>
                     </div>

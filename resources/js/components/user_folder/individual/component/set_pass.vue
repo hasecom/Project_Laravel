@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="set_pass_">
         <form @submit.prevent="chk_fnc">
         <div class="row">
             <div class="col-md-4">
@@ -35,6 +35,9 @@
     </div>
 </template>
 <style>
+.set_pass_{
+    color:black;
+}
 </style>
 <script>
 export default{

@@ -37,6 +37,7 @@ export default{
         }
     },mounted:function(){
         this.get_likes_user_data(0,this.photo_data_box.photo_id);
+        
     }
     ,methods:{
         get_likes_user_data(judg,photo_id){
