@@ -2,16 +2,16 @@
     <div class="row mt-5">
          <div class="col-md-12">
              <div class="row">
-                    <div class="col-md-6" v-for="(item ,index) in my_img_arr" v-bind:key="index">
+                    <div class="col-md-6" v-for="(item ,index) in reverseItems" v-bind:key="index">
                         <div class="card img-thumbnail mt-3 shadow-sm">
 			                <svg class="bd-placeholder-img card-img-top" width="100%" height="150" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: カードの画像"><title>プレースホルダ</title><rect fill="#868e96" width="100%" height="100%"></rect><text fill="#dee2e6" dy=".3em" x="30%" y="50%">no image</text></svg>
 			                <div class="card-body px-2 py-3">
-                                <h5 class="card-title">{{item[index].photo_name}}</h5>
-                                <p class="card-text text-muted text-center">{{item[index].photo_description}}</p>
+                                <h5 class="card-title">{{item[reverseItems.length -1 -index].photo_name}}</h5>
+                                <p class="card-text text-muted text-center">{{item[reverseItems.length -1 -index].photo_description}}</p>
 			                </div>
                             <div class="row">
                                 <p class="col-md-8"></p>
-                                <p class="col-md-3 card-text text-white bg-primary rounded">¥{{item[index].photo_price}}</p>   
+                                <p class="col-md-3 card-text text-white bg-primary rounded">¥{{item[reverseItems.length -1 -index].photo_price}}</p>   
                             </div>
 		                </div>
                     </div>
@@ -55,6 +55,10 @@ export default{
                     });
          
             }
+    },computed:{
+    reverseItems(){
+        return this.my_img_arr.slice().reverse();
+    },
     }
 
 }

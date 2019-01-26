@@ -44,4 +44,17 @@ body{
   color:white;
   font-weight: bold;
 }
+.btn_hover:hover{
+  background-color:rgba(240,240,240,1);
+  -webkit-transition: background-color 200ms ease;
+  transition: background-color 200ms ease;
+
+}
+.btn_hover{
+  
+}
+
+.row_margin_del_{
+  margin:0;
+}
 
