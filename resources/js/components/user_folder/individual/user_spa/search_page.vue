@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="row">
+        <div class="row row_margin_del_">
         <div v-for="(item , index) in search_data" :key="index" class="col-md-3">
                 <div >{{item}}</div>
         </div>

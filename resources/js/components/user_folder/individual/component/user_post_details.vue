@@ -2,8 +2,7 @@
     <div>
         <MyModal @close="closeModal" v-if="user_modal" class="border-0" >          
                     <div class="modal_display">
-                        <div class="row">
-                            <div class="col-md-5">
+                       
                               <div>{{photo_data.user_name}}&emsp;&emsp;<span class="text-muted">@{{photo_data.user_id}}</span></div>
                               <!-- <span class="bd-placeholder-img card-img-top" width="100%" height="300" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: カードの画像"><title>プレースホルダ</title> -->
 			                    <amplify-s3-image style="pointer-events: none;" :imagePath= "'Photos/'+photo_data.photo_path+'/'+photo_data.file_name+'.png'" ></amplify-s3-image>
@@ -20,14 +19,17 @@
                                           <span @click="tab_select(2)">{{photo_data.likes_cnt}}件</span>
                                          </p>
                                  <user-post-details :photo_data="photo_data" :my_data="my_data"></user-post-details>
-                                <p class="card-text text-muted text-center">{{photo_data.photo_description}}</p>
+                                <!-- <p class="card-text text-muted text-center">{{photo_data.photo_description}}</p> -->
+                                <div v-for="(item,index) in tags_arr" :key="index" class="tag_class">
+                                    <span class="pointer" @click="tag_click(item)">#{{tags_arr[index]}}</span>&emsp;
+                                    </div>
 			                      </div>
                             
                                
                                
                            
-		                      </div>
-                        <div class="col-md-7">
+		                      
+                        
                             <!-- DDDDDDDDDDDDDDDDDDDDDDDDDDDDD -->
                             <ul id="myTab" class="nav nav-tabs" role="tablist">
                                 <li class="nav-item">
@@ -43,7 +45,7 @@
 
 <!-- パネル部分 -->
 <div id="myTabContent" class="tab-content mt-3">
-  <div id="home" class="tab-pane" :class="[isActive == 0 ?'active':'']"  role="tabpanel" aria-labelledby="home-tab">ホームの文章です。...</div>
+  <div id="home" class="tab-pane" :class="[isActive == 0 ?'active':'']"  role="tabpanel" aria-labelledby="home-tab"><detailed-item :detailed="photo_data"></detailed-item></div>
   <div id="comment" class="tab-pane" :class="[isActive == 1 ?'active':'']" role="tabpanel" aria-labelledby="comment-tab"><chats-indicate :chats="photo_data['photo_id']" ref="chatsget"></chats-indicate></div>
   <div id="likes" class="tab-pane"  :class="[isActive == 2 ?'active':'']" role="tabpanel" aria-labelledby="likes-tab"><likes-list :photo_data_box="photo_data" :my_data="my_data" v-on:chats-event="likesMethod" ref="likes_child"></likes-list></div>
 </div>
@@ -52,16 +54,16 @@
    
                             <!-- DDDDDDDDDDDDDDDDDDDDDDDDDDDDD -->
                         </div>
-                        </div>
-                         
-                    </div>
+                  
         </MyModal>
     </div>
 </template>
+
 <style>
 /* body{
   overflow: hidden;
 } */
+
 .tab-content{
     overflow-y:scroll;
     overflow-x: hidden;
@@ -75,6 +77,7 @@
 .modal-window{
     background: var(--base-color);
     width:var(--width-size);
+    height:var(--height-size);
     overflow:scroll;
 }
 .profile_icon{
@@ -100,6 +103,10 @@
     width:30px;
     height:30px;
 }
+.tag_class{
+    display:inline;
+    font-size:1.3rem;
+}
 </style>
 <script>
 
@@ -123,13 +130,15 @@ export default{
         return{ 
             user_modal :false,
             chat_flg_send:0, 
-            isActive:0
+            isActive:0,
+            tags_data:[]
         }
         },components:{
         MyModal
     },watch: {
 
-}, 
+},mounted:function(){
+},
       methods:{  
         openModal(select_num) {
         var body = document.getElementsByTagName('body')[0];
@@ -138,6 +147,7 @@ export default{
         document.documentElement.style.setProperty('--width-size', '80%');
         document.documentElement.style.setProperty('--height-size', '80%');
     this.tab_select(select_num);
+    this.tags_manag();
     },tab_select(select_num){
    if(select_num == 0){
             this.chat_flg_send = 0;
@@ -177,7 +187,20 @@ export default{
     },
     likesMethod(){
         this.closeModal();
+    },tags_manag(){
+       let tags_add = this.photo_data.tag;
+       if(tags_add.slice(0,1) == "#"){
+       tags_add = tags_add.slice(1) ;
+       }
+        let tags_arr = [];
+        tags_arr = tags_add.split('#');
+        this.tags_arr = tags_arr;
+    },
+    tag_click(tag_name){
+        this.closeModal();
+        this.$router.push({ path: '/search', query: { word: tag_name } });
     }
       }
 }
 </script>
+

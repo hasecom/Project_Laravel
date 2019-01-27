@@ -7,7 +7,7 @@
                 <div class="row mt-5">
                   <div class="col-md-12">
                          <div v-for="(item ,index) in time_line" v-bind:key="index">
-                           <div class="card img-thumbnail mt-3 shadow-sm pointer">
+                           <div class="card img-thumbnail mt-3 shadow-sm ">
 			                      <div @click="modal_set('details' + index,0)" class="img_layer border">
                               <amplify-s3-image :imagePath= "'Photos/'+item.photo_path+'/'+item.file_name+'.png'">
                               </amplify-s3-image>
@@ -258,7 +258,6 @@ export default{
       
     },
     info_hover(num){
-      console.log("入る");
       let cng_value_btn = document.getElementById('value_' + num);
       cng_value_btn.style.backgroundColor = "rgba(0,191,255,0.7)";
       cng_value_btn.textContent = "詳細";
