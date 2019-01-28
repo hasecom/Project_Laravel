@@ -128,6 +128,27 @@
     text-align: left;
 }
 
+
+/* ===========================
+ *スクロールバー 
+   ==========================*/
+div::-webkit-scrollbar{
+  width: 6px;
+}
+div::-webkit-scrollbar-track{
+  background: white;
+  border: none;
+  border-radius: 12px;
+  box-shadow: inset 0 0 2px gray; 
+}
+div::-webkit-scrollbar-thumb{
+  background: #aaa;
+  border-radius: 12px;
+  box-shadow: none;
+}
+
+
+
 </style>
 
 
