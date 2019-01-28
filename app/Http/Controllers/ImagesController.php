@@ -47,7 +47,7 @@ class ImagesController extends Controller
         $date = date('Y-m-d H:i:s');
         $folder_name=$date;
         $file_name=$date.'_'.str_random(16);
-        $result=Storage::disk('s3')->directories('public/');
+        $result=Storage::disk('s3')->directories('public/Photos');
         // if(count(Storage::disk('s3')->directories('public/'))==0){
         //     Storage::disk('s3')->makeDirectory($folder_name);
         // }
@@ -63,7 +63,7 @@ class ImagesController extends Controller
         if($dir_flg==1){
                 Storage::disk('s3')->put($dir.'/'.$file_name.'.png', $fileData);
             }else{
-                Storage::disk('s3')->makeDirectory('public/'.$folder_name);
+                Storage::disk('s3')->makeDirectory('public/Photos/'.$folder_name);
                 Storage::disk('s3')->put($folder_name.'/'.$file_name.'.png', $fileData);
             }
         //*新規投稿画像をDBに保存
@@ -77,7 +77,7 @@ class ImagesController extends Controller
         $new_posted_photos->file_name = $file_name;
 
         if($dir_flg==1){
-            $new_posted_photos->photo_path = str_replace('public/', '', $dir);
+            $new_posted_photos->photo_path = str_replace('public/Photos/', '', $dir);
         }else{
             $new_posted_photos->photo_path = $folder_name;
         };

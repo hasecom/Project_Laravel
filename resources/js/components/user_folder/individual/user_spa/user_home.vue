@@ -282,9 +282,12 @@ export default{
     },
     openModal() {
       this.img_modal = true;
+      $('html, body').css('overflow', 'hidden');
+      event.preventDefault();
     },
     closeModal() {
       this.img_modal = false;
+      $('html, body').css('overflow', 'auto');
     },
     info_leave(num,val){
       let cng_value_btn = document.getElementById('value_' + num);
