@@ -35,6 +35,17 @@
       </div>
     </label>
 
+                <input id="title" type="text" v-model="send_post_name" placeholder="タイトル"/>
+                <textarea id= 'caption' v-model="send_description" placeholder="作品の説明"></textarea>
+                <input id = 'tag' type="text" v-model="send_post_tag" placeholder="タグ  例(#sample)"/>
+                <div class='price_info'><span>￥</span><input id = 'price' type="text" v-model="send_price" placeholder="0"></div>
+
+                <div class="photo_info2">
+                <p id="size">ファイルサイズ[0 Bytes]</p>
+                <p id="px">大きさ[{{upload_width}}x{{upload_height}}]</p>
+                </div>
+    </div>
+
           <input id="title" type="text" v-model="send_post_name" placeholder="タイトル"/>
           <textarea id= 'caption' v-model="send_description" placeholder="作品の説明"></textarea>
           <input id = 'tag' type="text" v-model="send_post_tag" placeholder="タグ  例(#sample)"/>
@@ -160,6 +171,8 @@ export default {
       file: null,
       error: '',
       amplifyUI: AmplifyUI,
+      upload_width:0,
+      upload_height:0
     }
   },
   mounted : function(){
@@ -210,6 +223,10 @@ export default {
       if (!this.options.storageOptions.contentType) {
         this.options.storageOptions.contentType = this.file.type;
       };
+      // const name = this.options.defaultName ? this.options.defaultName : this.file.name;
+      // this.s3ImagePath = `${this.options.path}${name}`;
+      // const that = this;
+      var up_image = new Image();
       const reader = new FileReader();
       reader.onload = (e) => {
       this.photo_size =this.file.size;
@@ -217,6 +234,12 @@ export default {
       document.getElementById("size").innerHTML = this.size_txt;
       this.file_type = this.file.type;
       this.uploadedImage = e.target.result;
+           up_image.src = reader.result;
+           up_image.onload = function(){
+        _this.upload_width = up_image.naturalWidth;
+        _this.upload_height = up_image.naturalHeight;
+      }; 
+      const _this = this;
       }
       reader.readAsDataURL(this.file);
     },
@@ -248,7 +271,8 @@ onPost(){
        this.return_base64 = response['data'];
          this.sample_data = "data:"+this.file_type+";base64," + response['data'];
        console.log(this.file_type);
-       location.reload();
+       location.reload(); //!後でちゃんと変更
+    
        }).catch(function (error) {
        console.log(error);
      });

@@ -2,52 +2,52 @@
     <div class="container">
         <div class="row">
           <div class="col-md-3"></div>
-            <div class="col-6">
+            <div class="col-md-6">
               <div class="mt-3">
                 <div class="row mt-5">
                   <div class="col-md-12">
                          <div v-for="(item ,index) in time_line" v-bind:key="index">
-                           <div class="card img-thumbnail mt-3 shadow-sm">
-			                      <div @click="modal_set('details' + index,0)" class="img_layer">
+                           <div class="card img-thumbnail mt-3 shadow-sm ">
+			                      <div @click="modal_set('details' + index,0)" class="img_layer border">
                               <amplify-s3-image :imagePath= "'Photos/'+item.photo_path+'/'+item.file_name+'.png'">
-
                               </amplify-s3-image>
                             </div>
-                                <div class="row">
-                               <div class="col-md-1">
+                                <div class="row row_margin_del_">
+                               <div class="col-md-2">
                                  <span class="cover list_image" v-bind:style="{ backgroundImage: 'url(storage/' + item.icon_path + '.jpg)' }"></span>
                                </div>
-                              <div class="col-md-10">
-                                <span>{{item.user_name}}</span>
-                                <span class="text-muted">@{{item.user_id}}</span>
+                              <div class="col-md-6 d-flex align-items-center">
+                                  <span class="pr-3">{{item.user_name}}</span>
+                                  <span class="text-muted">@{{item.user_id}}</span>
                               </div>
+                               
                             </div>
-			                        <div class="card-body">
+			                        <!-- <div class="card-body">
                                 <h5 class="card-title">{{item.photo_name}}</h5>  
-			                      </div>
+			                      </div> -->
                                 <div class="bg-light">
                                       <div class="d-flex align-items-center"> 
-                                        <div class="row w-100 row_margin_del_">
-                                          <div class="col-md-6 border py-3 text-center">
+                                        <div class="row w-100 row_margin_del_ pointer">
+                                          <div class="col-6 border py-3 text-center btn_hover"  v-on:click.self="modal_set('details' + index,2)">
                                              <span @click="likes(item.photo_id,item.like_stauts)">
                                             <span v-if="item.like_stauts == 1"  width="16" height="16"><i class="fas fa-heart" style="color:red;"></i></span>
                                             <span v-if="item.like_stauts == 0" width="16" height="16"><i class="far fa-heart"></i></span>
                                             </span>  
                                             <span @click="modal_set('details' + index,2)">{{item.likes_cnt}}件</span>
                                            </div>
-                                           <div class="col-md-6 border py-3 text-center">
-                                            <span @click="modal_set('details' + index,1)"><i class="far fa-comment"></i></span>
+                                           <div class="col-6 border py-3 text-center btn_hover" @click="modal_set('details' + index,1)">
+                                            <span><i class="far fa-comment"></i></span>
                                           </div>
                                        </div>
                                       </div>
                   
 
-                               
+                            
                                  <user-post-details :photo_data="item" :my_data="my_data" :ref="'details' + index" v-on:likes-event="get_timeline_data"></user-post-details>
                                 </div>
-                            <div class="row bg-info card_footer_  py-3">
-                                <p class="col-md-8">{{date_disassembly_out[index][0]}}年{{date_disassembly_out[index][1]}}月{{date_disassembly_out[index][2]}}日</p>
-                                <p class="col-md-3 text-white bg-primary rounded">¥{{item.photo_price}}</p>   
+                            <div class="card_footer_  py-3 value_ row_margin_del_ pointer" @mouseenter="info_hover(index)" @mouseleave="info_leave(index,item.photo_price)" :id="'value_' + index" @click="modal_set('details' + index,0)">
+                                <!-- <p class="col-md-8">{{date_disassembly_out[index][0]}}年{{date_disassembly_out[index][1]}}月{{date_disassembly_out[index][2]}}日</p> -->
+                                ¥{{item.photo_price}}
                             </div>
 		                      </div>
                         </div> 
@@ -67,12 +67,18 @@
 
 
 <style>
+
 .card_footer_{
   margin:0;
+  background:rgba(0,191,255,1);
+  color:white;
+  text-align: center;
+
+  -webkit-transition: all 200ms ease;
+  transition: all 200ms ease;
+  
 }
-.row_margin_del_{
-  margin:0;
-}
+
 .img-thumbnail{
   padding:0 !important;
 }
@@ -116,6 +122,15 @@
 .list_image{
     width:30px;
     height:30px;
+}
+.value_{
+   display:table;
+   height:3em;
+   font-weight: bold;
+}
+.value_ span{
+    display:table-cell;
+  vertical-align:middle;
 }
 
 .img_layer{
@@ -244,7 +259,8 @@ export default{
               date_disassembly[j] = date_bef[j].match(/\d{1,4}/g);
           }
           this.date_disassembly_out = date_disassembly;       
-    },likes:function(photo_id,like_stauts){
+    },likes:function(photo_id,like_stauts,e){
+      
         let params = new URLSearchParams();
         params.append('photo_id',photo_id);
         params.append('like_stauts',like_stauts);
@@ -270,6 +286,20 @@ export default{
     closeModal() {
       this.img_modal = false;
     },
+    info_leave(num,val){
+      let cng_value_btn = document.getElementById('value_' + num);
+      cng_value_btn.style.backgroundColor = "rgba(0,191,255,1)";
+      
+      cng_value_btn.textContent = "¥" + val;
+      
+      
+    },
+    info_hover(num){
+      let cng_value_btn = document.getElementById('value_' + num);
+      cng_value_btn.style.backgroundColor = "rgba(0,191,255,0.7)";
+      cng_value_btn.textContent = "詳細";
+    }
+
   }
 }
 </script>

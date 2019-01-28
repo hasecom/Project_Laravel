@@ -12,10 +12,10 @@ use App\Posted_photos;
 class LikesController extends Controller
 {
    public function likes_get($id){
-       $likes_user_data = $this->likes_data($id);
      
-
-    return $likes_user_data;
+       $likes_user_data = $this->likes_data($id);
+      
+   return $likes_user_data;
    }
    public function likes_post(){
 

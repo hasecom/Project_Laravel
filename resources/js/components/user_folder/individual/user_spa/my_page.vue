@@ -1,9 +1,8 @@
 <template>
     <div>
-        <div class="container">
-            <div class="row">
+            <div class="row row_margin_del_">
               <div class="col-md-3"></div>
-                 <div class="col-6">
+                 <div class="col-md-6">
                      <div class="mt-3">
                              <div class="card-body row align-items-center">
                                 <span class="cover ml-5 profile_icon" v-bind:style="{ backgroundImage: 'url(storage/' + each_user_data.icon_path + '.jpg)' }"></span>
@@ -11,9 +10,9 @@
                                 <p class="pl-2 text-muted">{{each_user_data.user_id}}</p>
                             </div>
                             <div>  
-                                <button  v-if="follows_list.length != 0" type="button" class="btn-sm border"  @click="openModal(0)">フォロー中　{{follows_list.length}}人</button>
+                                <button  v-if="follows_list.length != 0" type="button" class="btn-sm border pointer"  @click="openModal(0)">フォロー中　{{follows_list.length}}人</button>
                                <button  v-if="follows_list.length == 0" type="button" class="btn-sm border">フォロー中　{{follows_list.length}}人</button>
-                               <button v-if="followed_list.length != 0" type="button" class="btn-sm border"  @click="openModal(1)">フォロワー　{{followed_list.length}}人</button>
+                               <button v-if="followed_list.length != 0" type="button" class="btn-sm border pointer"  @click="openModal(1)">フォロワー　{{followed_list.length}}人</button>
                                <button v-if="followed_list.length == 0" type="button" class="btn-sm border">フォロワー　{{followed_list.length}}人</button>
                                
                             </div>
@@ -24,26 +23,30 @@
                 </div>  
                 <div class="col-md-3"></div> 
             </div>
-        </div>
         <MyModal @close="closeModal" v-if="user_modal" class="border-0">
                <div class="row justify-content-center mt-3 border-bottom ">
               <div class="col-md-3"></div>
             <div class="col-md-6 h4">{{modai_title}}</div>
-           <div @click="closeModal()" class="col-md-3 h4"><i class="fas fa-times"></i></div>
+           <div @click="closeModal()" class="col-md-3 h4 pointer"><i class="fas fa-times"></i></div>
           </div>
             <div v-if="display_judg == 0">
               <div class="modal_display mx-sm-5">
-                <div v-for="val in follows_list" v-bind:key="val.id">
+                <div v-for="(val ,index) in follows_list" v-bind:key="index">
                     <div class="row mb-2">
                         <div class="col-md-2">
-                            <span class="cover list_image text-left" @click="follows_link(val.user_id)" v-bind:style="{ backgroundImage: 'url(storage/' + val.icon_path + '.jpg)' }"></span>
+                            <span class="cover list_image text-left pointer" @click="follows_link(val.user_id)" v-bind:style="{ backgroundImage: 'url(storage/' + val.icon_path + '.jpg)' }"></span>
                         </div>
                          <div class="col-md-4">
-                            <span class="h5"  @click="follows_link(val.user_id)">{{val.user_name}}</span><br>
-                            <span class="text-muted" style="line-height:0px;">{{val.user_id}}</span>
+                            <span class="h5 pointer"  @click="follows_link(val.user_id)">{{val.user_name}}</span><br>
+                            <span class="text-muted pointer" style="line-height:0px;">{{val.user_id}}</span>
                         </div>
                         <div class="col-md-6">
-                            <button type="button" class="btn-sm border" @click="follow_or_Non(val.id,val.follows_stauts)">{{val.follows_string}}</button>
+                                 <div v-if="val.follows_stauts == 0">
+                                <button type="button" class="btn-sm border pointer" @click="follow_or_Non(val.id,val.follows_stauts)" >{{val.follows_string}}</button>
+                            </div>
+                            <div v-if="val.follows_stauts == 1">
+                                <button type="button" class="btn-sm border follows_r pointer" @click="follow_or_Non(val.id,val.follows_stauts)" >{{val.follows_string}}</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -51,17 +54,23 @@
             </div>
                <div v-if="display_judg == 1">
               <div class="modal_display mx-sm-5">
-                <div v-for="val in followed_list" v-bind:key="val.id">
+                <div v-for="(val , index) in followed_list" v-bind:key="index">
                     <div class="row mb-2">
                         <div class="col-md-2">
-                            <span class="cover list_image text-left" @click="follows_link(val.user_id)" v-bind:style="{ backgroundImage: 'url(storage/' + val.icon_path + '.jpg)' }"></span>
+                            <span class="cover list_image text-left pointer" @click="follows_link(val.user_id)" v-bind:style="{ backgroundImage: 'url(storage/' + val.icon_path + '.jpg)' }"></span>
                         </div>
                          <div class="col-md-4">
-                            <span class="h5"  @click="follows_link(val.user_id)">{{val.user_name}}</span><br>
-                            <span class="text-muted" style="line-height:0px;">{{val.user_id}}</span>
+                            <span class="h5 pointer"  @click="follows_link(val.user_id)">{{val.user_name}}</span><br>
+                            <span class="text-muted pointer" style="line-height:0px;">{{val.user_id}}</span>
                         </div>
                         <div class="col-md-6">
-                            <button type="button" class="btn-sm border" @click="follow_or_Non(val.id,val.follows_stauts)">{{val.follows_string}}</button>
+                            <div v-if="val.follows_stauts == 0">
+                                <button type="button" class="btn-sm border pointer" @click="follow_or_Non(val.id,val.follows_stauts)" >{{val.follows_string}}</button>
+                            </div>
+                            <div v-if="val.follows_stauts == 1">
+                                <button type="button" class="btn-sm border follows_r pointer" @click="follow_or_Non(val.id,val.follows_stauts)" >{{val.follows_string}}</button>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -91,6 +100,7 @@
   padding:50px 20px;
 }
 
+
 @media (max-width: 992px) {
   .container {
     min-width: 890px;
@@ -106,6 +116,7 @@
     width:30px;
     height:30px;
 }
+
 </style>
 <script>
 import MyModal from '../../user_modal/user_modal.vue';
@@ -123,6 +134,7 @@ export default {
          user_modal: false, //modal表示・非表示
          display_judg :0, 
          modai_title:"",
+         relationship:0
         }
     },components:{
         MyModal
@@ -132,7 +144,9 @@ export default {
 },watch:{
             '$route' (to, from) {
                this.submit_user();
-            }
+            },
+        
+           
 },methods:{
     submit_user: function () {
        axios.get("api/users/chk").then(response=>{
@@ -157,7 +171,7 @@ export default {
     openModal(judg) {
        this.display_judg = judg;
        if (judg==0) this.modai_title = "フォロー中";
-       if (judg==1) this.modai_title = "フォロワー";
+       if (judg==1) this.modai_title = "フォロワー";     
       this.user_modal = true;
     },
     closeModal() {
@@ -185,23 +199,26 @@ export default {
                         //stautsはあくまで”自分が”フォローしているかどうか
                     this.followed_list[m]['follows_string'] ="フォロー中";
                     this.followed_list[m]['follows_stauts'] =1;
+               
                 }else{
                     //console.log("フォローのみされている"+followed_arr[m]);
                     this.followed_list[m]['follows_string'] ="フォローする";
                     this.followed_list[m]['follows_stauts'] =0;
+
                 }
             }
                 for(let n = 0; n < follows_arr.length; n++){
                 //フォロワー配列にフォロー配列と同一人物がいるか。
                 if(0 <= followed_arr.indexOf(follows_arr[n])){
                     this.follows_list[n]['follows_string'] ="フォロー中";
-                    this.follows_list[n]['follows_stauts'] =1;
+                    this.follows_list[n]['follows_stauts'] =1;    
                 }else{
                     //console.log("フォローしているだけ"+follows_arr[n]);
                     this.follows_list[n]['follows_string'] ="フォロー中";
-                    this.follows_list[n]['follows_stauts'] =1;
+                    this.follows_list[n]['follows_stauts'] =1;  
                 }
             }
+       
   
     }
     ,follow_or_Non(val,stauts){

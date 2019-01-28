@@ -25,6 +25,7 @@ import set_pass from './components/user_folder/individual/component/set_pass.vue
 import set_privacy from './components/user_folder/individual/component/set_privacy.vue';
 import footer from './components/user_folder/individual/component/footer.vue';
 import front_main from './components/user_folder/individual/component/front_main.vue';
+import detailed_item from './components/user_folder/individual/component/detailed_item.vue';
 
 
 //ADMIN
@@ -57,6 +58,7 @@ Vue.component('set-pass',set_pass);
 Vue.component('set-privacy',set_privacy);
 Vue.component('vue-footer',footer);
 Vue.component('front-main',front_main);
+Vue.component('detailed-item',detailed_item);
 
 //*aws amplify
 import Amplify, * as AmplifyModules from 'aws-amplify';

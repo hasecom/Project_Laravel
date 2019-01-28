@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="set_profile_">
     <form @submit.prevent="send_data">
         <div class="row">   
             <div class="col-4">
@@ -32,7 +32,9 @@
     </div>
 </template>
 <style>
-
+.set_profile_{
+    color:black;
+}
 </style>
 <script>
 export default{

@@ -15830,3 +15830,23 @@ readers do not read off random characters that represent icons */
   cursor: pointer;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
+.follows_r {
+  background: #ff9900;
+  color: white;
+  font-weight: bold;
+}
+
+.btn_hover:hover {
+  background-color: #f0f0f0;
+  -webkit-transition: background-color 200ms ease;
+  transition: background-color 200ms ease;
+}
+
+.row_margin_del_ {
+  margin: 0;
+}
+
