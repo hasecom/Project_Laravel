@@ -45,18 +45,6 @@
                 <p id="px">大きさ[{{upload_width}}x{{upload_height}}]</p>
                 </div>
     </div>
-
-          <input id="title" type="text" v-model="send_post_name" placeholder="タイトル"/>
-          <textarea id= 'caption' v-model="send_description" placeholder="作品の説明"></textarea>
-          <input id = 'tag' type="text" v-model="send_post_tag" placeholder="タグ  例(#sample)"/>
-          <div class='price_info'><span>￥</span><input id = 'price' type="text" v-model="send_price" placeholder="0">
-          </div>
-
-          <div class="photo_info2">
-          <p id="size">ファイルサイズ[0 Bytes]</p>
-          <!--<p id="px">大きさ[0x0]</p>-->
-          </div>
-
           <button v-if="file" v-bind:class="[amplifyUI.photoPickerButton, amplifyUI.button]" v-on:click="onPost" :disabled="!file" style="width:100%; ">{{options.title}}</button>
           <div class="error" v-if="error">
             {{ error }}
