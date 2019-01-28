@@ -304,6 +304,7 @@ onPost(){
        this.return_base64 = response['data'];
          this.sample_data = "data:"+this.file_type+";base64," + response['data'];
        console.log(this.file_type);
+    
        }).catch(function (error) {
        console.log(error);
      });

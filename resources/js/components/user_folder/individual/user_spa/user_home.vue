@@ -42,7 +42,7 @@
                                       </div>
                   
 
-                               
+                            
                                  <user-post-details :photo_data="item" :my_data="my_data" :ref="'details' + index" v-on:likes-event="get_timeline_data"></user-post-details>
                                 </div>
                             <div class="card_footer_  py-3 value_ row_margin_del_ pointer" @mouseenter="info_hover(index)" @mouseleave="info_leave(index,item.photo_price)" :id="'value_' + index" @click="modal_set('details' + index,0)">
@@ -261,8 +261,6 @@ export default{
       let cng_value_btn = document.getElementById('value_' + num);
       cng_value_btn.style.backgroundColor = "rgba(0,191,255,0.7)";
       cng_value_btn.textContent = "詳細";
-      
-      
     }
 
   }

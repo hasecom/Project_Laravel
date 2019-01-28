@@ -103,6 +103,8 @@ Route::post('/api/users/change/userinfo', 'UsersController@user_info_change');
 Route::get('/api/user/post_data/{id}', 'ImagesController@post_data_get');
 Route::post('/api/user/post_data/{id}', 'ImagesController@post_data_post');
 
+Route::get('/api/user/post_data/details/{get_details_info}', 'ImagesController@get_details_info');
+
 /*====================================================================
 タイムライン用データ送信用
 ======================================================================*/
@@ -129,6 +131,8 @@ Photo用データ送信用
 */
 Route::get('/api/user/post_data/photo/chat/{id}', 'ChatsController@chat_get');
 Route::post('/api/user/post_data/photo/chat/{id}', 'ChatsController@chat_post');
+
+
 
 /*====================================================================
 Tags用データ送信用

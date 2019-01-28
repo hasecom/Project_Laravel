@@ -2,7 +2,6 @@
     <div>
         <MyModal @close="closeModal" v-if="user_modal" class="border-0" >          
                     <div class="modal_display">
-                       
                               <div>{{photo_data.user_name}}&emsp;&emsp;<span class="text-muted">@{{photo_data.user_id}}</span></div>
                               <!-- <span class="bd-placeholder-img card-img-top" width="100%" height="300" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: カードの画像"><title>プレースホルダ</title> -->
 			                    <amplify-s3-image style="pointer-events: none;" :imagePath= "'Photos/'+photo_data.photo_path+'/'+photo_data.file_name+'.png'" ></amplify-s3-image>
@@ -105,7 +104,7 @@
 }
 .tag_class{
     display:inline;
-    font-size:1.3rem;
+    font-size:1.1rem;
 }
 </style>
 <script>
