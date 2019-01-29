@@ -4,7 +4,8 @@
              <div class="row">
                     <div class="col-md-6" v-for="(item ,index) in reverseItems" v-bind:key="index">
                         <div class="card img-thumbnail mt-3 shadow-sm">
-			                <svg class="bd-placeholder-img card-img-top" width="100%" height="150" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: カードの画像"><title>プレースホルダ</title><rect fill="#868e96" width="100%" height="100%"></rect><text fill="#dee2e6" dy=".3em" x="30%" y="50%">no image</text></svg>
+			                <!--<svg class="bd-placeholder-img card-img-top" width="100%" height="150" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: カードの画像"><title>プレースホルダ</title><rect fill="#868e96" width="100%" height="100%"></rect><text fill="#dee2e6" dy=".3em" x="30%" y="50%">no image</text></svg>-->
+			               <amplify-s3-image style="pointer-events: none;" :imagePath= "'Photos/'+item[reverseItems.length -1-index].photo_path+'/'+item[reverseItems.length -1-index].file_name+'.png'" ></amplify-s3-image>
 			                <div class="card-body px-2 py-3">
                                 <h5 class="card-title">{{item[reverseItems.length -1 -index].photo_name}}</h5>
                                 <p class="card-text text-muted text-center">{{item[reverseItems.length -1 -index].photo_description}}</p>
@@ -20,7 +21,20 @@
     </div>
 </template>
 <style>
+.amplify-image{
+    width:100% !important;
+    height:auto;
+}
+.img_layer{
+  width:auto !important;
+  height:auto !important;
+  background-color:#f8f9fa;
+  
+  display: table-cell !important; /*上下中央*/
+  text-align: center !important; /*左右中央*/
+  vertical-align: middle !important; /*上下中央*/
 
+}
 </style>
 <script>
 //画像の遅延でこれ使いたいな=>https://www.kabanoki.net/2099
