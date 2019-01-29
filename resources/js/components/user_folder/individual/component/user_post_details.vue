@@ -57,7 +57,7 @@
         </MyModal>
     </div>
 </template>
-<style scoped>
+<style>
 /* body{
   overflow: hidden;
 } */

@@ -79,7 +79,7 @@
         </MyModal>
     </div>
 </template>
-<style scoped>
+<style>
 .profile_icon{
      width: 150px;
     height: 150px;
