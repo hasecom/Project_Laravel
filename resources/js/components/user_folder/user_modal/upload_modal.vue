@@ -1,8 +1,8 @@
 <template>
-<div>
-  <div v-bind:class="amplifyUI.formSection" style="width: 380px">
-    <div v-bind:class="amplifyUI.sectionHeader">{{options.header}}</div>
-    <div v-bind:class="amplifyUI.sectionBody" style="text-align:center">
+  <div v-bind:class="amplifyUI.formContainer" style="text-align:center; margin-bottom:0px; max-width:100%;">
+  <!--<div class="modal" style="text-align:center; margin-bottom:0px; max-width:320px !important; width:320px !important">-->
+    <div v-bind:class="amplifyUI.sectionBody" style="text-align:center; margin-bottom:0px !important; width:100%; padding:10px;">
+    <div v-bind:class="amplifyUI.sectionHeader" style="text-align:center; width:100%; ">{{options.header}}</div>
       <img
         class="display_img" 
         v-if="file" 
@@ -14,8 +14,8 @@
         @dragover.prevent="dragover=true"
         @dragleave.prevent="dragover=false"
         @drop.prevent="drop">
-      <div v-bind:class="amplifyUI.photoPlaceholder" v-if="!file" style="width: 380px">
-      <div v-bind:class="amplifyUI.photoPlaceholderIcon" v-if="!file" style="width: 380px; color:#f90;">
+      <div v-bind:class="amplifyUI.photoPlaceholder" v-if="!file" style="width:100%; ">
+      <div v-bind:class="amplifyUI.photoPlaceholderIcon" v-if="!file" style="width:100%;">
         <p class="p1">ファイルを選択</p>
         <p class="p1">jpeg png 最大32MBまで</p>
 
@@ -34,15 +34,7 @@
         </div>
       </div>
     </label>
-      <!--<input
-        ref="file_input"  
-        type="file"
-        accept="options.accept"
-        @change="pick"
-      />-->
 
-
-        <!--<div class="photo_info">-->
                 <input id="title" type="text" v-model="send_post_name" placeholder="タイトル"/>
                 <textarea id= 'caption' v-model="send_description" placeholder="作品の説明"></textarea>
                 <input id = 'tag' type="text" v-model="send_post_tag" placeholder="タグ  例(#sample)"/>
@@ -52,33 +44,34 @@
                 <p id="size">ファイルサイズ[0 Bytes]</p>
                 <p id="px">大きさ[{{upload_width}}x{{upload_height}}]</p>
                 </div>
-        <!--</div>-->
     </div>
-
-
-
-
-    <button v-if="file" v-bind:class="[amplifyUI.photoPickerButton, amplifyUI.button]" v-on:click="onPost" :disabled="!file">{{options.title}}</button>
-    <div class="error" v-if="error">
-      {{ error }}
-    </div>
-  </div>
-</div>
+          <button v-if="file" v-bind:class="[amplifyUI.photoPickerButton, amplifyUI.button]" v-on:click="onPost" :disabled="!file" style="width:100%; ">{{options.title}}</button>
+          <div class="error" v-if="error">
+            {{ error }}
+          </div>
+        </div>
+      </div>
 </template>
 
 <style>
 #title{
+    width:100%;
+    
     border-radius: 6px 6px 0px 0px;
     margin :10px 0px 2px 0px;
     background-color: #f8f4f4;
 }
 #caption{
+    width:100%;  
+    
     height:100px;
     border-radius:0px 0px 6px 6px ;
     background-color: #f8f4f4;
     
 }
 #tag{
+    width:100%; 
+    
     margin-top: 10px;
     margin-bottom: 5px;
     border-radius:6px;
@@ -94,10 +87,17 @@
     background-color: #f8f4f4;
 }
 
+.photo_info{
+  height:100%;
+}
+
 .price_info{
-  background-color: #6cb2eb;
+  width:100%; 
+  
+  color:white;
   text-align: right;
   border-radius:3px;
+  background-color: #6cb2eb;
 }
 .price_info span{
   font-size: 1.5em;
@@ -111,12 +111,16 @@
   }
 
 .upload_area{ 
+  width:100%; 
+  
+  height:auto;
   background-color: rgb(63,63,61);
   opacity: 0.8;
 }
 
 .display_img{
-    width: 380px;
+    width:100%; 
+    
     height: 300px;
     object-fit: contain;
 }
@@ -125,44 +129,30 @@
 }
 
 
+/* ===========================
+ *スクロールバー 
+   ==========================*/
+div::-webkit-scrollbar{
+  width: 6px;
+}
+div::-webkit-scrollbar-track{
+  background: white;
+  border: none;
+  border-radius: 12px;
+  box-shadow: inset 0 0 2px gray; 
+}
+div::-webkit-scrollbar-thumb{
+  background: #aaa;
+  border-radius: 12px;
+  box-shadow: none;
+}
+
+
+
 </style>
 
 
-
-
-<!-- 
-<template>
-    <div>
-        <h1>画像投稿</h1>
-         
-         <form @submit.prevent="onPost" enctype= "multipart/form-data">
-          <div class="img_up">    
-          <img class="img_view" v-show="uploadedImage" :src="uploadedImage" width="480" height="320"/>
-          <input type="file" v-on:change="onFileChange" name="file"><br>
-          </div>
-          <div class="photo_info">
-            <div class="row">
-              <div class="col-md-3">
-                  タイトル：
-              </div>
-               <div class="col-md-8">
-                  <p><input id="title" type="text" v-model="send_post_name"/></p>
-              </div>
-
-            </div>
-        
-
-          <p>タ　グ　：<input type="text" v-model="send_post_tag"/></p>
-          <p>説明欄　：<textarea v-model="send_description"></textarea></p>
-          <p id="size">ファイルサイズ：[0 Bytes]</p>
-          <p id="px">大きさ：[0x0]</p>
-          </div>
-          <div class="sub" ><button  type="submit" class = "btn btn-primary">送信</button></div>
-          </form>-->
-        <!--</div>
-</template>-->
 <script>
-
 import * as AmplifyUI from '@aws-amplify/ui';
 
 export default {
@@ -181,14 +171,13 @@ export default {
       my_data:[],
       flg :0,
       photo_size :0,
+      size_text:'',
       file_type:'',
 
       dragover: false,
       files: [],
       logger: {},
       file: null,
-      s3ImagePath: '',
-      photoUrl: '',
       error: '',
       amplifyUI: AmplifyUI,
       upload_width:0,
@@ -207,14 +196,12 @@ export default {
       if (!this.options.storageOptions.contentType) {
         this.options.storageOptions.contentType = this.file.type;
       };
-      // const name = this.options.defaultName ? this.options.defaultName : this.file.name;
-      // this.s3ImagePath = `${this.options.path}${name}`;
-      // const that = this;
+
       const reader = new FileReader();
       reader.onload = (e) => {
-      //   const target = e.target;
-      //   const url  = target.result;
-      //   that.photoUrl = url;
+      this.photo_size =this.file.size;
+      this.size_txt = "ファイルサイズ[" + this.photo_size + " Bytes]";
+      document.getElementById("size").innerHTML = this.size_txt;
       this.file_type =this.file.type;
       this.uploadedImage = e.target.result;
       }
@@ -239,17 +226,6 @@ export default {
       console.log(error);
       });
     },
-    // upload() {
-    //   this.$Amplify.Storage.put(
-    //     this.s3ImagePath,
-    //     this.file, 
-    //     this.options.storageOptions,
-    //   )
-    //   .then((result) => {
-    //     this.completeFileUpload(result.key)
-    //   })
-    //   .catch(e => this.setError(e));
-    // },
     pick(file) {
       this.file = file.target.files[0];
       if (!this.file) { return ;};
@@ -262,9 +238,9 @@ export default {
       var up_image = new Image();
       const reader = new FileReader();
       reader.onload = (e) => {
-      //   const target = e.target;
-      //   const url  = target.result;
-      //   that.photoUrl = url;
+      this.photo_size =this.file.size;
+      this.size_txt = "ファイルサイズ[" + this.photo_size + " Bytes]";
+      document.getElementById("size").innerHTML = this.size_txt;
       this.file_type = this.file.type;
       this.uploadedImage = e.target.result;
            up_image.src = reader.result;
@@ -304,17 +280,12 @@ onPost(){
        this.return_base64 = response['data'];
          this.sample_data = "data:"+this.file_type+";base64," + response['data'];
        console.log(this.file_type);
+       location.reload(); //!後でちゃんと変更
     
        }).catch(function (error) {
        console.log(error);
      });
   },
-
-
-
-
-
-
 
     setError: function(e) {
       this.error = this.$Amplify.I18n.get(e.message || e);
@@ -322,87 +293,4 @@ onPost(){
     }
   }
 }
-
-
-
-
-
-// export default {
-// data() {
-//     return {
-//       uploadedImage: '',
-//       return_base64:'',
-//       sample_data:'',
-//       send_description:'',
-//       send_post_name:'',
-//       send_post_tag:'',
-//       my_data:[],
-//       flg :0,
-//       photo_size :0,
-//       img_modal:false,
-//     };
-//   },
-//   mounted : function(){
-//       this.on_post_Load();
-//   },
-//   methods: {
-//     on_post_Load(){
-//              axios.get("api/users/chk").then(response=>{
-//                 this.my_data = typeof(response['data'])=="undefined"? []: response['data'];
-//   }).catch(function (error) {
-//                console.log(error);
-//             });
-//     },
-//     openModal() {
-//       this.img_modal = true;
-//     },
-//     closeModal() {
-//       this.img_modal = false;
-//     },
-//     onFileChange(e) {
-//       let files = e.target.files || e.dataTransfer.files;
-//       this.createImage(files[0]);
-//           // console.log(files);
-//     },
-//     // アップロードした画像を表示
-//     createImage(file) {
-//       let reader = new FileReader();
-//       reader.onload = (e) => {
-//         this.uploadedImage = e.target.result;
-
-//       };
-//       reader.readAsDataURL(file);
-//       this.photo_size = file.size;
-//       var size_txt = "ファイルサイズ：[" + this.photo_size + " Bytes]";
-//       // var dimension = "大きさ：[" + file.width + "x"+ file.height + "]"; //!ファイルの幅と高さ取得どうやるの。。。
-//       document.getElementById("size").innerHTML = size_txt;
-//       // document.getElementById("px").innerHTML = dimension;
-//     },
-//     onPost(){
-       
-//         if(this.flg==1){
-//           return false;
-//         }
-//         let  token_ = Math.random();
-      
-//         let params = new URLSearchParams();
-//         params.append('files',this.uploadedImage);
-//         params.append('img_post',token_);
-//         params.append('photo_size',this.photo_size);
-//         // params.append('photo_px',dimension); //!ファイルの幅と高さ取得どうやるの。。。
-//         params.append('description',this.send_description);
-//         params.append('post_tag',this.send_post_tag);
-//         params.append('post_name',this.send_post_name);
-//         axios.post("api/user/post_data/"+ this.my_data['user_id'],params).then(response => {
-//           this.flg=1;
-//           this.return_base64 = response['data'];
-//             this.sample_data = "data:image/jpeg;base64," + response['data'];
-//           console.log(response['data']);
-//           }).catch(function (error) {
-//           console.log(error);
-//         });
-//     },
-//   },  
-
-// }
 </script>

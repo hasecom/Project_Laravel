@@ -23,3 +23,5 @@ resources/views/.DS_Store
 .DS_Store
 config/database.php
 
+public/js/app.js
+public/mix-manifest.json

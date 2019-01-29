@@ -143,8 +143,35 @@
   vertical-align: middle !important; /*上下中央*/
 
 }
+/*.modal-window{
+  text-align: center;
+  position: absolute;
+  overflow-y: scroll;
+  overflow-x: scroll;
+  height:90% !important;
+  width:80% !important;
+  object-fit: contain !important;
+  vertical-align: middle !important;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}*/
 
+/* ===========================
+ *投稿ボタン＆モーダル 
+   ==========================*/
 
+#main_modal .modal-window{
+  position: absolute;
+  text-align: center !important;
+  width:80vw;
+  max-width:420px;
+  max-height:95%;
+  overflow-y:scroll;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
 
 .my-green{
   width:140%;
@@ -195,6 +222,16 @@ export default{
         MyModal,Details,uploadmodal
     },mounted:function(){
       this.get_timeline_data();
+      //   window.onresize = function() {
+      //   var mwindow =document.getElementsByClassName("modal-window");
+      //   var modal = mwindow[0];
+      //   if(100>modal.children.clientHeight){
+      //     modal.id='default';
+      //   }else{
+      //     modal.id='overflow';
+      //   }
+      //   console.log(modal.children.clientHeight);
+      // };
   },methods:{
     get_timeline_data:function(){
       axios.get("api/users/chk").then(response => {
@@ -245,9 +282,12 @@ export default{
     },
     openModal() {
       this.img_modal = true;
+      $('html, body').css('overflow', 'hidden');
+      event.preventDefault();
     },
     closeModal() {
       this.img_modal = false;
+      $('html, body').css('overflow', 'auto');
     },
     info_leave(num,val){
       let cng_value_btn = document.getElementById('value_' + num);

@@ -120,6 +120,12 @@ methods:{
  
 
 <style scoped>
+#navbarNav4{
+  background-color: rgb(63,63,61);
+  width:40%;
+}
+
+
 :root {
   --border_opacity: 1.0;
   --my_menu_height:100%;
