@@ -20,7 +20,7 @@
             <div class="col-md-4">
                 <div v-for="(item_right , index) in img_arr_right" :key="index"  class="row flex-column" style="height:fit-content">
                     <div class="col-12  mt-2 pointer" :id="'item_right' + index"  @mouseenter="info_hover('item_right'+index)" @mouseleave="info_leave('item_right'+index)" @click="modal_set('details' + index,0)">
-                       <div class="sample">kkkkkkkkkkkkkkk</div>
+                       <!-- <div class="sample">kkkkkkkkkkkkkkk</div> -->
                         <amplify-s3-image style="pointer-events: none; width:100% !important"  :imagePath= "'Photos/'+item_right.photo_path+'/'+item_right.file_name+'.png'" ></amplify-s3-image>
                     </div>
                     <user-post-details :photo_data="item_right"   :ref="'details' + index"></user-post-details>

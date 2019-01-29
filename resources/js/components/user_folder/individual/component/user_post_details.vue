@@ -57,7 +57,7 @@
         </MyModal>
     </div>
 </template>
-<style scoped>
+<style>
 /* body{
   overflow: hidden;
 } */
@@ -76,7 +76,8 @@
     background: var(--base-color);
     width:var(--width-size);
     height:var(--height-size);
-    overflow:scroll;
+    overflow-y:scroll;
+    overflow-x:hidden;
 }
 .profile_icon{
     width: 150px;

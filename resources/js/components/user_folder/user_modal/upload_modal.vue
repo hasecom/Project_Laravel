@@ -50,7 +50,6 @@
             {{ error }}
           </div>
         </div>
-      </div>
 </template>
 
 <style>
@@ -205,6 +204,8 @@ export default {
       this.file_type =this.file.type;
       this.uploadedImage = e.target.result;
       }
+        _this.upload_width = up_image.naturalWidth;
+        _this.upload_height = up_image.naturalHeight;
       reader.readAsDataURL(this.file);
     },
     options() {
@@ -281,7 +282,7 @@ onPost(){
          this.sample_data = "data:"+this.file_type+";base64," + response['data'];
        console.log(this.file_type);
        location.reload(); //!後でちゃんと変更
-    
+
        }).catch(function (error) {
        console.log(error);
      });

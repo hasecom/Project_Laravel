@@ -58,7 +58,7 @@
             <div class="col-md-3"></div> 
         </div>
  
-    <div class="up_btn"><i class="fas fa-file-upload fa-3x faa-float animated my-green" @click="openModal">投稿</i></div>
+    <div class="up_btn pointer"><i class="fas fa-file-upload fa-3x faa-float animated my-green shadow-lg" style="width:100%; height:100%" @click="openModal"></i></div>
       <MyModal id="main_modal" @close="closeModal" v-if="img_modal" class="border-0">
         <uploadmodal></uploadmodal>
       </MyModal>
@@ -184,11 +184,18 @@
   user-select:none;
   background-color: rgb(63,63,61);
 }
+.my-green:hover{
+
+  background-color:rgb(63,63,61,0.9);
+}
 
 .up_btn{
   position: fixed;
   bottom: 7%;
   right: 10%;
+  width:100px;
+  height:100px;
+	border-radius: 50%;/*角丸*/
 }
 
 </style>

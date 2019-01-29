@@ -101,6 +101,7 @@
 }
 
 
+
 @media (max-width: 992px) {
   .container {
     min-width: 890px;
@@ -118,6 +119,13 @@
 }
 
 </style>
+<style>
+.modal-window{
+    overflow-y: scroll;
+    max-height: 70%;
+}
+</style>
+
 <script>
 import MyModal from '../../user_modal/user_modal.vue';
 window.Vue = require('vue');
