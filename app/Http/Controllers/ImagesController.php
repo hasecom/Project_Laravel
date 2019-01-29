@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Posted_photos;
 use App\Tags;
 use App\User;
+use App\Http\Controllers\LikesController;
 
 
 
@@ -40,7 +41,8 @@ class ImagesController extends Controller
     private function img_upload($get_input_id){
         $sample_data = $_POST['files'];
         $img = $_POST['files'];
-        $img = str_replace('data:image/jpeg;base64,', '', $img);
+        $file_type = $_POST['file_type'];
+        $img = str_replace('data:'.$file_type.';base64,', '', $img);
         $img = str_replace(' ', '+', $img);
         $fileData = base64_decode($img);
 
@@ -73,6 +75,7 @@ class ImagesController extends Controller
         $new_posted_photos->tag = $_POST['post_tag'];
         $new_posted_photos->photo_name = $_POST['post_name'];
         $new_posted_photos->photo_size = $_POST['photo_size'];
+        $new_posted_photos->photo_price = $_POST['photo_price'];
         
         $new_posted_photos->file_name = $file_name;
 
@@ -122,7 +125,9 @@ class ImagesController extends Controller
            
        }
        $img_post_data = $this->mediation_post_data($get_input_id);
-       return $img_post_data;
+
+        
+     return $img_post_data;
     }
     public function post_data_post($id){
         //post_image_page.vueからaxiosで取得したID
@@ -145,6 +150,29 @@ class ImagesController extends Controller
         }
         return $send_img_info;
     }
+    //詳細表示のためのメソッド ##search_page.vueで使用
+    public function get_details_info($id){
+            //$id =>photo_id
+            //getしたい情報::user_id,likes_cnt,like_id,like_stauts,Id,user_name,icon_path
+    //投稿ユーザの情報取得
+    $input_exists = Posted_photos::where('photo_id', $id)->exists();
+    if($input_exists != true) exit;//idがなければ処理停止
+    $photo_user_id = Posted_photos::where('photo_id', $id)->value('user_id');
+    $input_user_exists = User::where('id', $photo_user_id)->exists();
+    if($input_user_exists != true) exit;//idがなければ処理停止
+    $return_arr = User::where('id', $photo_user_id)->get([
+        'user_id',
+        'id',
+        'icon_path',
+        ]);
+    $likes = LikesController::likes_allocation($id);//いいね情報GET
+    $return_arr[0]['likes_cnt'] = $likes['likes_cnt'];
+    $return_arr[0]['like_id'] = $likes['like_id'];
+    $return_arr[0]['like_stauts'] = $likes['like_stauts'];
+    
+return $return_arr;
+        }
+
 /* ====================================================================
 使い回しメソッド
 ======================================================================*/
