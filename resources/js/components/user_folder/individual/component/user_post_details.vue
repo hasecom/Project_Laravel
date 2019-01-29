@@ -4,7 +4,7 @@
                     <div class="modal_display">
                               <div>{{photo_data.user_name}}&emsp;&emsp;<span class="text-muted">@{{photo_data.user_id}}</span></div>
                               <!-- <span class="bd-placeholder-img card-img-top" width="100%" height="300" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: カードの画像"><title>プレースホルダ</title> -->
-			                    <amplify-s3-image style="pointer-events: none;" :imagePath= "'Photos/'+photo_data.photo_path+'/'+photo_data.file_name+'.png'" ></amplify-s3-image>
+			                    <amplify-s3-image style="pointer-events: none; height:400px; object-fit: contain; text-align:center;" :imagePath= "'Photos/'+photo_data.photo_path+'/'+photo_data.file_name+'.png'" ></amplify-s3-image>
                               <!-- </span> -->
                                     <!--<svg class="bd-placeholder-img card-img-top" width="100%" height="300" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: カードの画像"><title>プレースホルダ</title><rect fill="#868e96" width="100%" height="100%"></rect><text fill="#dee2e6" dy=".3em" x="30%" y="50%">no image</text></svg>-->
 			                        <div class="card-body px-2 py-3">
@@ -20,7 +20,7 @@
                                  <user-post-details :photo_data="photo_data" :my_data="my_data"></user-post-details>
                                 <!-- <p class="card-text text-muted text-center">{{photo_data.photo_description}}</p> -->
                                 <div v-for="(item,index) in tags_arr" :key="index" class="tag_class">
-                                    <span class="pointer" @click="tag_click(item)">#{{tags_arr[index]}}</span>&emsp;
+                                    <span class="pointer" @click="tag_click(item)" style="color:skyblue;">#{{tags_arr[index]}}</span>&emsp;
                                     </div>
 			                      </div>
                             

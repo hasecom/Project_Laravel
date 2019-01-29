@@ -55,22 +55,19 @@
 <style>
 #title{
     width:100%;
-    
     border-radius: 6px 6px 0px 0px;
     margin :10px 0px 2px 0px;
     background-color: #f8f4f4;
 }
 #caption{
     width:100%;  
-    
     height:100px;
     border-radius:0px 0px 6px 6px ;
     background-color: #f8f4f4;
-    
 }
+
 #tag{
     width:100%; 
-    
     margin-top: 10px;
     margin-bottom: 5px;
     border-radius:6px;
@@ -92,11 +89,11 @@
 
 .price_info{
   width:100%; 
-  
   color:white;
   text-align: right;
   border-radius:3px;
   background-color: #6cb2eb;
+
 }
 .price_info span{
   font-size: 1.5em;
@@ -111,7 +108,6 @@
 
 .upload_area{ 
   width:100%; 
-  
   height:auto;
   background-color: rgb(63,63,61);
   opacity: 0.8;
@@ -119,7 +115,6 @@
 
 .display_img{
     width:100%; 
-    
     height: 300px;
     object-fit: contain;
 }

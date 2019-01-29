@@ -31,7 +31,7 @@ export default{
  .headline{
   color: black;
   background: rgba(225,225,225,0.8);
-  font-size: 20px;
+  font-size: 16px;
   line-height: 1;
   padding: 15px 15px 10px 40px;
   box-shadow: 0 1px 3px #777;
@@ -57,6 +57,7 @@ export default{
 </style>
 <style scoped>
 .cnt{
+    font-size:12px;
     padding-top:1rem;
     padding-bottom:1rem;
     padding-left:15px;
