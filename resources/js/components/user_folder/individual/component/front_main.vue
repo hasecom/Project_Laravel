@@ -11,7 +11,7 @@
            <div class="col-md-5">
                <div class="panel panel-default bg-white shadow-lg  rounded description_">
                     <div class="panel-body">
-                        <h1>スマホで写真を撮って</h1>
+                        <h1>スマホで写真を撮って</h1><br><br>
                         <div class="sec_"><i class="fas fa-mobile-alt"></i></div>
                     </div>
                 </div>
@@ -20,7 +20,7 @@
            <div class="col-md-5">
                 <div class="panel panel-default bg-white shadow-lg  rounded description_">
                     <div class="panel-body">
-                        <h1>アップロードするだけ</h1>
+                        <h1>アップロードするだけ</h1><br><br>
                         <div class="sec_"><i class="fas fa-upload"></i></div>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
            <div class="col-md-5">
                <div class="panel panel-default bg-white shadow-lg  rounded description_">
                     <div class="panel-body">
-                        <h1>欲しい写真を探して</h1>
+                        <h1>欲しい写真を探して</h1><br><br>
                         <div class="sec_"><i class="fas fa-search"></i></div>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
            <div class="col-md-5">
                 <div class="panel panel-default bg-white shadow-lg  rounded description_">
                     <div class="panel-body">
-                        <h1>ポイントで<br>支払う</h1>
+                        <h1>ポイントで<br>支払う</h1><br>
                         <div class="sec_"><i class="far fa-hand-point-up"></i></div>
                     </div>
                 </div>
@@ -67,7 +67,7 @@
            <div class="col-md-5">
                <div class="panel panel-default bg-white shadow-lg  rounded description_">
                     <div class="panel-body">
-                        <h1>ポイントで<span class="br_res"></span>写真を購入</h1>
+                        <h1>ポイントで<span class="br_res"></span>写真を購入</h1><br>
                         <div class="sec_">
                                 <i class="fas fa-dollar-sign"></i>
                             </div>
@@ -78,7 +78,7 @@
            <div class="col-md-5">
                 <div class="panel panel-default bg-white shadow-lg  rounded description_">
                     <div class="panel-body">
-                        <h1>出品者に<span class="br_res"></span>ポイントが付与</h1>
+                        <h1>出品者に<span class="br_res"></span>ポイントが付与</h1><br>
                         <div class="sec_"><i class="fas fa-user-alt"></i></div>
                     </div>
                 </div>

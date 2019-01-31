@@ -5,10 +5,9 @@
 <template>
   <div class="user_sign_up_main">
 <div class="authentication_box border rounded shadow-lg">
-
 <div class="my_state"></div>
     <div class="authentication_table">
-    <form @submit="submitForm">
+    <form @submit.prevent="submitForm">
   <div class="form-group">
     <label >ニックネーム</label>
     <input type="text" class="form-control shadow-sm "  v-model="user_name">
@@ -34,7 +33,7 @@
     <input type="password" class="form-control shadow-sm"  v-model="user_pass_chk">
   </div>
 
-<button type="submit" class="btn btn-primary">次へ</button>
+<button type="submit" class="btn btn-primary" >次へ</button>
 
 </form>
 </div>
@@ -47,7 +46,6 @@
 import Vue from 'vue'
 import axios from 'axios'
 Vue.$http = axios;
-
 export default {
 
   name: 'user-sign_up',
@@ -70,19 +68,24 @@ export default {
       user_pass_chk:'',
       chk_userid:this.chk_userid_send,
       chk_useremail:this.chk_useremail_send,
+   
     }
   },
   methods: {
               submitForm: function () {
               if(this.user_name !="" && this.user_id != "" && this.user_email != "" && this.user_pass != "")
               {
+               
         let params = new URLSearchParams();
            params.append('username',this.user_name);
            params.append('userid',this.user_id);
            params.append('useremail',this.user_email);
            params.append('userpassword',this.user_pass);
             axios.post('sign_up',params).then(response => {
-                window.location.href="sign_up#/redirect";
+          // window.location.href="sign_up#/redirect";
+           console.log(response['data'])
+            
+           this.$router.push({path:'/redirect',query:response['data']});
             }).catch(function (error) {
                console.log(error);
               alert('失敗');

@@ -164,6 +164,7 @@ class ImagesController extends Controller
         'user_id',
         'id',
         'icon_path',
+        'user_name'
         ]);
     $likes = LikesController::likes_allocation($id);//いいね情報GET
     $return_arr[0]['likes_cnt'] = $likes['likes_cnt'];
