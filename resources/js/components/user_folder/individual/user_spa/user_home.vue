@@ -21,7 +21,7 @@
                                   <span class="text-muted">@{{item.user_id}}</span>
                               </div>
                                  <p class="col-md-8" style="margin:0px;">{{date_disassembly_out[index][0]}}年{{date_disassembly_out[index][1]}}月{{date_disassembly_out[index][2]}}日</p> 
-                                 <post-delete :photo_data="item" :my_data="my_data" :ref="'dot_'+index" ></post-delete>
+                                 <post-delete :photo_data="item" :my_data="my_data" ></post-delete>
                             </div>
 			                        <!-- <div class="card-body">
                                 <h5 class="card-title">{{item.photo_name}}</h5>  
@@ -44,7 +44,7 @@
                   
 
                             
-                                 <user-post-details :photo_data="item" :my_data="my_data" v-on:likes-event="get_timeline_data"></user-post-details>
+                                 <user-post-details :photo_data="item" :my_data="my_data" v-on:likes-event="get_timeline_data" :ref="'details' + index"></user-post-details>
                                 </div>
                             <div class="card_footer_  py-3 value_ row_margin_del_ pointer" @mouseenter="info_hover(index)" @mouseleave="info_leave(index,item.photo_price)" :id="'value_' + index" @click="modal_set('details' + index,0)">
                                 ¥{{item.photo_price}}
@@ -286,7 +286,7 @@ export default{
       let cng_value_btn = document.getElementById('value_' + num);
       cng_value_btn.style.backgroundColor = "rgba(0,191,255,0.7)";
       cng_value_btn.textContent = "詳細";
-    },sampleda(){console.log("io")}
+    },
 
   }
 }

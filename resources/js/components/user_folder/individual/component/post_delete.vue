@@ -1,8 +1,8 @@
 <template>
     <div>
       <i class="fas fa-ellipsis-h text-muted pointer"  @click='dot_click' ></i>
-         <MyModal @close="closeModal" v-if="user_modal" class="border-0 "> 
-       <div class="set_modal" v-if="wherePage == 0">
+         <MyModal @close="closeModal" v-if="user_modal" class="border-0"> 
+       <div class="set_modal shadow-lg" v-if="wherePage == 0">
         <div>
             <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                 <a class="nav-link" @click="Post_Delete" v-if="isPrincipal"  id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">投稿を削除</a>
@@ -13,7 +13,7 @@
         </div>
          <div class="set_modal" v-if="wherePage == 1">
         <div>
-                <form class="text-center" @submit.prevent="deleteForm" >
+                <form class="text-center p-3" @submit.prevent="deleteForm" >
                <p>この投稿を削除しますか？</p>
                <button type="submit" class="btn btn-danger" >削除</button> 
                <button type="button" @click="closeModal()" class="btn btn-default border">キャンセル</button>
