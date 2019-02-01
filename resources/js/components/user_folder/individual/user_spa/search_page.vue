@@ -3,7 +3,7 @@
         <div class="row row_margin_del_" >
             <div class="col-md-4 col-6">
                 <div v-for="(item_left , index) in img_arr_left" :key="index"  class="row flex-column" style="height:fit-content">
-                    <div class="col-12 mt-2 pointer" :id="'item_left' + index"  @mouseenter="info_hover('item_left'+index)" @mouseleave="info_leave('item_left'+index)" @click="modal_set('details' + index,0)">
+                    <div class="col-12 mt-2 pointer" :id="'item_left' + index"  @mouseenter="info_hover('item_left'+index)" @mouseleave="info_leave('item_left'+index)" @click="modal_set('details' + index,0,0)">
                         <amplify-s3-image style="pointer-events: none; width:100% !important"  :imagePath= "'Photos/'+item_left.photo_path+'/'+item_left.file_name+'.png'" ></amplify-s3-image>
                     </div>
                     <user-post-details :photo_data="item_left"   :ref="'details' + index"></user-post-details>
@@ -11,7 +11,7 @@
             </div>
             <div class="col-md-4 col-6">
                 <div v-for="(item_center , index) in img_arr_center" :key="index"  class="row flex-column" style="height:fit-content">
-                    <div class="col-12  mt-2 pointer" :id="'item_center' + index"  @mouseenter="info_hover('item_center'+index)" @mouseleave="info_leave('item_center'+index)" @click="modal_set('details' + index,0)">
+                    <div class="col-12  mt-2 pointer" :id="'item_center' + index"  @mouseenter="info_hover('item_center'+index)" @mouseleave="info_leave('item_center'+index)" @click="modal_set('details' + index,0,1)">
                         <amplify-s3-image style="pointer-events: none; width:100% !important"  :imagePath= "'Photos/'+item_center.photo_path+'/'+item_center.file_name+'.png'" ></amplify-s3-image>
                     </div>
                     <user-post-details :photo_data="item_center"   :ref="'details' + index"></user-post-details>
@@ -19,7 +19,7 @@
             </div>
             <div class="col-md-4">
                 <div v-for="(item_right , index) in img_arr_right" :key="index"  class="row flex-column" style="height:fit-content">
-                    <div class="col-12  mt-2 pointer" :id="'item_right' + index"  @mouseenter="info_hover('item_right'+index)" @mouseleave="info_leave('item_right'+index)" @click="modal_set('details' + index,0)">
+                    <div class="col-12  mt-2 pointer" :id="'item_right' + index"  @mouseenter="info_hover('item_right'+index)" @mouseleave="info_leave('item_right'+index)" @click="modal_set('details' + index,0,2)">
                        <!-- <div class="sample">kkkkkkkkkkkkkkk</div> -->
                         <amplify-s3-image style="pointer-events: none; width:100% !important"  :imagePath= "'Photos/'+item_right.photo_path+'/'+item_right.file_name+'.png'" ></amplify-s3-image>
                     </div>
@@ -73,14 +73,14 @@ export default{
     for(let i = 0; i < this.search_data.length; i++){
                     axios.get("api/user/post_data/details/" + this.search_data[i]['photo_id'] ).then(response => {
                     if(typeof(response['data']) == "object"){
-                       
+                        this.search_data[i]['user_name'] = response['data'][0]['user_name'];
                       this.search_data[i]['icon_path'] = response['data'][0]['icon_path'];
                       this.search_data[i]['id'] = response['data'][0]['id'];
                       this.search_data[i]['like_id']= response['data'][0]['like_id'];
                       this.search_data[i]['likes_cnt'] = response['data'][0]['likes_cnt'];
                       this.search_data[i]['like_stauts'] = response['data'][0]['like_stauts'];
                       this.search_data[i]['user_id'] = response['data'][0]['user_id'];
-                 
+                    
                     }
             }).catch(function (error) {
                 console.log(error)
@@ -102,6 +102,7 @@ export default{
     },
     gallery_in(){
         let get_arr = this.search_data;
+       
        // get_arr = get_arr.reverse();
      for(let i = 0; i < get_arr.length; i++){
       if(i%3 == 0){
@@ -136,11 +137,10 @@ export default{
             });
 
     },
-    modal_set(ref,chat_or_img){
+    modal_set(ref,chat_or_img,col){
        
-        
      //chatクリック=1
-        this.$refs[ref][0].openModal(chat_or_img); 
+        this.$refs[ref][col].openModal(chat_or_img); 
     },
   
    }

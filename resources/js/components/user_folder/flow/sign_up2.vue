@@ -37,13 +37,14 @@ export default {
       temporary_url:""
   
        }
-  },created : function(){
+  },mounted : function(){
 
     //*props扱えるのcreatedらしいぜよ
     //TODO:sign_up1へIDが被っているのかメールが不正or被っているかを返す
-    if(this.chk_userid_send == "1" || this.chk_useremail_send == "1"){
-       window.location.href="sign_up#/registration";
+    if(this.$route['query']['chk_userid'] == true || this.$route['query']['chk_useremail'] == true){
+window.location.href="sign_up#/registration";
     }else{
+      
       axios.post('sign_up').then(response => {
   
        if(response['data']['status'] == true){//コントローラーからのレスポンスデータ
@@ -51,7 +52,7 @@ export default {
           this.temporary_registration_display +=  response['data']['email'] + '\n\n';
           this.temporary_registration_display += '登録用URLにアクセスさせて登録確認を完了してください。\n';
           this.temporary_url = "login_first" + "?token=" +response['data']['token'];
-          
+         
        }
  
 }).catch(function (error) {
@@ -59,7 +60,7 @@ export default {
         });
     
     }
-  }
+  } ,
 }
 </script>
 

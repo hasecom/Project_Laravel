@@ -10,7 +10,8 @@
                         <span class="text-muted" style="line-height:0px;" @click="follows_link(val.user_id)">{{val.user_id}}</span>
                     </div>
                      <div class="col-md-6">
-                        <button type="button" class="btn-sm border"  v-if="val.ff_stauts != -1"  @click="ff_click(val.id,val.user_id,val.ff_stauts,val,index)">{{val.follows_string}}</button>
+                         <button type="button" class="btn-sm border follows_r"  v-if="val.ff_stauts == 1"  @click="ff_click(val.id,val.user_id,val.ff_stauts,val,index)">{{val.follows_string}}</button>
+                        <button type="button" class="btn-sm border "  v-if="val.ff_stauts == 0"  @click="ff_click(val.id,val.user_id,val.ff_stauts,val,index)">{{val.follows_string}}</button>
                         <div v-if="val.ff_stauts == -1">&emsp;&emsp;&emsp;&emsp;</div>
                      </div>
                  </div>

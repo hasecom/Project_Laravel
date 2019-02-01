@@ -122,6 +122,10 @@ Userの新規登録画面
     }
     /*=User新規登録登録POST=*/
     public function sign_up_post(){
+        $allow=[
+            'chk_userid'=>true, //trueは許可されない
+            'chk_useremail'=>true,
+                    ];
         //TODO:hiddenで受け取り
         //?エンコード処理やnull値の処理はサーバでもやった方がいいかな？
         if(isset($_POST['userid'])){//*新規登録からアカウント情報を受け取れたか
@@ -185,7 +189,26 @@ Userの新規登録画面
           //sign_up2のvueにメールアドレスとステータスを返すのだお
           return $user_data;
         }
-      
+     
+        if(session()->has('challenge_signup')){
+            //*TEMP_ID,EMAILと本登録のIDとEMAILを合わせて比較
+            //ID,emailにダブりかあるかチェックする(falseならダブりなし)
+            $user_id_chk = User::where('user_id',session()->get('temp_user_id'))->exists();
+            $user_email_chk = User::where('mail',session()->get('temp_user_email'))->exists();
+            $temp_id_chk = Temp_User::where('token_flag',1)->where('temp_id',session()->get('temp_user_id'))->exists();
+            $temp_email_chk = Temp_User::where('temp_email',session()->get('temp_user_email'))->exists();
+            /*仮登録と本登録のDBから重複が無いかチェックをして一致しなければ
+            $allow配列にfalseを返す。IDかメアドどちらが重複しているか分かるように
+            IDとメールの項目を作成。->
+            //TODO:vue内でユーザが分かるように表示させる　
+            */
+        
+            if($user_id_chk == false && $temp_id_chk == false)$allow['chk_userid']=false;
+            if($user_email_chk == false && $temp_email_chk == false)$allow['chk_useremail']=false;   
+        
+        }
+        return $allow;
+
     }
 /* ====================================================================
 Userのトップ画面
