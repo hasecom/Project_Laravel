@@ -1,9 +1,9 @@
 <template>
     <div>
             <div class="row row_margin_del_">
-              <div class="col-md-3"></div>
-                 <div class="col-md-6">
-                     <div class="mt-3">
+              <div class="col-md-2"></div>
+                 <div class="col-md-8">
+                     <div class="mt-2">
                              <div class="card-body row align-items-center">
                                 <span class="cover ml-5 profile_icon" v-bind:style="{ backgroundImage: 'url(storage/' + each_user_data.icon_path + '.jpg)' }"></span>
                                  <h4 class="card-title ml-5">{{each_user_data.user_name}}</h4>
@@ -21,7 +21,7 @@
                       <img-gallery></img-gallery>
                      
                 </div>  
-                <div class="col-md-3"></div> 
+                <div class="col-md-2"></div> 
             </div>
         <MyModal @close="closeModal" v-if="user_modal" class="border-0">
                <div class="row justify-content-center mt-3 border-bottom ">

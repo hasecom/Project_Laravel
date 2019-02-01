@@ -4,14 +4,18 @@
              <div class="row">
                     <div class="col-md-6" v-for="(item ,index) in reverseItems" v-bind:key="index">
                         <div class="card img-thumbnail mt-3 shadow-sm">
+                            <div class="img_layer">
 			               <amplify-s3-image style="pointer-events: none;" :imagePath= "'Photos/'+item[reverseItems.length -1-index].photo_path+'/'+item[reverseItems.length -1-index].file_name+'.png'" ></amplify-s3-image>
-                            <div class="card-body px-2 py-3">
-                                <h5 class="card-title">{{item[reverseItems.length -1-index].photo_name}}</h5>
-                                <p class="card-text text-muted text-center">{{item[reverseItems.length -1-index].photo_description}}</p>
+                            </div>
+                            <!--<div class="card-body px-2 py-3">-->
+                            <div class="c-body" style="padding:10px 15px 15px 15px;">
+                                <h5 class="card-title text-center">{{item[reverseItems.length -1-index].photo_name}}</h5>
+                                <p class="card-text text-muted " >{{item[reverseItems.length -1-index].photo_description}}</p>
 			                </div>
-                            <div class="row row_margin_del_">
-                                <p class="col-md-4"></p>
-                                <p class="col-md-8 card-text">¥{{item[reverseItems.length -1-index].photo_price}}</p>   
+                            <div class="row row_margin_del_" style="background-color: rgb(0, 191, 255); padding:5px; border-radius:2px;">
+                                <p class="col-md-4" style="margin:0px;"></p>
+                                <p class="col-md-4 card-text" style="margin:5px 0px 5px 0px ;color:white; text-align:center">¥{{item[reverseItems.length -1-index].photo_price}}</p>   
+                                <p class="col-md-4" style="margin:0px;"></p>
                             </div>
 		                </div>
                     </div>
@@ -21,8 +25,26 @@
 </template>
 <style>
 .amplify-image{
-    width:100% !important;
-    height:auto;
+    height:350px !important;
+    width:auto !important;
+    max-width:100% !important;
+    max-height:100% !important;
+    margin:0 !important;
+    pointer-events:none !important;
+    object-fit: contain !important;
+    border:none !important;
+    border-radius:0px !important;
+}
+
+.img_layer {
+    width: auto !important;
+    height: auto !important;
+    background-color: #f8f9fa;
+    display: table-cell !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+    border-radius:2px !important;
+    
 }
 </style>
 <script>

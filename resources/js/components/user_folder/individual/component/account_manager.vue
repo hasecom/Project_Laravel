@@ -3,6 +3,7 @@
         <div @click="openModal">
          <span class="cover list_image set_click"  v-bind:style="{ backgroundImage: 'url(storage/' + my_data.icon_path + '.jpg)' }" ></span>
          <span class="small set_click">{{my_data.user_name}}</span>
+         <span style="color:#f90">{{my_data.point}} pt</span>
          </div>
 
 
@@ -17,6 +18,7 @@
          <a class="nav-link" id="v-pills-pass-tab" data-toggle="pill" href="#v-pills-pass" role="tab" aria-controls="v-pills-pass" aria-selected="false">パスワードを変更</a>
          <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">メール設定</a>
          <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">プライバシーとセキュリティー</a>
+         <a class="nav-link" id="v-pills-charge-tab" data-toggle="pill" href="#v-pills-charge" role="tab" aria-controls="v-pills-charge" aria-selected="false">チャージ</a>
     </div>
         </div>
         <div class="col-md-7">
@@ -25,6 +27,7 @@
                 <div class="tab-pane fade" id="v-pills-pass" role="tabpanel" aria-labelledby="v-pills-pass-tab"><set-pass :my_data_box="my_data" /></div>
                 <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab"></div>
                 <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab"><set-privacy /></div>
+                <div class="tab-pane fade" id="v-pills-charge" role="tabpanel" aria-labelledby="v-pills-charge-tab"><charge-point :my_data_box="my_data"/></div>
             </div>
         </div>
     </div>

@@ -20,7 +20,7 @@
                                   <span class="pr-3">{{item.user_name}}</span>
                                   <span class="text-muted">@{{item.user_id}}</span>
                               </div>
-                               
+                                 <p class="col-md-8" style="margin:0px;">{{date_disassembly_out[index][0]}}年{{date_disassembly_out[index][1]}}月{{date_disassembly_out[index][2]}}日</p> 
                             </div>
 			                        <!-- <div class="card-body">
                                 <h5 class="card-title">{{item.photo_name}}</h5>  
@@ -46,7 +46,6 @@
                                  <user-post-details :photo_data="item" :my_data="my_data" :ref="'details' + index" v-on:likes-event="get_timeline_data"></user-post-details>
                                 </div>
                             <div class="card_footer_  py-3 value_ row_margin_del_ pointer" @mouseenter="info_hover(index)" @mouseleave="info_leave(index,item.photo_price)" :id="'value_' + index" @click="modal_set('details' + index,0)">
-                                <!-- <p class="col-md-8">{{date_disassembly_out[index][0]}}年{{date_disassembly_out[index][1]}}月{{date_disassembly_out[index][2]}}日</p> -->
                                 ¥{{item.photo_price}}
                             </div>
 		                      </div>
@@ -83,7 +82,7 @@
   padding:0 !important;
 }
 .amplify-image{
-    height:auto !important;
+    height:400px !important;
     width:auto !important;
     max-width:100% !important;
     max-height:100% !important;
@@ -143,20 +142,6 @@
   vertical-align: middle !important; /*上下中央*/
 
 }
-/*.modal-window{
-  text-align: center;
-  position: absolute;
-  overflow-y: scroll;
-  overflow-x: scroll;
-  height:90% !important;
-  width:80% !important;
-  object-fit: contain !important;
-  vertical-align: middle !important;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}*/
-
 /* ===========================
  *投稿ボタン＆モーダル 
    ==========================*/

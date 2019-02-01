@@ -2,28 +2,35 @@
     <div>
         <div class="container">
             <div class="row">
-              <div class="col-md-3"></div>
-                 <div class="col-md-6">
-                     <div class="mt-3">
+              <div class="col-md-2"></div>
+                 <div class="col-md-8">
+                     <div class="mt-2">
                              <div class="card-body row align-items-center">
                                 <span class="profile_icon cover ml-5 pointer" v-bind:style="{ backgroundImage: 'url(storage/' + each_user_data.icon_path + '.jpg)' }"></span>
                                  <h4 class="card-title ml-5 pointer">{{each_user_data.user_name}}</h4>
                                 <p class="pl-2 text-muted pointer">{{each_user_data.user_id}}</p>
                             </div>
-                            <div class="float-right">
-                                <div v-if="user_follow_string == 'フォロー中'">
-                                    <button v-if="user_page_follow_btn == 1" type="button" class="btn-sm border follows_r" @click="User_FF_send()">{{user_follow_string}}</button>
-                                </div>
-                                 <div v-else>
-                                    <button v-if="user_page_follow_btn == 1" type="button" class="btn-sm border" @click="User_FF_send()">{{user_follow_string}}</button>
-                                </div>
-                            </div>
-                            <div>
-                                <button  v-if="user_follower.length != 0" type="button" class="btn-sm border pointer"  @click="openModal(0)">フォロー中　{{user_follower.length}}人</button>
-                               <button  v-if="user_follower.length == 0" type="button" class="btn-sm border">フォロー中　{{user_follower.length}}人</button>
+                        <div class="row">
+                          <div class="col-md-6" style="display:inline-block;">
+                            <div style="display:inline-block;">
+                               <button v-if="user_follower.length != 0" type="button" class="btn-sm border pointer"  @click="openModal(0)">フォロー中　{{user_follower.length}}人</button>
+                               <button v-if="user_follower.length == 0" type="button" class="btn-sm border">フォロー中　{{user_follower.length}}人</button>
                                <button v-if="user_followers.length != 0" type="button" class="btn-sm border pointer"  @click="openModal(1)">フォロワー　{{user_followers.length}}人</button>
                                <button v-if="user_followers.length == 0" type="button" class="btn-sm border">フォロワー　{{user_followers.length}}人</button>
-                                </div>
+                            </div>
+                          </div>
+                          <div class="col-md-6" style="text-align:left;">
+                            <!--<div class="float-right">-->
+                            <div v-if="user_follow_string == 'フォロー中'">
+                                <button v-if="user_page_follow_btn == 1" type="button" class="btn-sm border follows_r" @click="User_FF_send()">{{user_follow_string}}</button>
+                            </div>
+                            <div v-else>
+                                <button v-if="user_page_follow_btn == 1" type="button" class="btn-sm border" @click="User_FF_send()">{{user_follow_string}}</button>
+                            </div>
+                            <!--</div>-->
+                          </div>
+                        </div>
+
                             <p class="card-text mt-3">{{each_user_data.si_text}}</p>
                      </div>
                      <each-user-img-gallery :each_user_img=each_user_id></each-user-img-gallery>              

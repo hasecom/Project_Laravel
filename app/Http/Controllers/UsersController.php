@@ -270,6 +270,7 @@ TODO:DBにアクセスして認証チェック
                 "icon_path"=>$account_chk['icon_path'],
                 "user_name"=>$account_chk['user_name'],
                 "si_text"=>$account_chk['si_text'],
+                "point"=>$account_chk['point'],
                                 ];
         return $account_chk_arr;
         }
