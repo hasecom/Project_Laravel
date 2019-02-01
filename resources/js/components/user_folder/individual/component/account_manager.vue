@@ -109,8 +109,7 @@ export default{
                         console.log(error)
                     });
         },
-        openModal() {         
-     
+        openModal(){         
       this.user_modal = true;
     },
     closeModal() {
