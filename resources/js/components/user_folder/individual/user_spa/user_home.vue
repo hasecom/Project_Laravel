@@ -8,13 +8,13 @@
                   <div class="col-md-12">
                          <div v-for="(item ,index) in time_line" v-bind:key="index">
                            <div class="card img-thumbnail mt-3 shadow-sm ">
-			                      <div @click="modal_set('details' + index,0)" class="img_layer border">
+			                      <div @click="modal_set('details' + index,0)" class="uh_img_layer border">
                               <amplify-s3-image :imagePath="'Photos/'+item.photo_path+'/'+item.file_name+'.png'">
                               </amplify-s3-image>
                             </div>
                                 <div class="row row_margin_del_">
                                <div class="col-md-2">
-                                 <span class="cover list_image" v-bind:style="{ backgroundImage: 'url(storage/' + item.icon_path + '.jpg)' }"></span>
+                                 <!--<span class="cover list_image" v-bind:style="{ backgroundImage: 'url(storage/' + item.icon_path + '.jpg)' }"></span>-->
                                </div>
                               <div class="col-md-6 d-flex align-items-center">
                                   <span class="pr-3">{{item.user_name}}</span>
@@ -82,7 +82,7 @@
 .img-thumbnail{
   padding:0 !important;
 }
-.img_layer div .amplify-image{
+.uh_img_layer div .amplify-image{
     height:400px !important;
     width:auto !important;
     max-width:100% !important;
@@ -133,7 +133,7 @@
   vertical-align:middle;
 }
 
-.img_layer{
+.uh_img_layer{
   width:auto !important;
   height:auto !important;
   background-color:#f8f9fa;

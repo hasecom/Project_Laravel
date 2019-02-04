@@ -4,7 +4,7 @@
              <div class="row">
                     <div class="col-md-6" v-for="(item ,index) in reverseItems" v-bind:key="index">
                         <div class="card img-thumbnail mt-3 shadow-sm">
-                            <div class="img_layer">
+                            <div class="m_img_layer">
 			               <amplify-s3-image style="pointer-events: none;" :imagePath= "'Photos/'+item[reverseItems.length -1-index].photo_path+'/'+item[reverseItems.length -1-index].file_name+'.png'" ></amplify-s3-image>
                             </div>
                             <div class="card-body px-2 py-3">
@@ -25,7 +25,7 @@
     </div>
 </template>
 <style>
-.img_layer div .amplify-image{
+.m_img_layer div .amplify-image{
     height:350px !important;
     width:auto !important;
     max-width:100% !important;
@@ -37,7 +37,7 @@
     border-radius:0px !important;
 }
 
-.img_layer {
+.m_img_layer {
     width: auto !important;
     height: auto !important;
     background-color: #f8f9fa;
