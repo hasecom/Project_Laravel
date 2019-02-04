@@ -25,7 +25,7 @@
     </div>
 </template>
 <style>
-.amplify-image{
+.img_layer div .amplify-image{
     height:350px !important;
     width:auto !important;
     max-width:100% !important;
