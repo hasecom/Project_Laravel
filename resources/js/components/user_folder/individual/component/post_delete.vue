@@ -63,7 +63,7 @@ export default{
     },Principal_chk(){
       const post_user_id = this.photo_data.id;
       const user_id = this.my_data.id;
-      if(post_user_id == user_id){
+      if(post_user_id == user_id ||this.photo_data.user_id == user_id ){
             this.isPrincipal = true;
       }
       return true;

@@ -7,9 +7,10 @@
                             <div class="img_layer">
 			               <amplify-s3-image style="pointer-events: none;" :imagePath= "'Photos/'+item[reverseItems.length -1-index].photo_path+'/'+item[reverseItems.length -1-index].file_name+'.png'" ></amplify-s3-image>
                             </div>
-                            <!--<div class="card-body px-2 py-3">-->
-                            <div class="c-body" style="padding:10px 15px 15px 15px;">
+                            <div class="card-body px-2 py-3">
+                            <!-- <div class="c-body" style="padding:10px 15px 15px 15px;"> -->
                                 <h5 class="card-title text-center">{{item[reverseItems.length -1-index].photo_name}}</h5>
+                                <post-delete :photo_data="item[reverseItems.length -1-index]" :my_data="my_data" ></post-delete>
                                 <p class="card-text text-muted " >{{item[reverseItems.length -1-index].photo_description}}</p>
 			                </div>
                             <div class="row row_margin_del_" style="background-color: rgb(0, 191, 255); padding:5px; border-radius:2px;">
@@ -53,7 +54,8 @@
 export default{
     data(){
         return{
-            my_img_arr:[]
+            my_img_arr:[],
+            my_data:[]
         }
     },mounted : function(){ 
         this.img_load_func()
@@ -62,6 +64,7 @@ export default{
             img_load_func : function(){
             axios.get("api/users/chk").then(response => {
                if(typeof(response['data']) == "object"){
+                   this.my_data = response['data'];
                 axios.get("api/user/post_data/" + response['data']['user_id']).then(my_img_data => {
                    if(typeof(my_img_data['data']) == "object"){
                        let temp_arr =[];
