@@ -2,15 +2,14 @@
     <div>
         <div @click="openModal">
          <amplify-s3-image :imagePath= "'UserIcons/2019-01-29 11:03:49/2019-02-02 14:12:21_hGM6vMlWIPZRkx5c.png'" ></amplify-s3-image>
-         <amplify-s3-image :imagePath= "'UserIcons/'+ my_data.icon_path + '/' + my_data.icon_name + '.png'" ></amplify-s3-image>
+         
+         <div v-if="data1 != 'underfind'"><amplify-s3-image :imagePath="'UserIcons/'+ data1 + '/' + data2 + '.png'" ></amplify-s3-image></div>
          <span class="cover list_image set_click"  v-bind:style="{ backgroundImage: 'url(storage/' + my_data.icon_path + '.jpg)' }" ></span>
-         <span class="small set_click">{{my_data.user_name}}</span>
+         <span class="small set_click">{{my_data.user_name}}</span>{{data1}}
          <span style="color:#f90">{{my_data.point}} pt</span>
          </div>
          <span>{{my_data.icon_path}}</span>
-         <p>{{my_data['icon_path']}}</p>
-
-
+         <p>{{my_data}}</p>
 
 
 <!-- ######################################################## -->
@@ -85,6 +84,8 @@ export default{
         return{
             my_data:[],
             user_modal: false, //modal表示・非表示
+            data1 :'underfind',
+            data2:'underfind',
         }
     },components:{
         MyModal
@@ -96,6 +97,8 @@ export default{
         my_data: {
       handler: function (val, oldVal) {
         console.log('watch 1', 'newval: ', val, '   oldVal:', oldVal)
+        this.data1 = val.icon_path;
+        this.data2 = val.icon_name;
         if(oldVal.length !=0){
             console.log("セッションキレてます。")
         }
@@ -110,6 +113,7 @@ export default{
             axios.get("api/users/chk").then(user_info => {
                if(typeof(user_info['data']) == "object"){
                 this.my_data = user_info['data'];
+              
                 }
                 }).catch(function (error) {
                     console.log(error)
