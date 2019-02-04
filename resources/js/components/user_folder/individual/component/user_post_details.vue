@@ -58,20 +58,6 @@
     </div>
 </template>
 <style>
-/* body{
-  overflow: hidden;
-} */
-
-.tab-content{
-    overflow-y:scroll;
-    overflow-x: hidden;
-    height:400px;
-}
-:root{
-    --width-size:auto;
-    --height-size:auto;
-}
-
 .modal-window{
     background: var(--base-color);
     width:var(--width-size);
@@ -105,6 +91,22 @@
 .tag_class{
     display:inline;
     font-size:1.1rem;
+}
+</style>
+
+<style scoped>
+/* body{
+  overflow: hidden;
+} */
+
+.tab-content{
+    overflow-y:scroll;
+    overflow-x: hidden;
+    height:400px;
+}
+:root{
+    --width-size:auto;
+    --height-size:auto;
 }
 </style>
 <script>
