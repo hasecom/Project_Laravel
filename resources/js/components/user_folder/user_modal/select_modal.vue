@@ -1,7 +1,7 @@
 <template>
-  <transition name="modal" appear>
-    <div class="modal modal-overlay" @click.self="$emit('close')">
-      <div class="modal-window user_home" >
+  <transition name="selectmodal" appear>
+    <div class="selectmodal modal-overlay" @click.self="$emit('close_select')">
+      <div class="modal_select-window" >
              <slot name="header">
           </slot>
         <div class="rounded shadow border bg-white ">
@@ -19,7 +19,7 @@ export default{
 }
 </script>
 <style>
-.modal {
+.selectmodal {
     
     display: flex;
     align-items: center;

@@ -29,6 +29,7 @@ import detailed_item from './components/user_folder/individual/component/detaile
 import charge_point from './components/user_folder/individual/component/charge_point.vue';
 import set_icons from './components/user_folder/individual/component/set_icons.vue';
 import post_delete from './components/user_folder/individual/component/post_delete.vue';
+import img_buy from './components/user_folder/individual/component/img_buy.vue';
 
 
 //ADMIN
@@ -65,6 +66,7 @@ Vue.component('vue-footer',footer);
 Vue.component('front-main',front_main);
 Vue.component('detailed-item',detailed_item);
 Vue.component('post-delete',post_delete);
+Vue.component('img-buy',img_buy);
 
 
 //*aws amplify

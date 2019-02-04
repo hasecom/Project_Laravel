@@ -53,15 +53,19 @@
    
                             <!-- DDDDDDDDDDDDDDDDDDDDDDDDDDDDD -->
                         </div>
-                  
+         <img-buy></img-buy>         
         </MyModal>
     </div>
 </template>
 <style>
+:root{
+    --width-size_home:auto;
+    --height-size_home:auto;
+}
 .modal-window{
     background: var(--base-color);
-    width:var(--width-size);
-    height:var(--height-size);
+    width:var(--width-size_home);
+    height:var(--height-size_home);
     overflow-y:scroll;
     overflow-x:hidden;
 }
@@ -104,10 +108,7 @@
     overflow-x: hidden;
     height:400px;
 }
-:root{
-    --width-size:auto;
-    --height-size:auto;
-}
+
 </style>
 <script>
 
@@ -145,8 +146,8 @@ export default{
         var body = document.getElementsByTagName('body')[0];
         body.style.overflow="hidden";
         this.user_modal = true;
-        document.documentElement.style.setProperty('--width-size', '80%');
-        document.documentElement.style.setProperty('--height-size', '90%');
+        document.documentElement.style.setProperty('--width-size_home', '80%');
+        document.documentElement.style.setProperty('--height-size_home', '90%');
     this.tab_select(select_num);
     this.tags_manag();
     },tab_select(select_num){
@@ -168,8 +169,8 @@ export default{
         this.chat_flg_send = 0;
         this.isActive = 0;
         var modal_return= setTimeout(function(){
-        document.documentElement.style.setProperty('--width-size', 'auto');
-        document.documentElement.style.setProperty('--height-size', 'auto');
+        document.documentElement.style.setProperty('--width-size_home', 'auto');
+        document.documentElement.style.setProperty('--height-size_home', 'auto');
         },300);
     },likes:function(photo_id,like_stauts){
         let params = new URLSearchParams();

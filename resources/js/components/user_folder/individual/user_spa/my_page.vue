@@ -119,7 +119,7 @@
 }
 
 </style>
-<style>
+<style scoped>
 .modal-window{
     overflow-y: scroll;
     max-height: 70%;

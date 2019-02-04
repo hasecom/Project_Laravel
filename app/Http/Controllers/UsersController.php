@@ -433,10 +433,10 @@ TODO:仮登録のメール設定
 */
 //         mb_language("Ja");
 //         mb_internal_encoding("UTF-8");
-// $mailto = "hasetennis52@gmail.com";
+// $mailto = "@gmail.com";
 // $subject = "PHPでのメール送信について";
 // $content = "こんにちは。";
-// $mailfrom="From:" .mb_encode_mimeheader("サンプル") ."<hasetennisth@gmail.com>";
+// $mailfrom="From:" .mb_encode_mimeheader("サンプル") ."<@gmail.com>";
 // mb_send_mail($mailto, $subject, $content, $mailfrom);
 
         }catch(Exception $e){
