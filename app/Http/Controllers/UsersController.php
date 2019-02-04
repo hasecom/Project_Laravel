@@ -235,6 +235,7 @@ TODO:DBにアクセスして認証チェック
                 'user_name',
                 'si_text',
                 'icon_path',
+                'icon_name',
                 'point'
             )));
         
@@ -291,6 +292,7 @@ TODO:DBにアクセスして認証チェック
                 "user_id" => $account_chk['user_id'],
                 "id"=>$account_chk['id'],
                 "icon_path"=>$account_chk['icon_path'],
+                "icon_name"=>$account_chk['icon_name'],
                 "user_name"=>$account_chk['user_name'],
                 "si_text"=>$account_chk['si_text'],
                 "point"=>$account_chk['point'],
@@ -299,6 +301,64 @@ TODO:DBにアクセスして認証チェック
         }
       
     }
+
+
+    private function img_upload(){
+        $id = $_POST['id'];
+        $sample_data = $_POST['files'];
+        $img = $_POST['files'];
+        $file_type = $_POST['file_type'];
+        $img = str_replace('data:'.$file_type.';base64,', '', $img);
+        $img = str_replace(' ', '+', $img);
+        $fileData = base64_decode($img);
+
+        $date = date('Y-m-d H:i:s');
+        $folder_name=$date;
+        $file_name=$date.'_'.str_random(16);
+
+        $result=Storage::disk('s3')->directories('public/UserIcons');
+
+        $dir_flg=0;
+        foreach($result as $val){
+            $cnt_img = count(Storage::disk('s3')->allFiles($val));
+            if($cnt_img<30){
+                $dir=$val;
+                $dir_flg=1;
+            }
+        }
+        if($dir_flg==1){
+                Storage::disk('s3')->put($dir.'/'.$file_name.'.png', $fileData);
+            }else{
+                Storage::disk('s3')->makeDirectory('public/UserIcons/'.$folder_name);
+                Storage::disk('s3')->put($folder_name.'/'.$file_name.'.png', $fileData);
+            }
+        //*アイコン画像をDBに保存
+            $user_id= session()->get('user_id');
+            $truth_id = User::where('user_id',$user_id)->value('id');
+            if($truth_id != $id)exit;
+            $change_icons = User::where('id', $id)->first();
+
+            $change_icons->icon_name = $file_name;
+        if($dir_flg==1){
+            $change_icons->icon_path = str_replace('public/UserIcons/', '', $dir);
+        }else{
+            $change_icons->icon_path = $folder_name;
+        };
+        $change_icons->save();
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
     public function user_info_change(){
         if(!isset($_POST['is_judge_which']))exit;
         if($_POST['is_judge_which'] == 0){//プロフィール変更
@@ -313,7 +373,7 @@ TODO:DBにアクセスして認証チェック
             $change_profile->si_text =$si_text;
             $change_profile->save();
           return $this->account_chk_data();
-        }else if($_POST['is_judge_which'] == 1){
+        }else if($_POST['is_judge_which'] == 1){//pw変更
             $old_pass = $_POST['old_pass'];
             $new_pass = $_POST['new_pass'];
             $id = $_POST['id'];
@@ -333,6 +393,22 @@ TODO:DBにアクセスして認証チェック
                 return 'wrong_pass';
             }
           
+        }else if($_POST['is_judge_which'] == 2){
+            $img_post = $_POST['img_post'];
+            if(session()->has('img_token')){
+                $session_img = session()->get('img_token');
+                if($img_post!=$session_img){
+                    $this->img_upload();
+                    session()->put(['img_token'=>$img_post]);
+                    }
+                }else{
+                $this->img_upload();
+                session()->put(['img_token'=>$img_post]);
+                }
+
+
+
+
         }
         
   

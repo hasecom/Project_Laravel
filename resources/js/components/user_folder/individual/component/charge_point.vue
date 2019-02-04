@@ -1,7 +1,7 @@
 <template>
     <div class="charge_point_">
          <!--<input id="title" type="text"  placeholder="タイトル"/>-->
-                <div class='price_info'><span>￥</span><input id = 'price' type="text" v-model="send_price" placeholder="0"></div>
+                <div class='price_info'><span>￥</span><input id = 'price' type="text" placeholder="0"></div>
 
     </div>
 </template>

@@ -187,8 +187,8 @@
 <script>
 import MyModal from '../../user_modal/user_modal.vue';
 import Details from "../component/user_post_details.vue";
-import { AmplifyEventBus } from 'aws-amplify-vue';
-import { S3Image} from 'aws-amplify-vue';
+// import { AmplifyEventBus } from 'aws-amplify-vue';
+// import { S3Image} from 'aws-amplify-vue';
 import uploadmodal from '../../user_modal/upload_modal.vue';
 window.Vue = require('vue');
 

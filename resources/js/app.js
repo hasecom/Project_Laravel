@@ -27,6 +27,7 @@ import footer from './components/user_folder/individual/component/footer.vue';
 import front_main from './components/user_folder/individual/component/front_main.vue';
 import detailed_item from './components/user_folder/individual/component/detailed_item.vue';
 import charge_point from './components/user_folder/individual/component/charge_point.vue';
+import set_icons from './components/user_folder/individual/component/set_icons.vue';
 
 
 //ADMIN
@@ -58,6 +59,7 @@ Vue.component('set-profile',set_profile);
 Vue.component('set-pass',set_pass);
 Vue.component('set-privacy',set_privacy);
 Vue.component('charge-point',charge_point);
+Vue.component('set-icons',set_icons);
 Vue.component('vue-footer',footer);
 Vue.component('front-main',front_main);
 Vue.component('detailed-item',detailed_item);
