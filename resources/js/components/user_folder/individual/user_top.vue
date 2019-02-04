@@ -22,37 +22,24 @@
         </button>
         <div class="collapse navbar-collapse justify-content-around" id="navbarNav4">
           <ul class="navbar-nav">
-            <li class="nav-item active">
+            <li class="nav-item active" >
               <router-link to="/" >
-                <a class="no_link">ホーム</a>
+                <a class="no_link" :class='{select_bar:isActive == 0}'>ホーム</a>
               </router-link>
             </li>
          </ul>
     <ul class="navbar-nav">
       <li class="nav-item">
         <router-link to="/mypage" >
-          <a  class="no_link">マイページ</a>
+          <a  class="no_link" :class='{select_bar:isActive == 1}'>マイページ</a>
         </router-link>
       </li>
     </ul>
-       <!-- <ul class="navbar-nav">
-      <li class="nav-item">
-        <router-link  to="/search">
-         <a  class="no_link">検索</a>
-        </router-link>
-      </li>
-    </ul> -->
-    <!-- <ul class="navbar-nav">
-      <li class="nav-item">
-        <router-link  to="/post_image">
-          <a  class="no_link">投稿</a>
-        </router-link>
-      </li>
-    </ul> -->
+  
     <ul class="navbar-nav">
       <li class="nav-item">
          <router-link  to="/recruit_image" class="spa_link">
-          <a  class="no_link">募集</a>
+          <a  class="no_link" :class='{select_bar:isActive == 2}'>募集</a>
          </router-link>
       </li>
     </ul>
@@ -72,7 +59,8 @@ data(){
   return{
     scrollY: 0,
     isScroll_Down:false,
-    again_chk:true
+    again_chk:true,
+    isActive:-1,
   }
 },
 watch:{
@@ -85,11 +73,15 @@ watch:{
       }
      this.borderAnimation();
   }
-  }
+  },
+    '$route' (to, from) {
+    this.select_(this.$route.fullPath);
+    },
 },
 mounted(){
     window.addEventListener('scroll', this.handleScroll);
     this.borderAnimation();
+    this.select_(this.$route.fullPath);
   },
 methods:{
        handleScroll(){
@@ -112,6 +104,11 @@ methods:{
       }
 
  
+    },select_(val){
+      if(val == '/'){this.isActive =0;}
+      else if(val=='/mypage'){this.isActive = 1;}
+      else if(val=='/recruit_image'){this.isActive = 2;}
+      else{this.isActive = -1;}
     }
 }
 
@@ -120,6 +117,10 @@ methods:{
  
 
 <style scoped>
+.select_bar{
+  color:#ff9900 !important;
+}
+
 #navbarNav4{
   background-color: rgb(63,63,61);
   width:40%;

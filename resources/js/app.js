@@ -28,6 +28,7 @@ import front_main from './components/user_folder/individual/component/front_main
 import detailed_item from './components/user_folder/individual/component/detailed_item.vue';
 import charge_point from './components/user_folder/individual/component/charge_point.vue';
 import set_icons from './components/user_folder/individual/component/set_icons.vue';
+import post_delete from './components/user_folder/individual/component/post_delete.vue';
 
 
 //ADMIN
@@ -63,6 +64,8 @@ Vue.component('set-icons',set_icons);
 Vue.component('vue-footer',footer);
 Vue.component('front-main',front_main);
 Vue.component('detailed-item',detailed_item);
+Vue.component('post-delete',post_delete);
+
 
 //*aws amplify
 import Amplify, * as AmplifyModules from 'aws-amplify';

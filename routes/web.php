@@ -153,4 +153,14 @@ Route::get('/api/user/post_data/photo/search/{word}', 'SearchController@search_l
 Route::post('/api/user/post_data/photo/search/{word}','SearchController@search_list_post');
 
 
+/*====================================================================
+投稿データ削除用
+======================================================================*/
+/*
+
+*/
+Route::get('/api/user/post_data/delete/{post_id}', 'PostDeleteController@post_delete_get');
+Route::post('/api/user/post_data/delete/{post_id}','PostDeleteController@post_delete_post');
+
+
 

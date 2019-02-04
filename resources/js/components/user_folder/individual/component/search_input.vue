@@ -54,9 +54,7 @@ export default{
             user_search:[],
             get_id:"",
             select_num:0,
-            select_data:"",
- 
-         
+            select_data:"",  
         }
     },watch:{
         search_word:function(oldval ,newval){

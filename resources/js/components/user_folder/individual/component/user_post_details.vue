@@ -144,7 +144,7 @@ export default{
         body.style.overflow="hidden";
         this.user_modal = true;
         document.documentElement.style.setProperty('--width-size', '80%');
-        document.documentElement.style.setProperty('--height-size', '80%');
+        document.documentElement.style.setProperty('--height-size', '90%');
     this.tab_select(select_num);
     this.tags_manag();
     },tab_select(select_num){

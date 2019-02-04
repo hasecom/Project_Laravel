@@ -9,7 +9,7 @@
                          <div v-for="(item ,index) in time_line" v-bind:key="index">
                            <div class="card img-thumbnail mt-3 shadow-sm ">
 			                      <div @click="modal_set('details' + index,0)" class="img_layer border">
-                              <amplify-s3-image :imagePath= "'Photos/'+item.photo_path+'/'+item.file_name+'.png'">
+                              <amplify-s3-image :imagePath="'Photos/'+item.photo_path+'/'+item.file_name+'.png'">
                               </amplify-s3-image>
                             </div>
                                 <div class="row row_margin_del_">
@@ -21,6 +21,7 @@
                                   <span class="text-muted">@{{item.user_id}}</span>
                               </div>
                                  <p class="col-md-8" style="margin:0px;">{{date_disassembly_out[index][0]}}年{{date_disassembly_out[index][1]}}月{{date_disassembly_out[index][2]}}日</p> 
+                                 <post-delete :photo_data="item" :my_data="my_data" ></post-delete>
                             </div>
 			                        <!-- <div class="card-body">
                                 <h5 class="card-title">{{item.photo_name}}</h5>  
@@ -43,7 +44,7 @@
                   
 
                             
-                                 <user-post-details :photo_data="item" :my_data="my_data" :ref="'details' + index" v-on:likes-event="get_timeline_data"></user-post-details>
+                                 <user-post-details :photo_data="item" :my_data="my_data" v-on:likes-event="get_timeline_data" :ref="'details' + index"></user-post-details>
                                 </div>
                             <div class="card_footer_  py-3 value_ row_margin_del_ pointer" @mouseenter="info_hover(index)" @mouseleave="info_leave(index,item.photo_price)" :id="'value_' + index" @click="modal_set('details' + index,0)">
                                 ¥{{item.photo_price}}
@@ -170,7 +171,6 @@
   background-color: rgb(63,63,61);
 }
 .my-green:hover{
-
   background-color:rgb(63,63,61,0.9);
 }
 
@@ -194,6 +194,7 @@ window.Vue = require('vue');
 
  
 export default{
+  name:'user_home',
   data(){
     return{
       my_data:[],
@@ -214,16 +215,7 @@ export default{
         MyModal,Details,uploadmodal
     },mounted:function(){
       this.get_timeline_data();
-      //   window.onresize = function() {
-      //   var mwindow =document.getElementsByClassName("modal-window");
-      //   var modal = mwindow[0];
-      //   if(100>modal.children.clientHeight){
-      //     modal.id='default';
-      //   }else{
-      //     modal.id='overflow';
-      //   }
-      //   console.log(modal.children.clientHeight);
-      // };
+  
   },methods:{
     get_timeline_data:function(){
       axios.get("api/users/chk").then(response => {
@@ -233,7 +225,8 @@ export default{
                    if(typeof(time_line_data['data']) == "object"){
                       this.time_line_cnt = this.time_line.length;
                       this.time_line = time_line_data['data'];
-                      this.date_set();       
+                      this.date_set();  
+                      // this.$set(this.time_line);     
                     }
                     }).catch(function (error) {
                         console.log(error)
@@ -293,7 +286,7 @@ export default{
       let cng_value_btn = document.getElementById('value_' + num);
       cng_value_btn.style.backgroundColor = "rgba(0,191,255,0.7)";
       cng_value_btn.textContent = "詳細";
-    }
+    },
 
   }
 }
