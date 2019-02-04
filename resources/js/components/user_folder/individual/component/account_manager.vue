@@ -1,15 +1,17 @@
 <template>
     <div>
         <div @click="openModal">
-         <amplify-s3-image :imagePath= "'UserIcons/2019-01-29 11:03:49/2019-02-02 14:12:21_hGM6vMlWIPZRkx5c.png'" ></amplify-s3-image>
          
-         <div v-if="data1 != 'underfind'"><amplify-s3-image :imagePath="'UserIcons/'+ data1 + '/' + data2 + '.png'" ></amplify-s3-image></div>
-         <span class="cover list_image set_click"  v-bind:style="{ backgroundImage: 'url(storage/' + my_data.icon_path + '.jpg)' }" ></span>
-         <span class="small set_click">{{my_data.user_name}}</span>{{data1}}
+         <span v-if="data1 != 'underfind'">
+             <amplify-s3-image style="pointer-events:none;" v-if="data1 != 'underfind'" :imagePath="'UserIcons/'+ data1 + '/' + data2 + '.png'" >
+             </amplify-s3-image>
+         </span>
+         <!--<span v-if="data1 == 'underfind'">
+             <i class="fas fa-user"></i>
+         </span>-->
+         <span class="small set_click">{{my_data.user_name}}</span>
          <span style="color:#f90">{{my_data.point}} pt</span>
          </div>
-         <span>{{my_data.icon_path}}</span>
-         <p>{{my_data}}</p>
 
 
 <!-- ######################################################## -->
@@ -46,23 +48,41 @@
 .set_click{
     cursor: pointer;
 }
-.cover{
-    display: inline-block;
-    background-color: #ccc;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    border-radius: 50%;
+
+
+.amplify-image{
+    /*
+    *反映されてない 
+    */
+    display: inline-block !important;
+    background-color: #ccc !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    border-radius: 50% !important;
+    width:30px !important;
+    height:30px !important;
+    margin:0px !important;
+    border:0px !important;
+
+/*  default setting
+    width:30%;
+    margin:.2em;
+    border-radius:6px;
+    border:2px solid var(--color-white);
+    cursor:pointer;*/
+
 }
+
 
 .modal_display{
   background:white;
   padding:50px 20px;
 }
-.list_image{
+/*.list_image{
     width:30px;
     height:30px;
-}
+}*/
 .set_modal{
    min-width:650px;
 }

@@ -82,7 +82,7 @@
 .img-thumbnail{
   padding:0 !important;
 }
-.amplify-image{
+.img_layer div .amplify-image{
     height:400px !important;
     width:auto !important;
     max-width:100% !important;
