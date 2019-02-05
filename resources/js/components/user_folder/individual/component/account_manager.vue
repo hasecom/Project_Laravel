@@ -1,17 +1,18 @@
 <template>
     <div>
         <div @click="openModal">
-         
-         <span v-if="data1 != 'underfind'">
-             <amplify-s3-image style="pointer-events:none;" v-if="data1 != 'underfind'" :imagePath="'UserIcons/'+ data1 + '/' + data2 + '.png'" >
-             </amplify-s3-image>
-         </span>
+      
+            <div v-if="data1 != 'underfind'" >
+                <amplify-s3-image style="pointer-events:none;" :class='{IconImg:isLoad}' :imagePath="'UserIcons/'+ data1 + '/' + data2 + '.png'" ></amplify-s3-image>
+            </div>
          <!--<span v-if="data1 == 'underfind'">
              <i class="fas fa-user"></i>
          </span>-->
-         <span class="small set_click">{{my_data.user_name}}</span>
-         <span style="color:#f90">{{my_data.point}} pt</span>
-         </div>
+         <div>
+            <span class="small set_click">{{my_data.user_name}}</span>
+            <span style="color:#f90">{{my_data.point}} pt</span>
+        </div>
+    </div>
 
 
 <!-- ######################################################## -->
@@ -44,6 +45,15 @@
     
     </div>
 </template>
+<style>
+.IconImg img{
+ width:30px !important;
+ height:30px;
+ border-radius: 50% !important;
+ border:none !important;
+ margin:0 !important;
+}
+</style>
 <style scoped>
 .set_click{
     cursor: pointer;
@@ -72,7 +82,7 @@
     border:2px solid var(--color-white);
     cursor:pointer;*/
 
-}*/
+
 
 
 .modal_display{
@@ -93,6 +103,7 @@ box-sizing:border-box;
 -moz-box-sizing:border-box; /* Firefox */
 -webkit-box-sizing:border-box; /* Chrome, Safari */
 }
+
 </style>
 <script>
 
@@ -106,6 +117,7 @@ export default{
             user_modal: false, //modal表示・非表示
             data1 :'underfind',
             data2:'underfind',
+            isLoad:false,
         }
     },components:{
         MyModal
@@ -119,13 +131,18 @@ export default{
         console.log('watch 1', 'newval: ', val, '   oldVal:', oldVal)
         this.data1 = val.icon_path;
         this.data2 = val.icon_name;
+        this.isLoad = true;
+        console.log('aa');
         if(oldVal.length !=0){
             console.log("セッションキレてます。")
         }
 
       },
       deep: true
-    }
+    },
+     '$route' (to, from) {
+   this.get_my_data();
+    },
 
     },
     methods:{

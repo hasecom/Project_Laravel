@@ -6,7 +6,7 @@
                     <div class="col-12 mt-2 pointer" :id="'item_left' + index"  @mouseenter="info_hover('item_left'+index)" @mouseleave="info_leave('item_left'+index)" @click="modal_set('details' + index,0,0)">
                         <amplify-s3-image style="pointer-events: none; width:100% !important"  :imagePath= "'Photos/'+item_left.photo_path+'/'+item_left.file_name+'.png'" ></amplify-s3-image>
                     </div>
-                    <user-post-details :photo_data="item_left"   :ref="'details' + index"></user-post-details>
+                    <user-post-details :photo_data="item_left"  :my_data="my_data"  :ref="'details' + index"></user-post-details>
                 </div>
             </div>
             <div class="col-md-4 col-6">
@@ -14,7 +14,7 @@
                     <div class="col-12  mt-2 pointer" :id="'item_center' + index"  @mouseenter="info_hover('item_center'+index)" @mouseleave="info_leave('item_center'+index)" @click="modal_set('details' + index,0,1)">
                         <amplify-s3-image style="pointer-events: none; width:100% !important"  :imagePath= "'Photos/'+item_center.photo_path+'/'+item_center.file_name+'.png'" ></amplify-s3-image>
                     </div>
-                    <user-post-details :photo_data="item_center"   :ref="'details' + index"></user-post-details>
+                    <user-post-details :photo_data="item_center"  :my_data="my_data"  :ref="'details' + index"></user-post-details>
                 </div>
             </div>
             <div class="col-md-4">
@@ -23,7 +23,7 @@
                        <!-- <div class="sample">kkkkkkkkkkkkkkk</div> -->
                         <amplify-s3-image style="pointer-events: none; width:100% !important"  :imagePath= "'Photos/'+item_right.photo_path+'/'+item_right.file_name+'.png'" ></amplify-s3-image>
                     </div>
-                    <user-post-details :photo_data="item_right"   :ref="'details' + index"></user-post-details>
+                    <user-post-details :photo_data="item_right" :my_data="my_data"  :ref="'details' + index"></user-post-details>
                 </div>
             </div>
         </div>
@@ -45,7 +45,7 @@ export default{
             img_arr_left:[],
             img_arr_center:[],
             img_arr_right:[],
-            my_datas:[],
+            my_data:[],
             img_modal:false
             
         }
@@ -69,7 +69,7 @@ export default{
     search_word(){
              axios.get('api/user/post_data/photo/search/' + this.search_word_send['word']).then(search_word_response => {  
                 this.search_data = search_word_response['data'];
-    
+               
     for(let i = 0; i < this.search_data.length; i++){
                     axios.get("api/user/post_data/details/" + this.search_data[i]['photo_id'] ).then(response => {
                     if(typeof(response['data']) == "object"){
@@ -129,8 +129,9 @@ export default{
     },
     get_my_data(){
       axios.get("api/users/chk").then(response => {
-               if(typeof(response['data']) == "object"){
-                 this.my_datas = response['data'];
+               if(typeof(response['data']) == "object"){  
+                  
+                 this.my_data = response['data'];
                     }
             }).catch(function (error) {
                 console.log(error)

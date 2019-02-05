@@ -55,7 +55,10 @@
    
                             <!-- DDDDDDDDDDDDDDDDDDDDDDDDDDDDD -->
                         </div>
-         <img-buy :photo_data="photo_data" :my_data="my_data"></img-buy>         
+        
+        <footer class="modal-footer fixed-bottom bg-white" style='width:80%;margin:0 auto;'>
+             <img-buy :photo_data="photo_data" :my_data="my_data"></img-buy> 
+        </footer>       
         </MyModal>
     </div>
 </template>
@@ -165,6 +168,7 @@ export default{
         },components:{
         MyModal
     },watch: {
+
 
 },mounted:function(){
 },

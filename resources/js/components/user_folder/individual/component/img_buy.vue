@@ -1,26 +1,50 @@
 <template>
-    <div>
+    <div style='width:100%;'>
     <div class="buy_btn btn-lg pointer" @click='openModal()'>
         購入
     </div>
         <SelectModal @close_select="closeModal" v-if="select_modal" class="border-0"> 
-        <div class="set_modal shadow-lg" >
+        <div class="set_modal shadow-lg" v-if='modal_type == 0'>
             <form class="text-center p-3" @submit.prevent="Buy_Form" >
                <p>この投稿を購入しますか？</p>
-               <button type="submit" class="btn btn-info" >購入する</button> 
+               <button type="submit" class="btn buy_btn_in" >購入する</button> 
                <button type="button" @click="closeModal()" class="btn btn-default border">キャンセル</button>
         </form>
-   
         </div>
         </SelectModal>
         </div>
 </template>
 <style>
-.buy_btn{
-    display: inline-block;
+.buy_btn_in{
+    background-color: rgb(0, 191, 255);
+    color:white;
 }
+.buy_btn_in:hover{
+    background-color: rgba(0,191,255,0.7);
+}
+.buy_btn{
+    display:block;
+    background-color: rgb(0, 191, 255);
+    color:white;
+    text-align: center;
+}
+.buy_btn:hover{
+    background-color: rgba(0,191,255,0.7);
+ 
+}
+
 </style>
 <script>
+
+
+if (window.performance) {
+  if (performance.navigation.type === 1) {
+    // リロードされた
+    
+  } else {
+    // リロードされていない
+  }
+}
 import SelectModal from '../../user_modal/select_modal.vue';
 window.Vue = require('vue');
 export default{
@@ -36,16 +60,21 @@ export default{
     data(){
     return{
          select_modal:false, //modal表示・非表示
+         modal_type:0
     }
     },components:{
-        SelectModal
+        SelectModal,
     },
     methods:{
-        openModal(){         
+       
+        openModal(){ 
+            
         this.select_modal = true;
+       
     },
         closeModal() {
       this.select_modal = false;
+      this.$router.push({ query: '' })
     },
     Buy_Form(){
            let params = new URLSearchParams();
@@ -54,7 +83,8 @@ export default{
             params.append('covered_id',this.photo_data['id']);
        
           axios.post("api/user/post_data/point/trading",params).then(response=>{
-             console.log(response['data'])
+          
+              this.$router.push({ query: 'kfoe' })
            }).catch(function (error) {
               console.log(error);
            });
