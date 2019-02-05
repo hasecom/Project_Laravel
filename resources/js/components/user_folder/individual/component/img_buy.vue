@@ -1,6 +1,6 @@
 <template>
     <div>
-    <div class="buy_btn btn-lg pointer" @click='buy_btn_click'>
+    <div class="buy_btn btn-lg pointer" @click='openModal()'>
         購入
     </div>
         <SelectModal @close_select="closeModal" v-if="select_modal" class="border-0"> 
@@ -10,7 +10,7 @@
                <button type="submit" class="btn btn-info" >購入する</button> 
                <button type="button" @click="closeModal()" class="btn btn-default border">キャンセル</button>
         </form>
-    
+   
         </div>
         </SelectModal>
         </div>
@@ -24,6 +24,15 @@
 import SelectModal from '../../user_modal/select_modal.vue';
 window.Vue = require('vue');
 export default{
+    props:{
+        photo_data:{
+            type:Object
+        },
+        my_data:{
+            type:Object
+        }
+
+    },
     data(){
     return{
          select_modal:false, //modal表示・非表示
@@ -32,18 +41,23 @@ export default{
         SelectModal
     },
     methods:{
-        buy_btn_click(){
-            console.log("Ji")
-            this.openModal();
-        },
         openModal(){         
-            this.select_modal = true;
+        this.select_modal = true;
     },
         closeModal() {
       this.select_modal = false;
     },
     Buy_Form(){
-        console.log("ji");
+           let params = new URLSearchParams();
+            params.append('user_id',this.my_data['id']);
+            params.append('photo_id',this.photo_data['photo_id']);
+            params.append('covered_id',this.photo_data['id']);
+       
+          axios.post("api/user/post_data/point/trading",params).then(response=>{
+             console.log(response['data'])
+           }).catch(function (error) {
+              console.log(error);
+           });
     }
     }
 }

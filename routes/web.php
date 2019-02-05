@@ -163,4 +163,14 @@ Route::get('/api/user/post_data/delete/{post_id}', 'PostDeleteController@post_de
 Route::post('/api/user/post_data/delete/{post_id}','PostDeleteController@post_delete_post');
 
 
+/*====================================================================
+ポイントのやりとり用
+======================================================================*/
+/*
+
+*/
+Route::get('/api/user/post_data/point/trading', 'Point_Controller@point_get');//売買
+Route::post('/api/user/post_data/point/trading','Point_Controller@point_post');
+
+
 

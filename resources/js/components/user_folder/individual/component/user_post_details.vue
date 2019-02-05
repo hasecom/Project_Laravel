@@ -53,7 +53,7 @@
    
                             <!-- DDDDDDDDDDDDDDDDDDDDDDDDDDDDD -->
                         </div>
-         <img-buy></img-buy>         
+         <img-buy :photo_data="photo_data" :my_data="my_data"></img-buy>         
         </MyModal>
     </div>
 </template>
