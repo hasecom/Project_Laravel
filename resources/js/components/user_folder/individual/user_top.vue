@@ -6,13 +6,13 @@
   <div>
     <div class="sticky-top py-3 shadow">
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-sm-4">
           <router-link to="/"><h2 class="no_link title_">Byezer</h2></router-link>
         </div>
-        <div class="col-md-6">
+        <div class="col-sm-6">
          <search-input></search-input>
         </div>
-        <div class="col-md-2">
+        <div class="col-sm-2">
          <account-manager></account-manager>
         </div>
       </div>
