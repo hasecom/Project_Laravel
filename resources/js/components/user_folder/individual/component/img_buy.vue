@@ -11,6 +11,15 @@
                <button type="button" @click="closeModal()" class="btn btn-default border">キャンセル</button>
         </form>
         </div>
+        <div class="set_modal shadow-lg" v-if='modal_type == 1'>
+        <p>ポイントが足りません</p>
+        </div>
+         <div class="set_modal shadow-lg" v-if='modal_type == 2'>
+             <!-- //TODO:画像ダウンロード処理はここに書く############### -->
+             
+             画像をだうんろーど
+              <!-- //TODO:######################################### -->
+        </div>
         </SelectModal>
         </div>
 </template>
@@ -39,7 +48,7 @@
 
 if (window.performance) {
   if (performance.navigation.type === 1) {
-    // リロードされた
+    
     
   } else {
     // リロードされていない
@@ -60,21 +69,21 @@ export default{
     data(){
     return{
          select_modal:false, //modal表示・非表示
-         modal_type:0
+         modal_type:0,
+        now_query:[]
     }
     },components:{
         SelectModal,
     },
     methods:{
-       
         openModal(){ 
-            
         this.select_modal = true;
-       
+        this.now_query = this.$route.query;
+        
     },
         closeModal() {
       this.select_modal = false;
-      this.$router.push({ query: '' })
+      this.$router.push({ query:this.now_query })
     },
     Buy_Form(){
            let params = new URLSearchParams();
@@ -83,8 +92,12 @@ export default{
             params.append('covered_id',this.photo_data['id']);
        
           axios.post("api/user/post_data/point/trading",params).then(response=>{
-          
-              this.$router.push({ query: 'kfoe' })
+              this.$router.push({ query:Math.random().toString(36).slice(-8)});
+              if(response['data'] == 2){
+              this.modal_type = 2;
+              }else if(response['data'] == 1){
+                  this.modal_type = 1;
+              }
            }).catch(function (error) {
               console.log(error);
            });

@@ -132,9 +132,9 @@ export default{
         this.data1 = val.icon_path;
         this.data2 = val.icon_name;
         this.isLoad = true;
-        console.log('aa');
         if(oldVal.length !=0){
-            console.log("セッションキレてます。")
+       
+       
         }
 
       },

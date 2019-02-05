@@ -145,7 +145,6 @@ export default {
     on_post_Load(){
        axios.get("api/users/chk").then(response=>{
         this.my_data = typeof(response['data'])=="undefined"? []: response['data'];
-        console.log('aaa');
         }).catch(function (error) {
       console.log(error);
       });

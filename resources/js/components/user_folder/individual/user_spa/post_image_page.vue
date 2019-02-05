@@ -39,6 +39,7 @@ import uploadmodal from '../../user_modal/upload_modal.vue';
 window.Vue = require('vue');
 
 
+
 export default {
 data() {
     return {

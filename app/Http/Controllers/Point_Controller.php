@@ -59,7 +59,7 @@ class Point_Controller extends Controller
        $covered_user_point->point = $cover_now_point + $photo_price;
        $covered_user_point->save();
        
-        //*戻り値0=>不正なエラー、1=>お金が足りない、
+        //*戻り値0=>不正なエラー、1=>お金が足りない、2=>OK
 
         return 2;
     }
