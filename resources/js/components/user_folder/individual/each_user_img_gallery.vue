@@ -5,7 +5,7 @@
                     <div class="col-md-6" v-for="(item ,index) in reverseItems" v-bind:key="index">
                         <div class="card img-thumbnail mt-3 shadow-sm">
 			                <!--<svg class="bd-placeholder-img card-img-top" width="100%" height="150" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: カードの画像"><title>プレースホルダ</title><rect fill="#868e96" width="100%" height="100%"></rect><text fill="#dee2e6" dy=".3em" x="30%" y="50%">no image</text></svg>-->
-                           <div class="img_layer">
+                           <div class="eu_img_layer">
 			               <amplify-s3-image style="pointer-events: none;" :imagePath= "'Photos/'+item[reverseItems.length -1-index].photo_path+'/'+item[reverseItems.length -1-index].file_name+'.png'" ></amplify-s3-image>
                            </div>
 			                <div class="card-body px-2 py-3">
@@ -23,7 +23,7 @@
     </div>
 </template>
 <style>
-.img_layer div .amplify-image{
+.eu_img_layer div .amplify-image{
     height:400px !important;
     width:auto !important;
     max-width:100% !important;
@@ -34,7 +34,7 @@
     border:none !important;
     border-radius:0px !important;
 }
-.img_layer{
+.eu_img_layer{
   width:auto !important;
   height:auto !important;
   background-color:#f8f9fa;

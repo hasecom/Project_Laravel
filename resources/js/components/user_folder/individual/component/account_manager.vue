@@ -50,11 +50,11 @@
 }
 
 
-.amplify-image{
+/*.amplify-image{
     /*
     *反映されてない 
     */
-    display: inline-block !important;
+    /*display: inline-block !important;
     background-color: #ccc !important;
     background-position: center center !important;
     background-repeat: no-repeat !important;
@@ -63,7 +63,7 @@
     width:30px !important;
     height:30px !important;
     margin:0px !important;
-    border:0px !important;
+    border:0px !important;*/
 
 /*  default setting
     width:30%;
@@ -72,7 +72,7 @@
     border:2px solid var(--color-white);
     cursor:pointer;*/
 
-}
+}*/
 
 
 .modal_display{
