@@ -8,12 +8,15 @@
                   <div class="col-md-12">
                          <div v-for="(item ,index) in time_line" v-bind:key="index">
                            <div class="card img-thumbnail mt-3 shadow-sm ">
-			                      <div @click="modal_set('details' + index,0)" class="uh_img_layer border">
+			                      <div @click="modal_set('details' + index,0)" v-if="isLoad" class="uh_img_layer border">
                               <amplify-s3-image :imagePath="'Photos/'+item.photo_path+'/'+item.file_name+'.png'">
                               </amplify-s3-image>
                             </div>
                                 <div class="row row_margin_del_">
                                <div class="col-md-2">
+                                    <div v-if="isLoad">
+                                    <amplify-s3-image style="pointer-events:none;" :class="{home_icon:isLoad}" :imagePath="'UserIcons/'+ item.icon_path + '/' + item.icon_name + '.png'" ></amplify-s3-image>
+                                </div>
                                  <!--<span class="cover list_image" v-bind:style="{ backgroundImage: 'url(storage/' + item.icon_path + '.jpg)' }"></span>-->
                                </div>
                               <div class="col-md-6 d-flex align-items-center">
@@ -67,6 +70,13 @@
 
 
 <style>
+.home_icon img{
+ width:30px !important;
+ height:30px;
+ border-radius: 50% !important;
+ border:none !important;
+ margin:0 !important;
+}
 
 .card_footer_{
   margin:0;
@@ -210,13 +220,22 @@ export default{
       now_photo_id:'',
       user_post_details_:false,
       img_modal:false,
+      isLoad:false
     }
   },components:{
         MyModal,Details,uploadmodal
     },mounted:function(){
       this.get_timeline_data();
   
-  },methods:{
+  }, watch:{
+  time_line: {
+      handler: function (val, oldVal) {
+         this.isLoad = true;
+      },
+      deep: true
+    },
+  },
+  methods:{
     get_timeline_data:function(){
       axios.get("api/users/chk").then(response => {
                if(typeof(response['data']) == "object"){

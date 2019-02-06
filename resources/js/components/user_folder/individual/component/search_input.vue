@@ -20,7 +20,10 @@
                     <div v-for="(user_item ,count) in user_search" :key="count+1"  @mousedown="user_click(user_item.user_id)">
                    <div class="row pl-2 pt-3 pb-3 search_item" :id="'search' + (search_result.length + count)"   :ref="'search_word_ref' + (search_result.length + count)"> 
                        <div class="col-md-2">
-                           <span class="cover list_image"  v-bind:style="{ backgroundImage: 'url(storage/' + user_item.icon_path + '.jpg)' }"></span>
+                              <div v-if="isLoad">
+                          <amplify-s3-image  style="pointer-events:none;" :class="{search_icon:isLoad}" :imagePath="'UserIcons/'+ user_item.icon_path + '/' + user_item.icon_name + '.png'" ></amplify-s3-image>
+                    </div>
+                           <!-- <span class="cover list_image"  v-bind:style="{ backgroundImage: 'url(storage/' + user_item.icon_path + '.jpg)' }"></span> -->
                        </div>
                        <div class="col-md-3">
                         {{user_item.user_name}}
@@ -54,7 +57,8 @@ export default{
             user_search:[],
             get_id:"",
             select_num:0,
-            select_data:"",  
+            select_data:"", 
+            isLoad:false 
         }
     },watch:{
         search_word:function(oldval ,newval){
@@ -66,6 +70,12 @@ export default{
                 this.assist_word();
             };
         },
+        user_search: {
+      handler: function (val, oldVal) {
+         this.isLoad = true;
+      },
+      deep: true
+    },
 
 
     }
@@ -191,7 +201,15 @@ document.getElementById('search0').style.background ='rgba(184,188,192,0.2)';
 
 }
 </script>
-
+<style>
+.search_icon img{
+ width:30px !important;
+ height:30px;
+ border-radius: 50% !important;
+ border:none !important;
+ margin:0 !important;
+}
+</style>
 <style scoped>
 :root {
     --normal_background:whitesmoke;

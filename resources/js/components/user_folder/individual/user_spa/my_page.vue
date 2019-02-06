@@ -38,7 +38,7 @@
                     <div class="row mb-2">
                         <div class="col-md-2">
                              <div v-if="is_ffed_Load">
-                                    <amplify-s3-image style="pointer-events:none;" :class="{ff_icon:is_ffed_Load}" :imagePath="'UserIcons/'+ val.icon_path + '/' + val.icon_name + '.png'" ></amplify-s3-image>
+                                    <amplify-s3-image @click="follows_link(val.user_id)" style="pointer-events:none;" :class="{ff_icon:is_ffed_Load}" :imagePath="'UserIcons/'+ val.icon_path + '/' + val.icon_name + '.png'" ></amplify-s3-image>
                                 </div>
                             <!-- <span class="cover list_image text-left pointer" @click="follows_link(val.user_id)" v-bind:style="{ backgroundImage: 'url(storage/' + val.icon_path + '.jpg)' }"></span> -->
                         </div>
@@ -64,7 +64,7 @@
                     <div class="row mb-2">
                         <div class="col-md-2">
                                 <div v-if="is_ff_Load">
-                                    <amplify-s3-image style="pointer-events:none;" :class="{ff_icon:is_ff_Load}" :imagePath="'UserIcons/'+ val.icon_path + '/' + val.icon_name + '.png'" ></amplify-s3-image>
+                                    <amplify-s3-image @click="follows_link(val.user_id)" style="pointer-events:none;" :class="{ff_icon:is_ff_Load}" :imagePath="'UserIcons/'+ val.icon_path + '/' + val.icon_name + '.png'" ></amplify-s3-image>
                                 </div>
                             <!-- <span class="cover list_image text-left pointer" @click="follows_link(val.user_id)" v-bind:style="{ backgroundImage: 'url(storage/' + val.icon_path + '.jpg)' }"></span> -->
                         </div>

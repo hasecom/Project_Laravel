@@ -52,7 +52,10 @@
                 <div v-for="val in user_follower" v-bind:key="val.id">
                     <div class="row mb-2">
                         <div class="col-md-2">
-                            <span class="cover list_image text-left pointer" @click="follows_link(val.user_id)" v-bind:style="{ backgroundImage: 'url(storage/' + val.icon_path + '.jpg)' }"></span>
+                                <div v-if="is_ffed_Load">
+                                    <amplify-s3-image @click="follows_link(val.user_id)" style="pointer-events:none;" :class="{ff_icon:is_ffed_Load}" :imagePath="'UserIcons/'+ val.icon_path + '/' + val.icon_name + '.png'" ></amplify-s3-image>
+                                </div>
+                            <!-- <span class="cover list_image text-left pointer" @click="follows_link(val.user_id)" v-bind:style="{ backgroundImage: 'url(storage/' + val.icon_path + '.jpg)' }"></span> -->
                         </div>
                          <div class="col-md-4">
                             <span class="h5 pointer"  @click="follows_link(val.user_id)">{{val.user_name}}</span><br>
@@ -76,7 +79,10 @@
                 <div v-for="val in user_followers" v-bind:key="val.id">
                     <div class="row mb-2">
                         <div class="col-md-2">
-                            <span class="cover list_image text-left pointer" @click="follows_link(val.user_id)" v-bind:style="{ backgroundImage: 'url(storage/' + val.icon_path + '.jpg)' }"></span>
+                                        <div v-if="is_ff_Load">
+                                    <amplify-s3-image @click="follows_link(val.user_id)" style="pointer-events:none;" :class="{ff_icon:is_ff_Load}" :imagePath="'UserIcons/'+ val.icon_path + '/' + val.icon_name + '.png'" ></amplify-s3-image>
+                                </div>
+                            <!-- <span class="cover list_image text-left pointer" @click="follows_link(val.user_id)" v-bind:style="{ backgroundImage: 'url(storage/' + val.icon_path + '.jpg)' }"></span> -->
                         </div>
                          <div class="col-md-4">
                             <span class="h5 pointer"  @click="follows_link(val.user_id)">{{val.user_name}}</span><br>
@@ -99,6 +105,13 @@
     </div>
 </template>
 <style>
+.ff_icon img{
+ width:30px !important;
+ height:30px;
+ border-radius: 50% !important;
+ border:none !important;
+ margin:0 !important;
+}
 
 .profile_icon{
     width: 150px;
@@ -163,6 +176,8 @@ export default {
             modai_title:"",
             user_page_follow_btn:1,//ユーザページのフォローボタンを表示
             isLoad:false,
+             is_ff_Load:false,
+            is_ffed_Load:false,
         }
     },components:{
         MyModal
@@ -177,6 +192,18 @@ mounted : function() {
           this.each_user_data['icon_name'] = 'underfind';
         }
          this.isLoad = true;
+      },
+      deep: true
+    },
+     user_follower: {
+      handler: function (val, oldVal) {
+         this.is_ff_Load = true;
+      },
+      deep: true
+    },
+     user_followers: {
+      handler: function (val, oldVal) {
+         this.is_ffed_Load = true;
       },
       deep: true
     },

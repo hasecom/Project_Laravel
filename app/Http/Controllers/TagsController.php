@@ -45,7 +45,8 @@ class TagsController extends Controller
             'user_id',
             'user_name',
             'si_text',
-            'icon_path'
+            'icon_path',
+            'icon_name'
         )));
       
         }

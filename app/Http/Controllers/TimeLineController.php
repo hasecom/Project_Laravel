@@ -41,6 +41,7 @@ class TimeLineController extends Controller{
                   $timeline_data[$post_count]['user_id'] = User::where('id',$user_inner_id)->value('user_id');
                   $timeline_data[$post_count]['user_name'] = User::where('id',$user_inner_id)->value('user_name');
                   $timeline_data[$post_count]['icon_path'] = User::where('id',$user_inner_id)->value('icon_path');
+                  $timeline_data[$post_count]['icon_name'] = User::where('id',$user_inner_id)->value('icon_name');
 
                   $post_count++;
             
