@@ -6,7 +6,10 @@
                  <div class="col-md-8">
                      <div class="mt-2">
                              <div class="card-body row align-items-center">
-                                <span class="profile_icon cover ml-5 pointer" v-bind:style="{ backgroundImage: 'url(storage/' + each_user_data.icon_path + '.jpg)' }"></span>
+                                <!-- <span class="profile_icon cover ml-5 pointer" v-bind:style="{ backgroundImage: 'url(storage/' + each_user_data.icon_path + '.jpg)' }"></span> -->
+                             <div v-if="isLoad">
+                                    <amplify-s3-image style="pointer-events:none;" :class="{page_icon:isLoad}" :imagePath="'UserIcons/'+ each_user_data.icon_path + '/' + each_user_data.icon_name + '.png'" ></amplify-s3-image>
+                                </div>
                                  <h4 class="card-title ml-5 pointer">{{each_user_data.user_name}}</h4>
                                 <p class="pl-2 text-muted pointer">{{each_user_data.user_id}}</p>
                             </div>
@@ -96,8 +99,9 @@
     </div>
 </template>
 <style>
+
 .profile_icon{
-      width: 150px;
+    width: 150px;
     height: 150px;
 }
 .cover{
@@ -158,13 +162,24 @@ export default {
             display_judg :0, 
             modai_title:"",
             user_page_follow_btn:1,//ユーザページのフォローボタンを表示
+            isLoad:false,
         }
     },components:{
         MyModal
     },
 mounted : function() { 
             this.submit_user(this.$route.params['id']);
-},watch:{
+},watch:{  
+    each_user_data: {
+      handler: function (val, oldVal) {
+        if(val.icon_path == '' || val.icon_name == ''){
+          this.each_user_data['icon_path'] = 'underfind';
+          this.each_user_data['icon_name'] = 'underfind';
+        }
+         this.isLoad = true;
+      },
+      deep: true
+    },
             '$route' (to, from) {
                this.submit_user(this.$route.params['id']);
             },

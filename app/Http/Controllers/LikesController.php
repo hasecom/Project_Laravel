@@ -38,6 +38,7 @@ class LikesController extends Controller
             'user_name',
             'si_text',
             'icon_path',
+            'icon_name'
         ));       
     }
     return $likes_user_data;

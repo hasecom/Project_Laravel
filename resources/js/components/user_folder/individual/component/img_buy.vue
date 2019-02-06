@@ -46,14 +46,6 @@
 <script>
 
 
-if (window.performance) {
-  if (performance.navigation.type === 1) {
-    
-    
-  } else {
-    // リロードされていない
-  }
-}
 import SelectModal from '../../user_modal/select_modal.vue';
 window.Vue = require('vue');
 export default{
@@ -77,13 +69,16 @@ export default{
     },
     methods:{
         openModal(){ 
+            this.now_query = this.$route.query;
         this.select_modal = true;
-        this.now_query = this.$route.query;
+        
         
     },
         closeModal() {
+            this.modal_type = 0;
+    this.$router.push({ query:this.now_query })
       this.select_modal = false;
-      this.$router.push({ query:this.now_query })
+      
     },
     Buy_Form(){
            let params = new URLSearchParams();

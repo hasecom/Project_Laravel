@@ -3,7 +3,10 @@
         <div v-for="(item , index) in each_chats_data" :key="index">
             <div class="row"> 
                 <div class="col-md-1">   
-                     <span class="cover list_image text-left" v-bind:style="{ backgroundImage: 'url(storage/' + item[0]['user_data'][0]['icon_path'] + '.jpg)' }"></span>
+                     <!-- <span class="cover list_image text-left" v-bind:style="{ backgroundImage: 'url(storage/' + item[0]['user_data'][0]['icon_path'] + '.jpg)' }"></span> -->
+                     <div v-if="isLoad">
+                          <amplify-s3-image   style="pointer-events:none;" :class="{chats_icon:isLoad}" :imagePath="'UserIcons/'+  item[0]['user_data'][0]['icon_path'] + '/' +  item[0]['user_data'][0]['icon_name'] + '.png'" ></amplify-s3-image>
+                    </div>
                 </div>
                 <div class="col-md-10">
                     <span>{{item[0]['user_data'][0]['user_name']}}</span>
@@ -17,6 +20,13 @@
     </div>
 </template>
 <style>
+.chats_icon img{
+ width:30px !important;
+ height:30px;
+ border-radius: 50% !important;
+ border:none !important;
+ margin:0 !important;
+}
 
 .profile_icon{
      width: 150px;
@@ -45,8 +55,17 @@ export default{
     data(){
         return{
              each_chats_data:[],
-             date_disassembly_out:[]
+             date_disassembly_out:[],
+             isLoad:false,
         }
+    }, 
+    watch:{
+    each_chats_data: {
+      handler: function (val, oldVal) {
+         this.isLoad = true;
+      },
+      deep: true
+    },
     },
     methods:{
             chat_get(){

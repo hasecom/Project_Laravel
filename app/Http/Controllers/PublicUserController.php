@@ -25,7 +25,8 @@ class PublicUserController extends Controller
                 'user_id',
                 'user_name',
                 'si_text',
-                'icon_path'
+                'icon_path',
+                'icon_name'
             )));
             $mylogin_data = new UsersController;
             $mylogin_data->account_data();
@@ -45,6 +46,7 @@ class PublicUserController extends Controller
                         'user_name',
                         'si_text',
                         'icon_path', 
+                        'icon_name'
                     )));
                     $user_data["follows"][$i] = $add_user_id;
                 }
@@ -57,7 +59,8 @@ class PublicUserController extends Controller
                         'user_id',
                         'user_name',
                         'si_text',
-                        'icon_path'
+                        'icon_path',
+                        'icon_name'
                     )));
                     $user_data["followed"][$i] = $add_user_id;
                 }

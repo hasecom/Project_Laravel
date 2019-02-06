@@ -5,7 +5,10 @@
                  <div class="col-md-8">
                      <div class="mt-2">
                              <div class="card-body row align-items-center">
-                                <span class="cover ml-5 profile_icon" v-bind:style="{ backgroundImage: 'url(storage/' + each_user_data.icon_path + '.jpg)' }"></span>
+                                <!-- <span class="cover ml-5 profile_icon" v-bind:style="{ backgroundImage: 'url(storage/' + each_user_data.icon_path + '.jpg)' }"></span> -->
+                                <div v-if="isLoad">
+                                    <amplify-s3-image style="pointer-events:none;" :class="{page_icon:isLoad}" :imagePath="'UserIcons/'+ my_data.icon_path + '/' + my_data.icon_name + '.png'" ></amplify-s3-image>
+                                </div>
                                  <h4 class="card-title ml-5">{{each_user_data.user_name}}</h4>
                                 <p class="pl-2 text-muted">{{each_user_data.user_id}}</p>
                             </div>
@@ -34,7 +37,10 @@
                 <div v-for="(val ,index) in follows_list" v-bind:key="index">
                     <div class="row mb-2">
                         <div class="col-md-2">
-                            <span class="cover list_image text-left pointer" @click="follows_link(val.user_id)" v-bind:style="{ backgroundImage: 'url(storage/' + val.icon_path + '.jpg)' }"></span>
+                             <div v-if="is_ffed_Load">
+                                    <amplify-s3-image style="pointer-events:none;" :class="{ff_icon:is_ffed_Load}" :imagePath="'UserIcons/'+ val.icon_path + '/' + val.icon_name + '.png'" ></amplify-s3-image>
+                                </div>
+                            <!-- <span class="cover list_image text-left pointer" @click="follows_link(val.user_id)" v-bind:style="{ backgroundImage: 'url(storage/' + val.icon_path + '.jpg)' }"></span> -->
                         </div>
                          <div class="col-md-4">
                             <span class="h5 pointer"  @click="follows_link(val.user_id)">{{val.user_name}}</span><br>
@@ -57,7 +63,10 @@
                 <div v-for="(val , index) in followed_list" v-bind:key="index">
                     <div class="row mb-2">
                         <div class="col-md-2">
-                            <span class="cover list_image text-left pointer" @click="follows_link(val.user_id)" v-bind:style="{ backgroundImage: 'url(storage/' + val.icon_path + '.jpg)' }"></span>
+                                <div v-if="is_ff_Load">
+                                    <amplify-s3-image style="pointer-events:none;" :class="{ff_icon:is_ff_Load}" :imagePath="'UserIcons/'+ val.icon_path + '/' + val.icon_name + '.png'" ></amplify-s3-image>
+                                </div>
+                            <!-- <span class="cover list_image text-left pointer" @click="follows_link(val.user_id)" v-bind:style="{ backgroundImage: 'url(storage/' + val.icon_path + '.jpg)' }"></span> -->
                         </div>
                          <div class="col-md-4">
                             <span class="h5 pointer"  @click="follows_link(val.user_id)">{{val.user_name}}</span><br>
@@ -80,10 +89,23 @@
     </div>
 </template>
 <style>
-.profile_icon{
-     width: 150px;
-    height: 150px;
+.ff_icon img{
+ width:30px !important;
+ height:30px;
+ border-radius: 50% !important;
+ border:none !important;
+ margin:0 !important;
 }
+
+.page_icon img{
+    width: 150px !important;
+    height: 150px;
+    border-radius: 50% !important;
+    border:none !important;
+    margin:0 !important;
+    }
+
+
 .cover{
     display: inline-block;
     background-color: #ccc;
@@ -142,7 +164,11 @@ export default {
          user_modal: false, //modal表示・非表示
          display_judg :0, 
          modai_title:"",
-         relationship:0
+         relationship:0,
+         my_data:[],
+         isLoad:false,
+         is_ff_Load:false,
+         is_ffed_Load:false,
         }
     },components:{
         MyModal
@@ -150,7 +176,29 @@ export default {
     ,mounted : function() { 
             this.submit_user();
 },watch:{
-            '$route' (to, from) {
+    my_data: {
+      handler: function (val, oldVal) {
+        if(val.icon_path == '' || val.icon_name == ''){
+          this.my_data['icon_path'] = 'underfind';
+          this.my_data['icon_name'] = 'underfind';
+        }
+         this.isLoad = true;
+      },
+      deep: true
+    },
+    followed_list:{
+    handler: function (val, oldVal) {
+         this.is_ff_Load = true;
+      },
+      deep: true
+    },
+    follows_list:{
+        handler: function (val, oldVal) {
+         this.is_ffed_Load = true;
+      },
+      deep: true
+    },
+    '$route' (to, from) {
                this.submit_user();
             },
         
@@ -158,6 +206,7 @@ export default {
 },methods:{
     submit_user: function () {
        axios.get("api/users/chk").then(response=>{
+                    this.my_data = response['data'];
                    this.account_id = response['data']['user_id'];
                    this.account_inner_id = response['data']['id'];
             axios.get("api/user/"+this.account_id).then(response => {

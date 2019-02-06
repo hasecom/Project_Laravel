@@ -3,7 +3,10 @@
           <div v-for="(val , index) in likes_user" v-bind:key="index">
             <div class="row mb-2">
                 <div class="col-md-2">
-                    <span class="cover list_image text-left" @click="follows_link(val.user_id)" v-bind:style="{ backgroundImage: 'url(storage/' + val.icon_path + '.jpg)' }"></span>
+                    <div v-if="isLoad">
+                          <amplify-s3-image  @click="follows_link(val.user_id)" style="pointer-events:none;" :class="{likes_icon:isLoad}" :imagePath="'UserIcons/'+ val.icon_path + '/' + val.icon_name + '.png'" ></amplify-s3-image>
+                    </div>
+                    <!-- <span class="cover list_image text-left" @click="follows_link(val.user_id)" v-bind:style="{ backgroundImage: 'url(storage/' + val.icon_path + '.jpg)' }"></span> -->
                 </div>
                     <div class="col-md-4">
                         <span class="h5" @click="follows_link(val.user_id)">{{val.user_name}}</span><br>
@@ -21,6 +24,13 @@
 </template>
 <style>
 
+.likes_icon img{
+ width:30px !important;
+ height:30px;
+ border-radius: 50% !important;
+ border:none !important;
+ margin:0 !important;
+}
 </style>
 <script>
 export default{
@@ -32,9 +42,18 @@ export default{
             type:Object
         }
     },
+    watch:{
+    likes_user: {
+      handler: function (val, oldVal) {
+         this.isLoad = true;
+      },
+      deep: true
+    },
+    },
     data(){
         return{
             likes_user:[],
+            isLoad:[]
         }
     },mounted:function(){
         this.get_likes_user_data(0,this.photo_data_box.photo_id);

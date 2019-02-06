@@ -27,7 +27,8 @@ class ChatsController extends Controller
                                                                                                     'user_id',
                                                                                                     'user_name',
                                                                                                     'icon_path',
-                                                                                                    'flg'
+                                                                                                    'icon_name',
+                                                                                                    'flg',
                                                                                                     ]);
        }
        return $chat_data;

@@ -128,15 +128,13 @@ export default{
     watch:{
         my_data: {
       handler: function (val, oldVal) {
-        console.log('watch 1', 'newval: ', val, '   oldVal:', oldVal)
+        if(val.icon_path == '' || val.icon_name == ''){
+          this.my_data['icon_path'] = 'underfind';
+          this.my_data['icon_name'] = 'underfind';
+        }
         this.data1 = val.icon_path;
         this.data2 = val.icon_name;
         this.isLoad = true;
-        if(oldVal.length !=0){
-       
-       
-        }
-
       },
       deep: true
     },

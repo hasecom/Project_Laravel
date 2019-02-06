@@ -20,6 +20,7 @@ class User extends Model
     protected $mail = 'mail';
     protected $si_text = 'si_text';
     protected $icon_path = 'icon_path';
+    protected $icon_name = 'icon_name';
     protected $flg = 'flg';
     protected $point = 'point';
 
@@ -32,6 +33,7 @@ class User extends Model
         'tel_num' => "",
         'si_text'=>"",
         'icon_path'=>"undefined",
+        'icon_name'=>"undefined",
         'flg'=>1,
         'point'=>0,
     ];
