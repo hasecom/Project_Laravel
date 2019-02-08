@@ -173,4 +173,11 @@ Route::get('/api/user/post_data/point/trading', 'Point_Controller@point_get');//
 Route::post('/api/user/post_data/point/trading','Point_Controller@point_post');
 
 
+/*====================================================================
+購入画像DL用
+======================================================================*/
+/*
 
+*/
+// Route::get('/api/user/post_data/buy_data', 'ImagesController@get_buy_img');
+Route::post('/api/user/post_data/photo/buy_data', 'ImagesController@get_buy_img');

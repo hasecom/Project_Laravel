@@ -8,6 +8,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Posted_photos;
+use App\Point;
 use App\Tags;
 use App\User;
 use App\Http\Controllers\LikesController;
@@ -164,6 +165,7 @@ class ImagesController extends Controller
         'user_id',
         'id',
         'icon_path',
+        'icon_name',
         'user_name'
         ]);
     $likes = LikesController::likes_allocation($id);//いいね情報GET
@@ -173,6 +175,25 @@ class ImagesController extends Controller
     
 return $return_arr;
         }
+
+/*
+*購入された画像のデータを送信
+*/
+    public function get_buy_img(){
+        $seller_photo_id = $_POST['photo_id'];
+        $buyer_id = $_POST['user_id'];
+        $user_judge=Point::where('photo_id',$seller_photo_id)->value('user_id');
+        if($buyer_id!=$user_judge)exit;
+
+        $file_path = $_POST['photo_path'];
+        $file_name = $_POST['file_name'];
+        $contents= Storage::disk('s3')->get('public/Photos/'.$file_path.'/'.$file_name.'.png');
+        $fileData = base64_encode($contents);
+
+        return $fileData;
+        // $path = Storage::disk('s3')->url('public/Photos/'.$file_path.'/'.$file_name.'.png');
+        // return $path;
+    }
 
 /* ====================================================================
 使い回しメソッド
